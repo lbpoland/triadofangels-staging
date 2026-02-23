@@ -83,7 +83,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 ### C-01 Featured Albums rail
 - [IN PROGRESS] C-01.1 Mobile horizontal rail: scroll-snap, smooth, no vertical stacking, no overflow bleed
 - [NOT STARTED] C-01.2 Keyboard rail controls: ArrowLeft/Right, Home/End, optional prev/next buttons
-- [NOT STARTED] C-01.3 Reduced motion: avoid smooth scroll when prefers-reduced-motion
+- [IN PROGRESS] C-01.3 Reduced motion: avoid smooth scroll when prefers-reduced-motion
 
 ### C-02 Hero section polish
 - [NOT STARTED] C-02.1 Hero typography scale across breakpoints; prevent text overlap
@@ -114,7 +114,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [IN PROGRESS] E-01.4 Fix any remaining heading-order issues (maintain single H1 per page)
 
 ### E-02 Mode support
-- [NOT STARTED] E-02.1 Forced-colors: ensure borders, focus rings, interactive states visible
+- [IN PROGRESS] E-02.1 Forced-colors: ensure borders, focus rings, interactive states visible
 - [NOT STARTED] E-02.2 Reduced motion: disable smooth scrolling/animated transitions where applicable
 - [NOT STARTED] E-02.3 Screen reader: verify landmarks (header/nav/main/footer), labels, aria-current
 
@@ -244,3 +244,5 @@ Local QA results pasted:
 - [IN PROGRESS] G-01.5 Head performance: add preconnect/dns-prefetch where required origins exist
 
 - [IN PROGRESS] L-01.3 Runtime dev-check must PASS (album/track/book canonical+og+twitter urls correct; JSON-LD always valid)
+
+- **2026-02-23 (AEST)** — MEGA WAVE F (motion + forced-colors hardening): carousel keyboard navigation now preserves functionality in reduced-motion mode (uses `auto` behavior instead of blocking keyboard scroll), prose links are explicitly underlined in text blocks, and forced-colors link/control tokens were hardened for visibility parity. (Checklist: C-01.3, E-02.1, ID-010)

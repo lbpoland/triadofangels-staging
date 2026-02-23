@@ -180,3 +180,9 @@
 - Strategy: apply `srcset/sizes` only after a manifest is successfully fetched; if manifest is missing, use the original cover src.
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
+
+## 2026-02-23 — DEC-021: Reduced-motion keeps interaction parity (no feature loss)
+- Carousel/rail keyboard navigation must remain functional when `prefers-reduced-motion: reduce` is active.
+- Policy: swap smooth scroll behavior to `auto`; do **not** disable arrow/home/end keyboard navigation entirely.
+- Accessibility implication: reduced-motion users keep equal task completion paths without motion-heavy animation.
+- Artifacts: `js/global.js`, `css/style.css`, `TOA_Audit_Ledger_Master.md` (ID-010)

@@ -119,3 +119,5 @@
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
 
+
+- 2026-02-23 (ChatGPT session): MEGA WAVE F shipped in code (`css/style.css`, `js/global.js`). Browser-dependent validation remains pending local execution (runtime dev-check + LHCI) due environment browser binary constraints.

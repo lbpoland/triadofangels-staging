@@ -65,7 +65,7 @@
 | [DONE] | Exactly one `<h1>` per page | bundle verification | {h1_ok}/{tot_pages} pages |
 | [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer | ID-008 |
 | [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 |
-| [NOT STARTED] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 |
+| [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 (Wave F patch applied; pending LHCI verification) |
 | [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 |
 
 ---
@@ -126,3 +126,7 @@
 ### 2026-02-23
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
+
+### 2026-02-23 (later)
+- **Done (this session):** MEGA WAVE F accessibility hardening (reduced-motion carousel keyboard behavior + prose link non-color indicator + forced-colors link/control visibility updates).
+- **Next:** Validate with local runtime + LHCI and continue LCP-focused performance wave (ID-014).

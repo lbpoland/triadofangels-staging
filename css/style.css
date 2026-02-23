@@ -253,6 +253,13 @@ a:visited {
     color: var(--link-visited);
 }
 
+/* Ensure links inside prose blocks are always distinguishable without color alone. */
+:where(main, .site-footer, .legal-page, .privacy-policy, .terms-page) :is(p, li, dd, figcaption) a:not(.btn):not(.button):not(.cta-button):not(.quick-link):not(.nav-link):not(.nav-links a):not(.social-links a) {
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+}
+
 /* Navigation */
 body.menu-open {
     overflow: hidden;
@@ -1507,6 +1514,14 @@ video {
 }
 
 @media (forced-colors: active) {
+    a,
+    a:visited,
+    a:hover,
+    a:focus-visible {
+        color: LinkText;
+        text-decoration-color: LinkText;
+    }
+
     :focus-visible {
         outline: 2px solid Highlight;
         outline-offset: 3px;
@@ -1517,6 +1532,8 @@ video {
     .nav-toggle,
     .form-control,
     .form-button {
+        background: Canvas;
+        color: CanvasText;
         border: 1px solid CanvasText;
     }
 }

@@ -870,13 +870,13 @@ function openSubmenu(btn, menu) {
           focusable.addEventListener('keydown', (e) => {
             const key = e.key;
             if (key !== 'ArrowLeft' && key !== 'ArrowRight' && key !== 'Home' && key !== 'End') return;
-            if (prefersReducedMotion()) return;
 
             const amount = getScrollAmount(carousel) || 320;
-            if (key === 'ArrowLeft') carousel.scrollBy({ left: -amount, behavior: 'smooth' });
-            if (key === 'ArrowRight') carousel.scrollBy({ left: amount, behavior: 'smooth' });
-            if (key === 'Home') carousel.scrollTo({ left: 0, behavior: 'smooth' });
-            if (key === 'End') carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
+            const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+            if (key === 'ArrowLeft') carousel.scrollBy({ left: -amount, behavior });
+            if (key === 'ArrowRight') carousel.scrollBy({ left: amount, behavior });
+            if (key === 'Home') carousel.scrollTo({ left: 0, behavior });
+            if (key === 'End') carousel.scrollTo({ left: carousel.scrollWidth, behavior });
             e.preventDefault();
           });
         }
