@@ -126,3 +126,8 @@
 ### 2026-02-23
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
+
+### 2026-02-23 (MEGA WAVE C)
+- **Done:** Applied preconnect/dns-prefetch normalization across all HTML via `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` (ID-028 / G-01.5).
+- **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS, runtime+Lighthouse blocked in sandbox due to missing browser executables (ID-032).
+- **Next:** Run LOCAL QA PACK (Playwright + LHCI) and then advance to duplicate track route canonicalization (ID-015).

@@ -549,12 +549,13 @@ When an issue is fixed, update:
 - **Entry:** 2026-02-23T12:03:28Z
 
 ### ID-028 — Add fonts preconnect normalization tool (performance + Lighthouse uses-rel-preconnect)
+
 - **Severity:** P1
 - **Category:** Performance / Head metadata
-- **Status:** TOOL SHIPPED (PENDING APPLY + QA)
-- **Fix:** Added `tools/toa-mega-wave-c__preconnect-normalize.mjs` to inject preconnect + dns-prefetch for fonts across all HTML (deduped).
-- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`
-- **QA verification:** run tool `--apply`, then Lighthouse should reduce `uses-rel-preconnect` failures.
+- **Status:** FIX IMPLEMENTED (PENDING LOCAL LIGHTHOUSE VERIFICATION)
+- **Fix:** Added `tools/toa-mega-wave-c__preconnect-normalize.mjs` and executed `--apply` to inject preconnect + dns-prefetch for Google Fonts across all HTML (deduped).
+- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`, `tools/toa-mega-wave-c__preconnect-normalize__report.json`, all `*.html` documents (280 files)
+- **QA verification:** `node tools/toa-mega-wave-c__preconnect-normalize.mjs --check` now reports 0 pending changes after apply; confirm Lighthouse `uses-rel-preconnect` reduction locally.
 - **Entry:** 2026-02-23T12:03:28Z
 
 ### ID-029 — Improve global contrast for muted text + brand subtitle
@@ -589,3 +590,13 @@ When an issue is fixed, update:
 - **QA verification:** run generator tool, then verify in DevTools Network that smaller `-w320/-w480` assets are chosen on mobile; rerun Lighthouse.
 - **Entry:** 2026-02-23T19:33:25Z
 
+
+
+### ID-032 — Runtime/Lighthouse QA gate blocked by missing browser executables in sandbox
+- **Severity:** P1
+- **Category:** QA Environment / Validation gates
+- **Status:** BLOCKED (LOCAL EXECUTION REQUIRED)
+- **Detected by:** `node tools/dev-check.mjs --runtime --ci`, `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json`, `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json`
+- **Symptoms:** Playwright cannot launch (`Executable doesn't exist ... chrome-headless-shell`); Lighthouse wrapper reports no Chrome/Edge/Chromium executable detected.
+- **Required action:** Execute LOCAL QA PACK commands on a machine with Playwright Chromium + Chrome/Chromium installed and attach outputs.
+- **Entry:** 2026-02-23T23:09:00Z

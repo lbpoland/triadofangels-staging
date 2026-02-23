@@ -241,6 +241,6 @@ Local QA results pasted:
 
 ## Patch Notes (Append-Only)
 - **2026-02-23 (AEST)** — Micro patch: fixed `index.html` Celestia album route casing + added missing CSP `script-src` hashes for inline JSON-LD on `index.html`, `apps.html`, `digital-store.html`. (Ledger: ID-022, ID-023)
-- [IN PROGRESS] G-01.5 Head performance: add preconnect/dns-prefetch where required origins exist
+- [IN PROGRESS] G-01.5 Head performance: preconnect/dns-prefetch sweep APPLIED via MEGA WAVE C; pending local Lighthouse verification
 
-- [IN PROGRESS] L-01.3 Runtime dev-check must PASS (album/track/book canonical+og+twitter urls correct; JSON-LD always valid)
+- [IN PROGRESS] L-01.3 Runtime dev-check blocked in sandbox (Playwright browser binary unavailable); pending local runtime execution pack

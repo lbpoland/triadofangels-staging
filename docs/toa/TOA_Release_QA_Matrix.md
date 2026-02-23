@@ -119,3 +119,12 @@
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
 
+
+
+## 6) 2026-02-23 — MEGA WAVE C execution notes
+- Applied global head preconnect/dns-prefetch normalization for Google Fonts across 280 HTML files.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates are BLOCKED in sandbox:
+  - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
+- Local execution is required before marking Wave C as VERIFIED.
