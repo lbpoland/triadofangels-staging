@@ -180,3 +180,9 @@
 - Strategy: apply `srcset/sizes` only after a manifest is successfully fetched; if manifest is missing, use the original cover src.
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
+
+## 2026-02-24 — DEC-021: Preconnect sweep tooling must be idempotent
+- Head normalization tools that run across the full static corpus must be safe to re-run without producing additional diffs.
+- `tools/toa-mega-wave-c__preconnect-normalize.mjs` now removes existing preconnect comment/link nodes for Google Fonts before re-inserting a canonical block.
+- Verification rule: `--apply` followed by `--check` must yield `Files changed: 0`.
+- This is now required before any mass HTML sweep is marked complete.

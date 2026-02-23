@@ -551,11 +551,15 @@ When an issue is fixed, update:
 ### ID-028 — Add fonts preconnect normalization tool (performance + Lighthouse uses-rel-preconnect)
 - **Severity:** P1
 - **Category:** Performance / Head metadata
-- **Status:** TOOL SHIPPED (PENDING APPLY + QA)
-- **Fix:** Added `tools/toa-mega-wave-c__preconnect-normalize.mjs` to inject preconnect + dns-prefetch for fonts across all HTML (deduped).
-- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`
-- **QA verification:** run tool `--apply`, then Lighthouse should reduce `uses-rel-preconnect` failures.
-- **Entry:** 2026-02-23T12:03:28Z
+- **Status:** FIX IMPLEMENTED (PENDING LOCAL LHCI QA)
+- **Fix:** Applied `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` sweep across all 280 HTML files so Google Fonts origins now include normalized preconnect + dns-prefetch head hints.
+- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`, all `*.html` files in repo scope (see `docs/toa/TOA_MEGA_WAVE_C_FILE_MANIFEST.md`).
+- **QA verification:**
+  - `node tools/toa-mega-wave-c__preconnect-normalize.mjs --check` PASS (`Files changed: 0` / idempotent)
+  - `node tools/dev-check.mjs --ci` PASS
+  - `node tools/link-scan.mjs` PASS
+  - Lighthouse/Playwright runtime gates pending local machine execution (browser executable unavailable in this environment).
+- **Entry:** 2026-02-23T23:00:00Z
 
 ### ID-029 — Improve global contrast for muted text + brand subtitle
 - **Severity:** P1
@@ -589,3 +593,15 @@ When an issue is fixed, update:
 - **QA verification:** run generator tool, then verify in DevTools Network that smaller `-w320/-w480` assets are chosen on mobile; rerun Lighthouse.
 - **Entry:** 2026-02-23T19:33:25Z
 
+
+
+### ID-032 — Preconnect normalization idempotence hardening
+- **Severity:** P1
+- **Category:** Tooling / Performance governance
+- **Status:** VERIFIED (NON-BROWSER QA PASS)
+- **Detected by:** `node tools/toa-mega-wave-c__preconnect-normalize.mjs --check` returned `Files changed: 280` immediately after apply.
+- **Root cause:** The preconnect sweep did not remove existing `<!-- Preconnect (performance) -->` comment nodes, so repeated runs rewrote every HTML file.
+- **Fix:** Updated `tools/toa-mega-wave-c__preconnect-normalize.mjs` to dedupe existing preconnect comment + link lines before insertion.
+- **Acceptance criteria:** Post-apply check mode returns `Files changed: 0`.
+- **QA verification:** `node tools/toa-mega-wave-c__preconnect-normalize.mjs --check` PASS.
+- **Entry:** 2026-02-23T23:05:00Z

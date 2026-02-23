@@ -32,6 +32,7 @@
 | [DONE] | Pre-rendered music track pages exist (static SEO path) | /music/tracks/**/index.html | — |
 | [IN PROGRESS] | Minification / build pipeline strategy (src→dist) | /tools + repo structure | ID-017 |
 | [IN PROGRESS] | bfcache blocker identification + resolution | global JS/runtime | ID-018 |
+| [IN PROGRESS] | Global head preconnect normalization applied + idempotent | all HTML + tools/toa-mega-wave-c__preconnect-normalize.mjs | ID-028, ID-032 (pending local LHCI) |
 
 ---
 
@@ -126,3 +127,8 @@
 ### 2026-02-23
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
+
+### 2026-02-24
+- **In progress (this session):** MEGA WAVE C applied for preconnect/dns-prefetch normalization across all HTML pages; idempotence bug fixed in sweep tool.
+- **QA note:** Non-browser gates PASS; browser/runtime gates pending local execution because Playwright browser executable is unavailable in this environment.
+- **Next:** MEGA WAVE D focused on Lighthouse LCP/CLS reductions for Home/Music/Publishing/Search.
