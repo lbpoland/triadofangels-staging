@@ -1,0 +1,78 @@
+name: Bug report
+about: Report a defect with TOA checklist traceability and QA evidence.
+title: "[BUG] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to provide reproducible bug details with TOA checklist traceability.
+
+  - type: input
+    id: checklist_id
+    attributes:
+      label: Checklist ID
+      description: Reference an ID from /docs/toa/TOA_Mega_Implementation_Checklist.md.
+      placeholder: "TOA-123"
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Bug summary
+      description: Clear description of expected vs actual behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: Define measurable criteria that must pass to close this bug.
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected_files
+    attributes:
+      label: Affected files
+      description: List known/suspected files and why they are involved.
+      placeholder: |
+        - path/to/file.ext — reason
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Exact steps to reproduce.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: commands_run
+    attributes:
+      label: Commands run
+      description: Copy/paste commands used while investigating.
+      render: bash
+    validations:
+      required: true
+
+  - type: textarea
+    id: qa_evidence
+    attributes:
+      label: QA evidence
+      description: Include logs, screenshots, CI links, or artifact references.
+      placeholder: "Attach evidence or link to CI run/artifact."
+    validations:
+      required: true

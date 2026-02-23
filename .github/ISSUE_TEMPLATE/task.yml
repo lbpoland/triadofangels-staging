@@ -1,0 +1,74 @@
+name: Task
+about: Track implementation work with checklist IDs, acceptance criteria, and QA evidence.
+title: "[TASK] "
+labels:
+  - task
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to define scoped implementation tasks with delivery contract details.
+
+  - type: input
+    id: checklist_id
+    attributes:
+      label: Checklist ID
+      description: Reference an ID from /docs/toa/TOA_Mega_Implementation_Checklist.md.
+      placeholder: "TOA-456"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem_statement
+    attributes:
+      label: Problem statement
+      description: What are we solving and why?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: Define completion conditions as verifiable checklist items.
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected_files
+    attributes:
+      label: Affected files
+      description: List files expected to be changed and purpose for each.
+      placeholder: |
+        - path/to/file.ext — purpose
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation_notes
+    attributes:
+      label: Implementation notes
+      description: Constraints, dependencies, or sequencing notes.
+    validations:
+      required: true
+
+  - type: textarea
+    id: commands_run
+    attributes:
+      label: Commands run
+      description: Copy/paste commands used for implementation/validation.
+      render: bash
+    validations:
+      required: true
+
+  - type: textarea
+    id: qa_evidence
+    attributes:
+      label: QA evidence
+      description: Include test output snippets, links to CI runs, and artifacts.
+      placeholder: "Attach evidence or link to CI run/artifact."
+    validations:
+      required: true
