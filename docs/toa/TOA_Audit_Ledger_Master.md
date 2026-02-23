@@ -551,9 +551,9 @@ When an issue is fixed, update:
 ### ID-028 — Add fonts preconnect normalization tool (performance + Lighthouse uses-rel-preconnect)
 - **Severity:** P1
 - **Category:** Performance / Head metadata
-- **Status:** TOOL SHIPPED (PENDING APPLY + QA)
+- **Status:** IMPLEMENTED (PENDING LOCAL LHCI QA)
 - **Fix:** Added `tools/toa-mega-wave-c__preconnect-normalize.mjs` to inject preconnect + dns-prefetch for fonts across all HTML (deduped).
-- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`
+- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs` + 280 HTML pages (apply sweep)
 - **QA verification:** run tool `--apply`, then Lighthouse should reduce `uses-rel-preconnect` failures.
 - **Entry:** 2026-02-23T12:03:28Z
 
@@ -589,3 +589,15 @@ When an issue is fixed, update:
 - **QA verification:** run generator tool, then verify in DevTools Network that smaller `-w320/-w480` assets are chosen on mobile; rerun Lighthouse.
 - **Entry:** 2026-02-23T19:33:25Z
 
+
+
+### ID-032 — Runtime/Lighthouse browser-gate blocked in sandbox (Playwright + Chrome binaries missing)
+- **Severity:** P1
+- **Category:** QA Infrastructure / Environment Constraint
+- **Status:** OPEN (LOCAL QA REQUIRED)
+- **Detected by:** `node tools/dev-check.mjs --runtime --ci`, `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json`, `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json`
+- **Exact failure reasons:**
+  - Playwright import check: `Executable doesn't exist ... chrome-headless-shell` (browser binary missing).
+  - LHCI: `No Chrome/Edge/Chromium executable detected.`
+- **Required action (local):** install Playwright browsers + Chrome/Chromium (or set `CHROME_PATH`) and rerun runtime dev-check + LHCI mobile/desktop.
+- **Wave linkage:** Impacts verification closure for ID-028 (MEGA WAVE F).

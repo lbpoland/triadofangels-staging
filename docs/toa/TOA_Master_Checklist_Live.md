@@ -74,7 +74,7 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [IN PROGRESS] | Remove console errors on core pages (console-clean gate) | js/global.js + modules | ID-013 |
-| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS | ID-014 |
+| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS + head hints | ID-014 + ID-028 (preconnect sweep applied; pending LHCI verification) |
 | [IN PROGRESS] | Search page perf uplift (≥95) | search/search.* | ID-016 |
 | [NOT STARTED] | Minify CSS/JS in production build | build pipeline | ID-017 |
 | [IN PROGRESS] | Serve responsive images / right-size first view | images + HTML | ID-014 |
@@ -126,3 +126,8 @@
 ### 2026-02-23
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
+
+
+## Session Notes
+- **2026-02-23 (AEST):** MEGA WAVE F executed for head connection-hint normalization via `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` (280 HTML files updated).
+- Verification in this environment: `dev-check --ci` PASS and `link-scan` PASS; runtime + LHCI blocked by missing Playwright/Chrome binaries (see QA matrix + local QA pack).

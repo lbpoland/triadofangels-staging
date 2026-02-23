@@ -119,3 +119,14 @@
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
 
+
+
+## 6) Latest Execution Evidence (2026-02-23 AEST — MEGA WAVE F)
+- `node tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` → PASS (`HTML scanned: 280`, `Files changed: 280`).
+- `node tools/dev-check.mjs --ci` → PASS (Errors: 0, Warnings: 0).
+- `node tools/link-scan.mjs` → PASS (`broken=0`).
+- `node tools/dev-check.mjs --runtime --ci` → FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`).
+- `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` → FAIL in sandbox (`No Chrome/Edge/Chromium executable detected`).
+- `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` → FAIL in sandbox (`No Chrome/Edge/Chromium executable detected`).
+
+**Pending local-only gates:** runtime dev-check + LHCI mobile/desktop (see LOCAL QA PACK in session handoff).

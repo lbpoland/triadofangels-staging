@@ -180,3 +180,8 @@
 - Strategy: apply `srcset/sizes` only after a manifest is successfully fetched; if manifest is missing, use the original cover src.
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
+
+## 2026-02-23 — DEC-021: Execute site-wide preconnect normalization as an atomic Mega Wave
+- Applied `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` to all HTML pages in one batch (280 files) to enforce DEC-017 consistently.
+- Scope discipline: head-only performance layer (connection hints), no content/page copy changes.
+- QA evidence requirement: dev-check + link-scan must pass in CI mode; Lighthouse verification may be completed locally when Chrome is unavailable in the execution environment.
