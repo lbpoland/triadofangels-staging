@@ -92,7 +92,7 @@
 | JSON-LD valid + truthful | NOT RUN |  |
 | sitemap.xml present + correct | NOT RUN |  |
 | robots.txt aligned | NOT RUN |  |
-| Duplicate track routes resolved | NOT RUN | Issue ID-015 |
+| Duplicate track routes resolved | NOT RUN | Issue ID-015 phase 1 applied in code (alias noindex+canonical + sitemap pruning); local Lighthouse/SEO crawl verification pending |
 
 ---
 
@@ -119,3 +119,16 @@
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
 
+
+## 6) Automation Evidence — Mega Wave D (2026-02-23)
+- `node tools/dev-check.mjs --ci` → PASS (`reports/dev-check__2026-02-23T23-38-22-389Z.json`).
+- `node tools/dev-check.mjs --runtime --ci` → FAIL in this environment (`Runtime validation: Import failed; cannot select sample IDs.`).
+- `node tools/link-scan.mjs` → PASS (`reports/link-scan-report.md`).
+- `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` → NOT RUN locally here (no Chrome/Chromium binary).
+- `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` → NOT RUN locally here (no Chrome/Chromium binary).
+
+### Local-only pending gates
+Run on maintainer machine with browser binaries available:
+1) `node tools/dev-check.mjs --runtime --ci` (expect `[Dev-Check] PASS`).
+2) `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` (expect successful LHCI run + score outputs).
+3) `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` (expect successful LHCI run + score outputs).

@@ -88,7 +88,7 @@
 | ID-012 | P0 | IMPLEMENTED (PENDING QA) | Performance / UX | Publishing page CLS ~0.397 (severe layout shift) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
 | ID-013 | P0 | IMPLEMENTED (PENDING QA) | Stability | Lighthouse reports console errors on core pages | `js/global.js`, page modules |
 | ID-014 | P1 | OPEN | Performance | LCP too high on multiple core pages (Music ~7.4s, Index ~6.2s, Publishing ~5.8s) | images + CSS + critical path |
-| ID-015 | P1 | OPEN | SEO | Duplicate track pages (same title, multiple slugs) risk duplicate content | `music/tracks/**/index.html` |
+| ID-015 | P1 | IN PROGRESS | SEO | Duplicate track pages (same title, multiple slugs) risk duplicate content | `music/tracks/**/index.html` |
 | ID-016 | P1 | OPEN | Performance / UX | Search page baseline perf ~0.79, LCP ~5.4s | `search/search.js`, `search/search.css`, `css/style.css` |
 | ID-017 | P2 | OPEN | Build / Perf | Lighthouse flags minification + cache + compression strategy | tooling + build pipeline |
 | ID-018 | P2 | OPEN | UX / Perf | `bf-cache` prevented on most pages (investigate) | global JS + embed patterns |
@@ -103,7 +103,7 @@
 ### ID-001 — Full Coverage Audit Not Normalized Into Project Tracking Files
 - **Severity:** P1
 - **Category:** Governance
-- **Status:** OPEN
+- **Status:** IN PROGRESS
 - **Affected pages:** All
 - **Affected files:** `TOA_Audit_Ledger_Master.md`, `TOA_Master_Checklist_Live.md`, `TOA_Release_QA_Matrix.md`
 - **Root cause:** Audit narrative existed, but the project lacked a maintained tracker system.
@@ -336,7 +336,7 @@
 ### ID-015 — SEO: Duplicate Track Pages (Same Title, Multiple Slugs)
 - **Severity:** P1
 - **Category:** SEO / Routing
-- **Status:** OPEN
+- **Status:** IN PROGRESS
 - **Evidence:** Duplicate `<title>` values found across multiple distinct track URLs in the bundle.
 - **Affected pages:** Track pages under `music/tracks/**`
 - **Affected files:** `music/tracks/**/index.html`, sitemap generation, internal link generation
@@ -373,6 +373,7 @@
   - `music/tracks/phoenix-rising/venom-and-velvet/index.html` → canonical: `https://www.triadofangels.com/music/tracks/phoenix-rising/venom-and-velvet/`
   - `music/tracks/phoenix-rising/venom-velvet/index.html` → canonical: `https://www.triadofangels.com/music/tracks/phoenix-rising/venom-velvet/`
 - **Required fix:** Choose one canonical slug per track; make all alternates non-indexed and/or redirect to canonical (GitHub Pages-safe).
+- **Wave update (Phase 1):** De-indexed legacy alias pages for `harmony-s-call` and `probed-confused` by pointing canonical/OG/Twitter/JSON-LD URLs to canonical slugs and setting `meta robots` to `noindex, follow`; removed alias URLs from `sitemap.xml` to keep sitemap canonical-only.
 - **Acceptance criteria:** Only one indexable URL per track; sitemap lists canonical only; alternates redirect or noindex+canonical to primary.
 - **QA verification:** Link scan + sitemap check + Lighthouse SEO consistency.
 
@@ -589,3 +590,7 @@ When an issue is fixed, update:
 - **QA verification:** run generator tool, then verify in DevTools Network that smaller `-w320/-w480` assets are chosen on mobile; rerun Lighthouse.
 - **Entry:** 2026-02-23T19:33:25Z
 
+
+- **2026-02-23 (Mega Wave D — SEO canonical consolidation, phase 1):** ID-015 moved to IN PROGRESS. De-indexed two confirmed duplicate track alias routes (`harmony-s-call`, `probed-confused`) and removed those aliases from `sitemap.xml`. Pending: remaining duplicate title/slug pairs listed under ID-015.
+
+- **2026-02-23 (Mega Wave D QA evidence):** `dev-check --ci` PASS; `link-scan` PASS; `dev-check --runtime --ci` failed in this environment (`Runtime validation: Import failed; cannot select sample IDs.`); LHCI mobile/desktop blocked by missing Chrome/Chromium binary. Local execution required for runtime+LHCI gates before verifying ID-015.
