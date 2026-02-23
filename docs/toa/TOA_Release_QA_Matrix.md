@@ -11,6 +11,8 @@
 
 **Patch Wave 01 applied:** yes (P0). Local QA still required to mark PASS/FAIL.
 
+**Mega Wave F applied (global background hardening):** yes (performance/a11y layer in `css/style.css`).
+
 | Field | Value |
 |---|---|
 | Date (local) | 2026-02-23 |
@@ -119,3 +121,12 @@
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
 
+
+
+## 6) Session QA Evidence — 2026-02-23 (MEGA WAVE F)
+- ✅ `node tools/dev-check.mjs --ci` → PASS (280 HTML, 0 errors, 0 warnings).
+- ✅ `node tools/link-scan.mjs` → PASS (0 broken links).
+- ⚠️ `node tools/dev-check.mjs --runtime --ci` → FAIL in container due missing Playwright browser executable (`chromium_headless_shell` absent).
+- ⚠️ `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` and desktop variant are pending local execution if Chrome/Chromium is unavailable in container.
+
+**Pending local browser gates:** Runtime validation + Lighthouse mobile/desktop.

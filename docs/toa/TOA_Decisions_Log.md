@@ -180,3 +180,11 @@
 - Strategy: apply `srcset/sizes` only after a manifest is successfully fetched; if manifest is missing, use the original cover src.
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
+
+
+## 2026-02-23 — DEC-021: ToA background rendering policy for performance + accessibility
+- ToA theme full-page hero background must avoid `background-attachment: fixed` to reduce paint/compositing cost and mobile jank.
+- Use the mobile hero image variant on small screens and simplify overlay intensity for readability without heavy effects.
+- In `forced-colors: active`, decorative background pseudo-layers must be disabled so system colors remain authoritative.
+- In `prefers-reduced-motion: reduce`, keep background behavior static and avoid enhanced cinematic effects.
+- Artifacts: `css/style.css` (ToA pseudo-background rules), tracker updates in ledger/checklist/qa matrix.
