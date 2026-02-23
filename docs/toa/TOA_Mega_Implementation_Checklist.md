@@ -181,8 +181,8 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [NOT STARTED] I-01.3 Stream dropdown: stable, accessible, no clipping
 
 ### I-02 Data integrity
-- [NOT STARTED] I-02.1 Track slug uniqueness; canonical routing (avoid duplicates)
-- [NOT STARTED] I-02.2 JSON validation scripts for music catalog
+- [IN PROGRESS] I-02.1 Track slug uniqueness; canonical routing (avoid duplicates)
+- [DONE] I-02.2 JSON validation scripts for music catalog
 
 ---
 

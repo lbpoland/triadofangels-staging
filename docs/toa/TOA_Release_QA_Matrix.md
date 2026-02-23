@@ -92,7 +92,7 @@
 | JSON-LD valid + truthful | NOT RUN |  |
 | sitemap.xml present + correct | NOT RUN |  |
 | robots.txt aligned | NOT RUN |  |
-| Duplicate track routes resolved | NOT RUN | Issue ID-015 |
+| Duplicate track routes resolved | PASS | Mega Wave F: orphan pre-rendered track routes removed and dev-check route-integrity gate added (ID-015 / ID-032). |
 
 ---
 
@@ -118,4 +118,3 @@
 - Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, and Publishing-specific ARIA issues. (See Issue IDs: ID-008, ID-009, ID-011)
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
-
