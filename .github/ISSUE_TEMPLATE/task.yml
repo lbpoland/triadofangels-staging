@@ -1,0 +1,59 @@
+name: "Task"
+description: "Implementation task linked to TOA checklist IDs and QA evidence"
+title: "[Task]: "
+labels:
+  - task
+body:
+  - type: input
+    id: checklist_id
+    attributes:
+      label: Checklist ID
+      description: "Required ID(s) from docs/toa/TOA_Mega_Implementation_Checklist.md (example: A-02.2, G-01.2)."
+      placeholder: "A-02.2"
+    validations:
+      required: true
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: "What outcome must this task deliver?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: "Required, testable completion criteria."
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected_files
+    attributes:
+      label: Affected files
+      description: "List all expected files/directories to touch (required)."
+      placeholder: |
+        - .github/workflows/toa-ci.yml
+        - docs/toa/TOA_Mega_Implementation_Checklist.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: qa_evidence
+    attributes:
+      label: QA evidence required
+      description: "Required commands and evidence to mark done."
+      placeholder: |
+        Commands planned:
+        - npm run ci:validate
+
+        Evidence to attach:
+        - Command output
+        - Before/after screenshots if UI changed
+    validations:
+      required: true
