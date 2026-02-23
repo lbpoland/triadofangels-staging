@@ -115,7 +115,7 @@
 ---
 
 ## 5) Notes / Known Baseline Failures (as of 2026-02-23)
-- Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, and Publishing-specific ARIA issues. (See Issue IDs: ID-008, ID-009, ID-011)
+- Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, `link-in-text-block`, and Publishing-specific ARIA issues. (See Issue IDs: ID-008, ID-009, ID-010, ID-011)
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
 

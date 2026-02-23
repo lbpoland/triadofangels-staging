@@ -65,7 +65,7 @@
 | [DONE] | Exactly one `<h1>` per page | bundle verification | {h1_ok}/{tot_pages} pages |
 | [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer | ID-008 |
 | [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 |
-| [NOT STARTED] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 |
+| [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 |
 | [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 |
 
 ---

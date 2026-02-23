@@ -253,6 +253,15 @@ a:visited {
     color: var(--link-visited);
 }
 
+/* Ensure prose links are never color-only indicators (TOA ID-010). */
+main :where(p, dd, dt, blockquote) a,
+main ul:not(.nav-links):not(.social-links):not(.u-list-inline-links):not(.stream-links) li a,
+main ol li a {
+    text-decoration-line: underline;
+    text-decoration-thickness: max(2px, 0.08em);
+    text-underline-offset: 0.2em;
+}
+
 /* Navigation */
 body.menu-open {
     overflow: hidden;
