@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "generatedAt": "2026-02-23T19:45:19Z",
+  "covers": {
+    "/assets/images/albums/angelicresonance-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/angelicresonance-album-w{w}.webp"
+    },
+    "/assets/images/albums/ascend-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/ascend-album-w{w}.webp"
+    },
+    "/assets/images/albums/celestia-the-light-within-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/celestia-the-light-within-album-w{w}.webp"
+    },
+    "/assets/images/albums/constellation-frequency-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/constellation-frequency-album-w{w}.webp"
+    },
+    "/assets/images/albums/constellation-frequency2-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/constellation-frequency2-album-w{w}.webp"
+    },
+    "/assets/images/albums/divine-echoes-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/divine-echoes-album-w{w}.webp"
+    },
+    "/assets/images/albums/echoesonthedirtroad-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/echoesonthedirtroad-album-w{w}.webp"
+    },
+    "/assets/images/albums/enchantra-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/enchantra-album-w{w}.webp"
+    },
+    "/assets/images/albums/enchantra2-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/enchantra2-album-w{w}.webp"
+    },
+    "/assets/images/albums/neon-ascension-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/neon-ascension-album-w{w}.webp"
+    },
+    "/assets/images/albums/phoenixrising-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/phoenixrising-album-w{w}.webp"
+    },
+    "/assets/images/albums/probedandconfused-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/probedandconfused-album-w{w}.webp"
+    },
+    "/assets/images/albums/reality-exe-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/reality-exe-album-w{w}.webp"
+    },
+    "/assets/images/albums/serpentsveil-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/serpentsveil-album-w{w}.webp"
+    },
+    "/assets/images/albums/songsoffreedom-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/songsoffreedom-album-w{w}.webp"
+    },
+    "/assets/images/albums/the-quiet-war-2-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/the-quiet-war-2-album-w{w}.webp"
+    },
+    "/assets/images/albums/thequietwar-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/thequietwar-album-w{w}.webp"
+    },
+    "/assets/images/albums/wingsoffire-album.webp": {
+      "sizes": [
+        320,
+        480,
+        640,
+        800
+      ],
+      "pattern": "/assets/images/albums/variants/wingsoffire-album-w{w}.webp"
+    }
+  }
+}

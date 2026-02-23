@@ -1,0 +1,13 @@
+{
+  "tool": "tools/toa-mega-wave-a__canonical-dedupe.mjs",
+  "generatedAt": "2026-02-23T08:28:51.701Z",
+  "root": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels",
+  "mode": "apply",
+  "htmlFilesScanned": 280,
+  "changedFilesCount": 2,
+  "removedCanonicalLinksTotal": 2,
+  "changedFiles": [
+    "album.html",
+    "track.html"
+  ]
+}

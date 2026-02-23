@@ -1,0 +1,39 @@
+{
+  "name": "triadofangels-site",
+  "private": true,
+  "type": "module",
+  "description": "Triad of Angels \u2014 static site (GitHub Pages). Dev-only validation scripts (dev-check + link-scan + optional Playwright runtime).",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "ci:check": "node tools/dev-check.mjs --strict --strict-a11y-head --strict-no-inline-style",
+    "ci:check:runtime": "node tools/dev-check.mjs --strict --strict-a11y-head --strict-no-inline-style --runtime --require-playwright",
+    "ci:links": "node tools/link-scan.mjs --ci",
+    "ci:validate": "npm run ci:check && npm run ci:links",
+    "ci:validate:runtime": "npm run ci:check:runtime && npm run ci:links",
+    "dev:check": "node tools/dev-check.mjs --strict --strict-a11y-head",
+    "dev:check:no-inline": "node tools/dev-check.mjs --strict --strict-a11y-head --strict-no-inline-style",
+    "dev:check:runtime": "node tools/dev-check.mjs --strict --strict-a11y-head --runtime",
+    "dev:check:runtime:no-inline": "node tools/dev-check.mjs --strict --strict-a11y-head --strict-no-inline-style --runtime",
+    "dev:links": "node tools/link-scan.mjs",
+    "dev:validate": "npm run dev:check:runtime && npm run dev:links",
+    "dev:validate:no-inline": "npm run dev:check:runtime:no-inline && npm run dev:links",
+    "pw:install": "playwright install",
+    "pw:install:chromium": "playwright install chromium",
+    "pw:install:deps": "playwright install --with-deps",
+    "qa:check": "node tools/dev-check.mjs --strict --strict-a11y-head --runtime",
+    "qa:check:ci": "node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --runtime",
+    "qa:links": "node tools/link-scan.mjs --ci",
+    "qa:lighthouse": "npm run qa:lighthouse:mobile && npm run qa:lighthouse:desktop",
+    "qa:full": "npm run qa:check:ci && npm run qa:links && npm run qa:lighthouse",
+    "qa:serve": "node tools/static-serve.mjs --port=4173",
+    "qa:lighthouse:mobile": "node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json",
+    "qa:lighthouse:desktop": "node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json"
+  },
+  "devDependencies": {
+    "playwright": "^1.55.0",
+    "@lhci/cli": "^0.14.0",
+    "@playwright/test": "^1.58.0"
+  }
+}

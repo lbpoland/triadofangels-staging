@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+server/node_modules/
+
+# Lighthouse / test artifacts
+.lighthouseci/
+playwright-report/
+test-results/
+
+# Local reports / bundles (do not version by default)
+reports/
+_chatgpt_bundle/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.log
+
+server/
+node_modules/
+.lighthouseci/
+_chatgpt_bundle/
+*.log
+.DS_Store
+
+toa_bundle.py
+.toa_bundleignore

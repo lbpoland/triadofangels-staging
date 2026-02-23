@@ -1,0 +1,305 @@
+/* css/track.css — Track detail page */
+
+/* Hero-limited glow layer (track cover ambience)
+   JS sets #track-background-image background-image.
+   The effect is intentionally limited to the hero region so the rest of the page stays crisp.
+*/
+.track-page { position: relative; min-height: 100%; isolation: isolate; }
+
+.track-page .site-header,
+.track-page main,
+.track-page footer {
+  position: relative;
+  z-index: 1;
+}
+
+.track-bg {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: clamp(240px, 54vh, 520px);
+  background-position: center;
+  background-size: cover;
+  filter: blur(6px) saturate(1.18) brightness(1.08) contrast(1.04);
+  opacity: 0.34;
+  transform: scale(1.08);
+  pointer-events: none;
+  z-index: -1;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+}
+
+.track-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(var(--accent-rgb), 0.16), transparent 52%),
+    radial-gradient(circle at 76% 26%, rgba(21, 201, 250, 0.10), transparent 56%),
+    linear-gradient(180deg, rgba(var(--bg-rgb), 0.20) 0%, rgba(var(--bg-rgb), 0.88) 100%);
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0 10px;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.breadcrumbs a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.breadcrumbs a:hover {
+  border-bottom-color: rgba(241, 196, 15, 0.55);
+}
+
+.breadcrumbs__current { opacity: 0.8; }
+
+/* Hero */
+.track-hero {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 22px;
+  align-items: start;
+  margin-top: 14px;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid var(--stroke);
+  background: var(--panel);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+.track-hero__cover {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--stroke);
+  background: var(--panel-3);
+  aspect-ratio: 1 / 1;
+}
+
+.track-hero__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.track-hero__meta {
+  display: grid;
+  gap: 12px;
+}
+
+.track-meta-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
+
+.track-description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  opacity: 0.92;
+}
+
+.track-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.share-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+/* Sections */
+.track-section {
+  margin-top: 22px;
+}
+
+.section-title {
+  margin: 0 0 12px;
+  font-size: 18px;
+  letter-spacing: 0.2px;
+}
+
+/* Lyrics */
+.lyrics-wrap {
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: var(--panel);
+  padding: 14px 14px;
+}
+
+.lyrics-wrap pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.note-wrap {
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: var(--panel);
+  padding: 14px 14px;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* Video */
+.video-wrap {
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: var(--panel);
+  padding: 14px;
+}
+
+.video-wrap iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 14px;
+}
+
+/* More tracks */
+.more-tracks {
+  display: grid;
+  gap: 10px;
+}
+
+.more-track {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--stroke);
+  background: var(--panel);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.more-track:hover {
+  border-color: rgba(241, 196, 15, 0.55);
+  background: rgba(241, 196, 15, 0.08);
+}
+
+.more-track__meta {
+  display: grid;
+  gap: 4px;
+}
+
+.more-track__meta strong { font-weight: 700; }
+
+.more-track__sub {
+  opacity: 0.82;
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .track-hero { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track-bg { filter: blur(18px); }
+}
+
+
+/* YouTube audio embed (compact) */
+.video-wrap iframe.audio-embed {
+  aspect-ratio: auto;
+  height: 90px;
+}
+
+/* =========================================================
+   FULL-PAGE TRACK COVER BACKGROUND (replaces global hero-banner)
+   ========================================================= */
+
+/* Disable the global ToA background layer (hero-banner.webp) on track pages */
+body.track-page::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Make track cover ambience full-page */
+.track-bg {
+  position: fixed;
+  inset: 0;
+  height: auto;
+  width: auto;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  /* Your requested blur strength */
+  filter: blur(5px) saturate(1.10) brightness(1.02) contrast(1.02);
+  transform: scale(1.06);
+
+  opacity: 0.42;
+
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle wash layer (optional) */
+.track-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(241, 196, 15, 0.14), transparent 52%),
+    radial-gradient(circle at 76% 26%, rgba(21, 201, 250, 0.10), transparent 56%),
+    linear-gradient(180deg, rgba(var(--bg-rgb), 0.30) 0%, rgba(var(--bg-rgb), 0.92) 100%);
+}
+
+/* ---------- Track streaming links: collapse into dropdown on small screens ---------- */
+#track-links > details.streaming.stream-dropdown {
+  display: none;
+}
+
+#track-links .stream-summary__meta {
+  margin-left: auto;
+  opacity: 0.78;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15px;
+}
+
+@media (max-width: 720px) {
+  #track-links > a.link-tab {
+    display: none;
+  }
+
+  #track-links > details.streaming.stream-dropdown {
+    display: block;
+    width: 100%;
+  }
+
+  #track-links > details.streaming.stream-dropdown > summary.link-tab {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+
+/* Ensure global header overlays track hero + menus on this page */
+.track-page .site-header{ z-index: 6000; }

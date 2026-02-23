@@ -1,0 +1,362 @@
+[
+  {
+    "url": "http://127.0.0.1:4173/index.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_index_html-2026_02_23_19_58_55.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_index_html-2026_02_23_19_58_55.report.json",
+    "summary": {
+      "performance": 0.65,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/index.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_index_html-2026_02_23_19_59_13.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_index_html-2026_02_23_19_59_13.report.json",
+    "summary": {
+      "performance": 0.65,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/music.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_music_html-2026_02_23_19_59_47.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_music_html-2026_02_23_19_59_47.report.json",
+    "summary": {
+      "performance": 0.67,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/music.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_music_html-2026_02_23_20_00_05.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_music_html-2026_02_23_20_00_05.report.json",
+    "summary": {
+      "performance": 0.66,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/album.html?album=wings-of-fire",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_album_html-2026_02_23_20_00_57.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_album_html-2026_02_23_20_00_57.report.json",
+    "summary": {
+      "performance": 0.78,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/album.html?album=wings-of-fire",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_album_html-2026_02_23_20_01_12.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_album_html-2026_02_23_20_01_12.report.json",
+    "summary": {
+      "performance": 0.76,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/track.html?album=wings-of-fire&track=awakening-the-triad",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_track_html-2026_02_23_20_01_28.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_track_html-2026_02_23_20_01_28.report.json",
+    "summary": {
+      "performance": 0.76,
+      "accessibility": 0.92,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/track.html?album=wings-of-fire&track=awakening-the-triad",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_track_html-2026_02_23_20_03_33.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_track_html-2026_02_23_20_03_33.report.json",
+    "summary": {
+      "performance": 0.78,
+      "accessibility": 0.92,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/publishing.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_publishing_html-2026_02_23_20_04_31.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_publishing_html-2026_02_23_20_04_31.report.json",
+    "summary": {
+      "performance": 0.69,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/publishing.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_publishing_html-2026_02_23_20_06_07.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_publishing_html-2026_02_23_20_06_07.report.json",
+    "summary": {
+      "performance": 0.71,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/digital-store.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_digital_store_html-2026_02_23_20_07_32.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_digital_store_html-2026_02_23_20_07_32.report.json",
+    "summary": {
+      "performance": 0.69,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/digital-store.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_digital_store_html-2026_02_23_20_07_47.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_digital_store_html-2026_02_23_20_07_47.report.json",
+    "summary": {
+      "performance": 0.71,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/contact.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_contact_html-2026_02_23_20_08_32.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_contact_html-2026_02_23_20_08_32.report.json",
+    "summary": {
+      "performance": 0.66,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/contact.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_contact_html-2026_02_23_20_08_47.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_contact_html-2026_02_23_20_08_47.report.json",
+    "summary": {
+      "performance": 0.66,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/privacy.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_privacy_html-2026_02_23_20_09_02.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_privacy_html-2026_02_23_20_09_02.report.json",
+    "summary": {
+      "performance": 0.65,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/privacy.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_privacy_html-2026_02_23_20_09_33.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_privacy_html-2026_02_23_20_09_33.report.json",
+    "summary": {
+      "performance": 0.68,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/404.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_404_html-2026_02_23_20_09_48.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_404_html-2026_02_23_20_09_48.report.json",
+    "summary": {
+      "performance": 0.83,
+      "accessibility": 0.96,
+      "best-practices": 1,
+      "seo": 0.69
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/404.html",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_404_html-2026_02_23_20_10_17.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_404_html-2026_02_23_20_10_17.report.json",
+    "summary": {
+      "performance": 0.82,
+      "accessibility": 0.96,
+      "best-practices": 1,
+      "seo": 0.69
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/search/",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_search_-2026_02_23_20_10_32.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_search_-2026_02_23_20_10_32.report.json",
+    "summary": {
+      "performance": 0.6,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/search/",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_search_-2026_02_23_20_10_47.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_search_-2026_02_23_20_10_47.report.json",
+    "summary": {
+      "performance": 0.61,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/index.html",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_index_html-2026_02_23_19_59_30.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_index_html-2026_02_23_19_59_30.report.json",
+    "summary": {
+      "performance": 0.65,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/music.html",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_music_html-2026_02_23_20_00_23.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_music_html-2026_02_23_20_00_23.report.json",
+    "summary": {
+      "performance": 0.66,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/album.html?album=wings-of-fire",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_album_html-2026_02_23_20_00_41.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_album_html-2026_02_23_20_00_41.report.json",
+    "summary": {
+      "performance": 0.71,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/track.html?album=wings-of-fire&track=awakening-the-triad",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_track_html-2026_02_23_20_02_33.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_track_html-2026_02_23_20_02_33.report.json",
+    "summary": {
+      "performance": 0.78,
+      "accessibility": 0.92,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/publishing.html",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_publishing_html-2026_02_23_20_04_48.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_publishing_html-2026_02_23_20_04_48.report.json",
+    "summary": {
+      "performance": 0.7,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/digital-store.html",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_digital_store_html-2026_02_23_20_08_02.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_digital_store_html-2026_02_23_20_08_02.report.json",
+    "summary": {
+      "performance": 0.71,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/contact.html",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_contact_html-2026_02_23_20_08_17.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_contact_html-2026_02_23_20_08_17.report.json",
+    "summary": {
+      "performance": 0.66,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/privacy.html",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_privacy_html-2026_02_23_20_09_18.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_privacy_html-2026_02_23_20_09_18.report.json",
+    "summary": {
+      "performance": 0.68,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/404.html",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_404_html-2026_02_23_20_10_02.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_404_html-2026_02_23_20_10_02.report.json",
+    "summary": {
+      "performance": 0.83,
+      "accessibility": 0.96,
+      "best-practices": 1,
+      "seo": 0.69
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4173/search/",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_search_-2026_02_23_20_11_02.report.html",
+    "jsonPath": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels\\127_0_0_1-_search_-2026_02_23_20_11_02.report.json",
+    "summary": {
+      "performance": 0.61,
+      "accessibility": 0.96,
+      "best-practices": 0.96,
+      "seo": 1
+    }
+  }
+]

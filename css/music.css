@@ -1,0 +1,389 @@
+/* css/music.css — Shared album grid styling + Music page UI
+   Keep selectors compatible with existing homepage markup (.album-block)
+   while upgrading to a unified card system (.album-card).
+*/
+
+/* ---------- Music hero ---------- */
+.music-page .page-hero.music-hero {
+  padding: 40px 0 24px;
+  position: relative;
+}
+
+.music-page .page-hero__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.music-toolbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.music-search input[type="search"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--stroke-2);
+  background: var(--panel-3);
+  color: var(--text);
+  font-size: 14px;
+}
+
+.music-search input::placeholder {
+  color: var(--text-muted);
+}
+
+.music-sort select {
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--stroke-2);
+  background: var(--panel-3);
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* ---------- Album grid (shared) ---------- */
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 300px));
+    justify-content: center;
+  gap: 18px;
+  align-items: stretch;
+  justify-items: stretch;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 22px 20px 0;
+}
+
+@media (max-width: 560px) {
+  .music-toolbar {
+    grid-template-columns: 1fr;
+  }
+  .album-grid {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 240px));
+    padding: 18px 14px 0;
+  }
+}
+
+/* ---------- Unified album card ---------- */
+.album-card,
+.album-block {
+  border: 1px solid var(--stroke);
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border-radius: 18px;
+  overflow: visible;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100%;
+  box-shadow: var(--shadow-soft);
+}
+
+.album-card__cover,
+.album-link {
+  display: block;
+  position: relative;
+  background: var(--panel-3);
+  aspect-ratio: 1 / 1; /* CLS hardening */
+  overflow: hidden;
+}
+
+.album-card__cover img,
+.album-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.01);
+}
+
+.album-card__coverFallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-family: "Orbitron", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 900;
+  font-size: 34px;
+  color: var(--text);
+  opacity: 0.92;
+  background: radial-gradient(circle at 30% 30%, rgba(var(--accent-rgb), 0.18), rgba(var(--bg-rgb), 0.35));
+}
+
+.album-card__body,
+.album-info {
+  padding: 14px 14px 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.album-card__title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.album-card__title a,
+.album-title {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.album-card__meta {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.82;
+}
+
+.album-card__genre {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.76;
+}
+
+.album-card__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.album-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+
+/* Ensure menus render above adjacent cards (fix for clipped dropdowns) */
+.album-card:hover,
+.album-card:focus-within,
+.album-block:hover,
+.album-block:focus-within {
+  z-index: 40;
+}
+
+.streaming[open] {
+  z-index: 30;
+}
+
+.menu {
+  z-index: 40;
+}
+
+/* ---------- Streaming menu (details/summary) ---------- */
+.streaming {
+  position: relative;
+}
+
+.streaming > summary {
+  list-style: none;
+}
+
+.streaming > summary::-webkit-details-marker {
+  display: none;
+}
+
+.streaming[open] > summary {
+  border-color: rgba(var(--accent-rgb), 0.85);
+}
+
+.menu {
+  position: absolute;
+  z-index: 40;
+  right: 0;
+  margin-top: 10px;
+  width: min(260px, 70vw);
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid var(--stroke);
+  background: var(--glass-strong);
+  box-shadow: var(--shadow-deep);
+}
+
+.menu li {
+  list-style: none;
+}
+
+.menu a {
+  display: block;
+  padding: 10px 10px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid transparent;
+}
+
+.menu a:hover,
+.menu a:focus-visible {
+  border-color: rgba(var(--accent-rgb), 0.55);
+  background: rgba(var(--accent-rgb), 0.10);
+}
+
+.menu__empty {
+  padding: 10px;
+  opacity: 0.75;
+  font-size: 13px;
+}
+
+/* Hide legacy carousels if present (kept for backward compatibility) */
+
+/* =========================
+   Home Featured Albums — horizontal carousel (mobile-first)
+   ========================= */
+
+.index-page .featured-albums-carousel {
+  position: relative;
+}
+
+.index-page .featured-albums-carousel .album-nav-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 14px 0 0;
+}
+
+.index-page .featured-albums-carousel .album-nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  width: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--accent-rgb), 0.22);
+  background: var(--panel);
+  color: var(--accent);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, opacity 160ms ease;
+  touch-action: manipulation;
+}
+
+.index-page .featured-albums-carousel .album-nav-button:hover,
+.index-page .featured-albums-carousel .album-nav-button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  background: rgba(var(--accent-rgb), 0.10);
+  border-color: rgba(var(--accent-rgb), 0.34);
+  transform: translateY(-1px);
+}
+
+.index-page .featured-albums-carousel .album-nav-button[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.index-page .featured-albums-carousel .album-nav-button .glyph {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.index-page .featured-albums-carousel .album-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 18px 14px 8px;
+  margin: 0 auto;
+  max-width: 1200px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--accent-rgb), 0.6) var(--panel);
+}
+
+.index-page .featured-albums-carousel .album-track::-webkit-scrollbar {
+  height: 8px;
+}
+
+.index-page .featured-albums-carousel .album-track::-webkit-scrollbar-track {
+  background: var(--panel);
+  border-radius: 999px;
+}
+
+.index-page .featured-albums-carousel .album-track::-webkit-scrollbar-thumb {
+  background: rgba(var(--accent-rgb), 0.55);
+  border-radius: 999px;
+}
+
+.index-page .featured-albums-carousel .album-track:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 6px;
+}
+
+.index-page .featured-albums-carousel .album-block {
+  flex: 0 0 auto;
+  width: clamp(240px, 78vw, 320px);
+  scroll-snap-align: start;
+}
+
+@media (min-width: 860px) {
+  /* Desktop: keep the grid behavior for Featured Albums (no forced carousel) */
+  .index-page .featured-albums-carousel .album-track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 300px));
+    justify-content: center;
+    overflow: visible;
+    scroll-snap-type: none;
+    padding: 22px 20px 0;
+    gap: 18px;
+  }
+  .index-page .featured-albums-carousel .album-block {
+    width: auto;
+  }
+  .index-page .featured-albums-carousel .album-nav-buttons {
+    display: none;
+  }
+}
+
+
+/* =========================
+   Music page — responsive grid collapse (mobile authority)
+   ========================= */
+@media (max-width: 720px) {
+  .music-page .album-grid {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+  }
+  .music-page .album-block,
+  .music-page .album-card {
+    border-radius: 18px;
+  }
+}
+
+
+
+/* ---------- Mobile filter select (replaces chip row on small screens) ---------- */
+.music-filter-select {
+  display: none;
+  margin-top: 14px;
+}
+
+.music-filter-select select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(var(--accent-rgb), 0.22);
+  background: var(--panel);
+  color: var(--text);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.music-filter-select select:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .music-filter-select { display: block; }
+  #music-filter-chips { display: none; }
+}

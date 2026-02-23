@@ -1,0 +1,113 @@
+/* css/streaming.css — Streaming hub (Triad of Angels + ToA Studios)
+   Responsive authority:
+   - Desktop: 3 columns
+   - Tablet:  2 columns
+   - Mobile:  1 column
+   Note: main.page already provides max-width + padding. This file avoids double constraints.
+*/
+
+.streaming-page .page-hero.streaming-hero {
+  padding: 44px 0 18px;
+}
+
+.streaming-page .page-hero__inner {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.streaming-page .stream-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 24px 0 50px;
+  padding: 0;
+}
+
+@media (max-width: 980px) {
+  .streaming-page .stream-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .streaming-page .stream-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 18px 0 44px;
+  }
+}
+
+.stream-card {
+  border: 1px solid var(--stroke);
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+  padding: 18px 16px;
+}
+
+@media (max-width: 560px) {
+  .stream-card {
+    padding: 16px 14px;
+  }
+}
+
+.stream-card h2,
+.stream-card h3 {
+  margin: 0 0 10px;
+}
+
+.stream-card p {
+  margin: 0 0 12px;
+  opacity: 0.92;
+}
+
+.stream-links {
+  display: grid;
+  gap: 10px;
+}
+
+.stream-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(var(--accent-rgb), 0.20);
+  background: var(--panel);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  min-width: 0;
+}
+
+.stream-links a:hover,
+.stream-links a:focus-visible {
+  background: rgba(var(--accent-rgb), 0.12);
+  border-color: rgba(var(--accent-rgb), 0.35);
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.stream-links a > span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stream-links a > span.badge {
+  flex: 0 0 auto;
+  font-size: 12px;
+  opacity: 0.80;
+  font-weight: 700;
+}
+
+.streaming-page .stream-note {
+  margin: 0;
+  padding: 0 0 30px;
+  text-align: center;
+  opacity: 0.85;
+}
