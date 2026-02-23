@@ -180,3 +180,11 @@
 - Strategy: apply `srcset/sizes` only after a manifest is successfully fetched; if manifest is missing, use the original cover src.
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
+
+
+## DEC-021 — Mega Wave C uses automated preconnect normalization as the canonical method
+- **Date:** 2026-02-24
+- **Decision:** Use `tools/toa-mega-wave-c__preconnect-normalize.mjs` as the canonical way to enforce `preconnect` + `dns-prefetch` consistency for Google Fonts across the entire HTML corpus.
+- **Rationale:** Manual page-by-page edits are drift-prone across 280 static pages; automation keeps head performance hints uniform.
+- **Implications:** Run the tool for future head sweeps, then re-run `dev-check`, `link-scan`, and local LHCI before marking DONE.
+- **Artifacts:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`, `tools/toa-mega-wave-c__preconnect-normalize__report.json`, `TOA_Mega_Implementation_Checklist.md` (G-01.5 note)

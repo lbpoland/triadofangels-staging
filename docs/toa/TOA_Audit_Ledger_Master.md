@@ -71,6 +71,18 @@
 - **Files changed:** `css/style.css`, `js/global.js`, `publishing.html`, `css/publishing.css`, `js/publishing.js`
 - **Verification state:** **PENDING LOCAL QA** (run dev-check + LHCI per `TOA_P0_Patch_Wave_01_Plan.md`)
 
+
+## Patch Wave 02 — Mega Wave C (Head Connection Warm-Up)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Performance head normalization aligned to DEC-017 and checklist G-01.5 / ID-014 risk reduction
+- **Files changed:** 280 HTML files (site-wide sweep) + tracker docs + `tools/toa-mega-wave-c__preconnect-normalize__report.json`
+- **Implementation:** Added/normalized `preconnect` + `dns-prefetch` for `fonts.googleapis.com` and `fonts.gstatic.com` in every HTML file that loads Google Fonts.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci` PASS
+  - `node tools/link-scan.mjs` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|

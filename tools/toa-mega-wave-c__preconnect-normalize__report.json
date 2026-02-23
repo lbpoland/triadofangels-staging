@@ -1,13 +1,13 @@
 {
   "tool": "tools/toa-mega-wave-c__preconnect-normalize.mjs",
-  "generatedAt": "2026-02-23T19:11:43.470Z",
-  "root": "C:\\Users\\lbpol\\Downloads\\website-new\\triadofangels",
+  "generatedAt": "2026-02-23T23:47:09.475Z",
+  "root": "/workspace/triadofangels-staging",
   "mode": "apply",
   "htmlFilesScanned": 280,
   "changedFilesCount": 280,
   "actions": {
-    "PRECONNECT_INSERTED": 280,
-    "PRECONNECT_DEDUPED": 269
+    "PRECONNECT_DEDUPED": 280,
+    "PRECONNECT_INSERTED": 280
   },
   "changedFiles": [
     "404.html",

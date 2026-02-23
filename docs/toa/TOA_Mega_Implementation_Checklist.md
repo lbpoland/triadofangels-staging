@@ -241,6 +241,8 @@ Local QA results pasted:
 
 ## Patch Notes (Append-Only)
 - **2026-02-23 (AEST)** — Micro patch: fixed `index.html` Celestia album route casing + added missing CSP `script-src` hashes for inline JSON-LD on `index.html`, `apps.html`, `digital-store.html`. (Ledger: ID-022, ID-023)
-- [IN PROGRESS] G-01.5 Head performance: add preconnect/dns-prefetch where required origins exist
+- [IN PROGRESS] G-01.5 Head performance: add preconnect/dns-prefetch where required origins exist (implemented via Mega Wave C sweep on 280 HTML files; pending local LHCI verification)
 
 - [IN PROGRESS] L-01.3 Runtime dev-check must PASS (album/track/book canonical+og+twitter urls correct; JSON-LD always valid)
+
+- **2026-02-24 (AEST)** — Mega Wave C (Head connection warm-up): normalized Google Fonts `preconnect` + `dns-prefetch` blocks across all HTML pages using `tools/toa-mega-wave-c__preconnect-normalize.mjs` (280 files). Runtime/Lighthouse verification pending local browser-enabled QA.
