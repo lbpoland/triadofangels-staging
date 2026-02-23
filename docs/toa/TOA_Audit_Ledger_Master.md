@@ -589,3 +589,19 @@ When an issue is fixed, update:
 - **QA verification:** run generator tool, then verify in DevTools Network that smaller `-w320/-w480` assets are chosen on mobile; rerun Lighthouse.
 - **Entry:** 2026-02-23T19:33:25Z
 
+### ID-032 — Accessibility mode + touch ergonomics hardening (global navigation layer)
+- **Severity:** P1
+- **Category:** Accessibility / Navigation UX
+- **Status:** FIX IMPLEMENTED (PENDING QA)
+- **Goal:** Close high-ROI global a11y gaps for forced-colors, reduced-motion, and minimum mobile tap targets without changing page content.
+- **Fixes:**
+  - `css/style.css`: skip link upgraded to 44px-friendly target with explicit focus border treatment.
+  - `css/style.css`: navigation/theme controls and nav links normalized to minimum 44px touch targets.
+  - `css/style.css`: `@media (prefers-reduced-motion: reduce)` override disables motion-heavy transforms/transitions in nav interactions.
+  - `css/style.css`: `@media (forced-colors: active)` override ensures interactive controls retain visible borders/colors/focus.
+  - `js/global.js`: mobile menu close logic centralized and now auto-closes when resizing from mobile to desktop, preventing stale open state traps.
+- **Files touched:** `css/style.css`, `js/global.js`
+- **Checklist linkage:** B-01.3, B-03.2, B-03.3, E-02.1, E-02.2
+- **QA verification:** run `node tools/dev-check.mjs --ci`, `node tools/dev-check.mjs --runtime --ci`, `node tools/link-scan.mjs`; manual check for skip link + forced-colors + reduced-motion on header controls.
+- **Entry:** 2026-02-24T00:00:00Z
+

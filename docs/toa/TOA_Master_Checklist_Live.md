@@ -44,7 +44,7 @@
 | [IN PROGRESS] | Mobile header panel alignment + sizing fixed (S24) | css/style.css + js/global.js | ID-005 |
 | [IN PROGRESS] | Nested submenu behavior rebuilt (no massive gap) | css/style.css + js/global.js | ID-005 |
 | [IN PROGRESS] | Home Featured Albums horizontal carousel (touch + keyboard) | index.html + css/style.css + js/music-ui.js | ID-006 |
-| [IN PROGRESS] | Carousel/rail interaction polish (labels, focus, reduced motion) | global components | ID-006 + ID-009 |
+| [IN PROGRESS] | Carousel/rail interaction polish (labels, focus, reduced motion) | global components | ID-006 + ID-009 + ID-032 |
 
 ---
 
@@ -67,6 +67,7 @@
 | [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 |
 | [NOT STARTED] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 |
 | [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 |
+| [DONE] | Forced-colors + reduced-motion support hardened for global nav controls | css/style.css + js/global.js | ID-032 |
 
 ---
 
@@ -126,3 +127,7 @@
 ### 2026-02-23
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
+
+### 2026-02-24
+- **Done (this session):** Wave F global accessibility-mode hardening (touch targets, skip-link focus treatment, forced-colors, reduced-motion, mobile-menu resize close).
+- **Next:** Validate Wave F in full Core Release Gate manual matrix + move remaining P1 perf/SEO backlog (ID-014/ID-015).
