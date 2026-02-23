@@ -9,7 +9,9 @@
 
 ## 0) Test Context (fill each run)
 
-**Patch Wave 01 applied:** yes (P0). Local QA still required to mark PASS/FAIL.
+**Patch Wave 01 applied:** yes (P0).
+
+**Mega Wave F applied:** yes (ID-010 accessibility styling). Local LHCI verification still required to mark PASS/FAIL.
 
 | Field | Value |
 |---|---|
@@ -115,7 +117,7 @@
 ---
 
 ## 5) Notes / Known Baseline Failures (as of 2026-02-23)
-- Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, and Publishing-specific ARIA issues. (See Issue IDs: ID-008, ID-009, ID-011)
+- Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, Publishing-specific ARIA issues, and pending verification of `link-in-text-block` closure after Mega Wave F. (See Issue IDs: ID-008, ID-009, ID-010, ID-011)
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
 

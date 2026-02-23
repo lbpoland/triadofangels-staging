@@ -253,6 +253,22 @@ a:visited {
     color: var(--link-visited);
 }
 
+/*
+ * Mega Wave F (A11y links):
+ * Inline text links must never rely on color-only distinction.
+ * Scope this to prose-like containers so nav/buttons/cards can keep bespoke styling.
+ */
+:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a {
+    text-decoration-line: underline;
+    text-decoration-thickness: max(2px, 0.09em);
+    text-underline-offset: 0.2em;
+}
+
+:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a:hover,
+:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a:focus-visible {
+    text-decoration-thickness: max(2px, 0.11em);
+}
+
 /* Navigation */
 body.menu-open {
     overflow: hidden;
@@ -1510,6 +1526,21 @@ video {
     :focus-visible {
         outline: 2px solid Highlight;
         outline-offset: 3px;
+    }
+
+    a {
+        color: LinkText;
+    }
+
+    a:visited {
+        color: VisitedText;
+    }
+
+    :where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a {
+        text-decoration-line: underline;
+        text-decoration-thickness: 2px;
+        text-decoration-color: currentColor;
+        text-underline-offset: 0.16em;
     }
 
     .nav-links a,

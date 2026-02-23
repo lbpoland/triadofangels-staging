@@ -114,7 +114,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [IN PROGRESS] E-01.4 Fix any remaining heading-order issues (maintain single H1 per page)
 
 ### E-02 Mode support
-- [NOT STARTED] E-02.1 Forced-colors: ensure borders, focus rings, interactive states visible
+- [IN PROGRESS] E-02.1 Forced-colors: ensure borders, focus rings, interactive states visible (Wave F link visibility hardening landed; broaden component sweep pending)
 - [NOT STARTED] E-02.2 Reduced motion: disable smooth scrolling/animated transitions where applicable
 - [NOT STARTED] E-02.3 Screen reader: verify landmarks (header/nav/main/footer), labels, aria-current
 
@@ -244,3 +244,4 @@ Local QA results pasted:
 - [IN PROGRESS] G-01.5 Head performance: add preconnect/dns-prefetch where required origins exist
 
 - [IN PROGRESS] L-01.3 Runtime dev-check must PASS (album/track/book canonical+og+twitter urls correct; JSON-LD always valid)
+- **2026-02-23 (AEST)** — Mega Wave F accessibility layer: prose-scoped non-color link affordance + forced-colors link visibility upgrades in `css/style.css`. (Ledger: ID-010; Checklist: E-02.1)

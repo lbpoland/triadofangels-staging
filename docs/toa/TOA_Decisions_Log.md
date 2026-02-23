@@ -180,3 +180,10 @@
 - Strategy: apply `srcset/sizes` only after a manifest is successfully fetched; if manifest is missing, use the original cover src.
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
+
+
+## 2026-02-23 — DEC-021: Inline text links must preserve non-color affordance
+- Inline links in prose-like containers must retain visible underline affordance (thickness + offset), even when bespoke component styles remove decoration elsewhere.
+- In forced-colors mode, link colors must defer to system `LinkText`/`VisitedText` and keep underlines visible.
+- Scope to text contexts (`main` + footer copy) to avoid regressing nav/button visual systems.
+- Artifacts: `css/style.css`, `docs/toa/TOA_Audit_Ledger_Master.md` (ID-010).
