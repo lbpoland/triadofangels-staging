@@ -180,3 +180,8 @@
 - Strategy: apply `srcset/sizes` only after a manifest is successfully fetched; if manifest is missing, use the original cover src.
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
+## 2026-02-23 — DEC-021: Music pre-rendered routes must match catalog source-of-truth
+- `js/data.js` is the authoritative catalog for album/track route generation.
+- Every catalog-defined route must exist as a pre-rendered static page.
+- Orphan pre-rendered album/track routes (not represented in `js/data.js`) are invalid and must be removed.
+- Enforcement: `tools/dev-check.mjs` data integrity now fails on missing expected routes and orphan static routes.

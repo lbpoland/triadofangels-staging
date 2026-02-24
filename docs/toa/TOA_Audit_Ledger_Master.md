@@ -590,3 +590,25 @@ When an issue is fixed, update:
 - **QA verification:** run generator tool, then verify in DevTools Network that smaller `-w320/-w480` assets are chosen on mobile; rerun Lighthouse.
 - **Entry:** 2026-02-23T19:33:25Z
 
+### ID-032 — Mega Wave F: Music catalog route-integrity gate + orphan route cleanup
+- **Severity:** P1
+- **Category:** SEO / Data Integrity / Static Generation Hygiene
+- **Status:** FIX IMPLEMENTED (PENDING QA)
+- **Problem:** Pre-rendered track routes contained stale/orphan pages not present in `js/data.js`, creating duplicate-content/indexing risk and drift between source data and generated routes.
+- **Fixes:**
+  - Extended `tools/dev-check.mjs` data integrity checks to enforce that every data-defined album/track has a matching pre-rendered route and that no orphan pre-rendered album/track routes remain.
+  - Removed orphan track pages that were no longer represented in `js/data.js`.
+- **Files touched:**
+  - `tools/dev-check.mjs`
+  - `music/tracks/celestia-the-light-within/harmony-s-call/index.html` (removed)
+  - `music/tracks/echoes-on-the-dirt-road/boot-scoot-spin/index.html` (removed)
+  - `music/tracks/echoes-on-the-dirt-road/friday-nights-broken-lights/index.html` (removed)
+  - `music/tracks/echoes-on-the-dirt-road/rust-roses/index.html` (removed)
+  - `music/tracks/phoenix-rising/heaven-s-burning/index.html` (removed)
+  - `music/tracks/phoenix-rising/venom-velvet/index.html` (removed)
+  - `music/tracks/probed-and-confused/probed-confused/index.html` (removed)
+  - `music/tracks/serpents-veil/mirrors-dust/index.html` (removed)
+  - `music/tracks/serpents-veil/serpent-s-veil/index.html` (removed)
+  - `music/tracks/the-quiet-war-2/ashes-blueprints/index.html` (removed)
+- **QA verification:** `node tools/dev-check.mjs --ci` + `node tools/link-scan.mjs --ci` + `node tools/dev-check.mjs --runtime --ci`.
+- **Entry:** 2026-02-23T20:45:00Z

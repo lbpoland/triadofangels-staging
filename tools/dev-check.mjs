@@ -29,11 +29,13 @@
  *    - Parses every <script type="application/ld+json"> as JSON, except:
  *      - #dynamic-jsonld scaffold MUST exist on dynamic pages and MUST be empty at template time.
  *
- * 3) Data integrity checks (js/data.js):
+ * 3) Data integrity checks (js/data.js + pre-rendered route integrity):
  *    - unique album ids
  *    - each album.links is a plain object
  *    - per album: unique sanitized track ids
  *    - per track meta (album.lyrics[trackId]): links object present
+ *    - every data album/track has a matching pre-rendered static route
+ *    - no orphaned pre-rendered album/track routes that are missing in source data
  *
  * 4) Runtime validation (optional):
  *    - With --runtime, attempts Playwright (if installed) to load:
@@ -532,9 +534,12 @@ const loadData = async () => {
   };
 };
 
-const dataIntegrityChecks = (albums, sanitizeTrackId) => {
+const dataIntegrityChecks = (albums, sanitizeTrackId, htmlRelPaths = []) => {
   const errors = [];
   const warnings = [];
+
+  const expectedAlbumPages = new Set();
+  const expectedTrackPages = new Set();
 
   const ids = new Set();
   for (const album of albums) {
@@ -548,6 +553,8 @@ const dataIntegrityChecks = (albums, sanitizeTrackId) => {
 
     if (!isPlainObject(album.links)) errors.push({ kind: 'album', field: 'links', message: `Album ${id} missing links object` });
 
+    expectedAlbumPages.add(`music/albums/${id}/index.html`);
+
     const titles = Array.isArray(album.tracks) ? album.tracks : [];
     const trackIds = new Set();
     for (const t of titles) {
@@ -555,6 +562,7 @@ const dataIntegrityChecks = (albums, sanitizeTrackId) => {
       if (!tid) errors.push({ kind: 'track', field: 'id', message: `Album ${id} has track with empty sanitized id`, trackTitle: String(t) });
       if (trackIds.has(tid)) errors.push({ kind: 'track', field: 'id', message: `Album ${id} has duplicate sanitized track id: ${tid}`, trackTitle: String(t) });
       trackIds.add(tid);
+      expectedTrackPages.add(`music/tracks/${id}/${tid}/index.html`);
     }
 
     if (isPlainObject(album.lyrics)) {
@@ -564,6 +572,36 @@ const dataIntegrityChecks = (albums, sanitizeTrackId) => {
       }
     } else {
       warnings.push({ kind: 'album', field: 'lyrics', message: `Album ${id} has no lyrics object (ok, but track pages may not resolve)` });
+    }
+  }
+
+  const albumPageRe = /^music\/albums\/[^/]+\/index\.html$/i;
+  const trackPageRe = /^music\/tracks\/[^/]+\/[^/]+\/index\.html$/i;
+
+  const actualAlbumPages = new Set(htmlRelPaths.filter((p) => albumPageRe.test(p)));
+  const actualTrackPages = new Set(htmlRelPaths.filter((p) => trackPageRe.test(p)));
+
+  for (const expected of expectedAlbumPages) {
+    if (!actualAlbumPages.has(expected)) {
+      errors.push({ kind: 'album', field: 'static-route', message: `Missing pre-rendered album route: ${expected}` });
+    }
+  }
+
+  for (const expected of expectedTrackPages) {
+    if (!actualTrackPages.has(expected)) {
+      errors.push({ kind: 'track', field: 'static-route', message: `Missing pre-rendered track route: ${expected}` });
+    }
+  }
+
+  for (const actual of actualAlbumPages) {
+    if (!expectedAlbumPages.has(actual)) {
+      errors.push({ kind: 'album', field: 'orphan-static-route', message: `Orphan pre-rendered album route (not in js/data.js): ${actual}` });
+    }
+  }
+
+  for (const actual of actualTrackPages) {
+    if (!expectedTrackPages.has(actual)) {
+      errors.push({ kind: 'track', field: 'orphan-static-route', message: `Orphan pre-rendered track route (not in js/data.js): ${actual}` });
     }
   }
 
@@ -1076,7 +1114,9 @@ const main = async () => {
 
   try {
     const { albums, sanitizeTrackId, books } = await loadData();
-    dataIntegrity = dataIntegrityChecks(albums, sanitizeTrackId);
+    const htmlRelPaths = htmlFiles
+      .map((p) => path.relative(ROOT, p).replace(/\\/g, '/'));
+    dataIntegrity = dataIntegrityChecks(albums, sanitizeTrackId, htmlRelPaths);
     errorCount += dataIntegrity.errors.length;
     warnCount += dataIntegrity.warnings.length;
 
