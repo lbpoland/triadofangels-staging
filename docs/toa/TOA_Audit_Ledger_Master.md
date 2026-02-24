@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE L update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE M update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -151,6 +151,18 @@
   - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler --runtime --require-playwright` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+
+## Patch Wave 09 — Mega Wave M (Navigation Desktop Dropdown Stability)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Navigation-layer hardening for desktop dropdown placement and interaction continuity (ID-005 / B-02.1 / B-02.3 / B-03.1).
+- **Files changed:** `js/global.js`, `css/style.css` + governance tracker updates.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -158,7 +170,7 @@
 | ID-002 | P1 | OPEN | Workflow | Prevent “minimum page” audit drift | rules + instructions |
 | ID-003 | P0 | OPEN (process control) | Workflow | Atomic delivery enforcement | delivery contract + process |
 | ID-004 | P1 | BLOCKED | Audit | Deep-report reconciliation pending upload | deep-research-report(3).md |
-| ID-005 | P0 | IMPLEMENTED (PENDING QA) | Navigation / Mobile | Mobile header dropdown misalignment + nested submenu gap | `css/style.css`, `js/global.js`, header HTML generation |
+| ID-005 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Navigation / Mobile | Mobile/desktop header dropdown alignment + submenu stability hardening applied (Wave 01 + Wave M) | `css/style.css`, `js/global.js`, header HTML generation |
 | ID-006 | P0 | IMPLEMENTED (PENDING QA) | Home / UX | Featured Albums on Home not behaving like a horizontal carousel on mobile | `index.html`, `css/style.css`, `js/music-ui.js` |
 | ID-007 | P0 | IMPLEMENTED (PENDING QA) | Responsive | Content “box” frames overflow viewport on S24 (horizontal clipping/edge bleed) | `css/style.css` (+ page CSS where needed) |
 | ID-008 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `label-content-name-mismatch` across pages (visible text vs aria-label mismatch) | global HTML, footer/header, `css/style.css`, `js/album.js`, `js/track.js`, `js/book.js` |
@@ -248,12 +260,13 @@
 ### ID-005 — Mobile Header Dropdown Misalignment + Nested Submenu Gap
 - **Severity:** P0
 - **Category:** Navigation / Mobile
-- **Status:** IMPLEMENTED (PENDING QA)
+- **Status:** FIX IMPLEMENTED (PENDING LOCAL QA)
 - **Evidence:** User S24 screenshots: dropdown panel shifted too far right; left gap; nested “Music” submenu expands creating massive vertical blank space.
 - **Affected pages:** All (global header)
 - **Affected files:** `css/style.css`, `js/global.js`, header markup in all HTML pages (prefer fixing via `tools/generate-static.mjs` patterns if header is templated)
 - **Root cause (likely):** Mobile menu container sizing + alignment rules; nested dropdown expands in-flow instead of in a dedicated subpanel.
 - **Wave 01 implementation:** Mobile submenu rebuilt as **second-panel navigation** (Option B). Removed mobile flyout transform + removed CSP-blocked inline style shifting. Mobile menu width normalized for S24-class devices; submenu panel overlays the primary panel with Back control, stable scroll, no blank gap.
+- **Wave M implementation (2026-02-24):** Added desktop viewport-edge-aware submenu alignment (`.nav-submenu--align-right`) and resize-time repositioning for open dropdowns so nested navigation avoids clipping/interaction traps near viewport boundaries while preserving inside-click behavior and ESC/outside-close semantics.
 - **Why it matters:** Core navigation becomes visually broken on mobile; harms conversion and trust.
 - **Required fix (target behavior):**
   - Mobile menu panel width is intentional, centered/anchored consistently.
