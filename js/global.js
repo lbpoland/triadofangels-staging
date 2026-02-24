@@ -1040,41 +1040,5 @@ const isGlyphOnly = (s) => {
 })();
 
 
-// =========================
-// HOME — Featured Albums Rail Enhancer (P0)
-// Touch scroll is native. Add keyboard support + tabindex for accessibility.
-// =========================
-(function toaEnhanceHomeFeaturedRail(){
-  const rail = document.querySelector('.featured-albums-carousel .album-track');
-  if (!rail) return;
-
-  if (!rail.hasAttribute('tabindex')) rail.setAttribute('tabindex', '0');
-  if (!rail.hasAttribute('role')) rail.setAttribute('role', 'region');
-
-  const stepFor = () => {
-    const card = rail.querySelector('.album-block');
-    if (!card) return 260;
-    const r = card.getBoundingClientRect();
-    return Math.max(220, Math.round(r.width + 14));
-  };
-
-  rail.addEventListener('keydown', (e) => {
-    const step = stepFor();
-    if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      rail.scrollBy({ left: step, top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      rail.scrollBy({ left: -step, top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-    }
-    if (e.key === 'Home') {
-      e.preventDefault();
-      rail.scrollTo({ left: 0, top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-    }
-    if (e.key === 'End') {
-      e.preventDefault();
-      rail.scrollTo({ left: rail.scrollWidth, top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-    }
-  }, { passive: false });
-})();
+// Featured Albums rail keyboard support is handled by setupCarouselNav.
+// Keep one listener path to avoid duplicate Arrow/Home/End scroll jumps.

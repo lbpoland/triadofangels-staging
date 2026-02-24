@@ -1,6 +1,6 @@
 # TOA Website — Decisions Log (Anti-Drift)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE M  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE N  
 **Purpose:** Record decisions, constraints, and standards so work never re-litigates the same topics.
 
 ---
@@ -235,3 +235,9 @@
 - Recompute alignment on resize while dropdown is open to avoid stale geometry after viewport changes.
 - Interaction rule remains unchanged: interacting inside submenu does not close it; outside click/focus-out/ESC closes it.
 - Enforcement layer: `js/global.js` (submenu positioning logic) + `css/style.css` (alignment utility class).
+
+
+## 2026-02-24 — DEC-029: Single keyboard listener policy for horizontal rails
+- Horizontal carousel/rail keyboard behavior (ArrowLeft/ArrowRight/Home/End) must be owned by a single handler path to avoid duplicate-scroll jumps and inconsistent reduced-motion behavior.
+- Use the shared `setupCarouselNav` keyboard path in `js/global.js` for rail controls; avoid additional page-specific duplicate keydown listeners on the same carousel element.
+- Home Featured Albums rail must keep explicit SR guidance via `aria-describedby` so keyboard shortcuts are discoverable without adding non-semantic controls.

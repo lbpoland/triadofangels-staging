@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE M update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE N update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -163,6 +163,18 @@
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+
+## Patch Wave 10 — Mega Wave N (Home Featured Albums Rail Stabilization)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Homepage carousel interaction/accessibility stability for Featured Albums rail (ID-006 / C-01.1 / C-01.2 / C-01.3).
+- **Files changed:** `index.html`, `css/style.css`, `js/global.js` + governance tracker updates.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -171,7 +183,7 @@
 | ID-003 | P0 | OPEN (process control) | Workflow | Atomic delivery enforcement | delivery contract + process |
 | ID-004 | P1 | BLOCKED | Audit | Deep-report reconciliation pending upload | deep-research-report(3).md |
 | ID-005 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Navigation / Mobile | Mobile/desktop header dropdown alignment + submenu stability hardening applied (Wave 01 + Wave M) | `css/style.css`, `js/global.js`, header HTML generation |
-| ID-006 | P0 | IMPLEMENTED (PENDING QA) | Home / UX | Featured Albums on Home not behaving like a horizontal carousel on mobile | `index.html`, `css/style.css`, `js/music-ui.js` |
+| ID-006 | P0 | IMPLEMENTED (PENDING LOCAL QA) | Home / UX | Home Featured Albums rail hardened with single keyboard handler path, SR instructions, and mobile snap-width stability improvements | `index.html`, `css/style.css`, `js/global.js` |
 | ID-007 | P0 | IMPLEMENTED (PENDING QA) | Responsive | Content “box” frames overflow viewport on S24 (horizontal clipping/edge bleed) | `css/style.css` (+ page CSS where needed) |
 | ID-008 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `label-content-name-mismatch` across pages (visible text vs aria-label mismatch) | global HTML, footer/header, `css/style.css`, `js/album.js`, `js/track.js`, `js/book.js` |
 | ID-009 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `color-contrast` failures (light/dark parity) | `css/style.css` (+ page CSS) |
@@ -285,12 +297,13 @@
 ### ID-006 — Home Featured Albums Not Behaving Like a Horizontal Carousel (Mobile)
 - **Severity:** P0
 - **Category:** Home / UX
-- **Status:** IMPLEMENTED (PENDING QA)
+- **Status:** IMPLEMENTED (PENDING LOCAL QA)
 - **Evidence:** User reported Featured Albums stack vertically on Home instead of a left-right scroll rail.
 - **Affected pages:** `index.html`
-- **Affected files:** `index.html`, `css/style.css` (carousel styles exist), likely `js/music-ui.js` (carousel behavior), possibly a home-specific module
+- **Affected files:** `index.html`, `css/style.css`, `js/global.js`
 - **Root cause (likely):** Markup/class mismatch with existing carousel CSS, or missing JS initialization for the home rail.
 - **Wave 01 implementation:** Home Featured Albums now uses a real **horizontal rail** on mobile via global CSS. Added keyboard scrolling + tabindex enhancement (ArrowLeft/ArrowRight/Home/End) for accessibility.
+- **Mega Wave N implementation (2026-02-24):** Removed duplicate keyboard listeners so Arrow/Home/End does not double-scroll, added explicit screen-reader rail instructions (`aria-describedby`), and tightened mobile card width/snap padding to preserve horizontal behavior and prevent edge bleed.
 - **Why it matters:** Breaks premium discovery feel and massively increases scroll friction on mobile.
 - **Required fix:** Ensure Featured Albums uses the established carousel/rail pattern (scroll-snap + buttons + touch drag).
 - **Acceptance criteria:**

@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE M  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE N  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -82,9 +82,9 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 # C) HOMEPAGE / FEATURED ALBUMS / CAROUSELS
 
 ### C-01 Featured Albums rail
-- [IN PROGRESS] C-01.1 Mobile horizontal rail: scroll-snap, smooth, no vertical stacking, no overflow bleed
-- [NOT STARTED] C-01.2 Keyboard rail controls: ArrowLeft/Right, Home/End, optional prev/next buttons
-- [IN PROGRESS] C-01.3 Reduced motion: avoid smooth scroll when prefers-reduced-motion
+- [IN PROGRESS] C-01.1 Mobile horizontal rail: scroll-snap, smooth, no vertical stacking, no overflow bleed (Wave N responsive rail-width + snap-padding hardening applied; pending local QA)
+- [IN PROGRESS] C-01.2 Keyboard rail controls: ArrowLeft/Right, Home/End, optional prev/next buttons (Wave N de-duplicated keydown path to single carousel handler; pending local QA)
+- [IN PROGRESS] C-01.3 Reduced motion: avoid smooth scroll when prefers-reduced-motion (Wave N retained reduced-motion auto-scroll behavior via shared carousel path; pending local QA)
 
 ### C-02 Hero section polish
 - [NOT STARTED] C-02.1 Hero typography scale across breakpoints; prevent text overlap
@@ -258,3 +258,5 @@ Local QA results pasted:
 - **2026-02-24 (AEST)** — MEGA WAVE L (Console/CSP gate hardening): added strict no-inline-handler enforcement to `dev-check` and CI/QA npm scripts so CSP policy no longer relies on inline handlers; runtime/Lighthouse verification remains pending local browser execution. (Ledger: ID-013, ID-032; Checklist: L-01.1, L-01.2)
 
 - **2026-02-24 (AEST)** — MEGA WAVE M (Navigation desktop dropdown stability): added viewport-edge submenu alignment and resize-time repositioning logic to prevent desktop dropdown clipping while preserving inside-interaction/outside-close behavior. (Ledger: ID-005, ID-032; Checklist: B-02.1, B-02.3)
+
+- **2026-02-24 (AEST)** — MEGA WAVE N (Home Featured Albums rail stabilization): removed duplicate keyboard listeners causing double-scroll jumps, added screen-reader rail instructions/region linkage, and hardened mobile card sizing to preserve horizontal snap behavior without edge bleed. (Ledger: ID-006; Checklist: C-01.1, C-01.2, C-01.3)
