@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane)  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE G  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -11,10 +11,11 @@
 
 **Patch Wave 01 applied:** yes (P0).
 **MEGA WAVE C applied:** yes (head preconnect normalization across all HTML).
+**MEGA WAVE G applied:** yes (canonical track alias route pruning).
 
 | Field | Value |
 |---|---|
-| Date (local) | 2026-02-23 |
+| Date (local) | 2026-02-24 |
 | Tester | Luke (local) / ChatGPT (analysis) |
 | Local origin used | http://127.0.0.1:4173 (LHCI baseline) |
 | Bundle timestamp | TOA_SITE_BUNDLE__2026-02-23_091020 |
@@ -93,7 +94,7 @@
 | JSON-LD valid + truthful | NOT RUN |  |
 | sitemap.xml present + correct | NOT RUN |  |
 | robots.txt aligned | NOT RUN |  |
-| Duplicate track routes resolved | NOT RUN | Issue ID-015 phase 1 applied in code (alias noindex+canonical + sitemap pruning); local Lighthouse/SEO crawl verification pending |
+| Duplicate track routes resolved | IN PROGRESS | Phase 2 applied: removed 10 orphan alias pre-rendered track routes; verify locally via runtime + LHCI SEO rerun. |
 
 ---
 
@@ -122,10 +123,6 @@
 - Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, and Publishing-specific ARIA issues. (See Issue IDs: ID-008, ID-009, ID-011)
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
-<<<<<<< ours
-=======
-
-
 
 ## 6) 2026-02-23 — MEGA WAVE C execution notes
 - Applied global head preconnect/dns-prefetch normalization for Google Fonts across 280 HTML files.
@@ -134,3 +131,11 @@
   - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
   - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
 - Local execution is required before marking Wave C as VERIFIED.
+
+## 7) 2026-02-24 — MEGA WAVE G execution notes
+- Applied canonical track route hardening by removing 10 legacy alias static track pages flagged by `dev-check` as orphan routes.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates are BLOCKED in sandbox:
+  - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
+- Local execution is required before marking Wave G as VERIFIED.

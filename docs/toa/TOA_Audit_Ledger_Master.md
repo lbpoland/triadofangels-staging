@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-23 (Australia/Brisbane) — MEGA WAVE F update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE G update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -83,6 +83,17 @@
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+## Patch Wave 03 — Mega Wave G (Canonical Track Route Hardening)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** SEO/routing integrity for pre-rendered track corpus (ID-015 / I-02.1).
+- **Files changed:** 10 legacy alias track pages removed + governance tracker updates.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -100,7 +111,7 @@
 | ID-012 | P0 | IMPLEMENTED (PENDING QA) | Performance / UX | Publishing page CLS ~0.397 (severe layout shift) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
 | ID-013 | P0 | IMPLEMENTED (PENDING QA) | Stability | Lighthouse reports console errors on core pages | `js/global.js`, page modules |
 | ID-014 | P1 | OPEN | Performance | LCP too high on multiple core pages (Music ~7.4s, Index ~6.2s, Publishing ~5.8s) | images + CSS + critical path |
-| ID-015 | P1 | IN PROGRESS | SEO | Duplicate track pages (same title, multiple slugs) risk duplicate content | `music/tracks/**/index.html` |
+| ID-015 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO | Duplicate/alias track static routes pruned to canonical-only corpus (10 alias routes removed) | `music/tracks/**/index.html` |
 | ID-016 | P1 | OPEN | Performance / UX | Search page baseline perf ~0.79, LCP ~5.4s | `search/search.js`, `search/search.css`, `css/style.css` |
 | ID-017 | P2 | OPEN | Build / Perf | Lighthouse flags minification + cache + compression strategy | tooling + build pipeline |
 | ID-018 | P2 | OPEN | UX / Perf | `bf-cache` prevented on most pages (investigate) | global JS + embed patterns |
@@ -351,7 +362,7 @@
 ### ID-015 — SEO: Duplicate Track Pages (Same Title, Multiple Slugs)
 - **Severity:** P1
 - **Category:** SEO / Routing
-- **Status:** IN PROGRESS
+- **Status:** FIX IMPLEMENTED (PENDING QA)
 - **Evidence:** Duplicate `<title>` values found across multiple distinct track URLs in the bundle.
 - **Affected pages:** Track pages under `music/tracks/**`
 - **Affected files:** `music/tracks/**/index.html`, sitemap generation, internal link generation
@@ -389,6 +400,7 @@
   - `music/tracks/phoenix-rising/venom-velvet/index.html` → canonical: `https://www.triadofangels.com/music/tracks/phoenix-rising/venom-velvet/`
 - **Required fix:** Choose one canonical slug per track; make all alternates non-indexed and/or redirect to canonical (GitHub Pages-safe).
 - **Wave update (Phase 1):** De-indexed legacy alias pages for `harmony-s-call` and `probed-confused` by pointing canonical/OG/Twitter/JSON-LD URLs to canonical slugs and setting `meta robots` to `noindex, follow`; removed alias URLs from `sitemap.xml` to keep sitemap canonical-only.
+- **Wave update (Phase 2 / Mega Wave G):** Removed 10 legacy alias pre-rendered track routes flagged as `orphan-static-route` by dev-check so only canonical track slugs from `js/data.js` remain in the static corpus.
 - **Acceptance criteria:** Only one indexable URL per track; sitemap lists canonical only; alternates redirect or noindex+canonical to primary.
 - **QA verification:** Link scan + sitemap check + Lighthouse SEO consistency.
 

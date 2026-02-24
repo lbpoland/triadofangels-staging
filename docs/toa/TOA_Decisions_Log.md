@@ -1,6 +1,6 @@
 # TOA Website — Decisions Log (Anti-Drift)
 
-**Last updated:** 2026-02-23 (Australia/Brisbane)  
+**Last updated:** 2026-02-24 (Australia/Brisbane)  
 **Purpose:** Record decisions, constraints, and standards so work never re-litigates the same topics.
 
 ---
@@ -185,3 +185,10 @@
 - Applied `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` to all HTML pages in one batch (280 files) to enforce DEC-017 consistently.
 - Scope discipline: head-only performance layer (connection hints), no content/page copy changes.
 - QA evidence requirement: dev-check + link-scan must pass in CI mode; Lighthouse verification may be completed locally when Chrome is unavailable in the execution environment.
+
+
+## 2026-02-24 — DEC-022: Canonical-only pre-rendered track route policy
+- For each track in `js/data.js`, keep exactly one pre-rendered static route under `music/tracks/<album>/<track>/index.html`.
+- Legacy alias slugs that are not represented in `js/data.js` must be removed from the static corpus (no orphan pre-rendered routes).
+- Rationale: preserves dev-check route-integrity gate, avoids duplicate-content indexing risk, and keeps sitemap/static corpus aligned with canonical data.
+- Verification: `node tools/dev-check.mjs --ci` and `node tools/link-scan.mjs --ci` must pass after route pruning.
