@@ -11,6 +11,8 @@
 
 **Patch Wave 02 applied:** yes (Mega Wave C head-performance normalization). Local browser-enabled QA still required to mark PASS/FAIL.
 
+**Mega Wave F applied (global background hardening):** yes (performance/a11y layer in `css/style.css`).
+
 | Field | Value |
 |---|---|
 | Date (local) | 2026-02-23 |
@@ -126,11 +128,10 @@
 
 
 
-## 6) 2026-02-24 Sandbox QA Evidence (Mega Wave C)
-- `node tools/dev-check.mjs --ci` → **PASS**
-- `node tools/link-scan.mjs` → **PASS**
-- `node tools/dev-check.mjs --runtime --ci` → **FAIL** (Playwright browser executable missing in sandbox)
-- `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` → **FAIL** (no Chrome/Chromium executable detected)
-- `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` → **FAIL** (no Chrome/Chromium executable detected)
+## 6) Session QA Evidence — 2026-02-23 (MEGA WAVE F)
+- ✅ `node tools/dev-check.mjs --ci` → PASS (280 HTML, 0 errors, 0 warnings).
+- ✅ `node tools/link-scan.mjs` → PASS (0 broken links).
+- ⚠️ `node tools/dev-check.mjs --runtime --ci` → FAIL in container due missing Playwright browser executable (`chromium_headless_shell` absent).
+- ⚠️ `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` and desktop variant are pending local execution if Chrome/Chromium is unavailable in container.
 
-**Pending local-only gates:** runtime dev-check + LHCI mobile/desktop must be executed on a workstation with Playwright + Chrome/Chromium installed.
+**Pending local browser gates:** Runtime validation + Lighthouse mobile/desktop.

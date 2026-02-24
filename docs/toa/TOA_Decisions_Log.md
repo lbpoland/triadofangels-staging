@@ -182,9 +182,9 @@
 
 
 
-## DEC-021 — Mega Wave C uses automated preconnect normalization as the canonical method
-- **Date:** 2026-02-24
-- **Decision:** Use `tools/toa-mega-wave-c__preconnect-normalize.mjs` as the canonical way to enforce `preconnect` + `dns-prefetch` consistency for Google Fonts across the entire HTML corpus.
-- **Rationale:** Manual page-by-page edits are drift-prone across 280 static pages; automation keeps head performance hints uniform.
-- **Implications:** Run the tool for future head sweeps, then re-run `dev-check`, `link-scan`, and local LHCI before marking DONE.
-- **Artifacts:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`, `tools/toa-mega-wave-c__preconnect-normalize__report.json`, `TOA_Mega_Implementation_Checklist.md` (G-01.5 note)
+## 2026-02-23 — DEC-021: ToA background rendering policy for performance + accessibility
+- ToA theme full-page hero background must avoid `background-attachment: fixed` to reduce paint/compositing cost and mobile jank.
+- Use the mobile hero image variant on small screens and simplify overlay intensity for readability without heavy effects.
+- In `forced-colors: active`, decorative background pseudo-layers must be disabled so system colors remain authoritative.
+- In `prefers-reduced-motion: reduce`, keep background behavior static and avoid enhanced cinematic effects.
+- Artifacts: `css/style.css` (ToA pseudo-background rules), tracker updates in ledger/checklist/qa matrix.

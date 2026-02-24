@@ -75,7 +75,7 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [IN PROGRESS] | Remove console errors on core pages (console-clean gate) | js/global.js + modules | ID-013 |
-| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS + head connection warm-up | ID-014 (Mega Wave C preconnect sweep implemented; LHCI verification pending local run) |
+| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS | ID-014 (Mega Wave F: ToA background rendering hardened for mobile/reduced-motion/forced-colors) |
 | [IN PROGRESS] | Search page perf uplift (≥95) | search/search.* | ID-016 |
 | [NOT STARTED] | Minify CSS/JS in production build | build pipeline | ID-017 |
 | [IN PROGRESS] | Serve responsive images / right-size first view | images + HTML | ID-014 |
@@ -128,6 +128,7 @@
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
 
-### 2026-02-24
-- **In progress (this session):** Mega Wave C head-performance normalization completed via automated sweep (`preconnect` + `dns-prefetch` for Google Fonts across 280 HTML files).
-- **Pending local QA:** runtime `dev-check --runtime --ci` and LHCI mobile/desktop require local browser binaries.
+### 2026-02-23 — MEGA WAVE F
+- **In progress (this session):** Global ToA background performance/a11y hardening landed in `css/style.css` (mobile hero background variant + no fixed attachment + reduced-motion and forced-colors handling).
+- **QA state:** Non-browser gates run in container; runtime/Lighthouse pending local browser binaries.
+

@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane)  
+**Last updated:** 2026-02-23 (Australia/Brisbane) — MEGA WAVE F update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -107,6 +107,7 @@
 | ID-019 | P2 | OPEN | SEO | 404 SEO low (noindex/is-crawlable) — confirm intentional | `404.html` |
 | ID-020 | P2 | OPEN | Platform | Publishing data + content roadmap (truthful, no placeholders) | `js/publishing-data.js`, `publishing.html` |
 | ID-021 | P2 | OPEN | Platform / Trust | Store/Merch/Digital Store truth + consistency pass | `merch.html`, `digital-store.html`, `streaming.html` |
+| ID-032 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance + Accessibility | ToA global background rendering hardening (mobile variant, reduced-motion, forced-colors, no fixed attachment) | `css/style.css` |
 
 ---
 
@@ -603,19 +604,19 @@ When an issue is fixed, update:
 - **QA verification:** run generator tool, then verify in DevTools Network that smaller `-w320/-w480` assets are chosen on mobile; rerun Lighthouse.
 - **Entry:** 2026-02-23T19:33:25Z
 
-### ID-032 — Accessibility mode + touch ergonomics hardening (global navigation layer)
-- **Severity:** P1
-- **Category:** Accessibility / Navigation UX
-- **Status:** FIX IMPLEMENTED (PENDING QA)
-- **Goal:** Close high-ROI global a11y gaps for forced-colors, reduced-motion, and minimum mobile tap targets without changing page content.
-- **Fixes:**
-  - `css/style.css`: skip link upgraded to 44px-friendly target with explicit focus border treatment.
-  - `css/style.css`: navigation/theme controls and nav links normalized to minimum 44px touch targets.
-  - `css/style.css`: `@media (prefers-reduced-motion: reduce)` override disables motion-heavy transforms/transitions in nav interactions.
-  - `css/style.css`: `@media (forced-colors: active)` override ensures interactive controls retain visible borders/colors/focus.
-  - `js/global.js`: mobile menu close logic centralized and now auto-closes when resizing from mobile to desktop, preventing stale open state traps.
-- **Files touched:** `css/style.css`, `js/global.js`
-- **Checklist linkage:** B-01.3, B-03.2, B-03.3, E-02.1, E-02.2
-- **QA verification:** run `node tools/dev-check.mjs --ci`, `node tools/dev-check.mjs --runtime --ci`, `node tools/link-scan.mjs`; manual check for skip link + forced-colors + reduced-motion on header controls.
-- **Entry:** 2026-02-24T00:00:00Z
 
+
+### ID-032 — ToA background rendering hardening for LCP risk reduction + mode support
+- **Severity:** P1
+- **Category:** Performance + Accessibility
+- **Status:** FIX IMPLEMENTED (PENDING QA)
+- **Linked checklist IDs:** F-01.1, E-02.1, E-02.2
+- **Symptoms:** Core pages carry high LCP values and ToA theme uses an expensive full-page decorative background effect.
+- **Fix:** Updated `css/style.css` ToA background policy:
+  - removed fixed background attachment to reduce paint/compositing overhead;
+  - added mobile hero background variant for small screens (`hero-banner-mobile.webp`);
+  - simplified overlay gradients on mobile and reduced-motion mode;
+  - disabled decorative pseudo-layer backgrounds in forced-colors mode.
+- **Files touched:** `css/style.css`
+- **QA verification:** `node tools/dev-check.mjs --ci` PASS, `node tools/link-scan.mjs` PASS. Browser-dependent runtime + LHCI pending local run due missing Playwright/Chrome binaries in this container.
+- **Entry:** 2026-02-23T23:00:00Z
