@@ -1,46 +1,33 @@
-# TOA Mega Wave F — Music Route Integrity & Duplicate-Content Risk Reduction
+# TOA Mega Wave F Plan — Global Head Connection Hint Normalization
 
-**Plan date:** 2026-02-23 (Australia/Brisbane)  
-**Wave objective:** Reduce SEO/indexing risk by enforcing strict alignment between music catalog source data and pre-rendered static routes.  
-**Architectural layer:** Data integrity + static route governance (no visual/theme changes).
+**Date:** 2026-02-23 (AEST)  
+**Wave objective:** Improve cross-site font connection startup and reduce Lighthouse `uses-rel-preconnect` regressions by normalizing head connection hints across all static HTML pages.
 
----
+## Why this wave is next (ROI + risk reduction)
+- Existing governance and ledger explicitly shipped a preconnect normalization tool but left apply-state pending (`ID-028`).
+- Applying one deterministic head-layer sweep across all HTML pages gives immediate, broad performance upside without content risk.
+- Atomic architecture layer: **head metadata performance hints only** (no product/content changes).
 
-## Scope (Wave F)
-
-1. Add a hard validation gate in `tools/dev-check.mjs` that verifies:
-   - all catalog album routes exist in `/music/albums/<album>/index.html`
-   - all catalog track routes exist in `/music/tracks/<album>/<track>/index.html`
-   - no orphan pre-rendered album/track routes exist outside catalog source of truth (`js/data.js`)
-2. Remove orphan pre-rendered track pages detected by the new gate.
-3. Update governance artifacts to record decision, issue status, and QA evidence.
-
----
-
-## Checklist / Ledger IDs addressed
-
-- **I-02.1** Track slug uniqueness; canonical routing (avoid duplicates) — moved to **IN PROGRESS**
-- **I-02.2** JSON validation scripts for music catalog — moved to **DONE**
-- **ID-015** Duplicate track slugs / route duplication risk — risk reduced by route-integrity gate + orphan cleanup
-- **ID-032** New wave tracking entry for this implementation
-
----
+## Scope
+- Run offline enforcer: `node tools/toa-mega-wave-c__preconnect-normalize.mjs --apply`.
+- Verify non-browser gates in sandbox: dev-check CI + link-scan.
+- Attempt runtime + Lighthouse gates once; record environment constraints when browser binaries are unavailable.
+- Update governance artifacts (ledger/checklist/QA matrix/decisions) with evidence and pending local gates.
 
 ## Files likely touched
-
-- `tools/dev-check.mjs`
-- `music/tracks/**` (orphan route removals only)
+- `*.html` site-wide (head section hint normalization).
 - `docs/toa/TOA_Audit_Ledger_Master.md`
 - `docs/toa/TOA_Mega_Implementation_Checklist.md`
 - `docs/toa/TOA_Master_Checklist_Live.md`
-- `docs/toa/TOA_Decisions_Log.md`
 - `docs/toa/TOA_Release_QA_Matrix.md`
+- `docs/toa/TOA_Decisions_Log.md`
 
----
+## Checklist / Ledger linkage
+- **Checklist IDs:** G-01.5, F-01.1 (supporting), L-01.3 (verification dependency).
+- **Ledger IDs:** ID-028 (implementation closure pending local LHCI), ID-032 (browser-gate environment blocker tracking).
 
-## Validation gates (required)
-
-- `node tools/dev-check.mjs --ci`
-- `node tools/dev-check.mjs --runtime --ci`
-- `node tools/link-scan.mjs --ci`
-
+## Exit criteria for wave closure
+1. Preconnect sweep applied and committed in one atomic batch.
+2. `node tools/dev-check.mjs --ci` PASS.
+3. `node tools/link-scan.mjs` PASS.
+4. Runtime + LHCI evidence captured (PASS locally, or environment-blocked note with exact errors + local command pack).

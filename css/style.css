@@ -258,34 +258,13 @@ a:visited {
     color: var(--link-visited);
 }
 
-<<<<<<< HEAD
-/* Ensure prose links are never color-only indicators (TOA ID-010). */
-main :where(p, dd, dt, blockquote) a,
-main ul:not(.nav-links):not(.social-links):not(.u-list-inline-links):not(.stream-links) li a,
-main ol li a {
+/* Ensure links inside prose blocks are always distinguishable without color alone. */
+:where(main, .site-footer, .legal-page, .privacy-policy, .terms-page) :is(p, li, dd, figcaption) a:not(.btn):not(.button):not(.cta-button):not(.quick-link):not(.nav-link):not(.nav-links a):not(.social-links a) {
     text-decoration-line: underline;
-    text-decoration-thickness: max(2px, 0.08em);
+    text-decoration-thickness: 2px;
     text-underline-offset: 0.2em;
 }
 
-=======
-/*
- * Mega Wave F (A11y links):
- * Inline text links must never rely on color-only distinction.
- * Scope this to prose-like containers so nav/buttons/cards can keep bespoke styling.
- */
-:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a {
-    text-decoration-line: underline;
-    text-decoration-thickness: max(2px, 0.09em);
-    text-underline-offset: 0.2em;
-}
-
-:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a:hover,
-:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a:focus-visible {
-    text-decoration-thickness: max(2px, 0.11em);
-}
-
->>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
 /* Navigation */
 body.menu-open {
     overflow: hidden;
@@ -1595,6 +1574,14 @@ video {
 }
 
 @media (forced-colors: active) {
+    a,
+    a:visited,
+    a:hover,
+    a:focus-visible {
+        color: LinkText;
+        text-decoration-color: LinkText;
+    }
+
     :focus-visible {
         outline: 2px solid Highlight;
         outline-offset: 3px;
@@ -1620,6 +1607,8 @@ video {
     .nav-toggle,
     .form-control,
     .form-button {
+        background: Canvas;
+        color: CanvasText;
         border: 1px solid CanvasText;
     }
 }
@@ -2636,11 +2625,13 @@ main li { line-height: 1.55; }
 /* Default: no site-wide background image */
 :root {
   --toa-site-bg-image: none;
+  --toa-site-bg-image-mobile: none;
 }
 
 /* ToA theme only: enable the hero banner as the full-page background */
 html[data-theme="toa"] {
   --toa-site-bg-image: url("/assets/images/hero-banner.webp");
+  --toa-site-bg-image-mobile: url("/assets/images/hero-banner-mobile.webp");
   background: transparent; /* allow body pseudo-layer to be visible behind all content */
 }
 
@@ -2662,7 +2653,7 @@ html[data-theme="toa"] body::before {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  background-attachment: scroll;
 
   transform: translateZ(0);
 }
@@ -2709,6 +2700,38 @@ html[data-theme="contrast"] body::before,
 html[data-theme="contrast"] body::after {
   content: none !important;
   display: none !important;
+}
+
+@media (max-width: 860px) {
+  html[data-theme="toa"] body::before {
+    background-image: var(--toa-site-bg-image-mobile);
+    background-position: 62% center;
+  }
+
+  html[data-theme="toa"] body::after {
+    background:
+      radial-gradient(640px 340px at 18% 18%, rgba(241, 196, 15, 0.12), rgba(241, 196, 15, 0) 62%),
+      radial-gradient(520px 280px at 84% 24%, rgba(21, 201, 250, 0.10), rgba(21, 201, 250, 0) 66%),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.74));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="toa"] body::before {
+    background-attachment: scroll;
+  }
+
+  html[data-theme="toa"] body::after {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.72));
+  }
+}
+
+@media (forced-colors: active) {
+  html[data-theme="toa"] body::before,
+  html[data-theme="toa"] body::after {
+    content: none !important;
+    display: none !important;
+  }
 }
 
 /* =========================================================

@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-23 (Australia/Brisbane)  
+**Last updated:** 2026-02-24 (Australia/Brisbane)  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -10,8 +10,7 @@
 ## 0) Test Context (fill each run)
 
 **Patch Wave 01 applied:** yes (P0).
-
-**Mega Wave F applied:** yes (ID-010 accessibility styling). Local LHCI verification still required to mark PASS/FAIL.
+**MEGA WAVE C applied:** yes (head preconnect normalization across all HTML).
 
 | Field | Value |
 |---|---|
@@ -94,7 +93,7 @@
 | JSON-LD valid + truthful | NOT RUN |  |
 | sitemap.xml present + correct | NOT RUN |  |
 | robots.txt aligned | NOT RUN |  |
-| Duplicate track routes resolved | PASS | Mega Wave F: orphan pre-rendered track routes removed and dev-check route-integrity gate added (ID-015 / ID-032). |
+| Duplicate track routes resolved | NOT RUN | Issue ID-015 phase 1 applied in code (alias noindex+canonical + sitemap pruning); local Lighthouse/SEO crawl verification pending |
 
 ---
 
@@ -116,23 +115,22 @@
 
 ---
 
-## 5) Notes / Known Baseline Failures (as of 2026-02-23)
-<<<<<<< HEAD
-- Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, `link-in-text-block`, and Publishing-specific ARIA issues. (See Issue IDs: ID-008, ID-009, ID-010, ID-011)
-=======
-- Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, Publishing-specific ARIA issues, and pending verification of `link-in-text-block` closure after Mega Wave F. (See Issue IDs: ID-008, ID-009, ID-010, ID-011)
->>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
+## 5) Notes / Known Baseline Failures (as of 2026-02-24)
+- 2026-02-24 update: MEGA WAVE D adjusted runtime-generated outbound-link accessible names on album/track/book pages; rerun runtime + Lighthouse gates locally to confirm `label-content-name-mismatch` closure.
+- Runtime/browser gates pending in Codex environment due missing browser executable (`playwright` Chromium + Chrome/Chromium for LHCI). Run locally: `npm run pw:install:chromium`, `npm run ci:check:runtime`, `npm run qa:lighthouse:mobile`, `npm run qa:lighthouse:desktop`. Expected: `[Dev-Check] PASS` and LHCI route summaries without executable errors.
+
+- Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, and Publishing-specific ARIA issues. (See Issue IDs: ID-008, ID-009, ID-011)
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
 <<<<<<< ours
 =======
 
 
-## 6) Wave F QA Evidence (2026-02-24)
-- `node tools/dev-check.mjs --ci` → PASS
-- `node tools/dev-check.mjs --runtime --ci` → FAIL in this environment (Playwright browser binary missing)
-- `node tools/link-scan.mjs` → PASS (0 broken)
-- Manual smoke (Chromium): skip link receives visible focused state, nav controls meet larger touch targets, and mobile menu auto-closes when resizing to desktop.
-- Manual mode checks: reduced-motion and forced-colors behaviors still pending full Core Release Gate sweep across all required pages/devices.
-- `npx playwright install chromium` and `npm run qa:lighthouse:mobile` were attempted but blocked by environment download/Chrome availability constraints (403 on Playwright CDN + no Chrome binary).
->>>>>>> theirs
+
+## 6) 2026-02-23 — MEGA WAVE C execution notes
+- Applied global head preconnect/dns-prefetch normalization for Google Fonts across 280 HTML files.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates are BLOCKED in sandbox:
+  - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
+- Local execution is required before marking Wave C as VERIFIED.

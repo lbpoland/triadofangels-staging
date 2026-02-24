@@ -1,6 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
+**Last updated:** 2026-02-24 (Australia/Brisbane)  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -83,7 +84,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 ### C-01 Featured Albums rail
 - [IN PROGRESS] C-01.1 Mobile horizontal rail: scroll-snap, smooth, no vertical stacking, no overflow bleed
 - [NOT STARTED] C-01.2 Keyboard rail controls: ArrowLeft/Right, Home/End, optional prev/next buttons
-- [NOT STARTED] C-01.3 Reduced motion: avoid smooth scroll when prefers-reduced-motion
+- [IN PROGRESS] C-01.3 Reduced motion: avoid smooth scroll when prefers-reduced-motion
 
 ### C-02 Hero section polish
 - [NOT STARTED] C-02.1 Hero typography scale across breakpoints; prevent text overlap
@@ -114,8 +115,8 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [IN PROGRESS] E-01.4 Fix any remaining heading-order issues (maintain single H1 per page)
 
 ### E-02 Mode support
-- [DONE] E-02.1 Forced-colors: ensure borders, focus rings, interactive states visible (Wave F global forced-colors treatment)
-- [DONE] E-02.2 Reduced motion: disable smooth scrolling/animated transitions where applicable (Wave F reduced-motion override)
+- [IN PROGRESS] E-02.1 Forced-colors: ensure borders, focus rings, interactive states visible (decorative ToA background layers now disabled in forced-colors mode)
+- [IN PROGRESS] E-02.2 Reduced motion: disable smooth scrolling/animated transitions where applicable (ToA cinematic background effects simplified under prefers-reduced-motion)
 - [NOT STARTED] E-02.3 Screen reader: verify landmarks (header/nav/main/footer), labels, aria-current
 
 ---
@@ -131,6 +132,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [NOT STARTED] F-02.1 Images: modern formats + correct dimensions
 - [IN PROGRESS] F-02.2 Responsive images srcset/sizes for above-fold assets
 - [NOT STARTED] F-02.3 Preload only true LCP; avoid over-preloading
+- [IN PROGRESS] F-02.4 Normalize Google Fonts preconnect/dns-prefetch on all HTML pages (tool + sweep complete; LHCI verification pending local run)
 
 ---
 
@@ -181,7 +183,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [NOT STARTED] I-01.3 Stream dropdown: stable, accessible, no clipping
 
 ### I-02 Data integrity
-- [NOT STARTED] I-02.1 Track slug uniqueness; canonical routing (avoid duplicates)
+- [IN PROGRESS] I-02.1 Track slug uniqueness; canonical routing (avoid duplicates) — phase 1 alias de-indexing + sitemap pruning in progress
 - [NOT STARTED] I-02.2 JSON validation scripts for music catalog
 
 ---
@@ -240,7 +242,8 @@ Local QA results pasted:
 ---
 
 ## Patch Notes (Append-Only)
+- **2026-02-24 (AEST)** — MEGA WAVE D (Accessible-name alignment): normalized runtime-generated streaming/book links so `aria-label` begins with visible label text (e.g., `Spotify (opens in a new tab)`), reducing `label-content-name-mismatch` risk across album/track/book surfaces. (Ledger: ID-008, Checklist: E-01.1)
 - **2026-02-23 (AEST)** — Micro patch: fixed `index.html` Celestia album route casing + added missing CSP `script-src` hashes for inline JSON-LD on `index.html`, `apps.html`, `digital-store.html`. (Ledger: ID-022, ID-023)
-- [IN PROGRESS] G-01.5 Head performance: add preconnect/dns-prefetch where required origins exist
+- [IN PROGRESS] G-01.5 Head performance: preconnect/dns-prefetch sweep APPLIED via MEGA WAVE C; pending local Lighthouse verification
 
-- [IN PROGRESS] L-01.3 Runtime dev-check must PASS (album/track/book canonical+og+twitter urls correct; JSON-LD always valid)
+- [IN PROGRESS] L-01.3 Runtime dev-check blocked in sandbox (Playwright browser binary unavailable); pending local runtime execution pack

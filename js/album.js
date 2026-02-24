@@ -294,7 +294,7 @@ function buildStreamingDropdown(links, summaryLabel = 'Stream') {
             href: l.url,
             target: '_blank',
             rel: 'noopener noreferrer',
-            'aria-label': 'Open ' + l.label + ' in a new tab',
+            'aria-label': `${l.label} (opens in a new tab)`,
           }, [
             el('span', { text: l.label }),
           ]),
@@ -328,7 +328,7 @@ function renderLinkTabs(album) {
         href: l.url,
         target: '_blank',
         rel: 'noopener noreferrer',
-        'aria-label': 'Open ' + l.label + ' in a new tab',
+        'aria-label': `${l.label} (opens in a new tab)`,
       }, [
         el('span', { text: l.label }),
       ])
@@ -406,7 +406,7 @@ function renderTracklist(album, albumId) {
       el('a', {
         class: 'track-row',
         href,
-        'aria-label': `Open track: ${t.title}`,
+        'aria-label': `${t.title} (open track)`,
       }, [
         el('div', { class: 'track-row__num', text: String(idx + 1).padStart(2, '0') }),
         el('div', { class: 'track-row__title' }, [

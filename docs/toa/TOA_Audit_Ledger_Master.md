@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-23 (Australia/Brisbane)  
+**Last updated:** 2026-02-23 (Australia/Brisbane) — MEGA WAVE F update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -71,6 +71,18 @@
 - **Files changed:** `css/style.css`, `js/global.js`, `publishing.html`, `css/publishing.css`, `js/publishing.js`
 - **Verification state:** **PENDING LOCAL QA** (run dev-check + LHCI per `TOA_P0_Patch_Wave_01_Plan.md`)
 
+
+## Patch Wave 02 — Mega Wave C (Head Connection Warm-Up)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Performance head normalization aligned to DEC-017 and checklist G-01.5 / ID-014 risk reduction
+- **Files changed:** 280 HTML files (site-wide sweep) + tracker docs + `tools/toa-mega-wave-c__preconnect-normalize__report.json`
+- **Implementation:** Added/normalized `preconnect` + `dns-prefetch` for `fonts.googleapis.com` and `fonts.gstatic.com` in every HTML file that loads Google Fonts.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci` PASS
+  - `node tools/link-scan.mjs` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -81,20 +93,21 @@
 | ID-005 | P0 | IMPLEMENTED (PENDING QA) | Navigation / Mobile | Mobile header dropdown misalignment + nested submenu gap | `css/style.css`, `js/global.js`, header HTML generation |
 | ID-006 | P0 | IMPLEMENTED (PENDING QA) | Home / UX | Featured Albums on Home not behaving like a horizontal carousel on mobile | `index.html`, `css/style.css`, `js/music-ui.js` |
 | ID-007 | P0 | IMPLEMENTED (PENDING QA) | Responsive | Content “box” frames overflow viewport on S24 (horizontal clipping/edge bleed) | `css/style.css` (+ page CSS where needed) |
-| ID-008 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `label-content-name-mismatch` across pages (visible text vs aria-label mismatch) | global HTML, footer/header, `css/style.css` |
+| ID-008 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `label-content-name-mismatch` across pages (visible text vs aria-label mismatch) | global HTML, footer/header, `css/style.css`, `js/album.js`, `js/track.js`, `js/book.js` |
 | ID-009 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `color-contrast` failures (light/dark parity) | `css/style.css` (+ page CSS) |
-| ID-010 | P1 | OPEN | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
+| ID-010 | P1 | IMPLEMENTED (PENDING QA) | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
 | ID-011 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | Publishing page `aria-required-children` | `publishing.html`, `js/publishing.js`, `css/publishing.css` |
 | ID-012 | P0 | IMPLEMENTED (PENDING QA) | Performance / UX | Publishing page CLS ~0.397 (severe layout shift) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
 | ID-013 | P0 | IMPLEMENTED (PENDING QA) | Stability | Lighthouse reports console errors on core pages | `js/global.js`, page modules |
 | ID-014 | P1 | OPEN | Performance | LCP too high on multiple core pages (Music ~7.4s, Index ~6.2s, Publishing ~5.8s) | images + CSS + critical path |
-| ID-015 | P1 | OPEN | SEO | Duplicate track pages (same title, multiple slugs) risk duplicate content | `music/tracks/**/index.html` |
+| ID-015 | P1 | IN PROGRESS | SEO | Duplicate track pages (same title, multiple slugs) risk duplicate content | `music/tracks/**/index.html` |
 | ID-016 | P1 | OPEN | Performance / UX | Search page baseline perf ~0.79, LCP ~5.4s | `search/search.js`, `search/search.css`, `css/style.css` |
 | ID-017 | P2 | OPEN | Build / Perf | Lighthouse flags minification + cache + compression strategy | tooling + build pipeline |
 | ID-018 | P2 | OPEN | UX / Perf | `bf-cache` prevented on most pages (investigate) | global JS + embed patterns |
 | ID-019 | P2 | OPEN | SEO | 404 SEO low (noindex/is-crawlable) — confirm intentional | `404.html` |
 | ID-020 | P2 | OPEN | Platform | Publishing data + content roadmap (truthful, no placeholders) | `js/publishing-data.js`, `publishing.html` |
 | ID-021 | P2 | OPEN | Platform / Trust | Store/Merch/Digital Store truth + consistency pass | `merch.html`, `digital-store.html`, `streaming.html` |
+| ID-032 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance + Accessibility | ToA global background rendering hardening (mobile variant, reduced-motion, forced-colors, no fixed attachment) | `css/style.css` |
 
 ---
 
@@ -103,7 +116,7 @@
 ### ID-001 — Full Coverage Audit Not Normalized Into Project Tracking Files
 - **Severity:** P1
 - **Category:** Governance
-- **Status:** OPEN
+- **Status:** IN PROGRESS
 - **Affected pages:** All
 - **Affected files:** `TOA_Audit_Ledger_Master.md`, `TOA_Master_Checklist_Live.md`, `TOA_Release_QA_Matrix.md`
 - **Root cause:** Audit narrative existed, but the project lacked a maintained tracker system.
@@ -231,6 +244,7 @@
 - **Affected files:** Many HTML pages; header/footer link patterns; potentially `tools/generate-static.mjs` if it mass-edits head/footers
 - **Root cause (confirmed pattern):** Links with visible text use `aria-label` that does **not** match visible text (example pattern: visible “Search” but aria-label “Open site search”).
 - **Wave 01 implementation:** Added global runtime normalizer that removes mismatched `aria-label` from visibly-labeled links/buttons (so visible label becomes accessible name). Also converted glyph icons to generated content to reduce false-positive label detection.
+- **Mega Wave D implementation (2026-02-24):** Updated runtime-generated album/track/book outbound-link `aria-label` patterns to start with visible text (e.g., `Spotify (opens in a new tab)`), aligning with DEC-018 and reducing mismatch risk before Lighthouse parsing.
 - **Why it matters:** Screen readers announce a different name than what sighted users see; fails WCAG and Lighthouse.
 - **Required fix:** 
   - Remove `aria-label` from links/buttons that already have clear visible text.
@@ -260,11 +274,12 @@
 ### ID-010 — Accessibility: Links Rely on Color Only in Text Blocks
 - **Severity:** P1
 - **Category:** Accessibility
-- **Status:** OPEN
+- **Status:** IMPLEMENTED (PENDING QA)
 - **Evidence:** Lighthouse `link-in-text-block` failing (links not distinguishable without color).
 - **Affected pages:** Some pages with inline links (404 and others)
 - **Affected files:** `css/style.css`
 - **Root cause:** Inline links likely not underlined or otherwise distinguished.
+- **Wave F implementation:** Added explicit prose-link selectors so links in paragraph/list copy remain underlined (non-color indicator), while nav/button patterns remain exempt. Forced-colors overrides now set `LinkText` and Canvas/CanvasText treatment for interactive controls to preserve contrast and discoverability.
 - **Why it matters:** Users with color vision deficiencies and forced-colors modes may not detect links.
 - **Required fix:** Default underline or non-color indicator for inline text links; preserve premium styling.
 - **Acceptance criteria:** Lighthouse `link-in-text-block` passes; forced-colors still shows links clearly.
@@ -336,7 +351,7 @@
 ### ID-015 — SEO: Duplicate Track Pages (Same Title, Multiple Slugs)
 - **Severity:** P1
 - **Category:** SEO / Routing
-- **Status:** OPEN
+- **Status:** IN PROGRESS
 - **Evidence:** Duplicate `<title>` values found across multiple distinct track URLs in the bundle.
 - **Affected pages:** Track pages under `music/tracks/**`
 - **Affected files:** `music/tracks/**/index.html`, sitemap generation, internal link generation
@@ -373,6 +388,7 @@
   - `music/tracks/phoenix-rising/venom-and-velvet/index.html` → canonical: `https://www.triadofangels.com/music/tracks/phoenix-rising/venom-and-velvet/`
   - `music/tracks/phoenix-rising/venom-velvet/index.html` → canonical: `https://www.triadofangels.com/music/tracks/phoenix-rising/venom-velvet/`
 - **Required fix:** Choose one canonical slug per track; make all alternates non-indexed and/or redirect to canonical (GitHub Pages-safe).
+- **Wave update (Phase 1):** De-indexed legacy alias pages for `harmony-s-call` and `probed-confused` by pointing canonical/OG/Twitter/JSON-LD URLs to canonical slugs and setting `meta robots` to `noindex, follow`; removed alias URLs from `sitemap.xml` to keep sitemap canonical-only.
 - **Acceptance criteria:** Only one indexable URL per track; sitemap lists canonical only; alternates redirect or noindex+canonical to primary.
 - **QA verification:** Link scan + sitemap check + Lighthouse SEO consistency.
 
@@ -549,12 +565,13 @@ When an issue is fixed, update:
 - **Entry:** 2026-02-23T12:03:28Z
 
 ### ID-028 — Add fonts preconnect normalization tool (performance + Lighthouse uses-rel-preconnect)
+
 - **Severity:** P1
 - **Category:** Performance / Head metadata
-- **Status:** TOOL SHIPPED (PENDING APPLY + QA)
-- **Fix:** Added `tools/toa-mega-wave-c__preconnect-normalize.mjs` to inject preconnect + dns-prefetch for fonts across all HTML (deduped).
-- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`
-- **QA verification:** run tool `--apply`, then Lighthouse should reduce `uses-rel-preconnect` failures.
+- **Status:** FIX IMPLEMENTED (PENDING LOCAL LIGHTHOUSE VERIFICATION)
+- **Fix:** Added `tools/toa-mega-wave-c__preconnect-normalize.mjs` and executed `--apply` to inject preconnect + dns-prefetch for Google Fonts across all HTML (deduped).
+- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`, `tools/toa-mega-wave-c__preconnect-normalize__report.json`, all `*.html` documents (280 files)
+- **QA verification:** `node tools/toa-mega-wave-c__preconnect-normalize.mjs --check` now reports 0 pending changes after apply; confirm Lighthouse `uses-rel-preconnect` reduction locally.
 - **Entry:** 2026-02-23T12:03:28Z
 
 ### ID-029 — Improve global contrast for muted text + brand subtitle
@@ -589,19 +606,13 @@ When an issue is fixed, update:
 - **QA verification:** run generator tool, then verify in DevTools Network that smaller `-w320/-w480` assets are chosen on mobile; rerun Lighthouse.
 - **Entry:** 2026-02-23T19:33:25Z
 
-### ID-032 — Accessibility mode + touch ergonomics hardening (global navigation layer)
-- **Severity:** P1
-- **Category:** Accessibility / Navigation UX
-- **Status:** FIX IMPLEMENTED (PENDING QA)
-- **Goal:** Close high-ROI global a11y gaps for forced-colors, reduced-motion, and minimum mobile tap targets without changing page content.
-- **Fixes:**
-  - `css/style.css`: skip link upgraded to 44px-friendly target with explicit focus border treatment.
-  - `css/style.css`: navigation/theme controls and nav links normalized to minimum 44px touch targets.
-  - `css/style.css`: `@media (prefers-reduced-motion: reduce)` override disables motion-heavy transforms/transitions in nav interactions.
-  - `css/style.css`: `@media (forced-colors: active)` override ensures interactive controls retain visible borders/colors/focus.
-  - `js/global.js`: mobile menu close logic centralized and now auto-closes when resizing from mobile to desktop, preventing stale open state traps.
-- **Files touched:** `css/style.css`, `js/global.js`
-- **Checklist linkage:** B-01.3, B-03.2, B-03.3, E-02.1, E-02.2
-- **QA verification:** run `node tools/dev-check.mjs --ci`, `node tools/dev-check.mjs --runtime --ci`, `node tools/link-scan.mjs`; manual check for skip link + forced-colors + reduced-motion on header controls.
-- **Entry:** 2026-02-24T00:00:00Z
 
+
+### ID-032 — Runtime/Lighthouse QA gate blocked by missing browser executables in sandbox
+- **Severity:** P1
+- **Category:** QA Environment / Validation gates
+- **Status:** BLOCKED (LOCAL EXECUTION REQUIRED)
+- **Detected by:** `node tools/dev-check.mjs --runtime --ci`, `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json`, `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json`
+- **Symptoms:** Playwright cannot launch (`Executable doesn't exist ... chrome-headless-shell`); Lighthouse wrapper reports no Chrome/Edge/Chromium executable detected.
+- **Required action:** Execute LOCAL QA PACK commands on a machine with Playwright Chromium + Chrome/Chromium installed and attach outputs.
+- **Entry:** 2026-02-23T23:09:00Z

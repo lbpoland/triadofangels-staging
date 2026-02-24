@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-23 (Australia/Brisbane)  
+**Last updated:** 2026-02-24 (Australia/Brisbane)  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -32,6 +32,7 @@
 | [DONE] | Pre-rendered music track pages exist (static SEO path) | /music/tracks/**/index.html | — |
 | [IN PROGRESS] | Minification / build pipeline strategy (src→dist) | /tools + repo structure | ID-017 |
 | [IN PROGRESS] | bfcache blocker identification + resolution | global JS/runtime | ID-018 |
+| [IN PROGRESS] | Global head preconnect normalization applied + idempotent | all HTML + tools/toa-mega-wave-c__preconnect-normalize.mjs | ID-028, ID-032 (pending local LHCI) |
 
 ---
 
@@ -63,13 +64,9 @@
 | [DONE] | Skip link present on all HTML pages | bundle verification | {skip_ok}/{tot_pages} pages |
 | [DONE] | `<main id="main-content">` present on all HTML pages | bundle verification | {main_ok}/{tot_pages} pages |
 | [DONE] | Exactly one `<h1>` per page | bundle verification | {h1_ok}/{tot_pages} pages |
-| [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer | ID-008 |
+| [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer + js/album.js + js/track.js + js/book.js | ID-008 (Wave D applied; local runtime/LHCI verification pending) |
 | [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 |
-<<<<<<< HEAD
-| [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 |
-=======
-| [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 (Wave F implemented, pending LHCI verification) |
->>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
+| [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 (Wave F patch applied; pending LHCI verification) |
 | [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 |
 | [DONE] | Forced-colors + reduced-motion support hardened for global nav controls | css/style.css + js/global.js | ID-032 |
 
@@ -79,7 +76,7 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [IN PROGRESS] | Remove console errors on core pages (console-clean gate) | js/global.js + modules | ID-013 |
-| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS | ID-014 |
+| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS + head hints | ID-014 + ID-028 (preconnect sweep applied; pending LHCI verification) |
 | [IN PROGRESS] | Search page perf uplift (≥95) | search/search.* | ID-016 |
 | [NOT STARTED] | Minify CSS/JS in production build | build pipeline | ID-017 |
 | [IN PROGRESS] | Serve responsive images / right-size first view | images + HTML | ID-014 |
@@ -90,7 +87,7 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [DONE] | Canonical + OG/Twitter tags present on item pages | bundle patterns | Spot-check needed per page type |
-| [IN PROGRESS] | Resolve duplicate track slugs (one canonical per track) | music/tracks/** + tools/dev-check.mjs | ID-015 (orphan routes pruned + route-integrity gate added) |
+| [IN PROGRESS] | Resolve duplicate track slugs (one canonical per track) | music/tracks/** | ID-015 (Phase 1 aliases de-indexed + sitemap pruned) |
 | [IN PROGRESS] | Sitemap contains canonical URLs only (after duplicate fix) | sitemap.xml + generate-static | ID-015 |
 | [IN PROGRESS] | Decide how to score 404 SEO (noindex expected) | 404.html | ID-019 |
 
@@ -132,12 +129,7 @@
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
 
-<<<<<<< ours
-### 2026-02-23 (Mega Wave F)
-- **Done (this session):** Implemented prose-link non-color affordance + forced-colors link visibility hardening in `css/style.css` for ID-010.
-- **Next:** Run Lighthouse mobile/desktop to verify `link-in-text-block` closure and then advance to ID-014 (LCP wave).
-=======
-### 2026-02-24
-- **Done (this session):** Wave F global accessibility-mode hardening (touch targets, skip-link focus treatment, forced-colors, reduced-motion, mobile-menu resize close).
-- **Next:** Validate Wave F in full Core Release Gate manual matrix + move remaining P1 perf/SEO backlog (ID-014/ID-015).
->>>>>>> theirs
+### 2026-02-23 (MEGA WAVE C)
+- **Done:** Applied preconnect/dns-prefetch normalization across all HTML via `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` (ID-028 / G-01.5).
+- **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS, runtime+Lighthouse blocked in sandbox due to missing browser executables (ID-032).
+- **Next:** Run LOCAL QA PACK (Playwright + LHCI) and then advance to duplicate track route canonicalization (ID-015).
