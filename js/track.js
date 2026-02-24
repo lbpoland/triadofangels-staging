@@ -311,7 +311,7 @@ function buildStreamingDropdown(links, summaryLabel = 'Stream') {
             href: l.url,
             target: '_blank',
             rel: 'noopener noreferrer',
-            'aria-label': 'Open ' + l.label + ' in a new tab',
+            'aria-label': `${l.label} (opens in a new tab)`,
           }, [
             el('span', { text: l.label }),
           ]),
@@ -347,7 +347,7 @@ function renderLinkTabs(albumLinks, trackLinks) {
         href: l.url,
         target: '_blank',
         rel: 'noopener noreferrer',
-        'aria-label': 'Open ' + l.label + ' in a new tab',
+        'aria-label': `${l.label} (opens in a new tab)`,
       }, [el('span', { text: l.label })])
     );
   });

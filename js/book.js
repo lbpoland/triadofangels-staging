@@ -241,7 +241,7 @@ function renderBook(book, bookId) {
             href: l.url,
             target: '_blank',
             rel: 'noopener',
-            'aria-label': `Open ${l.label} in a new tab`,
+            'aria-label': `${l.label} (opens in a new tab)`,
           }, [l.label])
         );
       });

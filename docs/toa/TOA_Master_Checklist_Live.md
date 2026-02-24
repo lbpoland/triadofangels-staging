@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-23 (Australia/Brisbane)  
+**Last updated:** 2026-02-24 (Australia/Brisbane)  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -63,7 +63,7 @@
 | [DONE] | Skip link present on all HTML pages | bundle verification | {skip_ok}/{tot_pages} pages |
 | [DONE] | `<main id="main-content">` present on all HTML pages | bundle verification | {main_ok}/{tot_pages} pages |
 | [DONE] | Exactly one `<h1>` per page | bundle verification | {h1_ok}/{tot_pages} pages |
-| [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer | ID-008 |
+| [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer + js/album.js + js/track.js + js/book.js | ID-008 (Wave D applied; local runtime/LHCI verification pending) |
 | [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 |
 | [NOT STARTED] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 |
 | [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 |
@@ -126,3 +126,7 @@
 ### 2026-02-23
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
+
+### 2026-02-24
+- **In progress (this session):** MEGA WAVE D accessible-name alignment for runtime-generated links (`Spotify (opens in a new tab)` pattern) to reduce label-content-name mismatch risk.
+- **Next:** Local runtime + Lighthouse verification for ID-008/ID-013 with browser binaries.

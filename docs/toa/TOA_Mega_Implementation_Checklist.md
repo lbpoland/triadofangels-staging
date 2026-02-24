@@ -1,6 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
+**Last updated:** 2026-02-24 (Australia/Brisbane)  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -240,6 +241,7 @@ Local QA results pasted:
 ---
 
 ## Patch Notes (Append-Only)
+- **2026-02-24 (AEST)** — MEGA WAVE D (Accessible-name alignment): normalized runtime-generated streaming/book links so `aria-label` begins with visible label text (e.g., `Spotify (opens in a new tab)`), reducing `label-content-name-mismatch` risk across album/track/book surfaces. (Ledger: ID-008, Checklist: E-01.1)
 - **2026-02-23 (AEST)** — Micro patch: fixed `index.html` Celestia album route casing + added missing CSP `script-src` hashes for inline JSON-LD on `index.html`, `apps.html`, `digital-store.html`. (Ledger: ID-022, ID-023)
 - [IN PROGRESS] G-01.5 Head performance: add preconnect/dns-prefetch where required origins exist
 

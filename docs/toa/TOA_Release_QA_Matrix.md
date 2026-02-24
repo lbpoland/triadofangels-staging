@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-23 (Australia/Brisbane)  
+**Last updated:** 2026-02-24 (Australia/Brisbane)  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -114,7 +114,10 @@
 
 ---
 
-## 5) Notes / Known Baseline Failures (as of 2026-02-23)
+## 5) Notes / Known Baseline Failures (as of 2026-02-24)
+- 2026-02-24 update: MEGA WAVE D adjusted runtime-generated outbound-link accessible names on album/track/book pages; rerun runtime + Lighthouse gates locally to confirm `label-content-name-mismatch` closure.
+- Runtime/browser gates pending in Codex environment due missing browser executable (`playwright` Chromium + Chrome/Chromium for LHCI). Run locally: `npm run pw:install:chromium`, `npm run ci:check:runtime`, `npm run qa:lighthouse:mobile`, `npm run qa:lighthouse:desktop`. Expected: `[Dev-Check] PASS` and LHCI route summaries without executable errors.
+
 - Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, and Publishing-specific ARIA issues. (See Issue IDs: ID-008, ID-009, ID-011)
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
