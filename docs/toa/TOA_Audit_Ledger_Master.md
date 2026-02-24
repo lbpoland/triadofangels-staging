@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE G update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE H update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -94,6 +94,18 @@
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+
+## Patch Wave 04 — Mega Wave H (Publishing CLS + Empty-State Stabilization)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Publishing layout stability hardening under static/no-placeholder constraints (ID-012 / H-01.1 / F-01.2).
+- **Files changed:** `publishing.html`, `css/publishing.css`, `js/publishing.js` + governance tracker updates.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -108,7 +120,7 @@
 | ID-009 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `color-contrast` failures (light/dark parity) | `css/style.css` (+ page CSS) |
 | ID-010 | P1 | IMPLEMENTED (PENDING QA) | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
 | ID-011 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | Publishing page `aria-required-children` | `publishing.html`, `js/publishing.js`, `css/publishing.css` |
-| ID-012 | P0 | IMPLEMENTED (PENDING QA) | Performance / UX | Publishing page CLS ~0.397 (severe layout shift) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
+| ID-012 | P0 | HARDENED (PENDING QA) | Performance / UX | Publishing CLS mitigation strengthened (empty-state-first structure + deterministic UI state handling) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
 | ID-013 | P0 | IMPLEMENTED (PENDING QA) | Stability | Lighthouse reports console errors on core pages | `js/global.js`, page modules |
 | ID-014 | P1 | OPEN | Performance | LCP too high on multiple core pages (Music ~7.4s, Index ~6.2s, Publishing ~5.8s) | images + CSS + critical path |
 | ID-015 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO | Duplicate/alias track static routes pruned to canonical-only corpus (10 alias routes removed) | `music/tracks/**/index.html` |
@@ -317,12 +329,13 @@
 ### ID-012 — Publishing Page Severe CLS (~0.397)
 - **Severity:** P0
 - **Category:** Performance / UX
-- **Status:** IMPLEMENTED (PENDING QA)
+- **Status:** HARDENED (PENDING QA)
 - **Evidence:** Lighthouse shows CLS ~0.397 on Publishing (max across runs).
 - **Affected pages:** `publishing.html`
 - **Affected files:** `publishing.html`, `css/publishing.css`, `js/publishing.js`, images/fonts used by page
 - **Root cause (likely):** Late-loading fonts/images or JS-inserted content without reserved space.
 - **Wave 01 implementation:** Publishing CLS mitigations: removed JS runtime insertion of shelves; avoided DOM-heavy chip building when `books` is empty; replaced skeleton-first layout with stable empty state to prevent large post-load reflow.
+- **Wave H implementation (2026-02-24):** Removed malformed skeleton scaffold from `publishing.html`, added static empty-state-first markup, and introduced explicit `empty/results` state management in `js/publishing.js` with grid min-height/container hardening in `css/publishing.css`.
 - **Why it matters:** Visibly “jumps” the page; damages premium feel and can misclick users.
 - **Required fix:** Reserve layout space (min-heights, aspect-ratio), stabilize above-the-fold, preconnect/preload critical assets if needed.
 - **Acceptance criteria:** CLS ≤ 0.10 on Publishing (mobile).

@@ -162,6 +162,12 @@
   opacity: 0.80;
 }
 
+.library {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 /* Grid */
 .book-grid {
   display: grid;
@@ -171,7 +177,8 @@
   justify-items: stretch;
   margin: 0 auto;
   max-width: 1200px;
-  padding: 22px 20px 0;
+  padding: 22px 0 0;
+  min-height: 280px;
 }
 
 @media (max-width: 560px) {
@@ -184,9 +191,12 @@
   .library-shelves {
     padding: 18px 14px 0;
   }
+  .library {
+    padding: 0 14px;
+  }
   .book-grid {
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    padding: 18px 14px 0;
+    padding: 18px 0 0;
   }
   .shelf-card {
     width: 168px;
@@ -311,6 +321,7 @@ code {
 /* ---------- Stable empty state + CLS hardening ---------- */
 .library-empty {
   margin-top: 14px;
+  margin-bottom: 4px;
   padding: 18px 16px;
   border-radius: 16px;
   border: 1px solid var(--stroke-2);
