@@ -1,6 +1,6 @@
 # TOA Website — Decisions Log (Anti-Drift)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE J  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE M  
 **Purpose:** Record decisions, constraints, and standards so work never re-litigates the same topics.
 
 ---
@@ -227,3 +227,11 @@
 - Enforcement commands:
   - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`
   - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler --runtime --require-playwright`
+
+
+## 2026-02-24 — DEC-028: Desktop nav dropdowns must use viewport-edge-aware alignment
+- Desktop header dropdowns must never clip off-screen on narrow desktop/tablet landscape widths.
+- Policy: default left-aligned submenu placement, with automatic right-alignment fallback (`.nav-submenu--align-right`) whenever viewport overflow is detected.
+- Recompute alignment on resize while dropdown is open to avoid stale geometry after viewport changes.
+- Interaction rule remains unchanged: interacting inside submenu does not close it; outside click/focus-out/ESC closes it.
+- Enforcement layer: `js/global.js` (submenu positioning logic) + `css/style.css` (alignment utility class).

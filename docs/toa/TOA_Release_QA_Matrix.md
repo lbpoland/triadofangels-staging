@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE L  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE M  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -17,6 +17,7 @@
 **MEGA WAVE J applied:** yes (SEO indexing hygiene: canonical HTML-only sitemap + robots alignment).
 **MEGA WAVE K applied:** yes (Games/Apps/Store truth-first hub readiness copy + disclosures).
 **MEGA WAVE L applied:** yes (Console/CSP guardrail hardening: no-inline-handler gate + CI wiring).
+**MEGA WAVE M applied:** yes (Navigation desktop dropdown stability: edge-aware submenu alignment + resize repositioning).
 
 | Field | Value |
 |---|---|
@@ -191,3 +192,13 @@
   - Runtime dev-check failed because Playwright browser executable is missing (`chrome-headless-shell` not installed).
   - LHCI mobile/desktop failed because no Chrome/Edge/Chromium executable is available.
 - Local execution is required before marking Wave L as VERIFIED for L-01.1 / ID-013.
+
+
+## 13) 2026-02-24 — MEGA WAVE M execution notes
+- Applied navigation-layer desktop dropdown stability in `js/global.js` and `css/style.css` by adding viewport-edge-aware submenu alignment (`.nav-submenu--align-right`) and resize-time repositioning for open desktop dropdowns.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates attempted once and BLOCKED in sandbox:
+  - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
+- Screenshot attempt via browser container was attempted but blocked by container-to-localhost connection failure (`Page.goto: net::ERR_EMPTY_RESPONSE`).
+- Local execution is required before marking Wave M as VERIFIED for B-layer nav closure.

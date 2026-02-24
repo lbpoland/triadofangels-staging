@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE L  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE M  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -42,8 +42,8 @@
 
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
-| [IN PROGRESS] | Mobile header panel alignment + sizing fixed (S24) | css/style.css + js/global.js | ID-005 |
-| [IN PROGRESS] | Nested submenu behavior rebuilt (no massive gap) | css/style.css + js/global.js | ID-005 |
+| [IN PROGRESS] | Mobile header panel alignment + sizing fixed (S24) | css/style.css + js/global.js | ID-005 (Wave M desktop edge-alignment follow-up applied; pending local QA) |
+| [IN PROGRESS] | Nested submenu behavior rebuilt (no massive gap) | css/style.css + js/global.js | ID-005 (Wave M desktop submenu edge-alignment + outside-click stability applied; pending local QA) |
 | [IN PROGRESS] | Home Featured Albums horizontal carousel (touch + keyboard) | index.html + css/style.css + js/music-ui.js | ID-006 |
 | [IN PROGRESS] | Carousel/rail interaction polish (labels, focus, reduced motion) | global components | ID-006 + ID-009 + ID-032 |
 
@@ -169,3 +169,9 @@
 - **Done:** Hardened console/CSP governance layer by adding `--strict-no-inline-handler` gate in `tools/dev-check.mjs` and wiring no-inline handler/style enforcement into CI/runtime npm scripts.
 - **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing Playwright Chrome Headless Shell and no Chrome/Chromium binary.
 - **Next:** Run LOCAL QA PACK runtime + LHCI commands, then close ID-013/L-01.1 once browser gate confirms console-clean across core pages.
+
+
+### 2026-02-24 (MEGA WAVE M)
+- **Done:** Hardened desktop navigation dropdown stability by adding viewport-edge-aware submenu alignment and resize-time repositioning to prevent clipping/trap behavior while preserving inside-click interaction (ID-005 / B-02.1 / B-02.3).
+- **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing Playwright `chrome-headless-shell` and missing Chrome/Chromium executable.
+- **Next:** Run LOCAL QA PACK runtime + LHCI + manual nav regression matrix, then close B-layer nav items to VERIFIED.

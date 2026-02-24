@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE L  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE M  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -67,9 +67,9 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [DONE] B-01.3 Touch ergonomics: tap targets ≥ 44px; safe padding; no accidental closes (Wave F global nav controls + links)
 
 ### B-02 Desktop nav + dropdown stability
-- [NOT STARTED] B-02.1 Desktop dropdown positioning: no clipping; correct z-index; no overflow hidden traps
+- [IN PROGRESS] B-02.1 Desktop dropdown positioning: no clipping; correct z-index; no overflow hidden traps (Wave M viewport-edge alignment applied; pending local QA)
 - [NOT STARTED] B-02.2 Multi-level submenu: pointer + keyboard parity; no hover traps
-- [NOT STARTED] B-02.3 Click-outside rules: never close while interacting inside submenu
+- [IN PROGRESS] B-02.3 Click-outside rules: never close while interacting inside submenu (Wave M verified code path retained; pending local QA)
 
 ### B-03 Accessibility + semantics
 - [IN PROGRESS] B-03.1 Nav ARIA: expanded states correct; ESC closes; focus returns to trigger
@@ -256,3 +256,5 @@ Local QA results pasted:
 - **2026-02-24 (AEST)** — MEGA WAVE K (Games/Apps/Store readiness): converted Games/Apps/Store hubs to truthful static-first status pages with real launch links, explicit no-live-checkout/no-live-release states, and disclosure-forward copy to prevent fake cart/download claims. (Ledger: ID-021, ID-034; Checklist: K-01.1, K-02.1, K-03.1)
 
 - **2026-02-24 (AEST)** — MEGA WAVE L (Console/CSP gate hardening): added strict no-inline-handler enforcement to `dev-check` and CI/QA npm scripts so CSP policy no longer relies on inline handlers; runtime/Lighthouse verification remains pending local browser execution. (Ledger: ID-013, ID-032; Checklist: L-01.1, L-01.2)
+
+- **2026-02-24 (AEST)** — MEGA WAVE M (Navigation desktop dropdown stability): added viewport-edge submenu alignment and resize-time repositioning logic to prevent desktop dropdown clipping while preserving inside-interaction/outside-close behavior. (Ledger: ID-005, ID-032; Checklist: B-02.1, B-02.3)

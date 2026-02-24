@@ -541,7 +541,30 @@ const isGlyphOnly = (s) => {
       subPanel.__toaReturnBtn = null;
     };
 
-function openSubmenu(btn, menu) {
+    const positionDesktopSubmenu = (btn, menu) => {
+      if (!btn || !menu || isMobileNav()) return;
+
+      menu.classList.remove('nav-submenu--align-right');
+
+      const viewportPadding = 12;
+      const itemRect = btn.closest('.nav-item')?.getBoundingClientRect();
+      const menuRect = menu.getBoundingClientRect();
+      if (!itemRect || !menuRect) return;
+
+      const overflowRight = menuRect.right - (window.innerWidth - viewportPadding);
+      const overflowLeft = viewportPadding - menuRect.left;
+
+      if (overflowRight > 0) {
+        const canRightAlign = itemRect.right - menuRect.width >= viewportPadding;
+        if (canRightAlign) {
+          menu.classList.add('nav-submenu--align-right');
+        }
+      }
+
+      if (overflowLeft > 0) menu.classList.add('nav-submenu--align-right');
+    };
+
+    function openSubmenu(btn, menu) {
       if (isMobileNav()) {
         // Mobile uses a dedicated second-panel view (Option B)
         openSubPanel(btn, menu);
@@ -550,6 +573,7 @@ function openSubmenu(btn, menu) {
       closeAllSubmenus({ keepButton: btn });
       btn.setAttribute('aria-expanded', 'true');
       menu.hidden = false;
+      positionDesktopSubmenu(btn, menu);
     }
 
     function toggleSubmenu(btn, menu) {
@@ -624,6 +648,14 @@ function openSubmenu(btn, menu) {
       if (navMenu.contains(t)) return;
       closeAllSubmenus({ });
     });
+
+    window.addEventListener('resize', () => {
+      if (isMobileNav()) return;
+      for (const { btn, menu } of menus) {
+        const open = btn.getAttribute('aria-expanded') === 'true' && menu.hidden === false;
+        if (open) positionDesktopSubmenu(btn, menu);
+      }
+    }, { passive: true });
     // -------- aria-current auto (smart section mapping) --------
     const normalizePath = (p) => {
       let s = String(p || '/');
