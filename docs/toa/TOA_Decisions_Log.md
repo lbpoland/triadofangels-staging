@@ -270,3 +270,9 @@
 - Delivery must include dependency mapping, linkage coverage (ledger/checklist/QA entries), and a single-branch consolidated update package.
 - If browser binaries are unavailable, perform all non-browser gates once, log exact blocker output, stop retry loops, and attach a deterministic LOCAL QA PACK for closure.
 - Rationale: prevents partial-wave drift and keeps governance state synchronized with multi-layer implementation history.
+
+## 2026-02-24 — DEC-035: Global backlog replay may close via governance-only refresh when all READY waves are already implemented
+- During mandatory global mega-wave execution, if every READY wave is already implemented in source, the execution pass may be closed with governance/evidence refresh only (no fabricated code deltas).
+- Required deliverables still apply: dependency-safe replay statement, linkage coverage updates (ledger/checklist/QA matrix), and fresh non-browser validation evidence.
+- Browser-gated checks must be attempted once; when environment lacks required executables, record exact failure and mark PENDING LOCAL QA without retry loops.
+- Rationale: preserves truthful change history while satisfying full-backlog execution protocol under static-site and sandbox constraints.
