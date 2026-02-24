@@ -83,7 +83,7 @@
 | ID-007 | P0 | IMPLEMENTED (PENDING QA) | Responsive | Content “box” frames overflow viewport on S24 (horizontal clipping/edge bleed) | `css/style.css` (+ page CSS where needed) |
 | ID-008 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `label-content-name-mismatch` across pages (visible text vs aria-label mismatch) | global HTML, footer/header, `css/style.css` |
 | ID-009 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `color-contrast` failures (light/dark parity) | `css/style.css` (+ page CSS) |
-| ID-010 | P1 | OPEN | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
+| ID-010 | P1 | IMPLEMENTED (PENDING QA) | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
 | ID-011 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | Publishing page `aria-required-children` | `publishing.html`, `js/publishing.js`, `css/publishing.css` |
 | ID-012 | P0 | IMPLEMENTED (PENDING QA) | Performance / UX | Publishing page CLS ~0.397 (severe layout shift) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
 | ID-013 | P0 | IMPLEMENTED (PENDING QA) | Stability | Lighthouse reports console errors on core pages | `js/global.js`, page modules |
@@ -260,8 +260,9 @@
 ### ID-010 — Accessibility: Links Rely on Color Only in Text Blocks
 - **Severity:** P1
 - **Category:** Accessibility
-- **Status:** OPEN
+- **Status:** IMPLEMENTED (PENDING QA)
 - **Evidence:** Lighthouse `link-in-text-block` failing (links not distinguishable without color).
+- **Wave 02 implementation:** Added explicit prose-link underline guardrails in `main` content contexts (paragraphs, definition text, blockquotes, and standard lists), ensuring non-color indicators remain visible across themes.
 - **Affected pages:** Some pages with inline links (404 and others)
 - **Affected files:** `css/style.css`
 - **Root cause:** Inline links likely not underlined or otherwise distinguished.
