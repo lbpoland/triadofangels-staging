@@ -88,3 +88,19 @@ You must exceed baseline quality while staying:
 - performant
 - secure-by-design
 - truthful
+
+
+## DELIVERY SAFETY PROTOCOL (MEGA WAVE W)
+Every patch session must follow this exact sequence to avoid drift and false DONE claims:
+1. Authority ingest summary (rules/instructions/ledger/checklist/QA matrix/decisions).
+2. Wave plan (layer scope + targeted IDs + files + acceptance criteria).
+3. Atomic implementation (only files in scope; no report/bundle artifact edits).
+4. File Manifest (every changed file + one-line purpose).
+5. QA evidence (commands + exact outcomes + blocker text if runtime browser is unavailable).
+6. Governance updates (ledger/checklist/QA matrix/decisions/release notes).
+7. Continuation handoff (residual risks + next wave recommendation).
+
+Non-negotiable controls:
+- **Full Coverage rule:** core release pages are a regression floor only; session outputs must include a Coverage Map and explicit “Not Audited” entries with reasons.
+- **Atomic delivery rule:** only committed files listed in the manifest count as done; status claims must map 1:1 with committed artifacts.
+- **Browser-gate rule:** if runtime/Lighthouse is blocked by missing browser binaries, run non-browser gates once, record exact blocker text, and publish a LOCAL QA PACK for local execution.

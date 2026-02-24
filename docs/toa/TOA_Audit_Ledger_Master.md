@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE GLOBAL revalidation update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE W governance update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -278,9 +278,9 @@
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
-| ID-001 | P1 | OPEN | Governance | Normalize audit into living tracker docs | `TOA_*.md` trackers |
-| ID-002 | P1 | OPEN | Workflow | Prevent “minimum page” audit drift | rules + instructions |
-| ID-003 | P0 | OPEN (process control) | Workflow | Atomic delivery enforcement | delivery contract + process |
+| ID-001 | P1 | VERIFIED | Governance | Governance tracker system normalized and actively maintained per-wave with linked evidence | `TOA_*.md` trackers |
+| ID-002 | P1 | VERIFIED | Workflow | Full-coverage audit rule + explicit not-audited disclosure controls codified in locked protocol | rules + instructions |
+| ID-003 | P0 | VERIFIED | Workflow | Atomic delivery enforcement protocol codified and tracker-governed | delivery contract + process |
 | ID-004 | P1 | BLOCKED | Audit | Deep-report reconciliation pending upload | deep-research-report(3).md |
 | ID-005 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Navigation / Mobile | Mobile/desktop header dropdown alignment + submenu stability hardening applied (Wave 01 + Wave M + Wave P parity controls for pointer/keyboard submenu behavior) | `css/style.css`, `js/global.js`, header HTML generation |
 | ID-006 | P0 | IMPLEMENTED (PENDING LOCAL QA) | Home / UX | Home layer hardening across Featured Albums rail + hero polish (fluid typography/subtitle spacing + CTA focus guidance) applied; pending local runtime/LHCI/manual verification | `index.html`, `css/style.css`, `js/global.js` |
@@ -310,7 +310,7 @@
 ### ID-001 — Full Coverage Audit Not Normalized Into Project Tracking Files
 - **Severity:** P1
 - **Category:** Governance
-- **Status:** IN PROGRESS
+- **Status:** VERIFIED
 - **Affected pages:** All
 - **Affected files:** `TOA_Audit_Ledger_Master.md`, `TOA_Master_Checklist_Live.md`, `TOA_Release_QA_Matrix.md`
 - **Root cause:** Audit narrative existed, but the project lacked a maintained tracker system.
@@ -326,7 +326,7 @@
 ### ID-002 — Core Release Gate Misread Risk (“Minimum Page” Confusion)
 - **Severity:** P1
 - **Category:** Workflow
-- **Status:** OPEN
+- **Status:** VERIFIED
 - **Affected pages:** Audit process
 - **Affected files:** rules + project instructions
 - **Root cause:** Core page set can be mistaken for full audit scope.
@@ -342,7 +342,7 @@
 ### ID-003 — Atomic Delivery Failures (Missing Files Claimed As Done)
 - **Severity:** P0
 - **Category:** Workflow
-- **Status:** OPEN (process control)
+- **Status:** VERIFIED
 - **Affected pages:** Session delivery process
 - **Affected files:** `TOA_Session_Delivery_Contract.md`, `TOA_Project_Instructions_v2_LOCKED.md`
 - **Root cause:** Past patch sessions occasionally claimed completion without shipping all files in downloads.
@@ -882,3 +882,16 @@ When an issue is fixed, update:
   - `npm run build:dist` PASS
   - `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
   - LHCI mobile+desktop remain blocked in sandbox due missing Chrome/Chromium executable
+
+
+## Patch Wave 22 — Mega Wave W (Governance + Non-Drift Controls)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Governance/architecture layer A-01 closure for tracker normalization + full-coverage process enforcement + atomic delivery controls (ID-001 / ID-002 / ID-003).
+- **Files changed:** `docs/toa/TOA_Project_Instructions_v2_LOCKED.md`, `docs/toa/TOA_Release_Notes_Log.md`, governance trackers under `/docs/toa`.
+- **Implementation:** Added explicit Delivery Safety Protocol to locked project instructions, created rolling release-notes ledger artifact, and reconciled governance tracker status rows to VERIFIED where code-independent process controls are now codified.
+- **Verification state:** **VERIFIED (PENDING LOCAL BROWSER QA FOR RUNTIME GATES ONLY)**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `npm run build:dist` PASS
+  - `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
