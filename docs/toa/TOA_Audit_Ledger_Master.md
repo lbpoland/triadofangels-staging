@@ -566,11 +566,15 @@ When an issue is fixed, update:
 ### ID-028 — Add fonts preconnect normalization tool (performance + Lighthouse uses-rel-preconnect)
 - **Severity:** P1
 - **Category:** Performance / Head metadata
-- **Status:** TOOL SHIPPED (PENDING APPLY + QA)
-- **Fix:** Added `tools/toa-mega-wave-c__preconnect-normalize.mjs` to inject preconnect + dns-prefetch for fonts across all HTML (deduped).
-- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`
-- **QA verification:** run tool `--apply`, then Lighthouse should reduce `uses-rel-preconnect` failures.
-- **Entry:** 2026-02-23T12:03:28Z
+- **Status:** FIX IMPLEMENTED (PENDING LOCAL LHCI QA)
+- **Fix:** Applied `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` sweep across all 280 HTML files so Google Fonts origins now include normalized preconnect + dns-prefetch head hints.
+- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`, all `*.html` files in repo scope (see `docs/toa/TOA_MEGA_WAVE_C_FILE_MANIFEST.md`).
+- **QA verification:**
+  - `node tools/toa-mega-wave-c__preconnect-normalize.mjs --check` PASS (`Files changed: 0` / idempotent)
+  - `node tools/dev-check.mjs --ci` PASS
+  - `node tools/link-scan.mjs` PASS
+  - Lighthouse/Playwright runtime gates pending local machine execution (browser executable unavailable in this environment).
+- **Entry:** 2026-02-23T23:00:00Z
 
 ### ID-029 — Improve global contrast for muted text + brand subtitle
 - **Severity:** P1
@@ -606,17 +610,13 @@ When an issue is fixed, update:
 
 
 
-### ID-032 — ToA background rendering hardening for LCP risk reduction + mode support
+### ID-032 — Preconnect normalization idempotence hardening
 - **Severity:** P1
-- **Category:** Performance + Accessibility
-- **Status:** FIX IMPLEMENTED (PENDING QA)
-- **Linked checklist IDs:** F-01.1, E-02.1, E-02.2
-- **Symptoms:** Core pages carry high LCP values and ToA theme uses an expensive full-page decorative background effect.
-- **Fix:** Updated `css/style.css` ToA background policy:
-  - removed fixed background attachment to reduce paint/compositing overhead;
-  - added mobile hero background variant for small screens (`hero-banner-mobile.webp`);
-  - simplified overlay gradients on mobile and reduced-motion mode;
-  - disabled decorative pseudo-layer backgrounds in forced-colors mode.
-- **Files touched:** `css/style.css`
-- **QA verification:** `node tools/dev-check.mjs --ci` PASS, `node tools/link-scan.mjs` PASS. Browser-dependent runtime + LHCI pending local run due missing Playwright/Chrome binaries in this container.
-- **Entry:** 2026-02-23T23:00:00Z
+- **Category:** Tooling / Performance governance
+- **Status:** VERIFIED (NON-BROWSER QA PASS)
+- **Detected by:** `node tools/toa-mega-wave-c__preconnect-normalize.mjs --check` returned `Files changed: 280` immediately after apply.
+- **Root cause:** The preconnect sweep did not remove existing `<!-- Preconnect (performance) -->` comment nodes, so repeated runs rewrote every HTML file.
+- **Fix:** Updated `tools/toa-mega-wave-c__preconnect-normalize.mjs` to dedupe existing preconnect comment + link lines before insertion.
+- **Acceptance criteria:** Post-apply check mode returns `Files changed: 0`.
+- **QA verification:** `node tools/toa-mega-wave-c__preconnect-normalize.mjs --check` PASS.
+- **Entry:** 2026-02-23T23:05:00Z

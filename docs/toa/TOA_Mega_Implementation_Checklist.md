@@ -132,6 +132,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [NOT STARTED] F-02.1 Images: modern formats + correct dimensions
 - [IN PROGRESS] F-02.2 Responsive images srcset/sizes for above-fold assets
 - [NOT STARTED] F-02.3 Preload only true LCP; avoid over-preloading
+- [IN PROGRESS] F-02.4 Normalize Google Fonts preconnect/dns-prefetch on all HTML pages (tool + sweep complete; LHCI verification pending local run)
 
 ---
 
@@ -247,4 +248,4 @@ Local QA results pasted:
 
 - [IN PROGRESS] L-01.3 Runtime dev-check must PASS (album/track/book canonical+og+twitter urls correct; JSON-LD always valid)
 
-- **2026-02-23 (AEST)** — **MEGA WAVE F (in progress):** global ToA background performance/a11y hardening in `css/style.css` (mobile background variant, no fixed attachment, reduced-motion simplification, forced-colors decorative layer removal). Linked: ID-014, E-02.1, E-02.2, F-01.1.
+- **2026-02-24 (AEST)** — MEGA WAVE C: applied Google Fonts preconnect/dns-prefetch normalization across all HTML routes and fixed tool idempotence (`tools/toa-mega-wave-c__preconnect-normalize.mjs`). (Ledger: ID-028, ID-032)

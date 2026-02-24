@@ -181,10 +181,8 @@
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
 
-
-## 2026-02-23 — DEC-021: ToA background rendering policy for performance + accessibility
-- ToA theme full-page hero background must avoid `background-attachment: fixed` to reduce paint/compositing cost and mobile jank.
-- Use the mobile hero image variant on small screens and simplify overlay intensity for readability without heavy effects.
-- In `forced-colors: active`, decorative background pseudo-layers must be disabled so system colors remain authoritative.
-- In `prefers-reduced-motion: reduce`, keep background behavior static and avoid enhanced cinematic effects.
-- Artifacts: `css/style.css` (ToA pseudo-background rules), tracker updates in ledger/checklist/qa matrix.
+## 2026-02-24 — DEC-021: Preconnect sweep tooling must be idempotent
+- Head normalization tools that run across the full static corpus must be safe to re-run without producing additional diffs.
+- `tools/toa-mega-wave-c__preconnect-normalize.mjs` now removes existing preconnect comment/link nodes for Google Fonts before re-inserting a canonical block.
+- Verification rule: `--apply` followed by `--check` must yield `Files changed: 0`.
+- This is now required before any mass HTML sweep is marked complete.
