@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE T  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -115,8 +115,8 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [IN PROGRESS] E-01.4 Fix any remaining heading-order issues (maintain single H1 per page) (Wave R landmark/focus semantics hardening applied in `js/global.js`; pending local Lighthouse+SR verification)
 
 ### E-02 Mode support
-- [IN PROGRESS] E-02.1 Forced-colors: ensure borders, focus rings, interactive states visible (decorative ToA background layers now disabled in forced-colors mode)
-- [IN PROGRESS] E-02.2 Reduced motion: disable smooth scrolling/animated transitions where applicable (ToA cinematic background effects simplified under prefers-reduced-motion)
+- [IN PROGRESS] E-02.1 Forced-colors: ensure borders, focus rings, interactive states visible (Wave T added Publishing forced-colors system-color styles for controls/cards/chips + explicit focus-visible outlines; pending local runtime/LHCI verification)
+- [IN PROGRESS] E-02.2 Reduced motion: disable smooth scrolling/animated transitions where applicable (Wave T added Publishing transition/transform suppression + scroll-behavior auto fallback for shelf/library surfaces; pending local runtime/LHCI verification)
 - [IN PROGRESS] E-02.3 Screen reader: verify landmarks (header/nav/main/footer), labels, aria-current (Wave R footer `aria-current` + landmark fallback guards applied; pending local NVDA/VoiceOver verification)
 
 ---
@@ -271,3 +271,5 @@ Local QA results pasted:
 - **2026-02-24 (AEST)** — MEGA WAVE R (Accessibility landmarks + current-page semantics): extended global accessibility runtime to set footer navigation `aria-current="page"` for matching routes, enforce landmark role/label fallbacks for header/main/footer/footer-nav, and apply `main` `tabindex="-1"` fallback to preserve skip-link focus reliability. (Ledger: ID-008; Checklist: E-02.3, E-01.4)
 
 - **2026-02-24 (AEST)** — MEGA WAVE S (Accessibility contrast + Publishing list semantics): strengthened global muted/footer contrast tokens and replaced Publishing shelf role-based list scaffolding with native `ul/li` semantics, with secondary text now token-driven instead of opacity-faded for improved readability. (Ledger: ID-009, ID-011; Checklist: E-01.2, E-01.3)
+
+- **2026-02-24 (AEST)** — MEGA WAVE T (Accessibility mode support on Publishing): expanded reduced-motion handling to suppress Publishing hover/transitions and enforce auto scroll behavior, and added forced-colors system-color styles/focus outlines for Publishing controls, cards, and shelf surfaces. (Ledger: ID-032; Checklist: E-02.1, E-02.2)

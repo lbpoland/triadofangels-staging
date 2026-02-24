@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE T  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -24,6 +24,7 @@
 **MEGA WAVE Q applied:** yes (Responsive overflow/gutter hardening: shared main/section inline spacing tokens + section long-string wrapping guards).
 **MEGA WAVE R applied:** yes (Accessibility semantics hardening: footer `aria-current` mapping + landmark role/label/tabindex fallbacks in global runtime).
 **MEGA WAVE S applied:** yes (Accessibility contrast + Publishing semantic list hardening: stronger muted/footer text tokens + native `ul/li` shelves).
+**MEGA WAVE T applied:** yes (Accessibility mode-support hardening on Publishing: reduced-motion transition suppression + forced-colors system-color/focus-visible controls).
 
 | Field | Value |
 |---|---|
@@ -261,3 +262,12 @@
   - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
   - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
 - Local execution is required before marking Wave S as VERIFIED for E-01.2/E-01.3 and ID-009/ID-011 closure evidence.
+
+
+## 20) 2026-02-24 — MEGA WAVE T execution notes
+- Applied accessibility mode-support hardening on Publishing surfaces in `css/publishing.css`: reduced-motion transition/transform suppression for shelf/cards/chips/buttons plus scroll-behavior auto fallback, and forced-colors system-color treatment/focus outlines for search/sort controls, shelf/book cards, chips, and action buttons.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates attempted once and BLOCKED in sandbox:
+  - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
+- Local execution is required before marking Wave T as VERIFIED for E-02.1/E-02.2 and ID-032 closure evidence.
