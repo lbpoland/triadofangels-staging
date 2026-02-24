@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-23 (Australia/Brisbane)  
+**Last updated:** 2026-02-24 (Australia/Brisbane)  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -81,7 +81,7 @@
 | ID-005 | P0 | IMPLEMENTED (PENDING QA) | Navigation / Mobile | Mobile header dropdown misalignment + nested submenu gap | `css/style.css`, `js/global.js`, header HTML generation |
 | ID-006 | P0 | IMPLEMENTED (PENDING QA) | Home / UX | Featured Albums on Home not behaving like a horizontal carousel on mobile | `index.html`, `css/style.css`, `js/music-ui.js` |
 | ID-007 | P0 | IMPLEMENTED (PENDING QA) | Responsive | Content “box” frames overflow viewport on S24 (horizontal clipping/edge bleed) | `css/style.css` (+ page CSS where needed) |
-| ID-008 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `label-content-name-mismatch` across pages (visible text vs aria-label mismatch) | global HTML, footer/header, `css/style.css` |
+| ID-008 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `label-content-name-mismatch` across pages (visible text vs aria-label mismatch) | global HTML, footer/header, `css/style.css`, `js/album.js`, `js/track.js`, `js/book.js` |
 | ID-009 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `color-contrast` failures (light/dark parity) | `css/style.css` (+ page CSS) |
 | ID-010 | P1 | OPEN | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
 | ID-011 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | Publishing page `aria-required-children` | `publishing.html`, `js/publishing.js`, `css/publishing.css` |
@@ -231,6 +231,7 @@
 - **Affected files:** Many HTML pages; header/footer link patterns; potentially `tools/generate-static.mjs` if it mass-edits head/footers
 - **Root cause (confirmed pattern):** Links with visible text use `aria-label` that does **not** match visible text (example pattern: visible “Search” but aria-label “Open site search”).
 - **Wave 01 implementation:** Added global runtime normalizer that removes mismatched `aria-label` from visibly-labeled links/buttons (so visible label becomes accessible name). Also converted glyph icons to generated content to reduce false-positive label detection.
+- **Mega Wave D implementation (2026-02-24):** Updated runtime-generated album/track/book outbound-link `aria-label` patterns to start with visible text (e.g., `Spotify (opens in a new tab)`), aligning with DEC-018 and reducing mismatch risk before Lighthouse parsing.
 - **Why it matters:** Screen readers announce a different name than what sighted users see; fails WCAG and Lighthouse.
 - **Required fix:** 
   - Remove `aria-label` from links/buttons that already have clear visible text.
