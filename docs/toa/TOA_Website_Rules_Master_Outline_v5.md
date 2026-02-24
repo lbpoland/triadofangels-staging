@@ -16,6 +16,7 @@ The site must be:
 - Scalable
 - Brand-consistent
 - Truthful
+- Elite Premium Quality, Graphics and Design Layout, Functionality and Performance!
 
 **Reality rule:** Any secure feature (accounts, payments, private delivery, leaderboards) must use external providers. Never fake security client-side.
 
@@ -23,10 +24,6 @@ The site must be:
 
 ## 2) Authority Order
 1. This Rules & Master Outline
-2. Latest TOA_SITE_MANIFEST__*.json
-3. Latest TOA_SITE_BUNDLE__*.md
-4. Newer individual files uploaded in-session
-5. Live/local behavior and screenshots (QA truth only)
 
 ---
 
@@ -60,10 +57,6 @@ Every audit must cover:
 ---
 
 ## 5) Quality Gates (Definition of Done)
-A change is not done unless:
-- Core Release Gate pages pass QA
-- no regressions are introduced elsewhere
-- atomic delivery rules are followed
 
 ### 5.1 Performance
 Targets (Lighthouse Mobile + Desktop):
@@ -183,8 +176,8 @@ Rules:
 ## 11) Device + Browser + Theme QA Doctrine
 Every milestone must verify:
 ### Viewports
-- small phone
-- S24-class large phone
+- small mobile phone
+- large mobile phone
 - tablet portrait
 - tablet landscape
 - laptop
@@ -194,7 +187,8 @@ Every milestone must verify:
 - Chromium
 - Firefox
 - Safari/iOS-class behavior
-- Samsung Internet (recommended)
+- Samsung Internet
+- Edge
 
 ### Modes
 - light
@@ -247,18 +241,3 @@ Each game needs:
 Apps hub with structured cards, platform links, metadata, and scalable templates.
 
 ---
-
-## 14) Governance / Workflow / Session Contract
-Patch sessions must output:
-1) ZIP of completed files
-2) individual file downloads (preferred)
-3) work checklist
-4) QA checklist
-5) continuation prompt
-
-**Atomic delivery law:** A file is only complete if it is attached in the same response.
-
-Local test/bundle loop (authoritative):
-python .\toa_bundle.py --profile chatgpt --clean-lighthouse archive
-from:
-C:\Users\lbpol\Downloads\website-new\triadofangels
