@@ -1,6 +1,6 @@
 # TOA Website — Decisions Log (Anti-Drift)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE U  
 **Purpose:** Record decisions, constraints, and standards so work never re-litigates the same topics.
 
 ---
@@ -252,3 +252,9 @@
 - Publishing controls/cards/shelf surfaces must adopt explicit forced-colors system-color styling (`Canvas`, `CanvasText`, `ButtonText`, `Highlight`) so high-contrast mode keeps visible boundaries and focus cues.
 - Publishing interactive transitions/hover lifts must be suppressed when `prefers-reduced-motion: reduce` is active, with scroll behaviors falling back to `auto`.
 - Rationale: closes remaining E-02 mode-support drift under ID-032 without introducing JS-only accessibility dependencies.
+
+## 2026-02-24 — DEC-032: Local QA servers must be bfcache-compatible by default
+- Local QA/static serving must not use `Cache-Control: no-store` as the default response policy because it can prevent browser back/forward cache restoration and produce false-negative bfcache audits.
+- Default policy for local QA tooling: `no-cache` on HTML, short-lived cache (`public, max-age=300`) on static assets.
+- If deterministic no-store behavior is needed for debugging, tooling may expose an explicit opt-in override (Wave U: `tools/static-serve.mjs --cache=off`).
+- Rationale: aligns local diagnostics with production-like browser navigation behavior while preserving reproducible QA loops.
