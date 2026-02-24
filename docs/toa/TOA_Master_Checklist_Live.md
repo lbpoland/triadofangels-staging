@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE O  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE P  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -43,7 +43,7 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [IN PROGRESS] | Mobile header panel alignment + sizing fixed (S24) | css/style.css + js/global.js | ID-005 (Wave M desktop edge-alignment follow-up applied; pending local QA) |
-| [IN PROGRESS] | Nested submenu behavior rebuilt (no massive gap) | css/style.css + js/global.js | ID-005 (Wave M desktop submenu edge-alignment + outside-click stability applied; pending local QA) |
+| [IN PROGRESS] | Nested submenu behavior rebuilt (no massive gap) | css/style.css + js/global.js | ID-005 (Wave M desktop edge-alignment + outside-click stability retained; Wave P added desktop pointer-enter/leave parity + submenu Arrow/Home/End keyboard traversal; pending local QA) |
 | [IN PROGRESS] | Home Featured Albums horizontal carousel (touch + keyboard) | index.html + css/style.css + js/global.js | ID-006 (Wave N listener de-dup + SR guidance + mobile rail sizing; pending local QA) |
 | [IN PROGRESS] | Carousel/rail interaction polish (labels, focus, reduced motion) | global components | ID-006 + ID-009 + ID-032 (Wave N reduced-motion/shared-handler continuity retained; pending local QA) |
 
@@ -185,3 +185,9 @@
 - **Done:** Applied Homepage hero polish layer: fluid hero typography across breakpoints, dedicated subtitle styling, CTA focus-visible/touch-target hardening, and responsive hero image candidate hints via `srcset/sizes` (ID-014 / ID-006 / C-02.1 / C-02.2 / C-02.3).
 - **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
 - **Next:** Run LOCAL QA PACK for runtime + LHCI + manual Home hero typography/focus regression, then advance to B-02.2 desktop multi-level submenu parity.
+
+
+### 2026-02-24 (MEGA WAVE P)
+- **Done:** Hardened desktop nav submenu parity by adding pointer-enter open / pointer-leave close behavior (without focus traps), trigger-level Enter/Space + ArrowUp support, and submenu ArrowUp/ArrowDown/Home/End keyboard traversal in `js/global.js` (ID-005 / B-02.2 / B-03.1).
+- **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
+- **Next:** Run LOCAL QA PACK runtime + LHCI + manual desktop nav parity matrix, then close B-02.2/B-03.1 to VERIFIED.

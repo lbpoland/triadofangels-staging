@@ -596,6 +596,17 @@ const isGlyphOnly = (s) => {
       openSubmenu(btn, menu);
     }
 
+    const getMenuFocusable = (menu) => Array.from(
+      menu.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    );
+
+    const focusMenuItem = (menu, index) => {
+      const items = getMenuFocusable(menu);
+      if (!items.length) return;
+      const boundedIndex = ((index % items.length) + items.length) % items.length;
+      items[boundedIndex].focus({ preventScroll: true });
+    };
+
     // Click toggles
     for (const { btn, menu } of menus) {
       // Ensure hidden by default
@@ -613,8 +624,16 @@ const isGlyphOnly = (s) => {
         if (e.key === 'ArrowDown') {
           e.preventDefault();
           openSubmenu(btn, menu);
-          const first = menu.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
-          if (first) first.focus({ preventScroll: true });
+          focusMenuItem(menu, 0);
+        }
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          openSubmenu(btn, menu);
+          focusMenuItem(menu, -1);
+        }
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleSubmenu(btn, menu);
         }
         if (e.key === 'Escape') {
           e.preventDefault();
@@ -625,12 +644,47 @@ const isGlyphOnly = (s) => {
 
       // Close when menu loses focus to outside (but allow focus within menu)
       menu.addEventListener('keydown', (e) => {
+        const items = getMenuFocusable(menu);
+        const activeIndex = items.indexOf(document.activeElement);
+
+        if (e.key === 'ArrowDown' && items.length) {
+          e.preventDefault();
+          focusMenuItem(menu, activeIndex + 1);
+        }
+        if (e.key === 'ArrowUp' && items.length) {
+          e.preventDefault();
+          focusMenuItem(menu, activeIndex - 1);
+        }
+        if (e.key === 'Home' && items.length) {
+          e.preventDefault();
+          focusMenuItem(menu, 0);
+        }
+        if (e.key === 'End' && items.length) {
+          e.preventDefault();
+          focusMenuItem(menu, -1);
+        }
         if (e.key === 'Escape') {
           e.preventDefault();
           closeAllSubmenus();
           btn.focus({ preventScroll: true });
         }
       });
+
+      // Desktop pointer parity with keyboard open behavior.
+      const parentItem = btn.closest('.nav-item');
+      if (parentItem) {
+        parentItem.addEventListener('pointerenter', () => {
+          if (isMobileNav()) return;
+          openSubmenu(btn, menu);
+        });
+
+        parentItem.addEventListener('pointerleave', () => {
+          if (isMobileNav()) return;
+          const active = document.activeElement;
+          if (active instanceof Node && parentItem.contains(active)) return;
+          closeAllSubmenus();
+        });
+      }
     }
 
     // Close dropdowns on outside click
