@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE Q  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE R  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -64,7 +64,7 @@
 | [DONE] | Skip link present on all HTML pages | bundle verification | {skip_ok}/{tot_pages} pages |
 | [DONE] | `<main id="main-content">` present on all HTML pages | bundle verification | {main_ok}/{tot_pages} pages |
 | [DONE] | Exactly one `<h1>` per page | bundle verification | {h1_ok}/{tot_pages} pages |
-| [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer + js/album.js + js/track.js + js/book.js | ID-008 (Wave D applied; local runtime/LHCI verification pending) |
+| [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer + js/album.js + js/track.js + js/book.js + js/global.js | ID-008 (Wave D naming alignment + Wave R landmark/current-page semantics hardening applied; local runtime/LHCI verification pending) |
 | [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 |
 | [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 (Wave F patch applied; pending LHCI verification) |
 | [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 |
@@ -187,6 +187,11 @@
 - **Next:** Run LOCAL QA PACK for runtime + LHCI + manual Home hero typography/focus regression, then advance to B-02.2 desktop multi-level submenu parity.
 
 
+
+### 2026-02-24 (MEGA WAVE R)
+- **Done:** Hardened accessibility semantics in `js/global.js` by adding footer navigation `aria-current="page"` route mapping, landmark role/label fallback guards for header/main/footer/footer-nav, and `main` `tabindex="-1"` fallback for skip-link focus reliability (ID-008 / E-02.3 / E-01.4).
+- **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
+- **Next:** Run LOCAL QA PACK runtime + LHCI + screen-reader smoke to verify landmark announcements and footer current-page semantics before marking E-layer items VERIFIED.
 
 ### 2026-02-24 (MEGA WAVE Q)
 - **Done:** Applied responsive overflow/gutter hardening in `css/style.css` by adding shared page-gutter/panel-padding tokens, constraining `main` to an inline-safe centered container, normalizing section inline padding via tokens, and adding long-string wrapping guards for section copy/links (ID-007 / D-01.1 / D-01.2 / D-01.3).

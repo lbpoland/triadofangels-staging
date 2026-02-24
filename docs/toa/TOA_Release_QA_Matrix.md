@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE Q  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE R  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -22,6 +22,7 @@
 **MEGA WAVE O applied:** yes (Homepage hero polish: fluid typography/subtitle spacing + CTA focus-visible/touch target hardening + responsive hero `img srcset/sizes`).
 **MEGA WAVE P applied:** yes (Navigation submenu parity: desktop pointer-enter/leave behavior + trigger/menu keyboard traversal hardening).
 **MEGA WAVE Q applied:** yes (Responsive overflow/gutter hardening: shared main/section inline spacing tokens + section long-string wrapping guards).
+**MEGA WAVE R applied:** yes (Accessibility semantics hardening: footer `aria-current` mapping + landmark role/label/tabindex fallbacks in global runtime).
 
 | Field | Value |
 |---|---|
@@ -241,3 +242,12 @@
   - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
   - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
 - Local execution is required before marking Wave Q as VERIFIED for D-01.1/D-01.2/D-01.3 and ID-007 closure evidence.
+
+
+## 18) 2026-02-24 — MEGA WAVE R execution notes
+- Applied accessibility-layer semantics hardening in `js/global.js`: footer navigation `aria-current` route mapping plus fallback landmark role/label guarantees for header/main/footer/footer nav; `main` now gets `tabindex="-1"` only when absent to preserve skip-link focus transfer consistency.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates attempted once and BLOCKED in sandbox:
+  - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
+- Local execution is required before marking Wave R as VERIFIED for E-02.3/E-01.4 and ID-008 closure evidence.

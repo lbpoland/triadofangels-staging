@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE Q  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE R  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -112,12 +112,12 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [IN PROGRESS] E-01.1 Fix label-content-name-mismatch at scale (remove mismatched aria-label or align)
 - [IN PROGRESS] E-01.2 Fix color-contrast across both themes (text, buttons, badges, links)
 - [IN PROGRESS] E-01.3 Fix aria-required-children on Publishing filters
-- [IN PROGRESS] E-01.4 Fix any remaining heading-order issues (maintain single H1 per page)
+- [IN PROGRESS] E-01.4 Fix any remaining heading-order issues (maintain single H1 per page) (Wave R landmark/focus semantics hardening applied in `js/global.js`; pending local Lighthouse+SR verification)
 
 ### E-02 Mode support
 - [IN PROGRESS] E-02.1 Forced-colors: ensure borders, focus rings, interactive states visible (decorative ToA background layers now disabled in forced-colors mode)
 - [IN PROGRESS] E-02.2 Reduced motion: disable smooth scrolling/animated transitions where applicable (ToA cinematic background effects simplified under prefers-reduced-motion)
-- [NOT STARTED] E-02.3 Screen reader: verify landmarks (header/nav/main/footer), labels, aria-current
+- [IN PROGRESS] E-02.3 Screen reader: verify landmarks (header/nav/main/footer), labels, aria-current (Wave R footer `aria-current` + landmark fallback guards applied; pending local NVDA/VoiceOver verification)
 
 ---
 
@@ -266,3 +266,6 @@ Local QA results pasted:
 - **2026-02-24 (AEST)** — MEGA WAVE P (Navigation submenu parity): implemented desktop pointer-enter/leave submenu parity, added trigger/menu keyboard traversal controls (ArrowUp/ArrowDown/Home/End + Enter/Space), and preserved ESC focus-return/outside-close safety. (Ledger: ID-005, ID-013; Checklist: B-02.2, B-03.1)
 
 - **2026-02-24 (AEST)** — MEGA WAVE Q (Responsive overflow + gutter hardening): added shared page gutter and section inline-padding tokens, constrained `main` with safe inline spacing, and applied long-string wrap guards to section text/links to reduce mobile edge bleed and URL overflow risk. (Ledger: ID-007; Checklist: D-01.1, D-01.2, D-01.3)
+
+
+- **2026-02-24 (AEST)** — MEGA WAVE R (Accessibility landmarks + current-page semantics): extended global accessibility runtime to set footer navigation `aria-current="page"` for matching routes, enforce landmark role/label fallbacks for header/main/footer/footer-nav, and apply `main` `tabindex="-1"` fallback to preserve skip-link focus reliability. (Ledger: ID-008; Checklist: E-02.3, E-01.4)
