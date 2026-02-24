@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE Q update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE R update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -211,6 +211,20 @@
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+
+## Patch Wave 14 — Mega Wave R (Accessibility Landmark + Current-Page Semantics Hardening)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Accessibility semantics hardening for screen-reader landmark continuity and current-page announcements (ID-008 / E-02.3 / E-01.4).
+- **Files changed:** `js/global.js` + governance tracker updates.
+- **Implementation:** Added footer-navigation route matching to set `aria-current="page"`; enforced safe landmark fallbacks for header/main/footer/footer-nav labels/roles; added `tabindex="-1"` fallback for `main` to preserve skip-link focus behavior where absent.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -221,7 +235,7 @@
 | ID-005 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Navigation / Mobile | Mobile/desktop header dropdown alignment + submenu stability hardening applied (Wave 01 + Wave M + Wave P parity controls for pointer/keyboard submenu behavior) | `css/style.css`, `js/global.js`, header HTML generation |
 | ID-006 | P0 | IMPLEMENTED (PENDING LOCAL QA) | Home / UX | Home layer hardening across Featured Albums rail + hero polish (fluid typography/subtitle spacing + CTA focus guidance) applied; pending local runtime/LHCI/manual verification | `index.html`, `css/style.css`, `js/global.js` |
 | ID-007 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Responsive | Wave Q added shared main/section gutters and long-string wrap hardening to reduce mobile clipping/edge bleed risk pending local runtime/LHCI/manual viewport validation | `css/style.css` (+ page CSS where needed) |
-| ID-008 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `label-content-name-mismatch` across pages (visible text vs aria-label mismatch) | global HTML, footer/header, `css/style.css`, `js/album.js`, `js/track.js`, `js/book.js` |
+| ID-008 | P0 | HARDENED (PENDING LOCAL QA) | Accessibility | `label-content-name-mismatch` + landmark/current-page semantics continuity hardening | global HTML, footer/header, `js/global.js`, `css/style.css`, `js/album.js`, `js/track.js`, `js/book.js` |
 | ID-009 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `color-contrast` failures (light/dark parity) | `css/style.css` (+ page CSS) |
 | ID-010 | P1 | IMPLEMENTED (PENDING QA) | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
 | ID-011 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | Publishing page `aria-required-children` | `publishing.html`, `js/publishing.js`, `css/publishing.css` |
@@ -353,7 +367,7 @@
 ### ID-007 — Mobile Content Cards Overflow / Edge Bleed (S24)
 - **Severity:** P0
 - **Category:** Responsive / Layout
-- **Status:** IMPLEMENTED (PENDING QA)
+- **Status:** HARDENED (PENDING LOCAL QA)
 - **Evidence:** User S24 screenshots show section “boxes” extending beyond viewport edges.
 - **Affected pages:** Multiple (global component pattern)
 - **Affected files:** `css/style.css` (core cards/sections), plus page CSS as needed
@@ -378,6 +392,7 @@
 - **Root cause (confirmed pattern):** Links with visible text use `aria-label` that does **not** match visible text (example pattern: visible “Search” but aria-label “Open site search”).
 - **Wave 01 implementation:** Added global runtime normalizer that removes mismatched `aria-label` from visibly-labeled links/buttons (so visible label becomes accessible name). Also converted glyph icons to generated content to reduce false-positive label detection.
 - **Mega Wave D implementation (2026-02-24):** Updated runtime-generated album/track/book outbound-link `aria-label` patterns to start with visible text (e.g., `Spotify (opens in a new tab)`), aligning with DEC-018 and reducing mismatch risk before Lighthouse parsing.
+- **Mega Wave R implementation (2026-02-24):** Added landmark/current-page semantics hardening in `js/global.js`, including footer-nav `aria-current="page"` mapping and fallback role/label/tabindex guards for header/main/footer/footer-nav so screen-reader location cues remain consistent across global navigation surfaces.
 - **Why it matters:** Screen readers announce a different name than what sighted users see; fails WCAG and Lighthouse.
 - **Required fix:** 
   - Remove `aria-label` from links/buttons that already have clear visible text.

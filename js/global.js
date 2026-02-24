@@ -769,6 +769,46 @@ const isGlyphOnly = (s) => {
   })();
 
   // =========================
+  // LANDMARK + FOOTER CURRENT-PAGE HARDENING
+  // =========================
+  (function setupLandmarksAndFooterCurrent() {
+    const normalizePath = (p) => {
+      let s = String(p || '/');
+      s = s.split('?')[0].split('#')[0];
+      if (s === '/index.html') s = '/';
+      return s.replace(/\/{2,}/g, '/');
+    };
+
+    const here = normalizePath(window.location.pathname);
+
+    const footerNavs = Array.from(document.querySelectorAll('footer nav'));
+    for (const nav of footerNavs) {
+      nav.querySelectorAll('a[aria-current]').forEach((a) => a.removeAttribute('aria-current'));
+      const links = Array.from(nav.querySelectorAll('a[href]'));
+
+      const exact = links.find((a) => normalizePath(a.getAttribute('href') || '') === here);
+      if (exact) exact.setAttribute('aria-current', 'page');
+
+      if (!nav.hasAttribute('aria-label')) nav.setAttribute('aria-label', 'Footer navigation');
+    }
+
+    const header = document.querySelector('header.site-header, header[role="banner"], header');
+    if (header && !header.hasAttribute('role')) header.setAttribute('role', 'banner');
+
+    const main = document.getElementById('main-content') || document.querySelector('main');
+    if (main) {
+      if (!main.hasAttribute('role')) main.setAttribute('role', 'main');
+      if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+    }
+
+    const footer = document.querySelector('footer');
+    if (footer) {
+      if (!footer.hasAttribute('role')) footer.setAttribute('role', 'contentinfo');
+      if (!footer.hasAttribute('aria-label')) footer.setAttribute('aria-label', 'Site footer');
+    }
+  })();
+
+  // =========================
   // BACK TO TOP (site-wide, injected)
   // =========================
   (function setupBackToTop() {
