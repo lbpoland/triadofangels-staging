@@ -742,8 +742,14 @@ const startStaticServer = async (rootDir) => {
 
       const data = await fs.readFile(normalized);
       res.setHeader('Content-Type', mimeTypeFor(normalized));
-      // Development server: no aggressive caching.
-      res.setHeader('Cache-Control', 'no-store');
+      const ext = path.extname(normalized).toLowerCase();
+      // Keep deterministic QA behavior while allowing browser back/forward
+      // cache diagnostics to run (avoid `no-store`, which blocks bfcache).
+      if (ext === '.html') {
+        res.setHeader('Cache-Control', 'no-cache');
+      } else {
+        res.setHeader('Cache-Control', 'public, max-age=300');
+      }
       res.writeHead(200);
       res.end(data);
     } catch (e) {

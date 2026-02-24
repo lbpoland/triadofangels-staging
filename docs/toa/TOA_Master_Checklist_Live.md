@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE T  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE U  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -31,7 +31,7 @@
 | [DONE] | Core tooling exists: dev-check, link-scan, generate-static, static-serve | /tools/*.mjs | — |
 | [DONE] | Pre-rendered music track pages exist (static SEO path) | /music/tracks/**/index.html | — |
 | [IN PROGRESS] | Minification / build pipeline strategy (src→dist) | /tools + repo structure | ID-017 |
-| [IN PROGRESS] | bfcache blocker identification + resolution | global JS/runtime | ID-018 |
+| [IN PROGRESS] | bfcache blocker identification + resolution | tools/static-serve.mjs + tools/dev-check.mjs + runtime | ID-018 (Wave U moved local QA servers from `Cache-Control: no-store` to bfcache-safe cache headers; pending local LHCI/DevTools verification) |
 | [IN PROGRESS] | Global head preconnect normalization applied + idempotent | all HTML + tools/toa-mega-wave-c__preconnect-normalize.mjs | ID-028, ID-032 (pending local LHCI) |
 
 ---
@@ -213,3 +213,10 @@
 - **Done:** Extended accessibility mode-support hardening on Publishing surfaces by adding reduced-motion transition/transform kill-switches for cards/chips/buttons and forced-colors system-color styling for form controls, shelves, cards, and focus states in `css/publishing.css` (ID-032 / E-02.1 / E-02.2).
 - **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
 - **Next:** Run LOCAL QA PACK runtime + LHCI + manual forced-colors/reduced-motion checks on Publishing before marking E-02.1/E-02.2 VERIFIED.
+
+
+### 2026-02-24 (MEGA WAVE U)
+- **Done:** Applied Architecture/Tooling bfcache diagnostics hardening by removing `Cache-Control: no-store` from local QA servers (`tools/static-serve.mjs`, `tools/dev-check.mjs`) and replacing it with bfcache-safe cache policy (`no-cache` for HTML, short-lived `public, max-age=300` for static assets), plus optional `--cache=off` fallback for strict no-store debugging.
+- **QA:** `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `node tools/link-scan.mjs --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
+- **Next:** Run LOCAL QA PACK runtime + LHCI + Chrome DevTools bfcache diagnostics to verify ID-018 closure, then proceed to ID-017 build/minification strategy.
+

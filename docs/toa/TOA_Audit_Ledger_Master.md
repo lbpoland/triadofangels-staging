@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE T update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE U update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -250,6 +250,18 @@
   - `node tools/link-scan.mjs --ci` PASS
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+## Patch Wave 17 — Mega Wave U (Architecture/Tooling bfcache Gate Hardening)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Architecture + tooling layer closure for bfcache blocker diagnosis/removal (ID-018).
+- **Files changed:** `tools/static-serve.mjs`, `tools/dev-check.mjs` + governance tracker updates.
+- **Implementation:** Replaced local QA server `Cache-Control: no-store` defaults with bfcache-safe policy (`no-cache` for HTML and `public, max-age=300` for static assets), and added `tools/static-serve.mjs --cache=off` escape hatch for deterministic no-store debugging.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -270,7 +282,7 @@
 | ID-015 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO | Duplicate/alias track static routes pruned to canonical-only corpus (10 alias routes removed) | `music/tracks/**/index.html` |
 | ID-016 | P1 | IN PROGRESS | Performance / UX | Search perf baseline remains open; non-home heavy-background containment applied to reduce first-view cost pending local LHCI verification | `search/search.js`, `search/search.css`, `css/style.css` |
 | ID-017 | P2 | OPEN | Build / Perf | Lighthouse flags minification + cache + compression strategy | tooling + build pipeline |
-| ID-018 | P2 | OPEN | UX / Perf | `bf-cache` prevented on most pages (investigate) | global JS + embed patterns |
+| ID-018 | P2 | FIX IMPLEMENTED (PENDING LOCAL QA) | UX / Perf | Wave U removed local QA `Cache-Control: no-store` headers (known bfcache blocker) and replaced them with bfcache-safe cache policy for HTML/assets; pending local Lighthouse/DevTools proof | `tools/static-serve.mjs`, `tools/dev-check.mjs` |
 | ID-019 | P2 | OPEN | SEO | 404 SEO low (noindex/is-crawlable) — confirm intentional | `404.html` |
 | ID-020 | P2 | OPEN | Platform | Publishing data + content roadmap (truthful, no placeholders) | `js/publishing-data.js`, `publishing.html` |
 | ID-021 | P2 | FIX IMPLEMENTED (PENDING LOCAL QA) | Platform / Trust | Store/Merch/Digital Store truth + consistency pass | `merch.html`, `digital-store.html`, `streaming.html` |
@@ -605,10 +617,14 @@
 ### ID-018 — Back/Forward Cache Prevented
 - **Severity:** P2
 - **Category:** UX / Performance
-- **Status:** OPEN
+- **Status:** FIX IMPLEMENTED (PENDING LOCAL QA)
 - **Evidence:** Lighthouse `bf-cache` failing across most pages.
-- **Root cause:** Not yet identified (common causes include unload listeners, cache-control, or certain Web APIs).
-- **Required fix:** Identify the bfcache blocker in runtime; remove/adjust offending patterns.
+- **Root cause:** Local QA servers were forcing `Cache-Control: no-store` on all responses (`tools/static-serve.mjs` and `tools/dev-check.mjs` runtime probe server), which is a known blocker for back/forward cache restoration.
+- **Required fix:** Remove `no-store` from default QA serving path and keep deterministic reload semantics without blocking bfcache.
+- **Wave U implementation (2026-02-24):**
+  - `tools/static-serve.mjs` now defaults to bfcache-safe headers: `no-cache` for HTML and `public, max-age=300` for static assets.
+  - Added optional `--cache=off` mode to `tools/static-serve.mjs` for explicit `no-store` debugging when needed.
+  - `tools/dev-check.mjs` embedded runtime server now mirrors the same bfcache-safe cache profile (`no-cache` HTML / `public, max-age=300` assets).
 - **Acceptance criteria:** `bf-cache` passes on core pages.
 - **QA verification:** Lighthouse + Chrome DevTools bfcache diagnostics.
 

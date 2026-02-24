@@ -30,6 +30,7 @@ for (const raw of process.argv.slice(2)) {
 
 const PORT = Number(argMap.get('port') || 4173);
 const HOST = String(argMap.get('host') || '127.0.0.1');
+const CACHE_MODE = String(argMap.get('cache') || 'qa').toLowerCase();
 
 const MIME = new Map([
   ['.html', 'text/html; charset=utf-8'],
@@ -123,8 +124,15 @@ function serveFile(req, res, fsPath, status = 200) {
     res.statusCode = status;
     res.setHeader('Content-Type', type);
     res.setHeader('X-Content-Type-Options', 'nosniff');
-    // Keep cache off for QA determinism (no regressions vs previous behavior)
-    res.setHeader('Cache-Control', 'no-store');
+    // Use QA cache defaults that preserve deterministic reload behavior without
+    // disabling browser back/forward cache diagnostics.
+    if (CACHE_MODE === 'off') {
+      res.setHeader('Cache-Control', 'no-store');
+    } else if (ext === '.html') {
+      res.setHeader('Cache-Control', 'no-cache');
+    } else {
+      res.setHeader('Cache-Control', 'public, max-age=300');
+    }
 
     if (shouldGzip(req, ext, type) && data.length > 220) {
       const gz = getGzipped(fsPath, data);
