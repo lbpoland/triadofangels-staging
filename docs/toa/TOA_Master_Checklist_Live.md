@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE T  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -68,7 +68,7 @@
 | [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 (Wave S boosted muted/footer contrast tokens and Publishing secondary-text contrast floors; pending local LHCI/runtime verification) |
 | [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 (Wave F patch applied; pending LHCI verification) |
 | [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 (Wave S switched Publishing shelf rows to native `ul/li` semantics; pending local LHCI/runtime verification) |
-| [DONE] | Forced-colors + reduced-motion support hardened for global nav controls | css/style.css + js/global.js | ID-032 |
+| [IN PROGRESS] | Forced-colors + reduced-motion support hardened across global nav + Publishing surfaces | css/style.css + css/publishing.css + js/global.js + js/publishing.js | ID-032 (Wave T expanded Publishing forced-colors/reduced-motion behavior; pending local runtime/LHCI/manual mode verification) |
 
 ---
 
@@ -207,3 +207,9 @@
 - **Done:** Hardened accessibility contrast + semantic-list layer by raising global muted/footer text contrast tokens and converting Publishing shelf rows from ARIA-role list scaffolding to native `ul/li` semantics (ID-009 / ID-011 / E-01.2 / E-01.3).
 - **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
 - **Next:** Run LOCAL QA PACK runtime + LHCI + manual theme contrast/Publishing accessibility-tree checks, then mark E-01.2/E-01.3 VERIFIED.
+
+
+### 2026-02-24 (MEGA WAVE T)
+- **Done:** Extended accessibility mode-support hardening on Publishing surfaces by adding reduced-motion transition/transform kill-switches for cards/chips/buttons and forced-colors system-color styling for form controls, shelves, cards, and focus states in `css/publishing.css` (ID-032 / E-02.1 / E-02.2).
+- **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
+- **Next:** Run LOCAL QA PACK runtime + LHCI + manual forced-colors/reduced-motion checks on Publishing before marking E-02.1/E-02.2 VERIFIED.

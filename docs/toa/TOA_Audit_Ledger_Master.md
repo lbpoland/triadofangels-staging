@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE T update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -238,6 +238,18 @@
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+
+## Patch Wave 16 — Mega Wave T (Accessibility Mode Support on Publishing)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Accessibility mode-support hardening on Publishing interfaces (ID-032 / E-02.1 / E-02.2).
+- **Files changed:** `css/publishing.css` + governance tracker updates.
+- **Implementation:** Added Publishing reduced-motion transition/transform suppression and scroll-behavior fallback; added forced-colors system-color surface/control styles and explicit focus-visible outlines for Publishing search/sort controls, shelf/book cards, chips, and action buttons.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -263,7 +275,7 @@
 | ID-020 | P2 | OPEN | Platform | Publishing data + content roadmap (truthful, no placeholders) | `js/publishing-data.js`, `publishing.html` |
 | ID-021 | P2 | FIX IMPLEMENTED (PENDING LOCAL QA) | Platform / Trust | Store/Merch/Digital Store truth + consistency pass | `merch.html`, `digital-store.html`, `streaming.html` |
 | ID-034 | P2 | FIX IMPLEMENTED (PENDING LOCAL QA) | Platform / Readiness | Games/Apps truth-first hub readiness pass | `games.html`, `apps.html` |
-| ID-032 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance + Accessibility | ToA global background rendering hardening (mobile variant, reduced-motion, forced-colors, no fixed attachment) | `css/style.css` |
+| ID-032 | P1 | HARDENED (PENDING LOCAL QA) | Performance + Accessibility | Expanded mode-support hardening: global ToA background safeguards plus Publishing reduced-motion/forced-colors control and focus treatment updates | `css/style.css`, `css/publishing.css` |
 | ID-033 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO / Indexing | Sitemap now indexes canonical HTML pages only and robots disallows legacy templates + 404 path | `tools/generate-static.mjs`, `sitemap.xml`, `robots.txt` |
 
 ---

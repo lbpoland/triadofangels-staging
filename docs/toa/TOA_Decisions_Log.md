@@ -246,3 +246,9 @@
 - Publishing shelf rails and similar card lanes should prefer native `ul/li` markup over ARIA-role list/listitem scaffolding to avoid required-children drift when runtime DOM changes.
 - Secondary/supporting copy should use explicit theme tokens (e.g., `var(--text-muted)`, `var(--footer-text)`) instead of opacity-only fades where contrast can collapse against layered backgrounds.
 - Rationale: stabilizes accessibility QA against `aria-required-children` and `color-contrast` regressions without adding non-semantic complexity.
+
+
+## 2026-02-24 — DEC-031: Publishing mode support must map to OS accessibility settings
+- Publishing controls/cards/shelf surfaces must adopt explicit forced-colors system-color styling (`Canvas`, `CanvasText`, `ButtonText`, `Highlight`) so high-contrast mode keeps visible boundaries and focus cues.
+- Publishing interactive transitions/hover lifts must be suppressed when `prefers-reduced-motion: reduce` is active, with scroll behaviors falling back to `auto`.
+- Rationale: closes remaining E-02 mode-support drift under ID-032 without introducing JS-only accessibility dependencies.
