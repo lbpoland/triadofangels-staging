@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE J  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE K  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -107,9 +107,9 @@
 |---|---|---|---|
 | [DONE] | Music library + album/track templates present | music.html + album.html + track.html | — |
 | [IN PROGRESS] | Publishing page polished empty state + stable layout | publishing.html | ID-020 + ID-012 |
-| [NOT STARTED] | Games hub premium catalog & first game plan | games.html + new /games/* | Rules v5 §13 |
-| [NOT STARTED] | Apps hub premium catalog plan | apps.html + new /apps/* | Rules v5 §13 |
-| [IN PROGRESS] | Store/Merch hub alignment | merch.html + digital-store.html | ID-021 |
+| [IN PROGRESS] | Games hub premium catalog & first game plan | games.html + new /games/* | Wave K added truthful hub/catalog + quick filters (pending local QA) — ID-034 |
+| [IN PROGRESS] | Apps hub premium catalog plan | apps.html + new /apps/* | Wave K added truthful launch-now links to live web tools (pending local QA) — ID-034 |
+| [IN PROGRESS] | Store/Merch hub alignment | merch.html + digital-store.html | Wave K disclosure hardening applied; awaiting local QA + external storefront URLs — ID-021 |
 
 ---
 
@@ -157,3 +157,9 @@
 - **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due to missing browser executables.
 - **Next:** Run LOCAL QA PACK for runtime + LHCI SEO checks, then advance to site-wide OG/Twitter completeness sweep (G-02.1/G-02.2).
 
+
+
+### 2026-02-24 (MEGA WAVE K)
+- **Done:** Converted Games/Apps/Store surfaces into truthful static hubs: Games readiness filters + planning catalog, Apps launch-now links to live web tools, Store/Merch checkout/disclosure-first copy.
+- **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
+- **Next:** Run LOCAL QA PACK for runtime + LHCI, then implement K-01.2 first-playable game MVP controls/accessibility plan.

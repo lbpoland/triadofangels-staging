@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE J  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE K  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -200,16 +200,16 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 # K) GAMES / APPS / STORE READINESS (Static-first)
 
 ### K-01 Games
-- [NOT STARTED] K-01.1 Games hub page: curated catalog; instant-play filters
+- [IN PROGRESS] K-01.1 Games hub page: curated catalog; instant-play filters (Wave K truthful status hub + quick filters applied; pending local runtime/LHCI verification)
 - [NOT STARTED] K-01.2 First game MVP: pause/restart, keyboard, touch, accessibility plan
 - [NOT STARTED] K-01.3 Optional leaderboard: external service, disclosed
 
 ### K-02 Apps/Tools
-- [NOT STARTED] K-02.1 Apps hub with install/launch links (truthful)
+- [IN PROGRESS] K-02.1 Apps hub with install/launch links (truthful) (Wave K launch-now links to live web tools applied; pending local runtime/LHCI verification)
 - [NOT STARTED] K-02.2 Tool pages: performance + privacy notes
 
 ### K-03 Store
-- [NOT STARTED] K-03.1 Store hub: external checkout links; disclosures; no fake cart
+- [IN PROGRESS] K-03.1 Store hub: external checkout links; disclosures; no fake cart (Wave K disclosure-first copy hardening applied on Store/Merch; pending storefront partner URLs + local QA verification)
 - [NOT STARTED] K-03.2 Product schema for items (if static catalog exists)
 
 ---
@@ -252,3 +252,5 @@ Local QA results pasted:
 - **2026-02-24 (AEST)** — MEGA WAVE I (Critical path LCP containment): constrained heavyweight ToA full-page hero background image to Home only and added responsive Home hero image preload to reduce LCP pressure on core non-home pages. (Ledger: ID-014, ID-016; Checklist: F-01.1, F-02.3)
 
 - **2026-02-24 (AEST)** — MEGA WAVE J (SEO indexing hygiene): updated sitemap generation policy to canonical HTML pages only, regenerated `sitemap.xml` without lyrics TXT endpoints, and aligned `robots.txt` crawl directives to exclude `/404.html` and legacy query-template routes. (Ledger: ID-033; Checklist: G-04.1, G-04.2)
+
+- **2026-02-24 (AEST)** — MEGA WAVE K (Games/Apps/Store readiness): converted Games/Apps/Store hubs to truthful static-first status pages with real launch links, explicit no-live-checkout/no-live-release states, and disclosure-forward copy to prevent fake cart/download claims. (Ledger: ID-021, ID-034; Checklist: K-01.1, K-02.1, K-03.1)

@@ -212,3 +212,10 @@
 - Exclude non-HTML assets/content endpoints (for example `lyrics/**/*.txt`) and exclude legacy query templates (`/album.html`, `/track.html`, `/book.html`) from indexed sitemap entries.
 - `robots.txt` must remain aligned with this policy and keep `/404.html` and legacy templates out of crawl/index scope.
 - Enforcement: `tools/generate-static.mjs` sitemap generation and repository `robots.txt`.
+
+
+## 2026-02-24 — DEC-026: Truth-first platform hubs for Games/Apps/Store
+- Games, Apps, Merch, and Digital Store pages must present only currently available launch/checkout states.
+- Do not imply active products, instant download fulfillment, or on-site secure checkout unless real provider links and legal disclosures are present.
+- Until storefront/app links exist, hubs must explicitly state planning status and provide a truthful contact/notification path.
+- Rationale: closes trust gap ID-021 and prevents placeholder/fake-commerce UX under GitHub Pages static constraints.

@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE J  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE K  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -15,6 +15,7 @@
 **MEGA WAVE H applied:** yes (Publishing CLS + empty-state stabilization).
 **MEGA WAVE I applied:** yes (LCP critical-path containment: Home-only heavy background + Home hero preload).
 **MEGA WAVE J applied:** yes (SEO indexing hygiene: canonical HTML-only sitemap + robots alignment).
+**MEGA WAVE K applied:** yes (Games/Apps/Store truth-first hub readiness copy + disclosures).
 
 | Field | Value |
 |---|---|
@@ -171,3 +172,12 @@
   - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
   - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
 - Local execution is required before marking Wave J as VERIFIED.
+
+
+## 11) 2026-02-24 — MEGA WAVE K execution notes
+- Applied platform-readiness truth pass on `games.html`, `apps.html`, `digital-store.html`, and `merch.html` to remove implied live-checkout/live-product claims and keep launch status explicit.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates are BLOCKED in sandbox:
+  - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
+- Local execution is required before marking Wave K as VERIFIED.
