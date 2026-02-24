@@ -99,3 +99,23 @@ Actions completed in this global pass:
 
 - **Residual technical risk:** browser-gated verification debt (runtime + LHCI) remains the only blocker for promoting multiple IN PROGRESS governance rows to VERIFIED.
 - **Governance coherence:** all Mega Waves in scope remain executed and linked; this session refreshed evidence without introducing architecture drift.
+
+## 2026-02-24 Addendum — Full Saturation Replay (This Session, Pass 3)
+
+### Authority ingest confirmation
+- Re-read every file under `/docs/toa` (47 documents total), including all Mega Wave manifests (`C`, `G`→`V`), linked plans, ledger, checklists, QA matrix, and decisions log.
+- Result: no new structural dependencies introduced since prior global passes; all waves remain **READY** from a code-state perspective.
+
+### Dependency-safe execution outcome
+- Executed full backlog replay in previously defined safe order: `C → G → H → I → J → K → L → M → N → O → P → Q → R → S → T → U → V`.
+- Implementation delta this pass: **governance/evidence refresh only** (no product-surface source edits required because all READY waves are already implemented).
+
+### Validation evidence (this pass)
+- PASS — `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`
+- PASS — `node tools/link-scan.mjs --ci`
+- PASS — `npm run build:dist`
+- BLOCKED (single attempt; no retry loop) — `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`
+  - Exact blocker: Playwright Chromium executable missing (`chrome-headless-shell`).
+
+### Residual risk (technical)
+- Only remaining cross-wave closure blocker is browser-gated runtime/LHCI execution on a local host with installed Playwright browser + Chrome/Chromium.

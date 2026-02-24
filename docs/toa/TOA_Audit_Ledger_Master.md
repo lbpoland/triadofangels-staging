@@ -871,3 +871,14 @@ When an issue is fixed, update:
   - `npm run build:dist` PASS
   - `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
   - LHCI mobile+desktop remain blocked in sandbox due missing Chrome/Chromium executable
+
+## Patch Wave 21 — Mega Wave GLOBAL (Full Saturation Replay Pass 3)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Re-executed all Mega Wave manifests in dependency order (`C`, `G`→`V`) and refreshed governance evidence linkage across report/ledger/checklist/QA matrix.
+- **Files changed:** governance-only (`docs/toa/*`), with no product-surface code mutation.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `npm run build:dist` PASS
+  - `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop remain blocked in sandbox due missing Chrome/Chromium executable

@@ -311,3 +311,11 @@
   - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
   - LHCI mobile/desktop remain pending local execution on host with Chrome/Chromium installed.
 - Browser gates remain **PENDING LOCAL QA** for final VERIFIED promotion in linked checklist/ledger rows.
+
+## 24) 2026-02-24 — MEGA WAVE GLOBAL full saturation replay notes (pass 3)
+- Replayed complete Mega Wave backlog execution coverage for all defined manifests (`C`, `G`→`V`) after authority re-ingest of `/docs/toa` artifacts.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`, `npm run build:dist`).
+- Browser-dependent gate attempted once and BLOCKED in sandbox:
+  - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop remain pending local execution on host with Chrome/Chromium installed.
+- Browser gates remain **PENDING LOCAL QA** for final VERIFIED promotion in linked checklist/ledger entries.
