@@ -244,8 +244,7 @@ Local QA results pasted:
 ## Patch Notes (Append-Only)
 - **2026-02-24 (AEST)** — MEGA WAVE D (Accessible-name alignment): normalized runtime-generated streaming/book links so `aria-label` begins with visible label text (e.g., `Spotify (opens in a new tab)`), reducing `label-content-name-mismatch` risk across album/track/book surfaces. (Ledger: ID-008, Checklist: E-01.1)
 - **2026-02-23 (AEST)** — Micro patch: fixed `index.html` Celestia album route casing + added missing CSP `script-src` hashes for inline JSON-LD on `index.html`, `apps.html`, `digital-store.html`. (Ledger: ID-022, ID-023)
-- [IN PROGRESS] G-01.5 Head performance: add preconnect/dns-prefetch where required origins exist (implemented via Mega Wave C sweep on 280 HTML files; pending local LHCI verification)
+- [IN PROGRESS] G-01.5 Head performance: preconnect/dns-prefetch sweep applied site-wide; Lighthouse verification pending local Chrome/LHCI
 
 - [IN PROGRESS] L-01.3 Runtime dev-check must PASS (album/track/book canonical+og+twitter urls correct; JSON-LD always valid)
-
-- **2026-02-24 (AEST)** — MEGA WAVE C: applied Google Fonts preconnect/dns-prefetch normalization across all HTML routes and fixed tool idempotence (`tools/toa-mega-wave-c__preconnect-normalize.mjs`). (Ledger: ID-028, ID-032)
+- **2026-02-23 (AEST)** — MEGA WAVE F applied: ran `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` across 280 HTML pages to normalize Google Fonts connection hints (preconnect + dns-prefetch). QA: dev-check CI PASS; runtime/LHCI blocked in this environment due missing browser binaries.

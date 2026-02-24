@@ -76,7 +76,7 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [IN PROGRESS] | Remove console errors on core pages (console-clean gate) | js/global.js + modules | ID-013 |
-| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS | ID-014 (Mega Wave F: ToA background rendering hardened for mobile/reduced-motion/forced-colors) |
+| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS + head hints | ID-014 + ID-028 (preconnect sweep applied; pending LHCI verification) |
 | [IN PROGRESS] | Search page perf uplift (≥95) | search/search.* | ID-016 |
 | [NOT STARTED] | Minify CSS/JS in production build | build pipeline | ID-017 |
 | [IN PROGRESS] | Serve responsive images / right-size first view | images + HTML | ID-014 |
@@ -129,7 +129,7 @@
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
 
-### 2026-02-24
-- **In progress (this session):** MEGA WAVE C applied for preconnect/dns-prefetch normalization across all HTML pages; idempotence bug fixed in sweep tool.
-- **QA note:** Non-browser gates PASS; browser/runtime gates pending local execution because Playwright browser executable is unavailable in this environment.
-- **Next:** MEGA WAVE D focused on Lighthouse LCP/CLS reductions for Home/Music/Publishing/Search.
+
+## Session Notes
+- **2026-02-23 (AEST):** MEGA WAVE F executed for head connection-hint normalization via `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` (280 HTML files updated).
+- Verification in this environment: `dev-check --ci` PASS and `link-scan` PASS; runtime + LHCI blocked by missing Playwright/Chrome binaries (see QA matrix + local QA pack).

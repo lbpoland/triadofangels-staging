@@ -126,15 +126,13 @@
 =======
 
 
-## 6) Automation Evidence — Mega Wave D (2026-02-23)
-- `node tools/dev-check.mjs --ci` → PASS (`reports/dev-check__2026-02-23T23-38-22-389Z.json`).
-- `node tools/dev-check.mjs --runtime --ci` → FAIL in this environment (`Runtime validation: Import failed; cannot select sample IDs.`).
-- `node tools/link-scan.mjs` → PASS (`reports/link-scan-report.md`).
-- `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` → NOT RUN locally here (no Chrome/Chromium binary).
-- `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` → NOT RUN locally here (no Chrome/Chromium binary).
 
-### Local-only pending gates
-Run on maintainer machine with browser binaries available:
-1) `node tools/dev-check.mjs --runtime --ci` (expect `[Dev-Check] PASS`).
-2) `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` (expect successful LHCI run + score outputs).
-3) `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` (expect successful LHCI run + score outputs).
+## 6) Latest Execution Evidence (2026-02-23 AEST — MEGA WAVE F)
+- `node tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` → PASS (`HTML scanned: 280`, `Files changed: 280`).
+- `node tools/dev-check.mjs --ci` → PASS (Errors: 0, Warnings: 0).
+- `node tools/link-scan.mjs` → PASS (`broken=0`).
+- `node tools/dev-check.mjs --runtime --ci` → FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`).
+- `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` → FAIL in sandbox (`No Chrome/Edge/Chromium executable detected`).
+- `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` → FAIL in sandbox (`No Chrome/Edge/Chromium executable detected`).
+
+**Pending local-only gates:** runtime dev-check + LHCI mobile/desktop (see LOCAL QA PACK in session handoff).

@@ -181,8 +181,7 @@
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
 
-## 2026-02-24 — DEC-021: Preconnect sweep tooling must be idempotent
-- Head normalization tools that run across the full static corpus must be safe to re-run without producing additional diffs.
-- `tools/toa-mega-wave-c__preconnect-normalize.mjs` now removes existing preconnect comment/link nodes for Google Fonts before re-inserting a canonical block.
-- Verification rule: `--apply` followed by `--check` must yield `Files changed: 0`.
-- This is now required before any mass HTML sweep is marked complete.
+## 2026-02-23 — DEC-021: Execute site-wide preconnect normalization as an atomic Mega Wave
+- Applied `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` to all HTML pages in one batch (280 files) to enforce DEC-017 consistently.
+- Scope discipline: head-only performance layer (connection hints), no content/page copy changes.
+- QA evidence requirement: dev-check + link-scan must pass in CI mode; Lighthouse verification may be completed locally when Chrome is unavailable in the execution environment.

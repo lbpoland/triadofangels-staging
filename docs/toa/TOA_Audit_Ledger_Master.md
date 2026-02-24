@@ -567,15 +567,11 @@ When an issue is fixed, update:
 ### ID-028 — Add fonts preconnect normalization tool (performance + Lighthouse uses-rel-preconnect)
 - **Severity:** P1
 - **Category:** Performance / Head metadata
-- **Status:** FIX IMPLEMENTED (PENDING LOCAL LHCI QA)
-- **Fix:** Applied `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` sweep across all 280 HTML files so Google Fonts origins now include normalized preconnect + dns-prefetch head hints.
-- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`, all `*.html` files in repo scope (see `docs/toa/TOA_MEGA_WAVE_C_FILE_MANIFEST.md`).
-- **QA verification:**
-  - `node tools/toa-mega-wave-c__preconnect-normalize.mjs --check` PASS (`Files changed: 0` / idempotent)
-  - `node tools/dev-check.mjs --ci` PASS
-  - `node tools/link-scan.mjs` PASS
-  - Lighthouse/Playwright runtime gates pending local machine execution (browser executable unavailable in this environment).
-- **Entry:** 2026-02-23T23:00:00Z
+- **Status:** IMPLEMENTED (PENDING LOCAL LHCI QA)
+- **Fix:** Added `tools/toa-mega-wave-c__preconnect-normalize.mjs` to inject preconnect + dns-prefetch for fonts across all HTML (deduped).
+- **Files touched:** `tools/toa-mega-wave-c__preconnect-normalize.mjs` + 280 HTML pages (apply sweep)
+- **QA verification:** run tool `--apply`, then Lighthouse should reduce `uses-rel-preconnect` failures.
+- **Entry:** 2026-02-23T12:03:28Z
 
 ### ID-029 — Improve global contrast for muted text + brand subtitle
 - **Severity:** P1
@@ -610,6 +606,14 @@ When an issue is fixed, update:
 - **Entry:** 2026-02-23T19:33:25Z
 
 
-- **2026-02-23 (Mega Wave D — SEO canonical consolidation, phase 1):** ID-015 moved to IN PROGRESS. De-indexed two confirmed duplicate track alias routes (`harmony-s-call`, `probed-confused`) and removed those aliases from `sitemap.xml`. Pending: remaining duplicate title/slug pairs listed under ID-015.
 
-- **2026-02-23 (Mega Wave D QA evidence):** `dev-check --ci` PASS; `link-scan` PASS; `dev-check --runtime --ci` failed in this environment (`Runtime validation: Import failed; cannot select sample IDs.`); LHCI mobile/desktop blocked by missing Chrome/Chromium binary. Local execution required for runtime+LHCI gates before verifying ID-015.
+### ID-032 — Runtime/Lighthouse browser-gate blocked in sandbox (Playwright + Chrome binaries missing)
+- **Severity:** P1
+- **Category:** QA Infrastructure / Environment Constraint
+- **Status:** OPEN (LOCAL QA REQUIRED)
+- **Detected by:** `node tools/dev-check.mjs --runtime --ci`, `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json`, `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json`
+- **Exact failure reasons:**
+  - Playwright import check: `Executable doesn't exist ... chrome-headless-shell` (browser binary missing).
+  - LHCI: `No Chrome/Edge/Chromium executable detected.`
+- **Required action (local):** install Playwright browsers + Chrome/Chromium (or set `CHROME_PATH`) and rerun runtime dev-check + LHCI mobile/desktop.
+- **Wave linkage:** Impacts verification closure for ID-028 (MEGA WAVE F).
