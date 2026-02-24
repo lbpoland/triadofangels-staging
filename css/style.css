@@ -41,6 +41,8 @@ html, body {
     --glass-strong: rgba(var(--bg-rgb), 0.92);
     --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.35);
     --shadow-deep: 0 18px 50px rgba(0, 0, 0, 0.45);
+    --page-gutter-inline: clamp(14px, 4vw, 40px);
+    --panel-padding-inline: clamp(16px, 3.2vw, 40px);
 }
 
 html {
@@ -65,6 +67,12 @@ html, body {
 }
 
 main { flex: 1 0 auto; }
+
+main {
+    width: min(100%, 1280px);
+    margin-inline: auto;
+    padding-inline: var(--page-gutter-inline);
+}
 
 
 
@@ -1168,10 +1176,11 @@ body.privacy-page section:not(.hero-banner),
 body.terms-page section:not(.hero-banner),
 body.digital-store-page section:not(.hero-banner) {
     background: var(--panel);
-    padding: clamp(22px, 3.8vw, 50px);
+    padding-block: clamp(22px, 3.8vw, 50px);
+    padding-inline: var(--panel-padding-inline);
     border-radius: 24px;
     margin: 20px auto;
-    max-width: 1200px;
+    max-width: min(1200px, 100%);
     border: 1px solid var(--stroke);
     box-shadow: var(--shadow-soft), inset 0 0 0 1px rgba(var(--accent-rgb), 0.08);
     backdrop-filter: blur(10px);
@@ -1223,6 +1232,26 @@ body.album-page section h1,
 body.album-page section h2,
 body.album-page section p {
     color: var(--text);
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: auto;
+}
+
+body.index-page section a,
+body.visual-page section a,
+body.music-page section a,
+body.about-page section a,
+body.games-page section a,
+body.apps-page section a,
+body.merch-page section a,
+body.publishing-page section a,
+body.contact-page section a,
+body.privacy-page section a,
+body.terms-page section a,
+body.digital-store-page section a,
+body.track-page section a,
+body.album-page section a {
+    overflow-wrap: anywhere;
 }
 
 /* Ensure consistent styling for h1 elements in sections */
@@ -1417,7 +1446,8 @@ video {
     body.privacy-page section:not(.hero-banner),
     body.terms-page section:not(.hero-banner),
     body.digital-store-page section:not(.hero-banner) {
-        padding: 30px 15px;
+        padding-block: 30px;
+        padding-inline: clamp(14px, 4vw, 24px);
         margin: 15px auto;
         max-width: 100%;
     }
@@ -1530,7 +1560,8 @@ video {
     body.privacy-page section:not(.hero-banner),
     body.terms-page section:not(.hero-banner),
     body.digital-store-page section:not(.hero-banner) {
-        padding: 20px 16px;
+        padding-block: 20px;
+        padding-inline: clamp(12px, 4vw, 18px);
         margin: 10px auto;
     }
 

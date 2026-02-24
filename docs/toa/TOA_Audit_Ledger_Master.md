@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE P update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE Q update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -199,6 +199,18 @@
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+## Patch Wave 13 — Mega Wave Q (Responsive Overflow + Safe Gutter Hardening)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Responsive layout layer hardening for viewport-edge bleed and long-string overflow (`ID-007` / `D-01.1` / `D-01.2` / `D-01.3`).
+- **Files changed:** `css/style.css` + governance tracker updates.
+- **Implementation:** Added shared page/section inline spacing tokens, centered `main` with safe responsive gutters, tokenized section inline padding at default + mobile breakpoints, and added `overflow-wrap` guards for section text/links.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -208,7 +220,7 @@
 | ID-004 | P1 | BLOCKED | Audit | Deep-report reconciliation pending upload | deep-research-report(3).md |
 | ID-005 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Navigation / Mobile | Mobile/desktop header dropdown alignment + submenu stability hardening applied (Wave 01 + Wave M + Wave P parity controls for pointer/keyboard submenu behavior) | `css/style.css`, `js/global.js`, header HTML generation |
 | ID-006 | P0 | IMPLEMENTED (PENDING LOCAL QA) | Home / UX | Home layer hardening across Featured Albums rail + hero polish (fluid typography/subtitle spacing + CTA focus guidance) applied; pending local runtime/LHCI/manual verification | `index.html`, `css/style.css`, `js/global.js` |
-| ID-007 | P0 | IMPLEMENTED (PENDING QA) | Responsive | Content “box” frames overflow viewport on S24 (horizontal clipping/edge bleed) | `css/style.css` (+ page CSS where needed) |
+| ID-007 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Responsive | Wave Q added shared main/section gutters and long-string wrap hardening to reduce mobile clipping/edge bleed risk pending local runtime/LHCI/manual viewport validation | `css/style.css` (+ page CSS where needed) |
 | ID-008 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `label-content-name-mismatch` across pages (visible text vs aria-label mismatch) | global HTML, footer/header, `css/style.css`, `js/album.js`, `js/track.js`, `js/book.js` |
 | ID-009 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `color-contrast` failures (light/dark parity) | `css/style.css` (+ page CSS) |
 | ID-010 | P1 | IMPLEMENTED (PENDING QA) | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
