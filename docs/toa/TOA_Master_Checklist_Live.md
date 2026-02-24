@@ -87,7 +87,7 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [DONE] | Canonical + OG/Twitter tags present on item pages | bundle patterns | Spot-check needed per page type |
-| [IN PROGRESS] | Resolve duplicate track slugs (one canonical per track) | music/tracks/** + tools/dev-check.mjs | ID-015 (orphan routes pruned + route-integrity gate added) |
+| [IN PROGRESS] | Resolve duplicate track slugs (one canonical per track) | music/tracks/** | ID-015 (Phase 1 aliases de-indexed + sitemap pruned) |
 | [IN PROGRESS] | Sitemap contains canonical URLs only (after duplicate fix) | sitemap.xml + generate-static | ID-015 |
 | [IN PROGRESS] | Decide how to score 404 SEO (noindex expected) | 404.html | ID-019 |
 

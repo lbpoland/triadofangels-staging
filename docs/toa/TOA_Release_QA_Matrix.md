@@ -93,7 +93,7 @@
 | JSON-LD valid + truthful | NOT RUN |  |
 | sitemap.xml present + correct | NOT RUN |  |
 | robots.txt aligned | NOT RUN |  |
-| Duplicate track routes resolved | PASS | Mega Wave F: orphan pre-rendered track routes removed and dev-check route-integrity gate added (ID-015 / ID-032). |
+| Duplicate track routes resolved | NOT RUN | Issue ID-015 phase 1 applied in code (alias noindex+canonical + sitemap pruning); local Lighthouse/SEO crawl verification pending |
 
 ---
 
@@ -126,29 +126,15 @@
 =======
 
 
+## 6) Automation Evidence — Mega Wave D (2026-02-23)
+- `node tools/dev-check.mjs --ci` → PASS (`reports/dev-check__2026-02-23T23-38-22-389Z.json`).
+- `node tools/dev-check.mjs --runtime --ci` → FAIL in this environment (`Runtime validation: Import failed; cannot select sample IDs.`).
+- `node tools/link-scan.mjs` → PASS (`reports/link-scan-report.md`).
+- `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` → NOT RUN locally here (no Chrome/Chromium binary).
+- `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` → NOT RUN locally here (no Chrome/Chromium binary).
 
-## 6) 2026-02-24 — MEGA WAVE C QA evidence
-- ✅ `node tools/toa-mega-wave-c__preconnect-normalize.mjs --apply`
-  - Result: PASS, HTML scanned 280, files changed 280.
-- ✅ `node tools/toa-mega-wave-c__preconnect-normalize.mjs --check`
-  - Result: PASS, HTML scanned 280, files changed 0 (idempotence verified).
-- ✅ `node tools/dev-check.mjs --ci`
-  - Result: PASS, errors 0, warnings 0.
-- ⚠️ `node tools/dev-check.mjs --runtime --ci`
-  - Environment limitation: Playwright Chromium executable missing at `/root/.cache/ms-playwright/chromium_headless_shell-1208/...`; browser runtime validation could not execute in this environment.
-- ✅ `node tools/link-scan.mjs`
-  - Result: PASS, broken links 0.
-- ⚠️ Lighthouse mobile/desktop gates not run in this environment due to missing browser executable dependency.
-
-### LOCAL QA PACK (required to close pending browser gates)
-1. `npm ci`
-2. `npx playwright install --with-deps chromium`
-3. `node tools/dev-check.mjs --runtime --ci`  (Expected: `[Dev-Check] PASS`, `Errors: 0`)
-4. `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json`
-5. `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json`
-6. `node tools/dev-check.mjs --ci`
-7. `node tools/link-scan.mjs`
-
-Expected local closure criteria:
-- Runtime dev-check PASS with no Playwright import/runtime errors.
-- Lighthouse should show reduced/cleared `uses-rel-preconnect` opportunities on pages with Google Fonts.
+### Local-only pending gates
+Run on maintainer machine with browser binaries available:
+1) `node tools/dev-check.mjs --runtime --ci` (expect `[Dev-Check] PASS`).
+2) `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` (expect successful LHCI run + score outputs).
+3) `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` (expect successful LHCI run + score outputs).
