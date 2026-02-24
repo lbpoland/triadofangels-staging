@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE K update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE L update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -140,6 +140,17 @@
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+## Patch Wave 08 — Mega Wave L (Console/CSP Hard Gate Reinforcement)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Console/CSP hardening layer by extending dev-check to fail on inline handlers and enforcing no-inline scripts in CI/runtime commands (ID-013 / ID-032 / L-01.1 / L-01.2).
+- **Files changed:** `tools/dev-check.mjs`, `package.json` + governance tracker updates.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler --runtime --require-playwright` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -155,7 +166,7 @@
 | ID-010 | P1 | IMPLEMENTED (PENDING QA) | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
 | ID-011 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | Publishing page `aria-required-children` | `publishing.html`, `js/publishing.js`, `css/publishing.css` |
 | ID-012 | P0 | HARDENED (PENDING QA) | Performance / UX | Publishing CLS mitigation strengthened (empty-state-first structure + deterministic UI state handling) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
-| ID-013 | P0 | IMPLEMENTED (PENDING QA) | Stability | Lighthouse reports console errors on core pages | `js/global.js`, page modules |
+| ID-013 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Stability | Lighthouse reports console errors on core pages; Wave L added stricter no-inline handler/style gate enforcement in dev-check/CI but browser runtime proof still pending locally | `js/global.js`, page modules, `tools/dev-check.mjs`, `package.json` |
 | ID-014 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance | LCP containment patch applied (Home-only heavy cinematic background + Home hero preload); awaiting local LHCI confirmation | images + CSS + critical path |
 | ID-015 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO | Duplicate/alias track static routes pruned to canonical-only corpus (10 alias routes removed) | `music/tracks/**/index.html` |
 | ID-016 | P1 | IN PROGRESS | Performance / UX | Search perf baseline remains open; non-home heavy-background containment applied to reduce first-view cost pending local LHCI verification | `search/search.js`, `search/search.css`, `css/style.css` |
