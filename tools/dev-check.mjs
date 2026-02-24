@@ -12,7 +12,9 @@
  *   node tools/dev-check.mjs --strict --strict-a11y-head --runtime
  *   node tools/dev-check.mjs --strict --strict-a11y-head --runtime --origin=http://127.0.0.1:8080
  *   node tools/dev-check.mjs --strict-no-inline-style
+ *   node tools/dev-check.mjs --strict-no-inline-handler
  *   node tools/dev-check.mjs --strict --strict-a11y-head --strict-no-inline-style
+ *   node tools/dev-check.mjs --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler
  *   node tools/dev-check.mjs --strict --strict-a11y-head --strict-no-inline-style --runtime
  *
  * What it does:
@@ -24,6 +26,7 @@
  *    Missing required fields are WARN by default, FAIL with --strict.
  *    A11y/head-required fields (og:image:alt, twitter:image:alt, og:image dims, favicons, skip link, main landmark) are enforced with --strict-a11y-head.
  *    Inline style attributes are forbidden (opt-in) with --strict-no-inline-style.
+ *    Inline event handlers are forbidden (opt-in) with --strict-no-inline-handler.
  *
  * 2) Validates JSON-LD blocks:
  *    - Parses every <script type="application/ld+json"> as JSON, except:
@@ -87,6 +90,7 @@ const OPTS = {
   strict: ARGS.has('--strict'),
   strictA11yHead: ARGS.has('--strict-a11y-head'),
   strictNoInlineStyle: ARGS.has('--strict-no-inline-style'),
+  strictNoInlineHandler: ARGS.has('--strict-no-inline-handler'),
   runtime: ARGS.has('--runtime'),
   // CI mode:
   // - auto-enabled when process.env.CI is truthy, or via --ci
@@ -184,6 +188,7 @@ const checkHtmlMeta = (html, relPath, opts) => {
   const strict = !!opts?.strict;
   const strictA11yHead = !!opts?.strictA11yHead;
   const strictNoInlineStyle = !!opts?.strictNoInlineStyle;
+  const strictNoInlineHandler = !!opts?.strictNoInlineHandler;
   const errors = [];
   const warnings = [];
 
@@ -197,6 +202,21 @@ const checkHtmlMeta = (html, relPath, opts) => {
         field: 'inline-style',
         count: matches.length,
         note: 'Inline style attributes are forbidden. Move to CSS classes in css/style.css (or page CSS) to keep performance/cacheability and policy consistency.',
+        examples,
+      });
+    }
+  }
+
+  // INLINE EVENT HANDLERS (opt-in hard gate)
+  if (strictNoInlineHandler) {
+    const matches = [...html.matchAll(/<([a-z][a-z0-9:-]*)\b[^>]*\son[a-z0-9_-]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi)];
+    if (matches.length > 0) {
+      const examples = matches.slice(0, 5).map((m) => (m[0] || '').trim()).filter(Boolean);
+      errors.push({
+        kind: 'forbidden',
+        field: 'inline-handler',
+        count: matches.length,
+        note: 'Inline event handlers are forbidden by policy. Move behavior to JS modules using addEventListener and class/data selectors.',
         examples,
       });
     }
@@ -1160,7 +1180,7 @@ const main = async () => {
   // Console output
   const status = pass ? 'PASS' : 'FAIL';
   console.log(`\n[Dev-Check] ${status}`);
-  console.log(`Mode:       ${OPTS.strict ? 'STRICT' : 'DEFAULT'}${OPTS.strictA11yHead ? ' + A11Y_HEAD' : ''}${OPTS.strictNoInlineStyle ? ' + NO_INLINE_STYLE' : ''}${OPTS.runtime ? ' + RUNTIME' : ''}${OPTS.ci ? ' + CI' : ''}${OPTS.requirePlaywright ? ' + REQUIRE_PLAYWRIGHT' : ''}`);
+  console.log(`Mode:       ${OPTS.strict ? 'STRICT' : 'DEFAULT'}${OPTS.strictA11yHead ? ' + A11Y_HEAD' : ''}${OPTS.strictNoInlineStyle ? ' + NO_INLINE_STYLE' : ''}${OPTS.strictNoInlineHandler ? ' + NO_INLINE_HANDLER' : ''}${OPTS.runtime ? ' + RUNTIME' : ''}${OPTS.ci ? ' + CI' : ''}${OPTS.requirePlaywright ? ' + REQUIRE_PLAYWRIGHT' : ''}`);
   console.log(`HTML files: ${htmlFiles.length}`);
   console.log(`Errors:     ${errorCount}`);
   console.log(`Warnings:   ${warnCount}`);

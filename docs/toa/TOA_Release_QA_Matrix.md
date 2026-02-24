@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE K  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE L  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -16,6 +16,7 @@
 **MEGA WAVE I applied:** yes (LCP critical-path containment: Home-only heavy background + Home hero preload).
 **MEGA WAVE J applied:** yes (SEO indexing hygiene: canonical HTML-only sitemap + robots alignment).
 **MEGA WAVE K applied:** yes (Games/Apps/Store truth-first hub readiness copy + disclosures).
+**MEGA WAVE L applied:** yes (Console/CSP guardrail hardening: no-inline-handler gate + CI wiring).
 
 | Field | Value |
 |---|---|
@@ -181,3 +182,12 @@
   - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
   - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
 - Local execution is required before marking Wave K as VERIFIED.
+
+
+## 12) 2026-02-24 — MEGA WAVE L execution notes
+- Applied console/CSP hardening at tooling layer by adding `--strict-no-inline-handler` enforcement in `tools/dev-check.mjs` and wiring this flag into CI/runtime npm scripts (`ci:check`, `ci:check:runtime`, `dev:check:no-inline`, `dev:check:runtime:no-inline`, `qa:check:ci`).
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates attempted and BLOCKED in sandbox:
+  - Runtime dev-check failed because Playwright browser executable is missing (`chrome-headless-shell` not installed).
+  - LHCI mobile/desktop failed because no Chrome/Edge/Chromium executable is available.
+- Local execution is required before marking Wave L as VERIFIED for L-01.1 / ID-013.

@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE K  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE L  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -76,6 +76,7 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [IN PROGRESS] | Remove console errors on core pages (console-clean gate) | js/global.js + modules | ID-013 |
+| [IN PROGRESS] | Enforce no inline handlers / no inline style attrs via CI dev-check gates | tools/dev-check.mjs + package.json | ID-013 + ID-032 (Wave L tooling applied; pending local runtime/LHCI verification) |
 | [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS + head hints | ID-014 + ID-028 (Wave I applied: home-only heavy background containment + hero preload; pending LHCI verification) |
 | [IN PROGRESS] | Search page perf uplift (≥95) | search/search.* | ID-016 (Wave I reduced non-home first-view payload; further search-specific optimization still needed) |
 | [NOT STARTED] | Minify CSS/JS in production build | build pipeline | ID-017 |
@@ -163,3 +164,8 @@
 - **Done:** Converted Games/Apps/Store surfaces into truthful static hubs: Games readiness filters + planning catalog, Apps launch-now links to live web tools, Store/Merch checkout/disclosure-first copy.
 - **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
 - **Next:** Run LOCAL QA PACK for runtime + LHCI, then implement K-01.2 first-playable game MVP controls/accessibility plan.
+
+### 2026-02-24 (MEGA WAVE L)
+- **Done:** Hardened console/CSP governance layer by adding `--strict-no-inline-handler` gate in `tools/dev-check.mjs` and wiring no-inline handler/style enforcement into CI/runtime npm scripts.
+- **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing Playwright Chrome Headless Shell and no Chrome/Chromium binary.
+- **Next:** Run LOCAL QA PACK runtime + LHCI commands, then close ID-013/L-01.1 once browser gate confirms console-clean across core pages.

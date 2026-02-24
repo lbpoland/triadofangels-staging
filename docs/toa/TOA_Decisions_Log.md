@@ -219,3 +219,11 @@
 - Do not imply active products, instant download fulfillment, or on-site secure checkout unless real provider links and legal disclosures are present.
 - Until storefront/app links exist, hubs must explicitly state planning status and provide a truthful contact/notification path.
 - Rationale: closes trust gap ID-021 and prevents placeholder/fake-commerce UX under GitHub Pages static constraints.
+
+## 2026-02-24 — DEC-027: Enforce no-inline-handler CSP discipline in dev-check/CI
+- Add an explicit `--strict-no-inline-handler` gate in `tools/dev-check.mjs` that fails if any HTML contains inline event handlers (`on*=` attributes).
+- Keep `--strict-no-inline-style` as the companion gate for inline style attributes; both flags must be wired into CI/runtime scripts to prevent policy drift.
+- Rationale: L-layer governance requires CSP compatibility without relying on inline handler/style exceptions and with deterministic pre-merge enforcement.
+- Enforcement commands:
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler --runtime --require-playwright`
