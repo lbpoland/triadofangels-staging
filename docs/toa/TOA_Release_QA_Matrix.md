@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE P  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE Q  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -21,6 +21,7 @@
 **MEGA WAVE N applied:** yes (Home Featured Albums rail stabilization: single keyboard handler path + SR rail instructions + mobile snap-width hardening).
 **MEGA WAVE O applied:** yes (Homepage hero polish: fluid typography/subtitle spacing + CTA focus-visible/touch target hardening + responsive hero `img srcset/sizes`).
 **MEGA WAVE P applied:** yes (Navigation submenu parity: desktop pointer-enter/leave behavior + trigger/menu keyboard traversal hardening).
+**MEGA WAVE Q applied:** yes (Responsive overflow/gutter hardening: shared main/section inline spacing tokens + section long-string wrapping guards).
 
 | Field | Value |
 |---|---|
@@ -231,3 +232,12 @@
   - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
   - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
 - Local execution is required before marking Wave P as VERIFIED for B-02.2/B-03.1 and ID-005 closure evidence.
+
+
+## 17) 2026-02-24 — MEGA WAVE Q execution notes
+- Applied responsive-layer overflow hardening on `css/style.css`: shared `--page-gutter-inline`/`--panel-padding-inline` tokens, centered `main` with inline-safe gutters, tokenized section inline padding defaults/mobile breakpoints, and section text/link long-string wrap guards.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates attempted once and BLOCKED in sandbox:
+  - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
+- Local execution is required before marking Wave Q as VERIFIED for D-01.1/D-01.2/D-01.3 and ID-007 closure evidence.

@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE P  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE Q  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -52,7 +52,7 @@
 ## 4) Responsive Layout (Mobile / Tablet / Desktop / Ultrawide)
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
-| [IN PROGRESS] | Fix card/section box overflow on mobile (no edge bleed) | css/style.css (+ page CSS) | ID-007 |
+| [IN PROGRESS] | Fix card/section box overflow on mobile (no edge bleed) | css/style.css (+ page CSS) | ID-007 (Wave Q shared gutter + wrap hardening applied; pending local runtime/LHCI/manual viewport matrix) |
 | [IN PROGRESS] | Publishing CLS stabilized (≤0.10) | publishing.html + css/publishing.css + js/publishing.js | ID-012 (Wave H structural hardening applied; local LHCI verification pending) |
 | [IN PROGRESS] | Responsive images / hero sizing & srcset rollout | assets/images + HTML | ID-014 (Wave O added Home hero `img srcset/sizes`; broader asset variant rollout still pending) |
 
@@ -186,6 +186,12 @@
 - **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
 - **Next:** Run LOCAL QA PACK for runtime + LHCI + manual Home hero typography/focus regression, then advance to B-02.2 desktop multi-level submenu parity.
 
+
+
+### 2026-02-24 (MEGA WAVE Q)
+- **Done:** Applied responsive overflow/gutter hardening in `css/style.css` by adding shared page-gutter/panel-padding tokens, constraining `main` to an inline-safe centered container, normalizing section inline padding via tokens, and adding long-string wrapping guards for section copy/links (ID-007 / D-01.1 / D-01.2 / D-01.3).
+- **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
+- **Next:** Run LOCAL QA PACK runtime + LHCI + manual viewport overflow regression to verify ID-007 closure readiness.
 
 ### 2026-02-24 (MEGA WAVE P)
 - **Done:** Hardened desktop nav submenu parity by adding pointer-enter open / pointer-leave close behavior (without focus traps), trigger-level Enter/Space + ArrowUp support, and submenu ArrowUp/ArrowDown/Home/End keyboard traversal in `js/global.js` (ID-005 / B-02.2 / B-03.1).

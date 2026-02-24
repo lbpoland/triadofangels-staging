@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE P  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE Q  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -96,9 +96,9 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 # D) RESPONSIVE LAYOUT + OVERFLOW HARDENING
 
 ### D-01 Global overflow and safe gutters
-- [IN PROGRESS] D-01.1 Prevent horizontal page scroll on small devices; fix “card edge bleed”
-- [NOT STARTED] D-01.2 Standardize container padding per breakpoint; avoid elements touching viewport edges
-- [NOT STARTED] D-01.3 Clamp long titles/URLs; ensure word-break behavior does not break layout
+- [IN PROGRESS] D-01.1 Prevent horizontal page scroll on small devices; fix “card edge bleed” (Wave Q shared gutter + wrap hardening applied; pending local runtime/LHCI/manual viewport verification)
+- [IN PROGRESS] D-01.2 Standardize container padding per breakpoint; avoid elements touching viewport edges (Wave Q tokenized inline panel spacing applied; pending local viewport QA)
+- [IN PROGRESS] D-01.3 Clamp long titles/URLs; ensure word-break behavior does not break layout (Wave Q `overflow-wrap` guards applied to section copy/links; pending local viewport QA)
 
 ### D-02 Component sizing
 - [NOT STARTED] D-02.1 Card system: consistent radius/shadow/borders; equal vertical rhythm
@@ -264,3 +264,5 @@ Local QA results pasted:
 - **2026-02-24 (AEST)** — MEGA WAVE O (Homepage hero polish): implemented fluid Home hero typography and subtitle spacing, CTA focus-visible/touch-target hardening, and responsive hero image candidate hints (`srcset`/`sizes`) to progress C-02.1/C-02.2/C-02.3 under static-first constraints. (Ledger: ID-014, ID-006; Checklist: C-02.1, C-02.2, C-02.3)
 
 - **2026-02-24 (AEST)** — MEGA WAVE P (Navigation submenu parity): implemented desktop pointer-enter/leave submenu parity, added trigger/menu keyboard traversal controls (ArrowUp/ArrowDown/Home/End + Enter/Space), and preserved ESC focus-return/outside-close safety. (Ledger: ID-005, ID-013; Checklist: B-02.2, B-03.1)
+
+- **2026-02-24 (AEST)** — MEGA WAVE Q (Responsive overflow + gutter hardening): added shared page gutter and section inline-padding tokens, constrained `main` with safe inline spacing, and applied long-string wrap guards to section text/links to reduce mobile edge bleed and URL overflow risk. (Ledger: ID-007; Checklist: D-01.1, D-01.2, D-01.3)
