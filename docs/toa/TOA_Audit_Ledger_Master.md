@@ -1,7 +1,7 @@
 # TOA Website — Audit Ledger (Master)
 
 **Last updated:** 2026-02-23 (Australia/Brisbane)  
-**Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
+**Scope:** Mega Wave F — inline link affordance + forced-colors resilience (accessibility layer)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
 
@@ -70,6 +70,13 @@
 - **Scope:** P0 only (ID-005/006/007/008/009/011/012/013)
 - **Files changed:** `css/style.css`, `js/global.js`, `publishing.html`, `css/publishing.css`, `js/publishing.js`
 - **Verification state:** **PENDING LOCAL QA** (run dev-check + LHCI per `TOA_P0_Patch_Wave_01_Plan.md`)
+
+
+## Patch Wave 02 — Mega Wave F Implementation Log
+- **Date:** 2026-02-23 (Australia/Brisbane)
+- **Scope:** Accessibility link affordance layer (ID-010, E-02.1 support)
+- **Files changed:** `css/style.css` + tracker updates under `docs/toa/`
+- **Verification state:** **IMPLEMENTED (PENDING LHCI)** — static/rules checks passed in-session; full Lighthouse sweep remains next local gate.
 
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
@@ -265,11 +272,11 @@
 - **Wave 02 implementation:** Added explicit prose-link underline guardrails in `main` content contexts (paragraphs, definition text, blockquotes, and standard lists), ensuring non-color indicators remain visible across themes.
 - **Affected pages:** Some pages with inline links (404 and others)
 - **Affected files:** `css/style.css`
-- **Root cause:** Inline links likely not underlined or otherwise distinguished.
-- **Why it matters:** Users with color vision deficiencies and forced-colors modes may not detect links.
-- **Required fix:** Default underline or non-color indicator for inline text links; preserve premium styling.
+- **Root cause:** Inline links in prose-like contexts were not consistently differentiated beyond color in all modes.
+- **Wave F implementation:** Added a prose-scoped inline-link affordance layer to enforce underlines/thickness/offset in text containers (`main`/footer copy). Added forced-colors overrides so links use system link colors and preserve underline visibility.
+- **Why it matters:** Users with color vision deficiencies and forced-colors modes may not detect links without shape/decoration cues.
 - **Acceptance criteria:** Lighthouse `link-in-text-block` passes; forced-colors still shows links clearly.
-- **QA verification:** Lighthouse + forced-colors check.
+- **QA verification:** `node tools/dev-check.mjs --ci`, `node tools/link-scan.mjs --ci`, Lighthouse follow-up on core pages.
 
 ---
 

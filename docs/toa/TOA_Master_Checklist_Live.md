@@ -65,7 +65,11 @@
 | [DONE] | Exactly one `<h1>` per page | bundle verification | {h1_ok}/{tot_pages} pages |
 | [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer | ID-008 |
 | [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 |
+<<<<<<< HEAD
 | [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 |
+=======
+| [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 (Wave F implemented, pending LHCI verification) |
+>>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
 | [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 |
 
 ---
@@ -126,3 +130,7 @@
 ### 2026-02-23
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
+
+### 2026-02-23 (Mega Wave F)
+- **Done (this session):** Implemented prose-link non-color affordance + forced-colors link visibility hardening in `css/style.css` for ID-010.
+- **Next:** Run Lighthouse mobile/desktop to verify `link-in-text-block` closure and then advance to ID-014 (LCP wave).
