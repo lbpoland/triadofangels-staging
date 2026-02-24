@@ -293,3 +293,12 @@
   - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
   - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
 - Local execution is required before marking Wave V as VERIFIED for ID-017 / A-02.1 closure evidence.
+
+
+## 22) 2026-02-24 — MEGA WAVE GLOBAL execution notes
+- Executed a full manifest-level reconciliation across all declared Mega Wave manifests under `/docs/toa` (`C`, `G`→`V`) and published dependency/order/governance mapping in `TOA_MEGA_WAVE_GLOBAL_EXECUTION_REPORT.md`.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`, `node tools/build-static-dist.mjs --out=dist`).
+- Browser-dependent gates attempted once and BLOCKED in sandbox:
+  - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop remain blocked due no Chrome/Edge/Chromium executable.
+- Browser gates remain **PENDING LOCAL QA** for final VERIFIED promotion of impacted IN PROGRESS checklist items.

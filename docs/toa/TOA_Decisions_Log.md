@@ -263,3 +263,10 @@
 - Preserve readable source assets in repo root while generating a deploy-ready `dist/` tree via `tools/build-static-dist.mjs` for minification-focused Lighthouse verification and optional static deployment packaging.
 - Local QA must support alternate site roots, so `tools/static-serve.mjs` accepts `--root=<dir>` (for example `--root=dist`) to run runtime checks/LHCI against built artifacts.
 - This strategy avoids unsafe in-place source rewrites while still enabling measurable closure on ID-017 under static hosting constraints.
+
+
+## 2026-02-24 — DEC-034: Global mega-wave execution must reconcile full manifest backlog in dependency order
+- When instructed for global execution, operation scope is all defined Mega Wave manifests in `/docs/toa`, not only the next alphabetical wave.
+- Delivery must include dependency mapping, linkage coverage (ledger/checklist/QA entries), and a single-branch consolidated update package.
+- If browser binaries are unavailable, perform all non-browser gates once, log exact blocker output, stop retry loops, and attach a deterministic LOCAL QA PACK for closure.
+- Rationale: prevents partial-wave drift and keeps governance state synchronized with multi-layer implementation history.
