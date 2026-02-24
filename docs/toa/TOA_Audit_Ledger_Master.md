@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE R update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -225,6 +225,19 @@
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
 
+
+
+## Patch Wave 15 — Mega Wave S (Accessibility Contrast + Publishing Semantic Lists)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Accessibility contrast + required-children semantic hardening (ID-009 / ID-011 / E-01.2 / E-01.3).
+- **Files changed:** `css/style.css`, `css/publishing.css`, `js/publishing.js` + governance tracker updates.
+- **Implementation:** Increased muted/footer contrast token floors across themes, replaced Publishing support text opacity fades with token colors, and converted Publishing shelf rows to native semantic `ul/li` markup instead of role-based list scaffolding.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -236,9 +249,9 @@
 | ID-006 | P0 | IMPLEMENTED (PENDING LOCAL QA) | Home / UX | Home layer hardening across Featured Albums rail + hero polish (fluid typography/subtitle spacing + CTA focus guidance) applied; pending local runtime/LHCI/manual verification | `index.html`, `css/style.css`, `js/global.js` |
 | ID-007 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Responsive | Wave Q added shared main/section gutters and long-string wrap hardening to reduce mobile clipping/edge bleed risk pending local runtime/LHCI/manual viewport validation | `css/style.css` (+ page CSS where needed) |
 | ID-008 | P0 | HARDENED (PENDING LOCAL QA) | Accessibility | `label-content-name-mismatch` + landmark/current-page semantics continuity hardening | global HTML, footer/header, `js/global.js`, `css/style.css`, `js/album.js`, `js/track.js`, `js/book.js` |
-| ID-009 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `color-contrast` failures (light/dark parity) | `css/style.css` (+ page CSS) |
+| ID-009 | P0 | HARDENED (PENDING LOCAL QA) | Accessibility | Wave S raised muted/footer contrast tokens and replaced Publishing opacity-faded support text with tokenized colors to improve cross-theme readability | `css/style.css`, `css/publishing.css` |
 | ID-010 | P1 | IMPLEMENTED (PENDING QA) | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
-| ID-011 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | Publishing page `aria-required-children` | `publishing.html`, `js/publishing.js`, `css/publishing.css` |
+| ID-011 | P0 | HARDENED (PENDING LOCAL QA) | Accessibility | Wave S migrated Publishing shelf rows from role-based list semantics to native `ul/li` structure and aligned shelf text contrast tokens | `js/publishing.js`, `css/publishing.css` |
 | ID-012 | P0 | HARDENED (PENDING QA) | Performance / UX | Publishing CLS mitigation strengthened (empty-state-first structure + deterministic UI state handling) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
 | ID-013 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Stability | Lighthouse reports console errors on core pages; Wave L added stricter no-inline handler/style gate enforcement in dev-check/CI but browser runtime proof still pending locally | `js/global.js`, page modules, `tools/dev-check.mjs`, `package.json` |
 | ID-014 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance | LCP containment expanded with responsive hero image candidate hinting (`srcset`/`sizes`) on Home; awaiting local LHCI confirmation | images + CSS + critical path |

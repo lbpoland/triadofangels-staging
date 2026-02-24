@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE R  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -65,9 +65,9 @@
 | [DONE] | `<main id="main-content">` present on all HTML pages | bundle verification | {main_ok}/{tot_pages} pages |
 | [DONE] | Exactly one `<h1>` per page | bundle verification | {h1_ok}/{tot_pages} pages |
 | [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer + js/album.js + js/track.js + js/book.js + js/global.js | ID-008 (Wave D naming alignment + Wave R landmark/current-page semantics hardening applied; local runtime/LHCI verification pending) |
-| [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 |
+| [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 (Wave S boosted muted/footer contrast tokens and Publishing secondary-text contrast floors; pending local LHCI/runtime verification) |
 | [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 (Wave F patch applied; pending LHCI verification) |
-| [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 |
+| [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 (Wave S switched Publishing shelf rows to native `ul/li` semantics; pending local LHCI/runtime verification) |
 | [DONE] | Forced-colors + reduced-motion support hardened for global nav controls | css/style.css + js/global.js | ID-032 |
 
 ---
@@ -202,3 +202,8 @@
 - **Done:** Hardened desktop nav submenu parity by adding pointer-enter open / pointer-leave close behavior (without focus traps), trigger-level Enter/Space + ArrowUp support, and submenu ArrowUp/ArrowDown/Home/End keyboard traversal in `js/global.js` (ID-005 / B-02.2 / B-03.1).
 - **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
 - **Next:** Run LOCAL QA PACK runtime + LHCI + manual desktop nav parity matrix, then close B-02.2/B-03.1 to VERIFIED.
+
+### 2026-02-24 (MEGA WAVE S)
+- **Done:** Hardened accessibility contrast + semantic-list layer by raising global muted/footer text contrast tokens and converting Publishing shelf rows from ARIA-role list scaffolding to native `ul/li` semantics (ID-009 / ID-011 / E-01.2 / E-01.3).
+- **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
+- **Next:** Run LOCAL QA PACK runtime + LHCI + manual theme contrast/Publishing accessibility-tree checks, then mark E-01.2/E-01.3 VERIFIED.
