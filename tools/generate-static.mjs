@@ -553,21 +553,6 @@ async function generateStaticPages() {
   return counts;
 }
 
-async function collectLyricsTxtUrls() {
-  const urls = [];
-  const lyricsDir = path.join(ROOT, 'lyrics');
-  const exists = await fs.stat(lyricsDir).then(() => true).catch(() => false);
-  if (!exists) return urls;
-
-  for await (const f of walk(lyricsDir)) {
-    if (!f.endsWith('.txt')) continue;
-    const rel = path.relative(ROOT, f).replace(/\\/g, '/');
-    urls.push(`${SITE_ORIGIN}/${rel}`);
-  }
-
-  return urls;
-}
-
 function shouldIncludeCanonical(canon) {
   if (!canon) return false;
   if (canon.includes('?')) return false;
@@ -596,8 +581,6 @@ async function generateSitemap() {
     if (!shouldIncludeCanonical(canon)) continue;
     canonSet.add(canon);
   }
-
-  (await collectLyricsTxtUrls()).forEach((u) => canonSet.add(u));
 
   const urls = Array.from(canonSet).sort();
   const lastmod = new Date().toISOString().slice(0, 10);

@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE I  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE J  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -14,6 +14,7 @@
 **MEGA WAVE G applied:** yes (canonical track alias route pruning).
 **MEGA WAVE H applied:** yes (Publishing CLS + empty-state stabilization).
 **MEGA WAVE I applied:** yes (LCP critical-path containment: Home-only heavy background + Home hero preload).
+**MEGA WAVE J applied:** yes (SEO indexing hygiene: canonical HTML-only sitemap + robots alignment).
 
 | Field | Value |
 |---|---|
@@ -94,8 +95,8 @@
 | OG tags correct | NOT RUN |  |
 | Twitter tags correct | NOT RUN |  |
 | JSON-LD valid + truthful | NOT RUN |  |
-| sitemap.xml present + correct | NOT RUN |  |
-| robots.txt aligned | NOT RUN |  |
+| sitemap.xml present + correct | IN PROGRESS | Wave J regenerated sitemap from canonical HTML routes only; local runtime/LHCI verification pending. |
+| robots.txt aligned | IN PROGRESS | Wave J disallows `/404.html`, `/album.html`, `/track.html`, `/book.html` and keeps sitemap pointer; local SEO verification pending. |
 | Duplicate track routes resolved | IN PROGRESS | Phase 2 applied: removed 10 orphan alias pre-rendered track routes; verify locally via runtime + LHCI SEO rerun. |
 
 ---
@@ -161,3 +162,12 @@
   - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
   - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
 - Local execution is required before marking Wave I as VERIFIED.
+
+
+## 10) 2026-02-24 — MEGA WAVE J execution notes
+- Applied SEO indexing hygiene by removing non-HTML lyrics TXT URLs from sitemap generation, regenerating `sitemap.xml` from canonical HTML routes only, and aligning `robots.txt` with canonical indexing policy.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates are BLOCKED in sandbox:
+  - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
+- Local execution is required before marking Wave J as VERIFIED.

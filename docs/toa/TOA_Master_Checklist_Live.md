@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE I  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE J  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -88,7 +88,7 @@
 |---|---|---|---|
 | [DONE] | Canonical + OG/Twitter tags present on item pages | bundle patterns | Spot-check needed per page type |
 | [IN PROGRESS] | Resolve duplicate track slugs (one canonical per track) | music/tracks/** | ID-015 (Phase 2 alias route pruning applied; local SEO/LHCI verification pending) |
-| [IN PROGRESS] | Sitemap contains canonical URLs only (after duplicate fix) | sitemap.xml + generate-static | ID-015 |
+| [IN PROGRESS] | Sitemap contains canonical HTML URLs only (legacy query/templates + lyrics TXT excluded) | sitemap.xml + tools/generate-static.mjs | ID-015 + ID-033 (Wave J implementation applied; local runtime/LHCI verification pending) |
 | [IN PROGRESS] | Decide how to score 404 SEO (noindex expected) | 404.html | ID-019 |
 
 ---
@@ -150,3 +150,10 @@
 - **Done:** Applied performance-layer critical path containment by limiting full-page ToA hero image background to Home and adding responsive Home hero image preload hint (ID-014 / ID-016 / F-01.1 / F-02.3).
 - **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due to missing browser executables.
 - **Next:** Run LOCAL QA PACK for runtime + LHCI and then execute search-specific render/JS budget optimization (ID-016).
+
+
+### 2026-02-24 (MEGA WAVE J)
+- **Done:** Implemented SEO indexing hygiene layer by updating sitemap generation to include canonical HTML routes only, regenerated `sitemap.xml` without lyrics TXT URLs, and aligned `robots.txt` crawl directives to keep legacy templates and `/404.html` out of indexing scope (ID-033, G-04.1, G-04.2).
+- **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due to missing browser executables.
+- **Next:** Run LOCAL QA PACK for runtime + LHCI SEO checks, then advance to site-wide OG/Twitter completeness sweep (G-02.1/G-02.2).
+

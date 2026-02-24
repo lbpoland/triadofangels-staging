@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE I  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE J  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -156,8 +156,8 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [NOT STARTED] G-03.4 Breadcrumb schema for nested routes (if used)
 
 ### G-04 Search / indexing
-- [NOT STARTED] G-04.1 sitemap.xml covers all routes; excludes 404/dev artifacts
-- [NOT STARTED] G-04.2 robots.txt aligns with sitemap + desired indexing
+- [IN PROGRESS] G-04.1 sitemap.xml covers canonical HTML routes only; excludes 404/dev artifacts and non-HTML assets (Wave J implementation applied; pending local runtime/LHCI verification)
+- [IN PROGRESS] G-04.2 robots.txt aligns with sitemap + desired indexing (Wave J applied: disallow legacy templates + 404; pending local QA verification)
 - [NOT STARTED] G-04.3 Search UX: snippets, highlighting, grouping, speed
 
 ---
@@ -250,3 +250,5 @@ Local QA results pasted:
 - **2026-02-24 (AEST)** — MEGA WAVE H (Publishing CLS + empty-state stabilization): removed malformed Publishing skeleton scaffold, switched to truthful empty-state-first rendering, and added deterministic runtime empty/results state handling. (Ledger: ID-012, Checklist: H-01.1, F-01.2)
 
 - **2026-02-24 (AEST)** — MEGA WAVE I (Critical path LCP containment): constrained heavyweight ToA full-page hero background image to Home only and added responsive Home hero image preload to reduce LCP pressure on core non-home pages. (Ledger: ID-014, ID-016; Checklist: F-01.1, F-02.3)
+
+- **2026-02-24 (AEST)** — MEGA WAVE J (SEO indexing hygiene): updated sitemap generation policy to canonical HTML pages only, regenerated `sitemap.xml` without lyrics TXT endpoints, and aligned `robots.txt` crawl directives to exclude `/404.html` and legacy query-template routes. (Ledger: ID-033; Checklist: G-04.1, G-04.2)
