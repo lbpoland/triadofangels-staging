@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE V  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE W  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -31,9 +31,9 @@ Run after major batches (not after tiny edits):
 # A) GOVERNANCE + NON-DRIFT CONTROLS
 
 ### A-01 Project tracker hygiene
-- [IN PROGRESS] A-01.1 Ensure all tracker docs exist + are current (ledger/checklist/qa/decisions/patch plans)
-- [NOT STARTED] A-01.2 Add “Delivery Safety Protocol” to project instructions (8k-safe) and enforce each patch session
-- [NOT STARTED] A-01.3 Create/maintain a rolling “Release Notes” log per patch wave
+- [DONE] A-01.1 Ensure all tracker docs exist + are current (ledger/checklist/qa/decisions/patch plans) (Wave W governance reconciliation + evidence refresh)
+- [DONE] A-01.2 Add “Delivery Safety Protocol” to project instructions (8k-safe) and enforce each patch session (Wave W section added to locked project instructions)
+- [DONE] A-01.3 Create/maintain a rolling “Release Notes” log per patch wave (Wave W created `TOA_Release_Notes_Log.md`)
 
 ### A-02 Repo/tooling consistency
 - [IN PROGRESS] A-02.1 Confirm node tooling versions + remove deprecated packages where feasible (without breaking) (Wave V added dist-build + dist-serve scripts; package/dependency cleanup still pending)
@@ -264,3 +264,6 @@ Local QA results pasted:
 - **2026-02-24 (AEST)** — MEGA WAVE GLOBAL (cross-manifest saturation reconciliation): audited all defined Mega Wave manifests (`C`, `G`→`V`) in dependency order, revalidated non-browser gates, and recorded unified governance linkage + local browser-gate QA pack in `TOA_MEGA_WAVE_GLOBAL_EXECUTION_REPORT.md`. (Ledger: ID-005/006/007/008/009/011/012/013/014/015/016/017/018/021/028/032/033/034; Checklist: A-02.1/A-02.4/B-02/C-01/C-02/D-01/E-01/E-02/G-04/H-01/I-02/K-01/K-02/K-03/L-01)
 
 - **2026-02-24 (AEST)** — MEGA WAVE GLOBAL REVALIDATION: executed full backlog-level non-browser QA refresh over all declared Mega Wave manifests (`C`, `G`→`V`) and reconfirmed that remaining blockers are environment-only browser gates (Playwright/LHCI local execution required). (Ledger: ID-032; Checklist impact: cross-layer evidence refresh for A/B/C/D/E/F/G/H/I/K/L rows still marked IN PROGRESS)
+
+
+- **2026-02-24 (AEST)** — MEGA WAVE W (Governance + non-drift controls): added locked Delivery Safety Protocol workflow, created rolling release notes log, and reconciled governance trackers/ledger statuses for ID-001/ID-002/ID-003 under architecture layer A-01.

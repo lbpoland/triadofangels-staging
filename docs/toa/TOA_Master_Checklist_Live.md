@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE V  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE W  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -19,6 +19,7 @@
 | [DONE] | Master Checklist converted to status-driven live tracker | /TOA_Master_Checklist_Live.md | This file |
 | [DONE] | Release QA Matrix baseline present | /TOA_Release_QA_Matrix.md | Updated in this session |
 | [DONE] | Delivery contract present | /TOA_Session_Delivery_Contract.md | — |
+| [DONE] | Rolling release notes log present | /TOA_Release_Notes_Log.md | Wave W governance control |
 | [DONE] | Audit execution bridge present | /TOA_Website_Audit_Execution_Bridge_v1.md | — |
 | [BLOCKED] | Deep research seed report available for reconciliation | deep-research-report(3).md | Not present in /mnt/data (upload to unblock) — ID-004 |
 
@@ -242,3 +243,9 @@
 - **Done:** Re-read all `/docs/toa` authority artifacts, replayed all Mega Wave manifests (`C`, `G`→`V`) in dependency-safe order, and refreshed governance linkage records without additional product-surface code deltas.
 - **QA:** `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `node tools/link-scan.mjs --ci` PASS, `npm run build:dist` PASS; runtime dev-check remains blocked in sandbox due missing Playwright `chrome-headless-shell`.
 - **Next:** Run LOCAL QA PACK browser gates (runtime + LHCI mobile/desktop + dist-root serve) and promote remaining IN PROGRESS governance rows to VERIFIED where evidence clears.
+
+
+### 2026-02-24 (MEGA WAVE W)
+- **Done:** Closed Governance layer A-01 controls by adding a locked Delivery Safety Protocol section in project instructions, creating append-only release notes log, and reconciling governance trackers to VERIFIED workflow status for ID-001/ID-002/ID-003.
+- **QA:** `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `node tools/link-scan.mjs --ci` PASS, `npm run build:dist` PASS; runtime+Lighthouse blocked in sandbox due missing Playwright `chrome-headless-shell` / Chrome binary.
+- **Next:** Run LOCAL QA PACK browser gates locally and continue with the next non-governance layer wave.

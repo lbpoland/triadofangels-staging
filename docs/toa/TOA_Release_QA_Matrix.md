@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE V  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE W  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -27,6 +27,7 @@
 **MEGA WAVE T applied:** yes (Accessibility mode-support hardening on Publishing: reduced-motion transition suppression + forced-colors system-color/focus-visible controls).
 **MEGA WAVE U applied:** yes (Architecture/tooling bfcache gate hardening: QA servers now use bfcache-safe cache policy instead of `no-store`).
 **MEGA WAVE V applied:** yes (Architecture/tooling dist build: added `build-static-dist` minification pipeline and dist-root QA serve path).
+**MEGA WAVE W applied:** yes (Governance layer A-01 non-drift controls: locked delivery safety protocol + rolling release notes log + tracker reconciliation).
 
 | Field | Value |
 |---|---|
@@ -319,3 +320,12 @@
   - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
   - LHCI mobile/desktop remain pending local execution on host with Chrome/Chromium installed.
 - Browser gates remain **PENDING LOCAL QA** for final VERIFIED promotion in linked checklist/ledger entries.
+
+
+## 22) 2026-02-24 — MEGA WAVE W execution notes
+- Scope: Governance layer A-01 process closure (`ID-001`, `ID-002`, `ID-003`).
+- PASS: `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`
+- PASS: `node tools/link-scan.mjs --ci`
+- PASS: `npm run build:dist`
+- BLOCKED (single attempt, no retry): `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` due missing Playwright Chromium executable (`chrome-headless-shell`).
+- Local-only pending: `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` and `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` (Chrome/Chromium required).

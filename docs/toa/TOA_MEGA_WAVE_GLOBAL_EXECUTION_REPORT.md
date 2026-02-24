@@ -10,7 +10,7 @@ Reviewed artifacts:
 - Governance sources: `TOA_Audit_Ledger_Master.md`, `TOA_Master_Checklist_Live.md`, `TOA_Mega_Implementation_Checklist.md`, `TOA_Release_QA_Matrix.md`, `TOA_Decisions_Log.md`.
 
 Dependency graph (layered):
-1. **A-layer (Architecture/Tooling):** `U` → `V` (bfcache-safe QA cache policy precedes dist-root QA flow).
+1. **A-layer (Architecture/Tooling + Governance controls):** `U` → `V` → `W` (bfcache-safe QA cache policy precedes dist-root QA flow, then governance delivery controls closure).
 2. **B-layer (Navigation):** `M` → `P` (desktop alignment foundations before pointer/keyboard parity hardening).
 3. **C-layer (Homepage):** `N` → `O` (rail stability before hero polish).
 4. **D-layer (Responsive):** `Q` (independent after base globals).
@@ -38,6 +38,7 @@ Dependency graph (layered):
 | T | Reduced-motion/forced-colors | `TOA_MEGA_WAVE_T_FILE_MANIFEST.md` | ID-032 | E-02.1, E-02.2 | QA Matrix Wave T notes | COMPLETED (pending local browser QA only) |
 | U | bfcache QA policy | `TOA_MEGA_WAVE_U_FILE_MANIFEST.md` | ID-018 | A-02.4 | QA Matrix Wave U notes | COMPLETED (pending local browser QA only) |
 | V | Dist minification pipeline | `TOA_MEGA_WAVE_V_FILE_MANIFEST.md` | ID-017 | A-02.1 | QA Matrix Wave V notes | COMPLETED (pending local browser QA only) |
+| W | Governance non-drift controls | `TOA_MEGA_WAVE_W_FILE_MANIFEST.md` | ID-001, ID-002, ID-003 | A-01.1, A-01.2, A-01.3 | QA Matrix Wave W notes | VERIFIED (pending local browser QA only where required) |
 
 Execution order used for this global pass: `C → G → H → I → J → K → L → M → N → O → P → Q → R → S → T → U → V`.
 
@@ -119,3 +120,8 @@ Actions completed in this global pass:
 
 ### Residual risk (technical)
 - Only remaining cross-wave closure blocker is browser-gated runtime/LHCI execution on a local host with installed Playwright browser + Chrome/Chromium.
+
+
+## 2026-02-24 Addendum — MEGA WAVE W (Governance Layer Closure)
+- Closed governance architectural layer A-01 by codifying Delivery Safety Protocol in locked instructions, adding rolling release notes log, and reconciling ledger/checklist/QA artifacts for ID-001/ID-002/ID-003.
+- Browser-gated runtime/LHCI checks remain local-only in this sandbox; non-browser gates passed in-session.
