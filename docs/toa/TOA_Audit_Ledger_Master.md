@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE H update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE I update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -106,6 +106,18 @@
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+
+## Patch Wave 05 — Mega Wave I (Critical Path LCP Containment)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Performance critical-path reduction for core routes by limiting heavyweight ToA background imagery to Home + preloading Home hero candidate (ID-014 / ID-016 / F-01.1 / F-02.3).
+- **Files changed:** `css/style.css`, `index.html` + governance tracker updates.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -122,9 +134,9 @@
 | ID-011 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | Publishing page `aria-required-children` | `publishing.html`, `js/publishing.js`, `css/publishing.css` |
 | ID-012 | P0 | HARDENED (PENDING QA) | Performance / UX | Publishing CLS mitigation strengthened (empty-state-first structure + deterministic UI state handling) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
 | ID-013 | P0 | IMPLEMENTED (PENDING QA) | Stability | Lighthouse reports console errors on core pages | `js/global.js`, page modules |
-| ID-014 | P1 | OPEN | Performance | LCP too high on multiple core pages (Music ~7.4s, Index ~6.2s, Publishing ~5.8s) | images + CSS + critical path |
+| ID-014 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance | LCP containment patch applied (Home-only heavy cinematic background + Home hero preload); awaiting local LHCI confirmation | images + CSS + critical path |
 | ID-015 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO | Duplicate/alias track static routes pruned to canonical-only corpus (10 alias routes removed) | `music/tracks/**/index.html` |
-| ID-016 | P1 | OPEN | Performance / UX | Search page baseline perf ~0.79, LCP ~5.4s | `search/search.js`, `search/search.css`, `css/style.css` |
+| ID-016 | P1 | IN PROGRESS | Performance / UX | Search perf baseline remains open; non-home heavy-background containment applied to reduce first-view cost pending local LHCI verification | `search/search.js`, `search/search.css`, `css/style.css` |
 | ID-017 | P2 | OPEN | Build / Perf | Lighthouse flags minification + cache + compression strategy | tooling + build pipeline |
 | ID-018 | P2 | OPEN | UX / Perf | `bf-cache` prevented on most pages (investigate) | global JS + embed patterns |
 | ID-019 | P2 | OPEN | SEO | 404 SEO low (noindex/is-crawlable) — confirm intentional | `404.html` |
@@ -361,12 +373,13 @@
 ### ID-014 — Performance: LCP Too High on Multiple Core Pages
 - **Severity:** P1
 - **Category:** Performance
-- **Status:** OPEN
+- **Status:** FIX IMPLEMENTED (PENDING QA)
 - **Evidence:** LCP median values (ms): Music ~7440, Index ~6235, Publishing ~5793, Search ~5408, Contact/Privacy ~6150–6300.
 - **Affected pages:** Core pages above
 - **Affected files:** hero images, CSS critical path, font loading, any above-the-fold embeds
 - **Root cause (likely):** Large hero/cover images not optimized for first view, font load delays, heavy render work, or missing preload hints.
 - **Required fix:** Optimize LCP element (identify, compress, size), preload critical assets, reduce render-blocking overhead.
+- **Mega Wave I update (2026-02-24):** Scoped full-page ToA background hero image loading to Home only (`body.index-page`) with lightweight non-home ToA gradient fallback, and added Home responsive hero image preload hint to improve critical image discovery.
 - **Acceptance criteria:** LCP ≤ 2500ms target on mobile for core pages.
 - **QA verification:** Lighthouse mobile/desktop + WebPageTest style throttling if used.
 
@@ -422,12 +435,13 @@
 ### ID-016 — Search Page Performance / UX Baseline
 - **Severity:** P1
 - **Category:** Performance / UX
-- **Status:** OPEN
+- **Status:** IN PROGRESS
 - **Evidence:** Lighthouse perf ~0.79, LCP ~5.4s median.
 - **Affected pages:** `/search/`
 - **Affected files:** `search/search.js`, `search/search.css`, `css/style.css`
 - **Root cause (likely):** Heavy initial render or large background assets; potential layout shifts.
 - **Required fix:** Optimize search UI first render; reduce above-the-fold cost; ensure keyboard + screen-reader behavior stays perfect.
+- **Wave I update (2026-02-24):** Search route now avoids the heavyweight full-page ToA hero background image under ToA theme, reducing first-view byte pressure before local LHCI confirmation.
 - **Acceptance criteria:** Perf ≥ 0.95 on search; LCP within targets; no console errors.
 - **QA verification:** Lighthouse + keyboard search behavior tests.
 
