@@ -214,12 +214,17 @@ body {
     left: 0;
     background: var(--accent);
     color: #000;
-    padding: 8px;
+    padding: 12px 14px;
+    min-height: 44px;
+    border-radius: 0 0 10px 0;
+    border: 2px solid transparent;
+    font-weight: 700;
     z-index: 5000;
 }
 
 .skip-link:focus {
     top: 0;
+    border-color: var(--focus);
 }
 
 .hero-banner {
@@ -253,6 +258,34 @@ a:visited {
     color: var(--link-visited);
 }
 
+<<<<<<< HEAD
+/* Ensure prose links are never color-only indicators (TOA ID-010). */
+main :where(p, dd, dt, blockquote) a,
+main ul:not(.nav-links):not(.social-links):not(.u-list-inline-links):not(.stream-links) li a,
+main ol li a {
+    text-decoration-line: underline;
+    text-decoration-thickness: max(2px, 0.08em);
+    text-underline-offset: 0.2em;
+}
+
+=======
+/*
+ * Mega Wave F (A11y links):
+ * Inline text links must never rely on color-only distinction.
+ * Scope this to prose-like containers so nav/buttons/cards can keep bespoke styling.
+ */
+:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a {
+    text-decoration-line: underline;
+    text-decoration-thickness: max(2px, 0.09em);
+    text-underline-offset: 0.2em;
+}
+
+:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a:hover,
+:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a:focus-visible {
+    text-decoration-thickness: max(2px, 0.11em);
+}
+
+>>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
 /* Navigation */
 body.menu-open {
     overflow: hidden;
@@ -333,7 +366,8 @@ body.menu-open {
     border: 1px solid rgba(var(--accent-rgb), 0.18);
     border-radius: 999px;
     cursor: pointer;
-    padding: 8px 12px;
+    padding: 10px 14px;
+    min-height: 44px;
     color: var(--accent);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
     transition: transform 0.2s ease, background 0.2s ease;
@@ -489,7 +523,10 @@ body.menu-open {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.11em;
-    padding: 7px 10px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 12px;
     border-radius: 10px;
     transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
     font-size: 0.84rem;
@@ -660,8 +697,8 @@ body.menu-open {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        height: 40px;
-        width: 40px;
+        min-height: 44px;
+        min-width: 44px;
         border-radius: 12px;
         border: 1px solid rgba(var(--accent-rgb), 0.18);
         background: rgba(255, 255, 255, 0.05);
@@ -758,6 +795,57 @@ body.nav-open::before {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .nav-links,
+    .nav-links.show,
+    .nav-subpanel,
+    .nav-shell.nav-subpanel-open .nav-subpanel,
+    .nav-shell.nav-subpanel-open .nav-links.show,
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-sub-toggle:hover,
+    .nav-sub-toggle:focus-visible {
+        transform: none !important;
+    }
+}
+
+@media (forced-colors: active) {
+    .skip-link,
+    .nav-links a,
+    .nav-sub-toggle,
+    .theme-toggle,
+    .nav-toggle,
+    .theme-item,
+    .nav-subpanel__back,
+    .nav-subpanel__list a {
+        forced-color-adjust: auto;
+        border: 1px solid ButtonText;
+        background: Canvas;
+        color: LinkText;
+        text-shadow: none;
+        box-shadow: none;
+    }
+
+    .skip-link:focus,
+    .nav-links a:focus-visible,
+    .nav-sub-toggle:focus-visible,
+    .theme-toggle:focus-visible,
+    .nav-toggle:focus-visible,
+    .theme-item:focus-visible,
+    .nav-subpanel__back:focus-visible,
+    .nav-subpanel__list a:focus-visible {
+        outline: 2px solid Highlight;
+        outline-offset: 2px;
+    }
 }
 
 .hero-banner .picture {
@@ -1510,6 +1598,21 @@ video {
     :focus-visible {
         outline: 2px solid Highlight;
         outline-offset: 3px;
+    }
+
+    a {
+        color: LinkText;
+    }
+
+    a:visited {
+        color: VisitedText;
+    }
+
+    :where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a {
+        text-decoration-line: underline;
+        text-decoration-thickness: 2px;
+        text-decoration-color: currentColor;
+        text-underline-offset: 0.16em;
     }
 
     .nav-links a,

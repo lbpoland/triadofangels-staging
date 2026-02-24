@@ -44,7 +44,7 @@
 | [IN PROGRESS] | Mobile header panel alignment + sizing fixed (S24) | css/style.css + js/global.js | ID-005 |
 | [IN PROGRESS] | Nested submenu behavior rebuilt (no massive gap) | css/style.css + js/global.js | ID-005 |
 | [IN PROGRESS] | Home Featured Albums horizontal carousel (touch + keyboard) | index.html + css/style.css + js/music-ui.js | ID-006 |
-| [IN PROGRESS] | Carousel/rail interaction polish (labels, focus, reduced motion) | global components | ID-006 + ID-009 |
+| [IN PROGRESS] | Carousel/rail interaction polish (labels, focus, reduced motion) | global components | ID-006 + ID-009 + ID-032 |
 
 ---
 
@@ -65,8 +65,13 @@
 | [DONE] | Exactly one `<h1>` per page | bundle verification | {h1_ok}/{tot_pages} pages |
 | [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer | ID-008 |
 | [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 |
-| [NOT STARTED] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 |
+<<<<<<< HEAD
+| [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 |
+=======
+| [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 (Wave F implemented, pending LHCI verification) |
+>>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
 | [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 |
+| [DONE] | Forced-colors + reduced-motion support hardened for global nav controls | css/style.css + js/global.js | ID-032 |
 
 ---
 
@@ -85,7 +90,7 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [DONE] | Canonical + OG/Twitter tags present on item pages | bundle patterns | Spot-check needed per page type |
-| [NOT STARTED] | Resolve duplicate track slugs (one canonical per track) | music/tracks/** | ID-015 |
+| [IN PROGRESS] | Resolve duplicate track slugs (one canonical per track) | music/tracks/** + tools/dev-check.mjs | ID-015 (orphan routes pruned + route-integrity gate added) |
 | [IN PROGRESS] | Sitemap contains canonical URLs only (after duplicate fix) | sitemap.xml + generate-static | ID-015 |
 | [IN PROGRESS] | Decide how to score 404 SEO (noindex expected) | 404.html | ID-019 |
 
@@ -126,3 +131,13 @@
 ### 2026-02-23
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
+
+<<<<<<< ours
+### 2026-02-23 (Mega Wave F)
+- **Done (this session):** Implemented prose-link non-color affordance + forced-colors link visibility hardening in `css/style.css` for ID-010.
+- **Next:** Run Lighthouse mobile/desktop to verify `link-in-text-block` closure and then advance to ID-014 (LCP wave).
+=======
+### 2026-02-24
+- **Done (this session):** Wave F global accessibility-mode hardening (touch targets, skip-link focus treatment, forced-colors, reduced-motion, mobile-menu resize close).
+- **Next:** Validate Wave F in full Core Release Gate manual matrix + move remaining P1 perf/SEO backlog (ID-014/ID-015).
+>>>>>>> theirs

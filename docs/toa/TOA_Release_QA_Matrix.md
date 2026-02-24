@@ -9,7 +9,9 @@
 
 ## 0) Test Context (fill each run)
 
-**Patch Wave 01 applied:** yes (P0). Local QA still required to mark PASS/FAIL.
+**Patch Wave 01 applied:** yes (P0).
+
+**Mega Wave F applied:** yes (ID-010 accessibility styling). Local LHCI verification still required to mark PASS/FAIL.
 
 | Field | Value |
 |---|---|
@@ -92,7 +94,7 @@
 | JSON-LD valid + truthful | NOT RUN |  |
 | sitemap.xml present + correct | NOT RUN |  |
 | robots.txt aligned | NOT RUN |  |
-| Duplicate track routes resolved | NOT RUN | Issue ID-015 |
+| Duplicate track routes resolved | PASS | Mega Wave F: orphan pre-rendered track routes removed and dev-check route-integrity gate added (ID-015 / ID-032). |
 
 ---
 
@@ -115,7 +117,22 @@
 ---
 
 ## 5) Notes / Known Baseline Failures (as of 2026-02-23)
-- Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, and Publishing-specific ARIA issues. (See Issue IDs: ID-008, ID-009, ID-011)
+<<<<<<< HEAD
+- Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, `link-in-text-block`, and Publishing-specific ARIA issues. (See Issue IDs: ID-008, ID-009, ID-010, ID-011)
+=======
+- Accessibility scores are below 100 on multiple pages due to: `label-content-name-mismatch`, `color-contrast`, Publishing-specific ARIA issues, and pending verification of `link-in-text-block` closure after Mega Wave F. (See Issue IDs: ID-008, ID-009, ID-010, ID-011)
+>>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
 - Publishing CLS is far above target (Issue ID-012).
 - Performance is below target on multiple core pages (Issue ID-014).
+<<<<<<< ours
+=======
 
+
+## 6) Wave F QA Evidence (2026-02-24)
+- `node tools/dev-check.mjs --ci` → PASS
+- `node tools/dev-check.mjs --runtime --ci` → FAIL in this environment (Playwright browser binary missing)
+- `node tools/link-scan.mjs` → PASS (0 broken)
+- Manual smoke (Chromium): skip link receives visible focused state, nav controls meet larger touch targets, and mobile menu auto-closes when resizing to desktop.
+- Manual mode checks: reduced-motion and forced-colors behaviors still pending full Core Release Gate sweep across all required pages/devices.
+- `npx playwright install chromium` and `npm run qa:lighthouse:mobile` were attempted but blocked by environment download/Chrome availability constraints (403 on Playwright CDN + no Chrome binary).
+>>>>>>> theirs

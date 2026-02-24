@@ -1,0 +1,59 @@
+name: "Bug Report"
+description: "Report a defect with TOA checklist linkage and QA evidence"
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: input
+    id: checklist_id
+    attributes:
+      label: Checklist ID
+      description: "Required ID(s) from docs/toa/TOA_Mega_Implementation_Checklist.md (example: E-01.2, L-01.1)."
+      placeholder: "E-01.2"
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Bug summary
+      description: "Describe the observed issue and expected behavior."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: "Define concrete pass/fail conditions required to close this bug."
+      placeholder: |
+        - [ ] No console errors on page X
+        - [ ] Keyboard navigation works for component Y
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected_files
+    attributes:
+      label: Affected files
+      description: "List files/routes likely involved (required)."
+      placeholder: |
+        - index.html
+        - assets/js/nav.js
+    validations:
+      required: true
+
+  - type: textarea
+    id: qa_evidence
+    attributes:
+      label: QA evidence required
+      description: "Paste commands, outputs, screenshots, and environment used."
+      placeholder: |
+        Commands run:
+        - npm run ci:validate
+
+        Evidence:
+        - Console/log output
+        - Screenshots or recording links
+    validations:
+      required: true
