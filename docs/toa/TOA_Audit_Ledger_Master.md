@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE U update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE V update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -262,6 +262,19 @@
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
 
+## Patch Wave 18 — Mega Wave V (Architecture/Tooling dist Minification Pipeline)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Architecture + tooling layer for production-like dist build output and minification strategy closure path (ID-017 / A-02.1).
+- **Files changed:** `tools/build-static-dist.mjs`, `tools/static-serve.mjs`, `package.json` + governance tracker updates.
+- **Implementation:** Added zero-dependency `build-static-dist` pipeline that emits `dist/` with minified HTML/CSS/JS plus `build-report.json`, and added `tools/static-serve.mjs --root=<dir>` to serve dist artifacts directly for LHCI/runtime QA parity.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/build-static-dist.mjs --out=dist` PASS
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -281,7 +294,7 @@
 | ID-014 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance | LCP containment expanded with responsive hero image candidate hinting (`srcset`/`sizes`) on Home; awaiting local LHCI confirmation | images + CSS + critical path |
 | ID-015 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO | Duplicate/alias track static routes pruned to canonical-only corpus (10 alias routes removed) | `music/tracks/**/index.html` |
 | ID-016 | P1 | IN PROGRESS | Performance / UX | Search perf baseline remains open; non-home heavy-background containment applied to reduce first-view cost pending local LHCI verification | `search/search.js`, `search/search.css`, `css/style.css` |
-| ID-017 | P2 | OPEN | Build / Perf | Lighthouse flags minification + cache + compression strategy | tooling + build pipeline |
+| ID-017 | P2 | FIX IMPLEMENTED (PENDING LOCAL QA) | Build / Perf | Wave V introduced a static dist-build minification pipeline (`build-static-dist`) and dist-root QA serving path; pending local LHCI/prod-origin confirmation of Lighthouse audits | `tools/build-static-dist.mjs`, `tools/static-serve.mjs`, `package.json` |
 | ID-018 | P2 | FIX IMPLEMENTED (PENDING LOCAL QA) | UX / Perf | Wave U removed local QA `Cache-Control: no-store` headers (known bfcache blocker) and replaced them with bfcache-safe cache policy for HTML/assets; pending local Lighthouse/DevTools proof | `tools/static-serve.mjs`, `tools/dev-check.mjs` |
 | ID-019 | P2 | OPEN | SEO | 404 SEO low (noindex/is-crawlable) — confirm intentional | `404.html` |
 | ID-020 | P2 | OPEN | Platform | Publishing data + content roadmap (truthful, no placeholders) | `js/publishing-data.js`, `publishing.html` |
@@ -600,17 +613,18 @@
 ### ID-017 — Build/Perf: Minification + Cache + Compression Strategy
 - **Severity:** P2
 - **Category:** Build / Performance
-- **Status:** OPEN
+- **Status:** FIX IMPLEMENTED (PENDING LOCAL QA)
 - **Evidence:** Lighthouse flags `unminified-css`, `unminified-javascript`, `uses-text-compression`, and cache policy items on some runs.
 - **Affected pages:** Many
 - **Affected files:** `css/*.css`, `js/*.js`, `tools/static-serve.mjs`, possible future `src→dist` pipeline
-- **Root cause:** Current repo serves readable source assets; some local servers may not compress or set long cache.
-- **Required fix:** Decide and implement a static-friendly build step:
-  - minify CSS/JS into `/dist` (or same paths) while keeping source readable in `/src`
-  - verify GitHub Pages caching behavior; use hashed asset filenames if needed
-  - ensure local QA server uses gzip/brotli for accurate Lighthouse
-- **Acceptance criteria:** Lighthouse no longer flags minification/compression on production-origin runs; local QA environment matches production.
-- **QA verification:** Lighthouse run against production URL; compare with local.
+- **Root cause:** Source-first repository currently serves readable assets from root; minified deployment variant was not codified in tooling workflow.
+- **Wave V implementation (2026-02-24):**
+  - Added `tools/build-static-dist.mjs` to generate deploy-ready `dist/` output with conservative minification for HTML/CSS/JS and an auditable `dist/build-report.json`.
+  - Added `tools/static-serve.mjs --root=<dir>` so local QA/LHCI can run against built dist output (not only source tree).
+  - Added npm scripts `build:dist` and `qa:serve:dist` to standardize operator workflow.
+- **Remaining required fix:** Confirm Lighthouse minification/compression findings clear on local dist origin and production origin; decide hashed-filename rollout only if audits still flag long-term cache inefficiencies.
+- **Acceptance criteria:** Lighthouse no longer flags minification/compression on production-origin runs; local QA environment can validate both source and dist origins.
+- **QA verification:** Lighthouse run against dist local origin and production URL; compare with source-origin baseline.
 
 ---
 

@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE U  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE V  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -26,6 +26,7 @@
 **MEGA WAVE S applied:** yes (Accessibility contrast + Publishing semantic list hardening: stronger muted/footer text tokens + native `ul/li` shelves).
 **MEGA WAVE T applied:** yes (Accessibility mode-support hardening on Publishing: reduced-motion transition suppression + forced-colors system-color/focus-visible controls).
 **MEGA WAVE U applied:** yes (Architecture/tooling bfcache gate hardening: QA servers now use bfcache-safe cache policy instead of `no-store`).
+**MEGA WAVE V applied:** yes (Architecture/tooling dist build: added `build-static-dist` minification pipeline and dist-root QA serve path).
 
 | Field | Value |
 |---|---|
@@ -283,3 +284,12 @@
   - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
 - Local execution is required before marking Wave U as VERIFIED for ID-018 closure evidence.
 
+
+
+## 21) 2026-02-24 — MEGA WAVE V execution notes
+- Applied architecture/tooling build hardening by adding `tools/build-static-dist.mjs` for deploy-style dist output with HTML/CSS/JS minification and `dist/build-report.json` generation, plus `tools/static-serve.mjs --root=<dir>`/`npm run qa:serve:dist` to run QA directly against dist artifacts.
+- Non-browser gates in sandbox: PASS (`node tools/build-static-dist.mjs --out=dist`, `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates attempted once and BLOCKED in sandbox:
+  - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
+- Local execution is required before marking Wave V as VERIFIED for ID-017 / A-02.1 closure evidence.

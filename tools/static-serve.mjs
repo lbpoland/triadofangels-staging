@@ -31,6 +31,7 @@ for (const raw of process.argv.slice(2)) {
 const PORT = Number(argMap.get('port') || 4173);
 const HOST = String(argMap.get('host') || '127.0.0.1');
 const CACHE_MODE = String(argMap.get('cache') || 'qa').toLowerCase();
+const ROOT_DIR = path.resolve(ROOT, String(argMap.get('root') || '.'));
 
 const MIME = new Map([
   ['.html', 'text/html; charset=utf-8'],
@@ -70,10 +71,10 @@ function toFsPath(urlPath) {
   if (!base.includes('.')) p = p + '/index.html';
 
   // Normalize and ensure it stays within ROOT
-  const joined = path.join(ROOT, p);
+  const joined = path.join(ROOT_DIR, p);
   const normalized = path.normalize(joined);
 
-  if (!normalized.startsWith(ROOT)) return null;
+  if (!normalized.startsWith(ROOT_DIR)) return null;
   return normalized;
 }
 
@@ -154,7 +155,7 @@ const server = http.createServer((req, res) => {
   const fsPath = toFsPath(u.pathname);
 
   if (!fsPath) {
-    const fallback404 = path.join(ROOT, '404.html');
+    const fallback404 = path.join(ROOT_DIR, '404.html');
     if (fs.existsSync(fallback404)) return serveFile(req, res, fallback404, 404);
     return send(res, 404, 'Not found', 'text/plain; charset=utf-8');
   }
@@ -163,11 +164,11 @@ const server = http.createServer((req, res) => {
     return serveFile(req, res, fsPath, 200);
   }
 
-  const fallback404 = path.join(ROOT, '404.html');
+  const fallback404 = path.join(ROOT_DIR, '404.html');
   if (fs.existsSync(fallback404)) return serveFile(req, res, fallback404, 404);
   return send(res, 404, 'Not found', 'text/plain; charset=utf-8');
 });
 
 server.listen(PORT, HOST, () => {
-  console.log(`Static QA server listening on http://${HOST}:${PORT}`);
+  console.log(`Static QA server listening on http://${HOST}:${PORT} (root: ${path.relative(ROOT, ROOT_DIR) || '.'})`);
 });
