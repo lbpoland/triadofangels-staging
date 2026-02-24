@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE J update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE K update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -129,6 +129,17 @@
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+## Patch Wave 07 — Mega Wave K (Games / Apps / Store Truth-First Readiness)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Platform readiness and trust hardening for Games/Apps/Store static hubs (ID-021 / ID-034 / K-01.1 / K-02.1 / K-03.1).
+- **Files changed:** `games.html`, `apps.html`, `digital-store.html`, `merch.html` + governance tracker updates.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -152,7 +163,8 @@
 | ID-018 | P2 | OPEN | UX / Perf | `bf-cache` prevented on most pages (investigate) | global JS + embed patterns |
 | ID-019 | P2 | OPEN | SEO | 404 SEO low (noindex/is-crawlable) — confirm intentional | `404.html` |
 | ID-020 | P2 | OPEN | Platform | Publishing data + content roadmap (truthful, no placeholders) | `js/publishing-data.js`, `publishing.html` |
-| ID-021 | P2 | OPEN | Platform / Trust | Store/Merch/Digital Store truth + consistency pass | `merch.html`, `digital-store.html`, `streaming.html` |
+| ID-021 | P2 | FIX IMPLEMENTED (PENDING LOCAL QA) | Platform / Trust | Store/Merch/Digital Store truth + consistency pass | `merch.html`, `digital-store.html`, `streaming.html` |
+| ID-034 | P2 | FIX IMPLEMENTED (PENDING LOCAL QA) | Platform / Readiness | Games/Apps truth-first hub readiness pass | `games.html`, `apps.html` |
 | ID-032 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance + Accessibility | ToA global background rendering hardening (mobile variant, reduced-motion, forced-colors, no fixed attachment) | `css/style.css` |
 | ID-033 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO / Indexing | Sitemap now indexes canonical HTML pages only and robots disallows legacy templates + 404 path | `tools/generate-static.mjs`, `sitemap.xml`, `robots.txt` |
 
@@ -519,7 +531,7 @@
 ### ID-021 — Store/Merch/Digital Store Truth + Consistency Pass
 - **Severity:** P2
 - **Category:** Platform / Trust
-- **Status:** OPEN
+- **Status:** FIX IMPLEMENTED (PENDING LOCAL QA)
 - **Required fix:** Ensure Store-related pages:
   - clearly communicate “hub” vs “checkout”
   - do not imply on-site secure checkout unless external provider is used
@@ -679,3 +691,15 @@ When an issue is fixed, update:
 - **Files touched:** `tools/generate-static.mjs`, `sitemap.xml`, `robots.txt`
 - **QA verification:** `node tools/dev-check.mjs --ci` and `node tools/link-scan.mjs --ci` pass in sandbox; runtime/LHCI SEO confirmation pending local browser-enabled execution.
 - **Entry:** 2026-02-24T10:45:00Z
+
+
+### ID-034 — Games/Apps Hub Truth-First Readiness Pass
+- **Severity:** P2
+- **Category:** Platform / Readiness
+- **Status:** FIX IMPLEMENTED (PENDING LOCAL QA)
+- **Required fix:**
+  - convert Games hub to truthful launch-readiness catalog with explicit “no live games” state
+  - convert Apps hub to truthful launch links using only live website experiences
+  - avoid implied live app-store installs until official links exist
+- **Acceptance criteria:** Games/Apps pages list only real availability states and links; no fake release/install claims.
+- **QA verification:** manual content audit + `node tools/link-scan.mjs --ci` + local runtime/Lighthouse pass.
