@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE R  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -110,8 +110,8 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 
 ### E-01 Lighthouse A11y blockers
 - [IN PROGRESS] E-01.1 Fix label-content-name-mismatch at scale (remove mismatched aria-label or align)
-- [IN PROGRESS] E-01.2 Fix color-contrast across both themes (text, buttons, badges, links)
-- [IN PROGRESS] E-01.3 Fix aria-required-children on Publishing filters
+- [IN PROGRESS] E-01.2 Fix color-contrast across both themes (text, buttons, badges, links) (Wave S increased muted/footer contrast tokens + publishing secondary text tokenization; pending local Lighthouse verification)
+- [IN PROGRESS] E-01.3 Fix aria-required-children on Publishing filters (Wave S migrated Publishing shelf rails from role-based list semantics to native `ul/li` markup; pending local Lighthouse/runtime verification)
 - [IN PROGRESS] E-01.4 Fix any remaining heading-order issues (maintain single H1 per page) (Wave R landmark/focus semantics hardening applied in `js/global.js`; pending local Lighthouse+SR verification)
 
 ### E-02 Mode support
@@ -269,3 +269,5 @@ Local QA results pasted:
 
 
 - **2026-02-24 (AEST)** — MEGA WAVE R (Accessibility landmarks + current-page semantics): extended global accessibility runtime to set footer navigation `aria-current="page"` for matching routes, enforce landmark role/label fallbacks for header/main/footer/footer-nav, and apply `main` `tabindex="-1"` fallback to preserve skip-link focus reliability. (Ledger: ID-008; Checklist: E-02.3, E-01.4)
+
+- **2026-02-24 (AEST)** — MEGA WAVE S (Accessibility contrast + Publishing list semantics): strengthened global muted/footer contrast tokens and replaced Publishing shelf role-based list scaffolding with native `ul/li` semantics, with secondary text now token-driven instead of opacity-faded for improved readability. (Ledger: ID-009, ID-011; Checklist: E-01.2, E-01.3)

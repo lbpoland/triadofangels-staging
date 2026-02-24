@@ -491,17 +491,18 @@ const buildShelf = ({ heading, subheading, items, onViewAll }) => {
     section.appendChild(p);
   }
 
-  const row = document.createElement('div');
+  const row = document.createElement('ul');
   row.className = 'shelf__row';
-  row.setAttribute('role', 'list');
   if (prefersReducedMotion()) row.classList.add('shelf__row--reduced');
 
   const frag = document.createDocumentFragment();
   items.forEach((book) => {
+    const item = document.createElement('li');
+    item.className = 'shelf__item';
+
     const a = document.createElement('a');
     a.className = 'shelf-card';
     a.href = bookHref(book.id);
-    a.setAttribute('role', 'listitem');
 
     const cover = getPrimaryCover(book);
     if (cover) {
@@ -536,7 +537,8 @@ const buildShelf = ({ heading, subheading, items, onViewAll }) => {
     meta.appendChild(s);
     a.appendChild(meta);
 
-    frag.appendChild(a);
+    item.appendChild(a);
+    frag.appendChild(item);
   });
 
   row.appendChild(frag);

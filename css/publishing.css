@@ -89,7 +89,7 @@
 .shelf__subtitle {
   margin: 6px 0 0;
   font-size: 13px;
-  opacity: 0.82;
+  color: var(--text-muted);
 }
 
 .shelf__row {
@@ -98,8 +98,13 @@
   gap: 12px;
   overflow-x: auto;
   padding-bottom: 6px;
+  list-style: none;
   scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
+}
+
+.shelf__item {
+  flex: 0 0 auto;
 }
 
 .shelf__row--reduced {
@@ -107,7 +112,6 @@
 }
 
 .shelf-card {
-  flex: 0 0 auto;
   width: 180px;
   border-radius: 16px;
   overflow: hidden;
@@ -159,7 +163,7 @@
 
 .shelf-card__sub {
   font-size: 12px;
-  opacity: 0.80;
+  color: var(--text-muted);
 }
 
 .library {
@@ -275,7 +279,7 @@
 .book-card__subtitle {
   margin: 0;
   font-size: 13px;
-  opacity: 0.82;
+  color: var(--text-muted);
   line-height: 1.4;
 }
 
@@ -288,7 +292,7 @@
 .book-card__logline {
   margin: 0;
   font-size: 13px;
-  opacity: 0.88;
+  color: var(--text);
   line-height: 1.55;
 }
 

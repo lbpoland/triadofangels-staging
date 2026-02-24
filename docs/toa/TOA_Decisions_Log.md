@@ -1,6 +1,6 @@
 # TOA Website — Decisions Log (Anti-Drift)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE N  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S  
 **Purpose:** Record decisions, constraints, and standards so work never re-litigates the same topics.
 
 ---
@@ -241,3 +241,8 @@
 - Horizontal carousel/rail keyboard behavior (ArrowLeft/ArrowRight/Home/End) must be owned by a single handler path to avoid duplicate-scroll jumps and inconsistent reduced-motion behavior.
 - Use the shared `setupCarouselNav` keyboard path in `js/global.js` for rail controls; avoid additional page-specific duplicate keydown listeners on the same carousel element.
 - Home Featured Albums rail must keep explicit SR guidance via `aria-describedby` so keyboard shortcuts are discoverable without adding non-semantic controls.
+
+## 2026-02-24 — DEC-030: Prefer native list semantics + tokenized support text for accessibility stability
+- Publishing shelf rails and similar card lanes should prefer native `ul/li` markup over ARIA-role list/listitem scaffolding to avoid required-children drift when runtime DOM changes.
+- Secondary/supporting copy should use explicit theme tokens (e.g., `var(--text-muted)`, `var(--footer-text)`) instead of opacity-only fades where contrast can collapse against layered backgrounds.
+- Rationale: stabilizes accessibility QA against `aria-required-children` and `color-contrast` regressions without adding non-semantic complexity.
