@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE N  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE O  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -54,7 +54,7 @@
 |---|---|---|---|
 | [IN PROGRESS] | Fix card/section box overflow on mobile (no edge bleed) | css/style.css (+ page CSS) | ID-007 |
 | [IN PROGRESS] | Publishing CLS stabilized (≤0.10) | publishing.html + css/publishing.css + js/publishing.js | ID-012 (Wave H structural hardening applied; local LHCI verification pending) |
-| [IN PROGRESS] | Responsive images / hero sizing & srcset rollout | assets/images + HTML | ID-014 |
+| [IN PROGRESS] | Responsive images / hero sizing & srcset rollout | assets/images + HTML | ID-014 (Wave O added Home hero `img srcset/sizes`; broader asset variant rollout still pending) |
 
 ---
 
@@ -77,10 +77,10 @@
 |---|---|---|---|
 | [IN PROGRESS] | Remove console errors on core pages (console-clean gate) | js/global.js + modules | ID-013 |
 | [IN PROGRESS] | Enforce no inline handlers / no inline style attrs via CI dev-check gates | tools/dev-check.mjs + package.json | ID-013 + ID-032 (Wave L tooling applied; pending local runtime/LHCI verification) |
-| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS + head hints | ID-014 + ID-028 (Wave I applied: home-only heavy background containment + hero preload; pending LHCI verification) |
+| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS + head hints | ID-014 + ID-028 (Wave I containment + Wave O Home hero responsive `img` candidate hint applied; pending LHCI verification) |
 | [IN PROGRESS] | Search page perf uplift (≥95) | search/search.* | ID-016 (Wave I reduced non-home first-view payload; further search-specific optimization still needed) |
 | [NOT STARTED] | Minify CSS/JS in production build | build pipeline | ID-017 |
-| [IN PROGRESS] | Serve responsive images / right-size first view | images + HTML | ID-014 (Home hero responsive preload now applied; variant generation still pending) |
+| [IN PROGRESS] | Serve responsive images / right-size first view | images + HTML | ID-014 (Home hero responsive preload + Wave O `img srcset/sizes` applied; variant generation still pending) |
 
 ---
 
@@ -180,3 +180,8 @@
 - **Done:** Hardened Home Featured Albums rail by removing duplicate keyboard handlers, adding explicit screen-reader instructions, and tightening mobile card width/snap padding to keep horizontal rail behavior stable (ID-006 / C-01.1 / C-01.2 / C-01.3).
 - **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
 - **Next:** Run LOCAL QA PACK for runtime + LHCI + manual Home rail keyboard/touch regression, then advance to C-02 hero typography/LCP polish.
+
+### 2026-02-24 (MEGA WAVE O)
+- **Done:** Applied Homepage hero polish layer: fluid hero typography across breakpoints, dedicated subtitle styling, CTA focus-visible/touch-target hardening, and responsive hero image candidate hints via `srcset/sizes` (ID-014 / ID-006 / C-02.1 / C-02.2 / C-02.3).
+- **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
+- **Next:** Run LOCAL QA PACK for runtime + LHCI + manual Home hero typography/focus regression, then advance to B-02.2 desktop multi-level submenu parity.
