@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE X  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE Y  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -29,6 +29,7 @@
 **MEGA WAVE V applied:** yes (Architecture/tooling dist build: added `build-static-dist` minification pipeline and dist-root QA serve path).
 **MEGA WAVE W applied:** yes (Governance layer A-01 non-drift controls: locked delivery safety protocol + rolling release notes log + tracker reconciliation).
 **MEGA WAVE X applied:** yes (Architecture/tooling QA gate expansion: dev-check now enforces duplicate IDs/CSP-meta/local broken-link + robots/sitemap integrity checks; console-clean runtime gate script added).
+**MEGA WAVE Y applied:** yes (Architecture/tooling dependency convergence: removed unused `@playwright/test` to keep a single Playwright package path for runtime QA tooling).
 
 | Field | Value |
 |---|---|
@@ -339,3 +340,12 @@
 - Browser-dependent console gate attempted once and BLOCKED in sandbox:
   - `node tools/console-clean.mjs --ci` failed because Playwright Chromium executable is missing (`chrome-headless-shell`).
 - Local execution is required before marking Wave X-linked architecture items as VERIFIED.
+
+
+## 24) 2026-02-24 — MEGA WAVE Y execution notes
+- Applied architecture/tooling dependency convergence by removing unused `@playwright/test` from `devDependencies`, eliminating dual-version Playwright drift risk and keeping runtime scripts aligned to `playwright` imports/CLI usage.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`, `npm run build:dist`).
+- Browser-dependent gates attempted once and BLOCKED in sandbox:
+  - `node tools/console-clean.mjs --ci` failed due missing Playwright Chromium executable (`chrome-headless-shell`).
+  - Runtime dev-check + LHCI mobile/desktop remain blocked due missing browser executables.
+- Local execution is required before marking A-02.1-linked architecture/tooling items as VERIFIED.

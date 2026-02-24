@@ -2,7 +2,7 @@
   "name": "triadofangels-site",
   "private": true,
   "type": "module",
-  "description": "Triad of Angels \u2014 static site (GitHub Pages). Dev-only validation scripts (dev-check + link-scan + optional Playwright runtime).",
+  "description": "Triad of Angels — static site (GitHub Pages). Dev-only validation scripts (dev-check + link-scan + optional Playwright runtime).",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -36,8 +36,7 @@
     "qa:console-clean": "node tools/console-clean.mjs --ci"
   },
   "devDependencies": {
-    "playwright": "^1.55.0",
     "@lhci/cli": "^0.14.0",
-    "@playwright/test": "^1.58.0"
+    "playwright": "^1.55.0"
   }
 }
