@@ -1,7 +1,7 @@
 # TOA Website — Audit Ledger (Master)
 
 **Last updated:** 2026-02-23 (Australia/Brisbane)  
-**Scope:** Mega Wave F — inline link affordance + forced-colors resilience (accessibility layer)  
+**Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
 
@@ -71,13 +71,6 @@
 - **Files changed:** `css/style.css`, `js/global.js`, `publishing.html`, `css/publishing.css`, `js/publishing.js`
 - **Verification state:** **PENDING LOCAL QA** (run dev-check + LHCI per `TOA_P0_Patch_Wave_01_Plan.md`)
 
-
-## Patch Wave 02 — Mega Wave F Implementation Log
-- **Date:** 2026-02-23 (Australia/Brisbane)
-- **Scope:** Accessibility link affordance layer (ID-010, E-02.1 support)
-- **Files changed:** `css/style.css` + tracker updates under `docs/toa/`
-- **Verification state:** **IMPLEMENTED (PENDING LHCI)** — static/rules checks passed in-session; full Lighthouse sweep remains next local gate.
-
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -90,7 +83,7 @@
 | ID-007 | P0 | IMPLEMENTED (PENDING QA) | Responsive | Content “box” frames overflow viewport on S24 (horizontal clipping/edge bleed) | `css/style.css` (+ page CSS where needed) |
 | ID-008 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `label-content-name-mismatch` across pages (visible text vs aria-label mismatch) | global HTML, footer/header, `css/style.css` |
 | ID-009 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `color-contrast` failures (light/dark parity) | `css/style.css` (+ page CSS) |
-| ID-010 | P1 | IMPLEMENTED (PENDING QA) | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
+| ID-010 | P1 | OPEN | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
 | ID-011 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | Publishing page `aria-required-children` | `publishing.html`, `js/publishing.js`, `css/publishing.css` |
 | ID-012 | P0 | IMPLEMENTED (PENDING QA) | Performance / UX | Publishing page CLS ~0.397 (severe layout shift) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
 | ID-013 | P0 | IMPLEMENTED (PENDING QA) | Stability | Lighthouse reports console errors on core pages | `js/global.js`, page modules |
@@ -267,16 +260,15 @@
 ### ID-010 — Accessibility: Links Rely on Color Only in Text Blocks
 - **Severity:** P1
 - **Category:** Accessibility
-- **Status:** IMPLEMENTED (PENDING QA)
+- **Status:** OPEN
 - **Evidence:** Lighthouse `link-in-text-block` failing (links not distinguishable without color).
-- **Wave 02 implementation:** Added explicit prose-link underline guardrails in `main` content contexts (paragraphs, definition text, blockquotes, and standard lists), ensuring non-color indicators remain visible across themes.
 - **Affected pages:** Some pages with inline links (404 and others)
 - **Affected files:** `css/style.css`
-- **Root cause:** Inline links in prose-like contexts were not consistently differentiated beyond color in all modes.
-- **Wave F implementation:** Added a prose-scoped inline-link affordance layer to enforce underlines/thickness/offset in text containers (`main`/footer copy). Added forced-colors overrides so links use system link colors and preserve underline visibility.
-- **Why it matters:** Users with color vision deficiencies and forced-colors modes may not detect links without shape/decoration cues.
+- **Root cause:** Inline links likely not underlined or otherwise distinguished.
+- **Why it matters:** Users with color vision deficiencies and forced-colors modes may not detect links.
+- **Required fix:** Default underline or non-color indicator for inline text links; preserve premium styling.
 - **Acceptance criteria:** Lighthouse `link-in-text-block` passes; forced-colors still shows links clearly.
-- **QA verification:** `node tools/dev-check.mjs --ci`, `node tools/link-scan.mjs --ci`, Lighthouse follow-up on core pages.
+- **QA verification:** Lighthouse + forced-colors check.
 
 ---
 
@@ -597,25 +589,19 @@ When an issue is fixed, update:
 - **QA verification:** run generator tool, then verify in DevTools Network that smaller `-w320/-w480` assets are chosen on mobile; rerun Lighthouse.
 - **Entry:** 2026-02-23T19:33:25Z
 
-### ID-032 — Mega Wave F: Music catalog route-integrity gate + orphan route cleanup
+### ID-032 — Accessibility mode + touch ergonomics hardening (global navigation layer)
 - **Severity:** P1
-- **Category:** SEO / Data Integrity / Static Generation Hygiene
+- **Category:** Accessibility / Navigation UX
 - **Status:** FIX IMPLEMENTED (PENDING QA)
-- **Problem:** Pre-rendered track routes contained stale/orphan pages not present in `js/data.js`, creating duplicate-content/indexing risk and drift between source data and generated routes.
+- **Goal:** Close high-ROI global a11y gaps for forced-colors, reduced-motion, and minimum mobile tap targets without changing page content.
 - **Fixes:**
-  - Extended `tools/dev-check.mjs` data integrity checks to enforce that every data-defined album/track has a matching pre-rendered route and that no orphan pre-rendered album/track routes remain.
-  - Removed orphan track pages that were no longer represented in `js/data.js`.
-- **Files touched:**
-  - `tools/dev-check.mjs`
-  - `music/tracks/celestia-the-light-within/harmony-s-call/index.html` (removed)
-  - `music/tracks/echoes-on-the-dirt-road/boot-scoot-spin/index.html` (removed)
-  - `music/tracks/echoes-on-the-dirt-road/friday-nights-broken-lights/index.html` (removed)
-  - `music/tracks/echoes-on-the-dirt-road/rust-roses/index.html` (removed)
-  - `music/tracks/phoenix-rising/heaven-s-burning/index.html` (removed)
-  - `music/tracks/phoenix-rising/venom-velvet/index.html` (removed)
-  - `music/tracks/probed-and-confused/probed-confused/index.html` (removed)
-  - `music/tracks/serpents-veil/mirrors-dust/index.html` (removed)
-  - `music/tracks/serpents-veil/serpent-s-veil/index.html` (removed)
-  - `music/tracks/the-quiet-war-2/ashes-blueprints/index.html` (removed)
-- **QA verification:** `node tools/dev-check.mjs --ci` + `node tools/link-scan.mjs --ci` + `node tools/dev-check.mjs --runtime --ci`.
-- **Entry:** 2026-02-23T20:45:00Z
+  - `css/style.css`: skip link upgraded to 44px-friendly target with explicit focus border treatment.
+  - `css/style.css`: navigation/theme controls and nav links normalized to minimum 44px touch targets.
+  - `css/style.css`: `@media (prefers-reduced-motion: reduce)` override disables motion-heavy transforms/transitions in nav interactions.
+  - `css/style.css`: `@media (forced-colors: active)` override ensures interactive controls retain visible borders/colors/focus.
+  - `js/global.js`: mobile menu close logic centralized and now auto-closes when resizing from mobile to desktop, preventing stale open state traps.
+- **Files touched:** `css/style.css`, `js/global.js`
+- **Checklist linkage:** B-01.3, B-03.2, B-03.3, E-02.1, E-02.2
+- **QA verification:** run `node tools/dev-check.mjs --ci`, `node tools/dev-check.mjs --runtime --ci`, `node tools/link-scan.mjs`; manual check for skip link + forced-colors + reduced-motion on header controls.
+- **Entry:** 2026-02-24T00:00:00Z
+

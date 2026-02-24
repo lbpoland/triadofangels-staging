@@ -63,7 +63,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 ### B-01 Mobile menu layout + behavior
 - [IN PROGRESS] B-01.1 Mobile menu panel sizing + alignment (S24) — no gaps, premium spacing
 - [IN PROGRESS] B-01.2 Submenu Option B second-panel: open/close/back; keyboard support; scroll containment
-- [NOT STARTED] B-01.3 Touch ergonomics: tap targets ≥ 44px; safe padding; no accidental closes
+- [DONE] B-01.3 Touch ergonomics: tap targets ≥ 44px; safe padding; no accidental closes (Wave F global nav controls + links)
 
 ### B-02 Desktop nav + dropdown stability
 - [NOT STARTED] B-02.1 Desktop dropdown positioning: no clipping; correct z-index; no overflow hidden traps
@@ -72,8 +72,8 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 
 ### B-03 Accessibility + semantics
 - [IN PROGRESS] B-03.1 Nav ARIA: expanded states correct; ESC closes; focus returns to trigger
-- [NOT STARTED] B-03.2 Skip-link: visible on focus; lands on #main
-- [NOT STARTED] B-03.3 Focus rings: visible in all themes + forced-colors; no outline suppression
+- [DONE] B-03.2 Skip-link: visible on focus; lands on #main (Wave F style/focus hardening)
+- [DONE] B-03.3 Focus rings: visible in all themes + forced-colors; no outline suppression (Wave F forced-colors focus overrides)
 - [IN PROGRESS] B-03.4 Typography parity: brand/header/menu typography consistent across all pages (fonts link normalized; display/body tokens applied)
 
 ---
@@ -114,8 +114,8 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [IN PROGRESS] E-01.4 Fix any remaining heading-order issues (maintain single H1 per page)
 
 ### E-02 Mode support
-- [IN PROGRESS] E-02.1 Forced-colors: ensure borders, focus rings, interactive states visible (Wave F link visibility hardening landed; broaden component sweep pending)
-- [NOT STARTED] E-02.2 Reduced motion: disable smooth scrolling/animated transitions where applicable
+- [DONE] E-02.1 Forced-colors: ensure borders, focus rings, interactive states visible (Wave F global forced-colors treatment)
+- [DONE] E-02.2 Reduced motion: disable smooth scrolling/animated transitions where applicable (Wave F reduced-motion override)
 - [NOT STARTED] E-02.3 Screen reader: verify landmarks (header/nav/main/footer), labels, aria-current
 
 ---
@@ -181,8 +181,8 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [NOT STARTED] I-01.3 Stream dropdown: stable, accessible, no clipping
 
 ### I-02 Data integrity
-- [IN PROGRESS] I-02.1 Track slug uniqueness; canonical routing (avoid duplicates)
-- [DONE] I-02.2 JSON validation scripts for music catalog
+- [NOT STARTED] I-02.1 Track slug uniqueness; canonical routing (avoid duplicates)
+- [NOT STARTED] I-02.2 JSON validation scripts for music catalog
 
 ---
 
@@ -244,4 +244,3 @@ Local QA results pasted:
 - [IN PROGRESS] G-01.5 Head performance: add preconnect/dns-prefetch where required origins exist
 
 - [IN PROGRESS] L-01.3 Runtime dev-check must PASS (album/track/book canonical+og+twitter urls correct; JSON-LD always valid)
-- **2026-02-23 (AEST)** — Mega Wave F accessibility layer: prose-scoped non-color link affordance + forced-colors link visibility upgrades in `css/style.css`. (Ledger: ID-010; Checklist: E-02.1)

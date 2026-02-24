@@ -346,10 +346,19 @@ const isGlyphOnly = (s) => {
     const navMenu = document.getElementById('main-nav');
     if (!toggleButton || !navMenu) return;
 
+    const closeMobileMenu = ({ restoreFocus = false } = {}) => {
+      if (!navMenu.classList.contains('show')) return;
+      navMenu.classList.remove('show');
+      toggleButton.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
+      if (typeof navMenu.__toaCloseSubmenus === 'function') navMenu.__toaCloseSubmenus();
+      if (restoreFocus) toggleButton.focus({ preventScroll: true });
+    };
+
     // Toggle menu open/close
     toggleButton.addEventListener('click', () => {
       const isExpanded = navMenu.classList.toggle('show');
-      toggleButton.setAttribute('aria-expanded', isExpanded);
+      toggleButton.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
       document.body.classList.toggle('nav-open', isExpanded);
       if (!isExpanded && typeof navMenu.__toaCloseSubmenus === 'function') navMenu.__toaCloseSubmenus();
     });
@@ -364,22 +373,20 @@ const isGlyphOnly = (s) => {
       const inside = navShell ? navShell.contains(t) : (navMenu.contains(t) || toggleButton.contains(t));
       if (inside) return;
 
-      navMenu.classList.remove('show');
-      toggleButton.setAttribute('aria-expanded', false);
-      document.body.classList.remove('nav-open');
-      if (typeof navMenu.__toaCloseSubmenus === 'function') navMenu.__toaCloseSubmenus();
+      closeMobileMenu();
     });
 
     // ESC key closes menu for accessibility
     document.addEventListener('keyup', function(e) {
       if (e.key === "Escape" && navMenu.classList.contains('show')) {
-        navMenu.classList.remove('show');
-        toggleButton.setAttribute('aria-expanded', false);
-        document.body.classList.remove('nav-open');
-        if (typeof navMenu.__toaCloseSubmenus === 'function') navMenu.__toaCloseSubmenus();
-        toggleButton.focus();
+        closeMobileMenu({ restoreFocus: true });
       }
     });
+
+    window.addEventListener('resize', () => {
+      const isDesktop = window.matchMedia && window.matchMedia('(min-width: 861px)').matches;
+      if (isDesktop) closeMobileMenu();
+    }, { passive: true });
   })();
 
 

@@ -44,7 +44,7 @@
 | [IN PROGRESS] | Mobile header panel alignment + sizing fixed (S24) | css/style.css + js/global.js | ID-005 |
 | [IN PROGRESS] | Nested submenu behavior rebuilt (no massive gap) | css/style.css + js/global.js | ID-005 |
 | [IN PROGRESS] | Home Featured Albums horizontal carousel (touch + keyboard) | index.html + css/style.css + js/music-ui.js | ID-006 |
-| [IN PROGRESS] | Carousel/rail interaction polish (labels, focus, reduced motion) | global components | ID-006 + ID-009 |
+| [IN PROGRESS] | Carousel/rail interaction polish (labels, focus, reduced motion) | global components | ID-006 + ID-009 + ID-032 |
 
 ---
 
@@ -71,6 +71,7 @@
 | [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 (Wave F implemented, pending LHCI verification) |
 >>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
 | [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 |
+| [DONE] | Forced-colors + reduced-motion support hardened for global nav controls | css/style.css + js/global.js | ID-032 |
 
 ---
 
@@ -131,6 +132,12 @@
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
 
+<<<<<<< ours
 ### 2026-02-23 (Mega Wave F)
 - **Done (this session):** Implemented prose-link non-color affordance + forced-colors link visibility hardening in `css/style.css` for ID-010.
 - **Next:** Run Lighthouse mobile/desktop to verify `link-in-text-block` closure and then advance to ID-014 (LCP wave).
+=======
+### 2026-02-24
+- **Done (this session):** Wave F global accessibility-mode hardening (touch targets, skip-link focus treatment, forced-colors, reduced-motion, mobile-menu resize close).
+- **Next:** Validate Wave F in full Core Release Gate manual matrix + move remaining P1 perf/SEO backlog (ID-014/ID-015).
+>>>>>>> theirs

@@ -180,6 +180,7 @@
 - Strategy: apply `srcset/sizes` only after a manifest is successfully fetched; if manifest is missing, use the original cover src.
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
+<<<<<<< ours
 <<<<<<< HEAD
 ## 2026-02-23 — DEC-021: Music pre-rendered routes must match catalog source-of-truth
 - `js/data.js` is the authoritative catalog for album/track route generation.
@@ -195,3 +196,12 @@
 - Scope to text contexts (`main` + footer copy) to avoid regressing nav/button visual systems.
 - Artifacts: `css/style.css`, `docs/toa/TOA_Audit_Ledger_Master.md` (ID-010).
 >>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
+=======
+
+## 2026-02-24 — DEC-021: Global interaction accessibility floor (touch + forced-colors + reduced-motion)
+- All global header/nav interactive controls must meet a minimum **44px touch target** on mobile-class viewports.
+- Forced-colors mode must preserve visible control borders and focus outlines for nav/theme/skip-link interactions.
+- Reduced-motion mode must disable transform/transition-driven nav animations that are not required for comprehension.
+- Implementation baseline: `css/style.css` (`@media (forced-colors: active)`, `@media (prefers-reduced-motion: reduce)`, nav/skip-link sizing) and `js/global.js` (mobile menu close behavior parity on resize + Escape).
+
+>>>>>>> theirs
