@@ -186,7 +186,8 @@
 <section class="album-catalog featured u-section-pad-40" aria-labelledby="featured-title">
   <h2 id="featured-title" class="u-text-center">Featured Albums</h2>
   <div class="featured-albums-carousel">
-    <div class="album-track" id="toa-albums" aria-label="Featured albums carousel">
+    <p id="featured-albums-help" class="sr-only">Featured albums rail. Use left and right arrow keys to move between albums. Press Home to jump to the start and End to jump to the final album.</p>
+    <div class="album-track" id="toa-albums" role="region" aria-label="Featured albums carousel" aria-describedby="featured-albums-help">
     <article class="album-block">
       <a href="/music/albums/the-quiet-war-2/" class="album-link" aria-label="The Quiet War II Faultline Testament by ToA Studios">
         <img src="/assets/images/albums/the-quiet-war-2-album.webp" alt="The Quiet War II Faultline Testament album cover" width="1080" height="1080" loading="lazy" />
@@ -245,10 +246,10 @@
     </article>
   </div>
     <div class="album-nav-buttons">
-      <button class="album-nav-button album-nav-left" aria-label="Scroll to previous Album" data-carousel="toa-albums">
+      <button class="album-nav-button album-nav-left" aria-label="Scroll to previous album" data-carousel="toa-albums">
 	  <span aria-hidden="true">«</span>
       </button>
-      <button class="album-nav-button album-nav-right" aria-label="Scroll to next Album" data-carousel="toa-albums">
+      <button class="album-nav-button album-nav-right" aria-label="Scroll to next album" data-carousel="toa-albums">
 	  <span aria-hidden="true">»</span>
       </button>
     </div>
