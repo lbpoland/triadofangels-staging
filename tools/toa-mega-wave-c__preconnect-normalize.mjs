@@ -61,6 +61,7 @@ function normalizePreconnectInHead(html) {
 
   // Remove any existing preconnect/dns-prefetch lines for these origins to avoid duplicates
   const before = head;
+  head = head.replace(/\s*<!--\s*Preconnect\s*\(performance\)\s*-->\s*/gi, "\n");
   head = head.replace(/\n\s*<link\s+rel=["']preconnect["']\s+href=["']https:\/\/fonts\.googleapis\.com["'][^>]*>\s*/gi, "\n");
   head = head.replace(/\n\s*<link\s+rel=["']preconnect["']\s+href=["']https:\/\/fonts\.gstatic\.com["'][^>]*>\s*/gi, "\n");
   head = head.replace(/\n\s*<link\s+rel=["']dns-prefetch["']\s+href=["']https:\/\/fonts\.googleapis\.com["'][^>]*>\s*/gi, "\n");

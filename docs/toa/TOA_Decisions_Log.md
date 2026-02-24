@@ -181,8 +181,10 @@
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
 
-## 2026-02-23 — DEC-021: Reduced-motion keeps interaction parity (no feature loss)
-- Carousel/rail keyboard navigation must remain functional when `prefers-reduced-motion: reduce` is active.
-- Policy: swap smooth scroll behavior to `auto`; do **not** disable arrow/home/end keyboard navigation entirely.
-- Accessibility implication: reduced-motion users keep equal task completion paths without motion-heavy animation.
-- Artifacts: `js/global.js`, `css/style.css`, `TOA_Audit_Ledger_Master.md` (ID-010)
+
+## DEC-021 — Mega Wave C uses automated preconnect normalization as the canonical method
+- **Date:** 2026-02-24
+- **Decision:** Use `tools/toa-mega-wave-c__preconnect-normalize.mjs` as the canonical way to enforce `preconnect` + `dns-prefetch` consistency for Google Fonts across the entire HTML corpus.
+- **Rationale:** Manual page-by-page edits are drift-prone across 280 static pages; automation keeps head performance hints uniform.
+- **Implications:** Run the tool for future head sweeps, then re-run `dev-check`, `link-scan`, and local LHCI before marking DONE.
+- **Artifacts:** `tools/toa-mega-wave-c__preconnect-normalize.mjs`, `tools/toa-mega-wave-c__preconnect-normalize__report.json`, `TOA_Mega_Implementation_Checklist.md` (G-01.5 note)

@@ -9,9 +9,7 @@
 
 ## 0) Test Context (fill each run)
 
-**Patch Wave 01 applied:** yes (P0).
-
-**Mega Wave F applied:** yes (ID-010 accessibility styling). Local LHCI verification still required to mark PASS/FAIL.
+**Patch Wave 02 applied:** yes (Mega Wave C head-performance normalization). Local browser-enabled QA still required to mark PASS/FAIL.
 
 | Field | Value |
 |---|---|
@@ -127,4 +125,12 @@
 =======
 
 
-- 2026-02-23 (ChatGPT session): MEGA WAVE F shipped in code (`css/style.css`, `js/global.js`). Browser-dependent validation remains pending local execution (runtime dev-check + LHCI) due environment browser binary constraints.
+
+## 6) 2026-02-24 Sandbox QA Evidence (Mega Wave C)
+- `node tools/dev-check.mjs --ci` → **PASS**
+- `node tools/link-scan.mjs` → **PASS**
+- `node tools/dev-check.mjs --runtime --ci` → **FAIL** (Playwright browser executable missing in sandbox)
+- `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` → **FAIL** (no Chrome/Chromium executable detected)
+- `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` → **FAIL** (no Chrome/Chromium executable detected)
+
+**Pending local-only gates:** runtime dev-check + LHCI mobile/desktop must be executed on a workstation with Playwright + Chrome/Chromium installed.
