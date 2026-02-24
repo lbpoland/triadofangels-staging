@@ -258,34 +258,13 @@ a:visited {
     color: var(--link-visited);
 }
 
-<<<<<<< HEAD
-/* Ensure prose links are never color-only indicators (TOA ID-010). */
-main :where(p, dd, dt, blockquote) a,
-main ul:not(.nav-links):not(.social-links):not(.u-list-inline-links):not(.stream-links) li a,
-main ol li a {
+/* Ensure links inside prose blocks are always distinguishable without color alone. */
+:where(main, .site-footer, .legal-page, .privacy-policy, .terms-page) :is(p, li, dd, figcaption) a:not(.btn):not(.button):not(.cta-button):not(.quick-link):not(.nav-link):not(.nav-links a):not(.social-links a) {
     text-decoration-line: underline;
-    text-decoration-thickness: max(2px, 0.08em);
+    text-decoration-thickness: 2px;
     text-underline-offset: 0.2em;
 }
 
-=======
-/*
- * Mega Wave F (A11y links):
- * Inline text links must never rely on color-only distinction.
- * Scope this to prose-like containers so nav/buttons/cards can keep bespoke styling.
- */
-:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a {
-    text-decoration-line: underline;
-    text-decoration-thickness: max(2px, 0.09em);
-    text-underline-offset: 0.2em;
-}
-
-:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a:hover,
-:where(main, .site-footer, footer) :where(p, li, dd, dt, blockquote, figcaption, small) a:focus-visible {
-    text-decoration-thickness: max(2px, 0.11em);
-}
-
->>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
 /* Navigation */
 body.menu-open {
     overflow: hidden;
@@ -1595,6 +1574,14 @@ video {
 }
 
 @media (forced-colors: active) {
+    a,
+    a:visited,
+    a:hover,
+    a:focus-visible {
+        color: LinkText;
+        text-decoration-color: LinkText;
+    }
+
     :focus-visible {
         outline: 2px solid Highlight;
         outline-offset: 3px;
@@ -1620,6 +1607,8 @@ video {
     .nav-toggle,
     .form-control,
     .form-button {
+        background: Canvas;
+        color: CanvasText;
         border: 1px solid CanvasText;
     }
 }

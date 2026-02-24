@@ -180,28 +180,9 @@
 - Strategy: apply `srcset/sizes` only after a manifest is successfully fetched; if manifest is missing, use the original cover src.
 - Variants generator: `tools/toa-mega-wave-e__generate_album_cover_variants.py` outputs variants + `assets/images/albums/variants/manifest.json`.
 
-<<<<<<< ours
-<<<<<<< HEAD
-## 2026-02-23 — DEC-021: Music pre-rendered routes must match catalog source-of-truth
-- `js/data.js` is the authoritative catalog for album/track route generation.
-- Every catalog-defined route must exist as a pre-rendered static page.
-- Orphan pre-rendered album/track routes (not represented in `js/data.js`) are invalid and must be removed.
-- Enforcement: `tools/dev-check.mjs` data integrity now fails on missing expected routes and orphan static routes.
-=======
 
-
-## 2026-02-23 — DEC-021: Inline text links must preserve non-color affordance
-- Inline links in prose-like containers must retain visible underline affordance (thickness + offset), even when bespoke component styles remove decoration elsewhere.
-- In forced-colors mode, link colors must defer to system `LinkText`/`VisitedText` and keep underlines visible.
-- Scope to text contexts (`main` + footer copy) to avoid regressing nav/button visual systems.
-- Artifacts: `css/style.css`, `docs/toa/TOA_Audit_Ledger_Master.md` (ID-010).
->>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
-=======
-
-## 2026-02-24 — DEC-021: Global interaction accessibility floor (touch + forced-colors + reduced-motion)
-- All global header/nav interactive controls must meet a minimum **44px touch target** on mobile-class viewports.
-- Forced-colors mode must preserve visible control borders and focus outlines for nav/theme/skip-link interactions.
-- Reduced-motion mode must disable transform/transition-driven nav animations that are not required for comprehension.
-- Implementation baseline: `css/style.css` (`@media (forced-colors: active)`, `@media (prefers-reduced-motion: reduce)`, nav/skip-link sizing) and `js/global.js` (mobile menu close behavior parity on resize + Escape).
-
->>>>>>> theirs
+## 2026-02-23 — DEC-021: Reduced-motion keeps interaction parity (no feature loss)
+- Carousel/rail keyboard navigation must remain functional when `prefers-reduced-motion: reduce` is active.
+- Policy: swap smooth scroll behavior to `auto`; do **not** disable arrow/home/end keyboard navigation entirely.
+- Accessibility implication: reduced-motion users keep equal task completion paths without motion-heavy animation.
+- Artifacts: `js/global.js`, `css/style.css`, `TOA_Audit_Ledger_Master.md` (ID-010)

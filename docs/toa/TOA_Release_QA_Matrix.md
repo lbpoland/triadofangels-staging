@@ -127,11 +127,4 @@
 =======
 
 
-## 6) Wave F QA Evidence (2026-02-24)
-- `node tools/dev-check.mjs --ci` → PASS
-- `node tools/dev-check.mjs --runtime --ci` → FAIL in this environment (Playwright browser binary missing)
-- `node tools/link-scan.mjs` → PASS (0 broken)
-- Manual smoke (Chromium): skip link receives visible focused state, nav controls meet larger touch targets, and mobile menu auto-closes when resizing to desktop.
-- Manual mode checks: reduced-motion and forced-colors behaviors still pending full Core Release Gate sweep across all required pages/devices.
-- `npx playwright install chromium` and `npm run qa:lighthouse:mobile` were attempted but blocked by environment download/Chrome availability constraints (403 on Playwright CDN + no Chrome binary).
->>>>>>> theirs
+- 2026-02-23 (ChatGPT session): MEGA WAVE F shipped in code (`css/style.css`, `js/global.js`). Browser-dependent validation remains pending local execution (runtime dev-check + LHCI) due environment browser binary constraints.

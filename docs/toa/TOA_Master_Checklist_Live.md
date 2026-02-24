@@ -65,11 +65,7 @@
 | [DONE] | Exactly one `<h1>` per page | bundle verification | {h1_ok}/{tot_pages} pages |
 | [IN PROGRESS] | Fix label-content-name mismatch (remove/align aria-label) | global HTML/header/footer + js/album.js + js/track.js + js/book.js | ID-008 (Wave D applied; local runtime/LHCI verification pending) |
 | [IN PROGRESS] | Fix color contrast failures (light/dark) | css/style.css (+ page CSS) | ID-009 |
-<<<<<<< HEAD
-| [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 |
-=======
-| [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 (Wave F implemented, pending LHCI verification) |
->>>>>>> origin/codex/execute-next-mega-wave-for-toa-website
+| [IN PROGRESS] | Inline links not color-only (underline/indicator) | css/style.css | ID-010 (Wave F patch applied; pending LHCI verification) |
 | [IN PROGRESS] | Publishing ARIA required-children fixed | publishing.html + js/publishing.js | ID-011 |
 | [DONE] | Forced-colors + reduced-motion support hardened for global nav controls | css/style.css + js/global.js | ID-032 |
 
@@ -132,6 +128,6 @@
 - **Done (this session):** Tracker normalization; ledger/checklist/QA matrix/decisions log/p0 plan created or updated.
 - **Next:** Patch Wave 01 (P0) implementation.
 
-### 2026-02-24
-- **In progress (this session):** MEGA WAVE D accessible-name alignment for runtime-generated links (`Spotify (opens in a new tab)` pattern) to reduce label-content-name mismatch risk.
-- **Next:** Local runtime + Lighthouse verification for ID-008/ID-013 with browser binaries.
+### 2026-02-23 (later)
+- **Done (this session):** MEGA WAVE F accessibility hardening (reduced-motion carousel keyboard behavior + prose link non-color indicator + forced-colors link/control visibility updates).
+- **Next:** Validate with local runtime + LHCI and continue LCP-focused performance wave (ID-014).
