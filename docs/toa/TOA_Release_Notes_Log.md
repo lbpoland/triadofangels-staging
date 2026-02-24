@@ -14,3 +14,8 @@
 - Expanded `tools/dev-check.mjs` static gate coverage to include duplicate ID detection, CSP meta presence, internal HTML broken-link checks, and robots/sitemap integrity assertions.
 - Added `tools/console-clean.mjs` plus npm scripts (`ci:console-clean`, `qa:console-clean`) to enforce console-clean runtime checks across core pages when Playwright browser binaries are available locally.
 - Updated governance trackers for A-02.2/A-02.3 progression; local browser-gated execution remains pending due missing Chromium executable in this environment.
+
+
+## 2026-02-24 — MEGA WAVE Y (Architecture/Tooling Dependency Convergence)
+- Removed unused `@playwright/test` from `devDependencies` so runtime QA tooling uses a single Playwright package path (`playwright`), reducing dependency drift risk under checklist A-02.1.
+- Revalidated non-browser gates (strict dev-check, link scan, dist build) and recorded browser-executable blocker state for runtime/LHCI gates in governance artifacts.

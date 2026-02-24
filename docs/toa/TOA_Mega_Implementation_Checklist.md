@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE X  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE Y  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -36,7 +36,7 @@ Run after major batches (not after tiny edits):
 - [DONE] A-01.3 Create/maintain a rolling “Release Notes” log per patch wave (Wave W created `TOA_Release_Notes_Log.md`)
 
 ### A-02 Repo/tooling consistency
-- [IN PROGRESS] A-02.1 Confirm node tooling versions + remove deprecated packages where feasible (without breaking) (Wave V added dist-build + dist-serve scripts; package/dependency cleanup still pending)
+- [IN PROGRESS] A-02.1 Confirm node tooling versions + remove deprecated packages where feasible (without breaking) (Wave Y removed unused duplicate `@playwright/test` dependency to reduce Playwright version drift; local browser/LHCI evidence still pending for full VERIFIED closure)
 - [IN PROGRESS] A-02.2 Ensure dev-check covers: CSP, broken links, duplicate IDs, JSON-LD validity, sitemap, robots (Wave X expanded `tools/dev-check.mjs` with duplicate-id, CSP-meta, local broken-link, and robots/sitemap integrity checks; pending local browser-gate QA)
 - [IN PROGRESS] A-02.3 Add a “console-clean” CI gate script (optional) that loads core pages and fails on console errors (Wave X added `tools/console-clean.mjs` and npm `ci:console-clean` / `qa:console-clean`; pending local browser executable to run gate)
 - [IN PROGRESS] A-02.4 Resolve bfcache blockers in local QA/runtime stack (Wave U removed local QA no-store headers; pending local LHCI + DevTools validation)
@@ -269,3 +269,5 @@ Local QA results pasted:
 - **2026-02-24 (AEST)** — MEGA WAVE W (Governance + non-drift controls): added locked Delivery Safety Protocol workflow, created rolling release notes log, and reconciled governance trackers/ledger statuses for ID-001/ID-002/ID-003 under architecture layer A-01.
 
 - **2026-02-24 (AEST)** — MEGA WAVE X (Architecture/tooling QA-gate coverage expansion): expanded `tools/dev-check.mjs` to enforce duplicate IDs + CSP meta + local broken HTML references + robots/sitemap integrity checks, and added `tools/console-clean.mjs` with npm CI/QA scripts to fail on console/page/runtime request errors across core pages. Browser runtime execution remains pending local Playwright browser install in this sandbox. (Ledger: ID-013, ID-017, ID-033; Checklist: A-02.2, A-02.3)
+
+- **2026-02-24 (AEST)** — MEGA WAVE Y (Architecture/tooling dependency convergence): removed unused `@playwright/test` dev dependency so runtime automation resolves through a single `playwright` package path, reducing toolchain drift risk while preserving Wave V dist pipeline and Wave X QA gates. (Ledger: ID-017, ID-013; Checklist: A-02.1)

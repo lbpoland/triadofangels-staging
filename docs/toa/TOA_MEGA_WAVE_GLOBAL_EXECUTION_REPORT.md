@@ -137,3 +137,14 @@ Actions completed in this global pass:
   - PASS — `npm run build:dist`
   - BLOCKED — `node tools/console-clean.mjs --ci` (Playwright Chromium executable missing: `chrome-headless-shell`).
 - Governance linkage: Ledger `ID-013`, `ID-017`, `ID-033`; Checklist `A-02.2`, `A-02.3` moved to implementation-complete pending local browser QA.
+
+
+## 2026-02-24 Addendum — MEGA WAVE Y (Architecture/Tooling Dependency Convergence)
+- Layer scope: A-02 architecture/tooling package consistency hardening (next-step continuation after Wave X).
+- Removed unused `@playwright/test` from `devDependencies` to avoid dual-version Playwright drift while preserving existing `playwright`-based runtime tooling and scripts.
+- Validation in sandbox:
+  - PASS — `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`
+  - PASS — `node tools/link-scan.mjs --ci`
+  - PASS — `npm run build:dist`
+  - BLOCKED — `node tools/console-clean.mjs --ci` (Playwright Chromium executable missing: `chrome-headless-shell`).
+- Governance linkage: Ledger `ID-017`, `ID-013`; Checklist `A-02.1` moved forward to implementation-complete pending local browser QA.

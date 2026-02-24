@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE X architecture/tooling update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE Y architecture/tooling update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -290,11 +290,11 @@
 | ID-010 | P1 | IMPLEMENTED (PENDING QA) | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
 | ID-011 | P0 | HARDENED (PENDING LOCAL QA) | Accessibility | Wave S migrated Publishing shelf rows from role-based list semantics to native `ul/li` structure and aligned shelf text contrast tokens | `js/publishing.js`, `css/publishing.css` |
 | ID-012 | P0 | HARDENED (PENDING QA) | Performance / UX | Publishing CLS mitigation strengthened (empty-state-first structure + deterministic UI state handling) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
-| ID-013 | P0 | HARDENED (PENDING LOCAL QA) | Stability | Wave L no-inline handler/style enforcement now paired with Wave X expanded dev-check static coverage and new `console-clean` runtime gate script; browser runtime proof remains pending local Playwright browser install | `tools/dev-check.mjs`, `tools/console-clean.mjs`, `package.json`, page modules |
+| ID-013 | P0 | HARDENED (PENDING LOCAL QA) | Stability | Wave L no-inline enforcement + Wave X runtime console-clean gate are now backed by Wave Y dependency convergence (single Playwright package path); browser runtime proof remains pending local Playwright browser install | `tools/dev-check.mjs`, `tools/console-clean.mjs`, `package.json`, `package-lock.json`, page modules |
 | ID-014 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance | LCP containment expanded with responsive hero image candidate hinting (`srcset`/`sizes`) on Home; awaiting local LHCI confirmation | images + CSS + critical path |
 | ID-015 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO | Duplicate/alias track static routes pruned to canonical-only corpus (10 alias routes removed) | `music/tracks/**/index.html` |
 | ID-016 | P1 | IN PROGRESS | Performance / UX | Search perf baseline remains open; non-home heavy-background containment applied to reduce first-view cost pending local LHCI verification | `search/search.js`, `search/search.css`, `css/style.css` |
-| ID-017 | P2 | FIX IMPLEMENTED (PENDING LOCAL QA) | Build / Perf | Wave V introduced a static dist-build minification pipeline (`build-static-dist`) and dist-root QA serving path; pending local LHCI/prod-origin confirmation of Lighthouse audits | `tools/build-static-dist.mjs`, `tools/static-serve.mjs`, `package.json` |
+| ID-017 | P2 | FIX IMPLEMENTED (PENDING LOCAL QA) | Build / Perf | Wave V introduced static dist-build minification pipeline (`build-static-dist`), and Wave Y removed unused duplicate `@playwright/test` to reduce toolchain drift before local dist-origin runtime/LHCI confirmation | `tools/build-static-dist.mjs`, `tools/static-serve.mjs`, `package.json`, `package-lock.json` |
 | ID-018 | P2 | FIX IMPLEMENTED (PENDING LOCAL QA) | UX / Perf | Wave U removed local QA `Cache-Control: no-store` headers (known bfcache blocker) and replaced them with bfcache-safe cache policy for HTML/assets; pending local Lighthouse/DevTools proof | `tools/static-serve.mjs`, `tools/dev-check.mjs` |
 | ID-019 | P2 | OPEN | SEO | 404 SEO low (noindex/is-crawlable) — confirm intentional | `404.html` |
 | ID-020 | P2 | OPEN | Platform | Publishing data + content roadmap (truthful, no placeholders) | `js/publishing-data.js`, `publishing.html` |
@@ -907,3 +907,15 @@ When an issue is fixed, update:
   - `npm run build:dist` PASS
   - `node tools/console-clean.mjs --ci` BLOCKED in sandbox due missing Playwright Chromium executable (`chrome-headless-shell`)
   - LHCI mobile+desktop remain local-only due missing Chrome/Chromium binary in sandbox
+
+
+## Patch Wave 23 — Mega Wave Y (Architecture/Tooling Dependency Convergence)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Continue architecture/tooling layer A-02 by closing package consistency debt under A-02.1 while preserving Wave X runtime gate architecture.
+- **Files changed:** `package.json`, `package-lock.json` + governance tracker updates under `/docs/toa`.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `npm run build:dist` PASS
+  - `node tools/console-clean.mjs --ci` BLOCKED in sandbox due missing Playwright Chromium executable (`chrome-headless-shell`)
+  - Runtime dev-check + LHCI mobile+desktop remain blocked in sandbox due missing browser executables
