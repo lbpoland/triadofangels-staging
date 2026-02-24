@@ -847,3 +847,15 @@ When an issue is fixed, update:
   - avoid implied live app-store installs until official links exist
 - **Acceptance criteria:** Games/Apps pages list only real availability states and links; no fake release/install claims.
 - **QA verification:** manual content audit + `node tools/link-scan.mjs --ci` + local runtime/Lighthouse pass.
+
+
+## Patch Wave 19 — Mega Wave GLOBAL (Cross-Manifest Saturation Reconciliation)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Dependency-order reconciliation across all defined Mega Wave manifests (`C`, `G`→`V`) with governance linkage audit and fresh non-browser QA evidence.
+- **Files changed:** governance-only (`docs/toa/*`) + no product-surface source mutations in this wave.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/build-static-dist.mjs --out=dist` PASS
+  - `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop remain blocked in sandbox due missing Chrome/Chromium executable

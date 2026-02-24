@@ -225,3 +225,9 @@
 - **Done:** Added Architecture/Tooling dist-build pipeline via `tools/build-static-dist.mjs` to generate a deployable `dist/` tree with minified HTML/CSS/JS plus build metrics report, and extended `tools/static-serve.mjs` with `--root` so local QA/LHCI can run directly against `dist` output (ID-017 / A-02.1).
 - **QA:** `node tools/build-static-dist.mjs --out=dist` PASS, `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `node tools/link-scan.mjs --ci` PASS; runtime+Lighthouse blocked in sandbox due missing Playwright `chrome-headless-shell` and missing Chrome/Chromium executable.
 - **Next:** Run LOCAL QA PACK dist-origin runtime + LHCI sweeps to verify `unminified-*` / compression findings clear, then promote ID-017 to VERIFIED.
+
+
+### 2026-02-24 (MEGA WAVE GLOBAL)
+- **Done:** Performed full `/docs/toa` mega-wave manifest reconciliation across all defined manifests (`C`, `G`→`V`), documented dependency-safe ordering, and published unified global execution report (`TOA_MEGA_WAVE_GLOBAL_EXECUTION_REPORT.md`).
+- **QA:** `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `node tools/link-scan.mjs --ci` PASS, `node tools/build-static-dist.mjs --out=dist` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
+- **Next:** Execute LOCAL QA PACK browser gates (runtime + LHCI mobile/desktop + dist-root serving) to advance remaining IN PROGRESS items to VERIFIED where applicable.
