@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane)  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE G  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -183,7 +183,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [NOT STARTED] I-01.3 Stream dropdown: stable, accessible, no clipping
 
 ### I-02 Data integrity
-- [IN PROGRESS] I-02.1 Track slug uniqueness; canonical routing (avoid duplicates) — phase 1 alias de-indexing + sitemap pruning in progress
+- [IN PROGRESS] I-02.1 Track slug uniqueness; canonical routing (avoid duplicates) — phase 2 alias route pruning applied (10 orphan aliases removed), pending local SEO/LHCI verification
 - [NOT STARTED] I-02.2 JSON validation scripts for music catalog
 
 ---

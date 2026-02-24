@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane)  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE G  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -87,7 +87,7 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [DONE] | Canonical + OG/Twitter tags present on item pages | bundle patterns | Spot-check needed per page type |
-| [IN PROGRESS] | Resolve duplicate track slugs (one canonical per track) | music/tracks/** | ID-015 (Phase 1 aliases de-indexed + sitemap pruned) |
+| [IN PROGRESS] | Resolve duplicate track slugs (one canonical per track) | music/tracks/** | ID-015 (Phase 2 alias route pruning applied; local SEO/LHCI verification pending) |
 | [IN PROGRESS] | Sitemap contains canonical URLs only (after duplicate fix) | sitemap.xml + generate-static | ID-015 |
 | [IN PROGRESS] | Decide how to score 404 SEO (noindex expected) | 404.html | ID-019 |
 
@@ -133,3 +133,9 @@
 - **Done:** Applied preconnect/dns-prefetch normalization across all HTML via `tools/toa-mega-wave-c__preconnect-normalize.mjs --apply` (ID-028 / G-01.5).
 - **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS, runtime+Lighthouse blocked in sandbox due to missing browser executables (ID-032).
 - **Next:** Run LOCAL QA PACK (Playwright + LHCI) and then advance to duplicate track route canonicalization (ID-015).
+
+
+### 2026-02-24 (MEGA WAVE G)
+- **Done:** Pruned 10 legacy duplicate track alias static routes so only canonical pre-rendered track pages remain (ID-015 / I-02.1).
+- **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due to missing browser executables.
+- **Next:** Run LOCAL QA PACK for runtime + LHCI, then advance to Publishing CLS/LCP wave (ID-012 / ID-014).
