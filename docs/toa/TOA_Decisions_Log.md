@@ -1,6 +1,6 @@
 # TOA Website — Decisions Log (Anti-Drift)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE N  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S  
 **Purpose:** Record decisions, constraints, and standards so work never re-litigates the same topics.
 
 ---
@@ -241,3 +241,9 @@
 - Horizontal carousel/rail keyboard behavior (ArrowLeft/ArrowRight/Home/End) must be owned by a single handler path to avoid duplicate-scroll jumps and inconsistent reduced-motion behavior.
 - Use the shared `setupCarouselNav` keyboard path in `js/global.js` for rail controls; avoid additional page-specific duplicate keydown listeners on the same carousel element.
 - Home Featured Albums rail must keep explicit SR guidance via `aria-describedby` so keyboard shortcuts are discoverable without adding non-semantic controls.
+
+## 2026-02-24 — DEC-030: Governance release-memory + delivery safety protocol are mandatory controls
+- Maintain an append-only release notes artifact (`TOA_Release_Notes_Log.md`) as governance memory for every mega wave.
+- Keep the Delivery Safety Protocol codified in locked project instructions and apply it every patch session.
+- Extend static validation to include root SEO artifacts (`robots.txt` and `sitemap.xml`) in `dev-check`.
+- Optional runtime `console-clean` gate is required in tooling and should be executed locally when browser executables are unavailable in sandbox.

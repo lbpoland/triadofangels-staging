@@ -534,6 +534,73 @@ const validatePlaceholders = (html, relPath) => {
   return errors;
 };
 
+const normalizeSiteUrl = (value) => {
+  const s = String(value || '').trim();
+  if (!s) return '';
+  return s.replace(/\/+$/g, '');
+};
+
+const validateRepoSeoArtifacts = async () => {
+  const errors = [];
+  const warnings = [];
+
+  const robotsPath = path.join(ROOT, 'robots.txt');
+  const sitemapPath = path.join(ROOT, 'sitemap.xml');
+
+  let robots = '';
+  let sitemap = '';
+
+  try {
+    robots = await readText(robotsPath);
+  } catch {
+    errors.push({ kind: 'missing', field: 'robots.txt', note: 'robots.txt is required at repo root.' });
+  }
+
+  try {
+    sitemap = await readText(sitemapPath);
+  } catch {
+    errors.push({ kind: 'missing', field: 'sitemap.xml', note: 'sitemap.xml is required at repo root.' });
+  }
+
+  if (robots) {
+    const match = /^\s*Sitemap\s*:\s*(.+)$/im.exec(robots);
+    if (!match || !match[1]) {
+      errors.push({ kind: 'missing', field: 'robots.sitemap', note: 'robots.txt must include a Sitemap directive.' });
+    } else {
+      const raw = String(match[1]).trim();
+      if (!raw.startsWith('http://') && !raw.startsWith('https://')) {
+        errors.push({ kind: 'non-absolute', field: 'robots.sitemap', value: raw });
+      } else if (!raw.startsWith(`${SITE_ORIGIN}/`)) {
+        warnings.push({ kind: 'non-site-origin', field: 'robots.sitemap', value: raw });
+      }
+    }
+  }
+
+  if (sitemap) {
+    const locMatches = [...sitemap.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/gi)];
+    if (locMatches.length === 0) {
+      errors.push({ kind: 'missing', field: 'sitemap.loc', note: 'sitemap.xml must include at least one <loc> URL.' });
+    }
+
+    for (const m of locMatches) {
+      const raw = normalizeSiteUrl(m[1]);
+      if (!raw) {
+        errors.push({ kind: 'empty', field: 'sitemap.loc' });
+        continue;
+      }
+      if (!raw.startsWith('http://') && !raw.startsWith('https://')) {
+        errors.push({ kind: 'non-absolute', field: 'sitemap.loc', value: raw });
+        continue;
+      }
+      if (!raw.startsWith(SITE_ORIGIN)) {
+        warnings.push({ kind: 'non-site-origin', field: 'sitemap.loc', value: raw });
+      }
+    }
+  }
+
+  return { errors, warnings };
+};
+
 const loadData = async () => {
   const dataUrl = pathToFileURL(path.join(ROOT, 'js', 'data.js')).href;
   const utilsUrl = pathToFileURL(path.join(ROOT, 'js', 'utils.js')).href;
@@ -1131,6 +1198,7 @@ const main = async () => {
   // Data integrity + runtime selection
   let dataIntegrity = { errors: [], warnings: [] };
   let runtimeValidation = { mode: 'none', pass: true, checks: [] };
+  let repoSeoArtifacts = { errors: [], warnings: [] };
 
   try {
     const { albums, sanitizeTrackId, books } = await loadData();
@@ -1156,6 +1224,10 @@ const main = async () => {
     };
   }
 
+  repoSeoArtifacts = await validateRepoSeoArtifacts();
+  errorCount += repoSeoArtifacts.errors.length;
+  warnCount += repoSeoArtifacts.warnings.length;
+
   const pass = (errorCount === 0) && (!OPTS.ci || warnCount === 0);
 
   const report = {
@@ -1172,6 +1244,7 @@ const main = async () => {
     },
     perFile,
     dataIntegrity,
+    repoSeoArtifacts,
     runtimeValidation
   };
 

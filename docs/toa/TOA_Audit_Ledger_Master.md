@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE R update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -225,11 +225,23 @@
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
 
+## Patch Wave 15 — Mega Wave S (Governance + Tooling Safety Controls)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Governance-layer execution for delivery safety protocol, release-memory continuity, and optional console-clean runtime tooling (ID-001 / ID-002 / ID-013; A-01.2 / A-01.3 / A-02.2 / A-02.3).
+- **Files changed:** `docs/toa/TOA_Project_Instructions_v2_LOCKED.md`, `docs/toa/TOA_Release_Notes_Log.md`, `tools/dev-check.mjs`, `tools/console-clean.mjs`, `package.json` + tracker updates.
+- **Implementation:** Added explicit Delivery Safety Protocol, created append-only release notes log, expanded `dev-check` root artifact verification (`robots.txt` + `sitemap.xml`), and added optional Playwright `console-clean` script with CI/QA script wiring.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/console-clean.mjs` FAIL in sandbox due missing Playwright Chromium executable
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
-| ID-001 | P1 | OPEN | Governance | Normalize audit into living tracker docs | `TOA_*.md` trackers |
-| ID-002 | P1 | OPEN | Workflow | Prevent “minimum page” audit drift | rules + instructions |
+| ID-001 | P1 | HARDENED (VERIFIED) | Governance | Governance tracker continuity expanded with rolling release notes artifact and mandatory tracker updates per wave | `docs/toa/TOA_Release_Notes_Log.md`, `docs/toa/TOA_Mega_Implementation_Checklist.md`, `docs/toa/TOA_Master_Checklist_Live.md` |
+| ID-002 | P1 | HARDENED (VERIFIED) | Workflow | Added explicit Delivery Safety Protocol to locked instructions to prevent minimum-scope drift and enforce QA/evidence discipline | `docs/toa/TOA_Project_Instructions_v2_LOCKED.md` |
 | ID-003 | P0 | OPEN (process control) | Workflow | Atomic delivery enforcement | delivery contract + process |
 | ID-004 | P1 | BLOCKED | Audit | Deep-report reconciliation pending upload | deep-research-report(3).md |
 | ID-005 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Navigation / Mobile | Mobile/desktop header dropdown alignment + submenu stability hardening applied (Wave 01 + Wave M + Wave P parity controls for pointer/keyboard submenu behavior) | `css/style.css`, `js/global.js`, header HTML generation |
@@ -240,7 +252,7 @@
 | ID-010 | P1 | IMPLEMENTED (PENDING QA) | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
 | ID-011 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | Publishing page `aria-required-children` | `publishing.html`, `js/publishing.js`, `css/publishing.css` |
 | ID-012 | P0 | HARDENED (PENDING QA) | Performance / UX | Publishing CLS mitigation strengthened (empty-state-first structure + deterministic UI state handling) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
-| ID-013 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Stability | Lighthouse reports console errors on core pages; Wave L added stricter no-inline handler/style gate enforcement in dev-check/CI but browser runtime proof still pending locally | `js/global.js`, page modules, `tools/dev-check.mjs`, `package.json` |
+| ID-013 | P0 | HARDENED (PENDING LOCAL QA) | Stability | Wave S added optional core-page `console-clean` runtime gate script and CI/QA wiring on top of Wave L strict no-inline checks; browser/runtime proof still pending local execution | `tools/console-clean.mjs`, `tools/dev-check.mjs`, `package.json` |
 | ID-014 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance | LCP containment expanded with responsive hero image candidate hinting (`srcset`/`sizes`) on Home; awaiting local LHCI confirmation | images + CSS + critical path |
 | ID-015 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO | Duplicate/alias track static routes pruned to canonical-only corpus (10 alias routes removed) | `music/tracks/**/index.html` |
 | ID-016 | P1 | IN PROGRESS | Performance / UX | Search perf baseline remains open; non-home heavy-background containment applied to reduce first-view cost pending local LHCI verification | `search/search.js`, `search/search.css`, `css/style.css` |

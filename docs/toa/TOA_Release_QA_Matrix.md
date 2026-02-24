@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE R  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -23,6 +23,7 @@
 **MEGA WAVE P applied:** yes (Navigation submenu parity: desktop pointer-enter/leave behavior + trigger/menu keyboard traversal hardening).
 **MEGA WAVE Q applied:** yes (Responsive overflow/gutter hardening: shared main/section inline spacing tokens + section long-string wrapping guards).
 **MEGA WAVE R applied:** yes (Accessibility semantics hardening: footer `aria-current` mapping + landmark role/label/tabindex fallbacks in global runtime).
+**MEGA WAVE S applied:** yes (Governance/tooling safety: Delivery Safety Protocol + release notes log + robots/sitemap dev-check coverage + optional console-clean gate script).
 
 | Field | Value |
 |---|---|
@@ -251,3 +252,11 @@
   - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
   - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
 - Local execution is required before marking Wave R as VERIFIED for E-02.3/E-01.4 and ID-008 closure evidence.
+
+## 19) 2026-02-24 — MEGA WAVE S execution notes
+- Applied governance/tooling safety controls by adding Delivery Safety Protocol instructions, creating rolling release notes, extending `dev-check` with robots/sitemap artifact checks, and adding optional Playwright `console-clean` runtime script wired in npm QA/CI flows.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates attempted once and BLOCKED in sandbox:
+  - `node tools/console-clean.mjs` failed due missing Playwright Chromium executable (`Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1200/chrome-linux/headless_shell`).
+  - LHCI mobile/desktop remain blocked due no Chrome/Chromium binary.
+- Local execution is required before marking Wave S browser-runtime aspects as VERIFIED for A-02.3 / ID-013.

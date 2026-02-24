@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE R  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -49,13 +49,13 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 
 ### A-01 Project tracker hygiene
 - [IN PROGRESS] A-01.1 Ensure all tracker docs exist + are current (ledger/checklist/qa/decisions/patch plans)
-- [NOT STARTED] A-01.2 Add “Delivery Safety Protocol” to project instructions (8k-safe) and enforce each patch session
-- [NOT STARTED] A-01.3 Create/maintain a rolling “Release Notes” log per patch wave
+- [DONE] A-01.2 Add “Delivery Safety Protocol” to project instructions (8k-safe) and enforce each patch session (Wave S)
+- [DONE] A-01.3 Create/maintain a rolling “Release Notes” log per patch wave (Wave S added `TOA_Release_Notes_Log.md`)
 
 ### A-02 Repo/tooling consistency
 - [NOT STARTED] A-02.1 Confirm node tooling versions + remove deprecated packages where feasible (without breaking)
-- [NOT STARTED] A-02.2 Ensure dev-check covers: CSP, broken links, duplicate IDs, JSON-LD validity, sitemap, robots
-- [NOT STARTED] A-02.3 Add a “console-clean” CI gate script (optional) that loads core pages and fails on console errors
+- [DONE] A-02.2 Ensure dev-check covers: CSP, broken links, duplicate IDs, JSON-LD validity, sitemap, robots (Wave S added robots/sitemap artifact checks)
+- [IN PROGRESS] A-02.3 Add a “console-clean” CI gate script (optional) that loads core pages and fails on console errors (Wave S script + npm wiring added; pending local browser execution)
 
 ---
 
@@ -269,3 +269,5 @@ Local QA results pasted:
 
 
 - **2026-02-24 (AEST)** — MEGA WAVE R (Accessibility landmarks + current-page semantics): extended global accessibility runtime to set footer navigation `aria-current="page"` for matching routes, enforce landmark role/label fallbacks for header/main/footer/footer-nav, and apply `main` `tabindex="-1"` fallback to preserve skip-link focus reliability. (Ledger: ID-008; Checklist: E-02.3, E-01.4)
+
+- **2026-02-24 (AEST)** — MEGA WAVE S (Governance + tooling safety): added Delivery Safety Protocol to locked instructions, created rolling `TOA_Release_Notes_Log.md`, extended `dev-check` with robots/sitemap artifact validation, and introduced optional Playwright `console-clean` gate script wiring in npm CI/QA flows. (Ledger: ID-001, ID-002, ID-013; Checklist: A-01.2, A-01.3, A-02.2, A-02.3)

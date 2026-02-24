@@ -129,3 +129,13 @@ You must exceed baseline quality while staying:
 - performant
 - secure-by-design
 - truthful
+
+## DELIVERY SAFETY PROTOCOL (8K-SAFE PATCH OUTPUT)
+Before finalizing any patch session response, enforce this sequence:
+1) List changed files from git and confirm only intended layer files were touched.
+2) Confirm governance updates are included (ledger, live checklist, QA matrix, wave plan/manifest, decisions when policy changed).
+3) Run non-browser validation gates first (`dev-check` strict no-inline + `link-scan`).
+4) Attempt browser/runtime gates exactly once in constrained environments.
+5) If browser executable is unavailable, stop retries, log exact error text, and publish a local QA pack.
+6) Mark items as `VERIFIED (pending local QA)` when non-browser checks pass but browser-only gates are blocked by environment limits.
+7) Do not claim `DONE` for any artifact that is missing from the patch set.

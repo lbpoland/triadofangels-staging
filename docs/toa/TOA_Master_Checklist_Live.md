@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE R  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE S  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -18,6 +18,7 @@
 | [DONE] | Audit Ledger updated and authoritative | /TOA_Audit_Ledger_Master.md | This file |
 | [DONE] | Master Checklist converted to status-driven live tracker | /TOA_Master_Checklist_Live.md | This file |
 | [DONE] | Release QA Matrix baseline present | /TOA_Release_QA_Matrix.md | Updated in this session |
+| [DONE] | Rolling release notes log present | /TOA_Release_Notes_Log.md | Added in Wave S |
 | [DONE] | Delivery contract present | /TOA_Session_Delivery_Contract.md | — |
 | [DONE] | Audit execution bridge present | /TOA_Website_Audit_Execution_Bridge_v1.md | — |
 | [BLOCKED] | Deep research seed report available for reconciliation | deep-research-report(3).md | Not present in /mnt/data (upload to unblock) — ID-004 |
@@ -33,6 +34,7 @@
 | [IN PROGRESS] | Minification / build pipeline strategy (src→dist) | /tools + repo structure | ID-017 |
 | [IN PROGRESS] | bfcache blocker identification + resolution | global JS/runtime | ID-018 |
 | [IN PROGRESS] | Global head preconnect normalization applied + idempotent | all HTML + tools/toa-mega-wave-c__preconnect-normalize.mjs | ID-028, ID-032 (pending local LHCI) |
+| [IN PROGRESS] | Optional console-clean runtime gate implemented and wired | tools/console-clean.mjs + package.json | ID-013 (Wave S added script; pending local Playwright execution) |
 
 ---
 
@@ -202,3 +204,8 @@
 - **Done:** Hardened desktop nav submenu parity by adding pointer-enter open / pointer-leave close behavior (without focus traps), trigger-level Enter/Space + ArrowUp support, and submenu ArrowUp/ArrowDown/Home/End keyboard traversal in `js/global.js` (ID-005 / B-02.2 / B-03.1).
 - **QA:** `dev-check --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
 - **Next:** Run LOCAL QA PACK runtime + LHCI + manual desktop nav parity matrix, then close B-02.2/B-03.1 to VERIFIED.
+
+### 2026-02-24 (MEGA WAVE S)
+- **Done:** Executed governance/tooling safety layer by adding Delivery Safety Protocol to locked instructions, creating rolling release-notes artifact, extending `dev-check` with robots/sitemap validation, and adding optional `console-clean` runtime gate tooling/script wiring (ID-001 / ID-002 / ID-013).
+- **QA:** `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `node tools/link-scan.mjs --ci` PASS; browser runtime gates blocked in sandbox due missing Playwright Chromium executable.
+- **Next:** Run LOCAL QA PACK browser commands to verify `console-clean` runtime gate and then promote A-02.3 + ID-013 to fully VERIFIED.
