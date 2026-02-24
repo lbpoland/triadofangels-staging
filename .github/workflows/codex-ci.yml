@@ -16,16 +16,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: npm
 
       - name: Install Dependencies
         run: npm ci
 
-      - name: Run Dev Check
-        run: node tools/dev-check.mjs --ci
-
-      - name: Run Link Scan
-        run: node tools/link-scan.mjs
-
-      # Optional: Lighthouse CI (configure if you have LHCI setup)
-      - name: Run Lighthouse CI
-        run: lhci autorun
+      - name: Run CI Validation
+        run: npm run ci:validate
