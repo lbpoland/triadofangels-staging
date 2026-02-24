@@ -2,7 +2,7 @@
   "name": "triadofangels-site",
   "private": true,
   "type": "module",
-  "description": "Triad of Angels \u2014 static site (GitHub Pages). Dev-only validation scripts (dev-check + link-scan + optional Playwright runtime).",
+  "description": "Triad of Angels — static site (GitHub Pages). Dev-only validation scripts (dev-check + link-scan + optional Playwright runtime).",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -29,7 +29,9 @@
     "qa:full": "npm run qa:check:ci && npm run qa:links && npm run qa:lighthouse",
     "qa:serve": "node tools/static-serve.mjs --port=4173",
     "qa:lighthouse:mobile": "node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json",
-    "qa:lighthouse:desktop": "node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json"
+    "qa:lighthouse:desktop": "node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json",
+    "build:dist": "node tools/build-static-dist.mjs --out=dist",
+    "qa:serve:dist": "node tools/static-serve.mjs --root=dist --port=4173"
   },
   "devDependencies": {
     "playwright": "^1.55.0",

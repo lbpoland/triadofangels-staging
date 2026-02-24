@@ -1,6 +1,6 @@
 # TOA Website — Decisions Log (Anti-Drift)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE U  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE V  
 **Purpose:** Record decisions, constraints, and standards so work never re-litigates the same topics.
 
 ---
@@ -258,3 +258,8 @@
 - Default policy for local QA tooling: `no-cache` on HTML, short-lived cache (`public, max-age=300`) on static assets.
 - If deterministic no-store behavior is needed for debugging, tooling may expose an explicit opt-in override (Wave U: `tools/static-serve.mjs --cache=off`).
 - Rationale: aligns local diagnostics with production-like browser navigation behavior while preserving reproducible QA loops.
+
+## 2026-02-24 — DEC-033: Dist-first minification workflow for GitHub Pages parity
+- Preserve readable source assets in repo root while generating a deploy-ready `dist/` tree via `tools/build-static-dist.mjs` for minification-focused Lighthouse verification and optional static deployment packaging.
+- Local QA must support alternate site roots, so `tools/static-serve.mjs` accepts `--root=<dir>` (for example `--root=dist`) to run runtime checks/LHCI against built artifacts.
+- This strategy avoids unsafe in-place source rewrites while still enabling measurable closure on ID-017 under static hosting constraints.

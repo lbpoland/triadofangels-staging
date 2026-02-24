@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE U  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE V  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -53,7 +53,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 - [NOT STARTED] A-01.3 Create/maintain a rolling “Release Notes” log per patch wave
 
 ### A-02 Repo/tooling consistency
-- [NOT STARTED] A-02.1 Confirm node tooling versions + remove deprecated packages where feasible (without breaking)
+- [IN PROGRESS] A-02.1 Confirm node tooling versions + remove deprecated packages where feasible (without breaking) (Wave V added dist-build + dist-serve scripts; package/dependency cleanup still pending)
 - [NOT STARTED] A-02.2 Ensure dev-check covers: CSP, broken links, duplicate IDs, JSON-LD validity, sitemap, robots
 - [NOT STARTED] A-02.3 Add a “console-clean” CI gate script (optional) that loads core pages and fails on console errors
 - [IN PROGRESS] A-02.4 Resolve bfcache blockers in local QA/runtime stack (Wave U removed local QA no-store headers; pending local LHCI + DevTools validation)
@@ -275,3 +275,5 @@ Local QA results pasted:
 
 - **2026-02-24 (AEST)** — MEGA WAVE T (Accessibility mode support on Publishing): expanded reduced-motion handling to suppress Publishing hover/transitions and enforce auto scroll behavior, and added forced-colors system-color styles/focus outlines for Publishing controls, cards, and shelf surfaces. (Ledger: ID-032; Checklist: E-02.1, E-02.2)
 - **2026-02-24 (AEST)** — MEGA WAVE U (Architecture/tooling bfcache hardening): replaced local QA server `Cache-Control: no-store` defaults with bfcache-safe cache policy (`no-cache` HTML + `public, max-age=300` assets), mirrored in dev-check runtime server, and added `tools/static-serve.mjs --cache=off` debug fallback. (Ledger: ID-018; Checklist: A-02.4)
+
+- **2026-02-24 (AEST)** — MEGA WAVE V (Architecture/tooling dist minification pipeline): added `tools/build-static-dist.mjs` zero-dependency dist builder with HTML/CSS/JS minification + build-report output, plus `tools/static-serve.mjs --root`/`npm run qa:serve:dist` support for production-like LHCI against dist artifacts. (Ledger: ID-017; Checklist: A-02.1)

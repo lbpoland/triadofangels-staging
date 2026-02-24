@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE U  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE V  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -30,7 +30,7 @@
 | [DONE] | Static hosting constraints enforced (no server-side secrets) | Rules v5 | — |
 | [DONE] | Core tooling exists: dev-check, link-scan, generate-static, static-serve | /tools/*.mjs | — |
 | [DONE] | Pre-rendered music track pages exist (static SEO path) | /music/tracks/**/index.html | — |
-| [IN PROGRESS] | Minification / build pipeline strategy (src→dist) | /tools + repo structure | ID-017 |
+| [IN PROGRESS] | Minification / build pipeline strategy (src→dist) | /tools + repo structure | ID-017 (Wave V added zero-dependency `build-static-dist` dist pipeline + dist-root QA server option; pending local LHCI production-origin verification) |
 | [IN PROGRESS] | bfcache blocker identification + resolution | tools/static-serve.mjs + tools/dev-check.mjs + runtime | ID-018 (Wave U moved local QA servers from `Cache-Control: no-store` to bfcache-safe cache headers; pending local LHCI/DevTools verification) |
 | [IN PROGRESS] | Global head preconnect normalization applied + idempotent | all HTML + tools/toa-mega-wave-c__preconnect-normalize.mjs | ID-028, ID-032 (pending local LHCI) |
 
@@ -79,7 +79,7 @@
 | [IN PROGRESS] | Enforce no inline handlers / no inline style attrs via CI dev-check gates | tools/dev-check.mjs + package.json | ID-013 + ID-032 (Wave L tooling applied; pending local runtime/LHCI verification) |
 | [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS + head hints | ID-014 + ID-028 (Wave I containment + Wave O Home hero responsive `img` candidate hint applied; pending LHCI verification) |
 | [IN PROGRESS] | Search page perf uplift (≥95) | search/search.* | ID-016 (Wave I reduced non-home first-view payload; further search-specific optimization still needed) |
-| [NOT STARTED] | Minify CSS/JS in production build | build pipeline | ID-017 |
+| [IN PROGRESS] | Minify CSS/JS in production build | build pipeline | ID-017 (Wave V dist minification pipeline implemented; pending local Lighthouse proof on dist/prod origins) |
 | [IN PROGRESS] | Serve responsive images / right-size first view | images + HTML | ID-014 (Home hero responsive preload + Wave O `img srcset/sizes` applied; variant generation still pending) |
 
 ---
@@ -220,3 +220,8 @@
 - **QA:** `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `node tools/link-scan.mjs --ci` PASS; runtime+Lighthouse blocked in sandbox due missing browser executables.
 - **Next:** Run LOCAL QA PACK runtime + LHCI + Chrome DevTools bfcache diagnostics to verify ID-018 closure, then proceed to ID-017 build/minification strategy.
 
+
+### 2026-02-24 (MEGA WAVE V)
+- **Done:** Added Architecture/Tooling dist-build pipeline via `tools/build-static-dist.mjs` to generate a deployable `dist/` tree with minified HTML/CSS/JS plus build metrics report, and extended `tools/static-serve.mjs` with `--root` so local QA/LHCI can run directly against `dist` output (ID-017 / A-02.1).
+- **QA:** `node tools/build-static-dist.mjs --out=dist` PASS, `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `node tools/link-scan.mjs --ci` PASS; runtime+Lighthouse blocked in sandbox due missing Playwright `chrome-headless-shell` and missing Chrome/Chromium executable.
+- **Next:** Run LOCAL QA PACK dist-origin runtime + LHCI sweeps to verify `unminified-*` / compression findings clear, then promote ID-017 to VERIFIED.
