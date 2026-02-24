@@ -16,19 +16,6 @@
 
 ---
 
-## Session Handoff Protocol (MANDATORY)
-
-When starting a new ChatGPT session, paste:
-1) Authority Order
-2) Latest Bundle + Manifest + Lighthouse artifacts
-3) Tracker Files (Audit Ledger / Master Checklist / QA Matrix / Decisions Log / Patch Plan)
-4) This file: TOA_Mega_Implementation_Checklist.md
-5) Then say: “Continue with checklist items: <IDs>” and paste any new local QA outputs.
-
-Do not re-audit from scratch unless explicitly requested. Use checklists + ledger as execution memory.
-
----
-
 ## Core Commands (Local QA)
 
 Run after major batches (not after tiny edits):
@@ -38,10 +25,6 @@ Run after major batches (not after tiny edits):
 - node tools/link-scan.mjs
 - node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json
 - node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json
-- Bundle refresh:
-  - python .\toa_bundle.py --profile chatgpt --clean-lighthouse archive
-
-Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 
 ---
 
