@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE O  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE P  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -68,11 +68,11 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 
 ### B-02 Desktop nav + dropdown stability
 - [IN PROGRESS] B-02.1 Desktop dropdown positioning: no clipping; correct z-index; no overflow hidden traps (Wave M viewport-edge alignment applied; pending local QA)
-- [NOT STARTED] B-02.2 Multi-level submenu: pointer + keyboard parity; no hover traps
+- [IN PROGRESS] B-02.2 Multi-level submenu: pointer + keyboard parity; no hover traps (Wave P desktop pointer-enter/leave parity + submenu arrow/home/end keyboard traversal applied; pending local QA)
 - [IN PROGRESS] B-02.3 Click-outside rules: never close while interacting inside submenu (Wave M verified code path retained; pending local QA)
 
 ### B-03 Accessibility + semantics
-- [IN PROGRESS] B-03.1 Nav ARIA: expanded states correct; ESC closes; focus returns to trigger
+- [IN PROGRESS] B-03.1 Nav ARIA: expanded states correct; ESC closes; focus returns to trigger (Wave P retained ESC/focus return behavior while adding Enter/Space + ArrowUp parity on nav-sub toggles; pending local QA)
 - [DONE] B-03.2 Skip-link: visible on focus; lands on #main (Wave F style/focus hardening)
 - [DONE] B-03.3 Focus rings: visible in all themes + forced-colors; no outline suppression (Wave F forced-colors focus overrides)
 - [IN PROGRESS] B-03.4 Typography parity: brand/header/menu typography consistent across all pages (fonts link normalized; display/body tokens applied)
@@ -262,3 +262,5 @@ Local QA results pasted:
 - **2026-02-24 (AEST)** — MEGA WAVE N (Home Featured Albums rail stabilization): removed duplicate keyboard listeners causing double-scroll jumps, added screen-reader rail instructions/region linkage, and hardened mobile card sizing to preserve horizontal snap behavior without edge bleed. (Ledger: ID-006; Checklist: C-01.1, C-01.2, C-01.3)
 
 - **2026-02-24 (AEST)** — MEGA WAVE O (Homepage hero polish): implemented fluid Home hero typography and subtitle spacing, CTA focus-visible/touch-target hardening, and responsive hero image candidate hints (`srcset`/`sizes`) to progress C-02.1/C-02.2/C-02.3 under static-first constraints. (Ledger: ID-014, ID-006; Checklist: C-02.1, C-02.2, C-02.3)
+
+- **2026-02-24 (AEST)** — MEGA WAVE P (Navigation submenu parity): implemented desktop pointer-enter/leave submenu parity, added trigger/menu keyboard traversal controls (ArrowUp/ArrowDown/Home/End + Enter/Space), and preserved ESC focus-return/outside-close safety. (Ledger: ID-005, ID-013; Checklist: B-02.2, B-03.1)
