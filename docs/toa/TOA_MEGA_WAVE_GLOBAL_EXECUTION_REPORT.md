@@ -63,3 +63,39 @@ Actions completed in this global pass:
 - `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json`
 - `node tools/static-serve.mjs --port=4173 --root=dist`
 
+## 2026-02-24 Addendum — Full Backlog Re-Execution (This Session)
+
+### Multi-wave readiness snapshot (dependency-safe)
+
+| Wave | Layer | Dependency status | Note |
+|---|---|---|---|
+| C | Head perf normalization | READY | Already implemented; revalidated via non-browser gates this session. |
+| G | Canonical routing | READY | Already implemented; no structural blocker. |
+| H | Publishing CLS | READY | Already implemented; browser QA remains local-only blocker. |
+| I | Critical path LCP | READY | Already implemented; dist/runtime checks rerun this session. |
+| J | SEO indexing hygiene | READY | Already implemented; no dependency conflict. |
+| K | Truth-first hubs | READY | Already implemented; governance evidence refreshed. |
+| L | CSP/runtime gate | READY | Already implemented; local browser runtime still required. |
+| M | Nav desktop stability | READY | Already implemented and linked in governance trackers. |
+| N | Home rail stabilization | READY | Already implemented and linked in governance trackers. |
+| O | Hero polish | READY | Already implemented and linked in governance trackers. |
+| P | Nav parity | READY | Already implemented and linked in governance trackers. |
+| Q | Responsive overflow | READY | Already implemented and linked in governance trackers. |
+| R | A11y semantics | READY | Already implemented and linked in governance trackers. |
+| S | Contrast/list semantics | READY | Already implemented and linked in governance trackers. |
+| T | Reduced-motion/forced-colors | READY | Already implemented and linked in governance trackers. |
+| U | bfcache QA policy | READY | Already implemented and linked in governance trackers. |
+| V | Dist minification pipeline | READY | Already implemented; dist build rerun this session. |
+
+### Re-execution evidence (non-browser + browser-gate attempt)
+
+- PASS — `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`
+- PASS — `node tools/link-scan.mjs --ci`
+- PASS — `npm run build:dist`
+- BLOCKED (single attempt; no retry loop) — `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`
+  - Blocker: Playwright Chromium executable missing in environment (`chrome-headless-shell`).
+
+### Consolidated risk update
+
+- **Residual technical risk:** browser-gated verification debt (runtime + LHCI) remains the only blocker for promoting multiple IN PROGRESS governance rows to VERIFIED.
+- **Governance coherence:** all Mega Waves in scope remain executed and linked; this session refreshed evidence without introducing architecture drift.

@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE V update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE GLOBAL revalidation update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -857,5 +857,17 @@ When an issue is fixed, update:
   - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
   - `node tools/link-scan.mjs --ci` PASS
   - `node tools/build-static-dist.mjs --out=dist` PASS
+  - `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop remain blocked in sandbox due missing Chrome/Chromium executable
+
+
+## Patch Wave 20 — Mega Wave GLOBAL (Backlog Re-Execution Evidence Refresh)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Re-executed complete Mega Wave backlog governance pass to confirm dependency-safe saturation state across manifests `C`, `G`→`V`.
+- **Files changed:** governance-only (`docs/toa/*`) for updated evidence/status narration; no product-surface code changes.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `npm run build:dist` PASS
   - `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
   - LHCI mobile+desktop remain blocked in sandbox due missing Chrome/Chromium executable
