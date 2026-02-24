@@ -34,6 +34,11 @@ const setGridBusy = (isBusy) => {
   UI.grid.dataset.loading = isBusy ? 'true' : 'false';
 };
 
+const setGridState = (state) => {
+  if (!UI.grid) return;
+  UI.grid.dataset.state = state;
+};
+
 
 const normalize = (value) => {
   const s = (value ?? '').toString();
@@ -416,7 +421,7 @@ const renderGrid = (recs) => {
 
   UI.grid.replaceChildren(frag);
   setGridBusy(false);
-};;
+};
 
 const renderMeta = (count) => {
   if (!UI.meta) return;
@@ -659,12 +664,40 @@ const renderChips = () => {
 
 let rafId = 0;
 
+const updateEmptyState = ({ hasData, hasResults }) => {
+  if (!UI.empty) return;
+
+  if (!hasData) {
+    UI.empty.hidden = false;
+    UI.empty.innerHTML = `
+      <p class="library-empty__title">Publishing library is currently empty</p>
+      <p class="library-empty__text">No books are published in this catalog yet. When official releases are added in <code>/js/publishing-data.js</code>, this page will automatically render shelves, filters, and book cards.</p>
+    `;
+    return;
+  }
+
+  if (!hasResults) {
+    UI.empty.hidden = false;
+    UI.empty.innerHTML = `
+      <p class="library-empty__title">No matching books</p>
+      <p class="library-empty__text"><strong>No results.</strong> Try adjusting the search, filters, or sort.</p>
+    `;
+    return;
+  }
+
+  UI.empty.hidden = true;
+};
+
 const updateUi = () => {
   if (rafId) cancelAnimationFrame(rafId);
   rafId = requestAnimationFrame(() => {
     const recs = filterAndRank();
 
-    if (UI.empty) UI.empty.hidden = recs.length !== 0;
+    const hasData = Array.isArray(books) && books.length > 0;
+    const hasResults = recs.length > 0;
+
+    setGridState(hasResults ? 'results' : 'empty');
+    updateEmptyState({ hasData, hasResults });
 
     renderGrid(recs);
     renderMeta(recs.length);
@@ -700,7 +733,8 @@ const init = () => {
       clearNode(UI.chips);
     }
     const recs = [];
-    if (UI.empty) UI.empty.hidden = false;
+    setGridState('empty');
+    updateEmptyState({ hasData: false, hasResults: false });
     renderGrid(recs);
     renderMeta(0);
     injectJsonLd(recs);

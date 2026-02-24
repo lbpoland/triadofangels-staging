@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE G  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE H  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -12,6 +12,7 @@
 **Patch Wave 01 applied:** yes (P0).
 **MEGA WAVE C applied:** yes (head preconnect normalization across all HTML).
 **MEGA WAVE G applied:** yes (canonical track alias route pruning).
+**MEGA WAVE H applied:** yes (Publishing CLS + empty-state stabilization).
 
 | Field | Value |
 |---|---|
@@ -139,3 +140,13 @@
   - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
   - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
 - Local execution is required before marking Wave G as VERIFIED.
+
+
+## 8) 2026-02-24 — MEGA WAVE H execution notes
+- Applied Publishing layout stabilization by replacing malformed skeleton grid scaffold with truthful static empty-state-first markup.
+- Updated `js/publishing.js` to drive explicit empty/results UI states for no-data vs no-filter-results behavior.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates are BLOCKED in sandbox:
+  - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
+- Local execution is required before marking Wave H as VERIFIED.

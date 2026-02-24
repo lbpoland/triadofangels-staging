@@ -1,6 +1,6 @@
 # TOA Website — Decisions Log (Anti-Drift)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane)  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE H  
 **Purpose:** Record decisions, constraints, and standards so work never re-litigates the same topics.
 
 ---
@@ -192,3 +192,10 @@
 - Legacy alias slugs that are not represented in `js/data.js` must be removed from the static corpus (no orphan pre-rendered routes).
 - Rationale: preserves dev-check route-integrity gate, avoids duplicate-content indexing risk, and keeps sitemap/static corpus aligned with canonical data.
 - Verification: `node tools/dev-check.mjs --ci` and `node tools/link-scan.mjs --ci` must pass after route pruning.
+
+
+## 2026-02-24 — DEC-023: Publishing empty-state-first rendering to reduce CLS
+- `publishing.html` must ship a truthful, static empty-state block by default when `js/publishing-data.js` has no books.
+- Avoid heavy skeleton scaffolds for this page while catalog is empty; they create avoidable large layout shifts when runtime clears/replaces nodes.
+- `js/publishing.js` owns deterministic state transitions (`empty` vs `results`) and message copy for no-data vs no-filter-results conditions.
+- CSS must reserve stable library area spacing/min-height so toolbar/sections do not jump while JS initializes.

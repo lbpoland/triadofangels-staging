@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE G  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE H  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -53,7 +53,7 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [IN PROGRESS] | Fix card/section box overflow on mobile (no edge bleed) | css/style.css (+ page CSS) | ID-007 |
-| [IN PROGRESS] | Publishing CLS stabilized (≤0.10) | publishing.html + css/publishing.css + js/publishing.js | ID-012 |
+| [IN PROGRESS] | Publishing CLS stabilized (≤0.10) | publishing.html + css/publishing.css + js/publishing.js | ID-012 (Wave H structural hardening applied; local LHCI verification pending) |
 | [IN PROGRESS] | Responsive images / hero sizing & srcset rollout | assets/images + HTML | ID-014 |
 
 ---
@@ -139,3 +139,8 @@
 - **Done:** Pruned 10 legacy duplicate track alias static routes so only canonical pre-rendered track pages remain (ID-015 / I-02.1).
 - **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due to missing browser executables.
 - **Next:** Run LOCAL QA PACK for runtime + LHCI, then advance to Publishing CLS/LCP wave (ID-012 / ID-014).
+
+### 2026-02-24 (MEGA WAVE H)
+- **Done:** Stabilized Publishing library structure and empty-state rendering to reduce CLS risk (ID-012 / H-01.1 / F-01.2).
+- **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due to missing browser executables.
+- **Next:** Run LOCAL QA PACK for Publishing runtime + LHCI, then advance to Home/Music LCP optimization (ID-014 / F-01.1).

@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE G  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE H  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -125,7 +125,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 
 ### F-01 Core Web Vitals
 - [IN PROGRESS] F-01.1 Reduce LCP on Home and Music (hero + above-fold images)
-- [NOT STARTED] F-01.2 CLS ≤ 0.10 on Publishing and any other failing page
+- [IN PROGRESS] F-01.2 CLS ≤ 0.10 on Publishing and any other failing page (Wave H layout/empty-state hardening applied; pending local LHCI confirmation)
 - [NOT STARTED] F-01.3 INP improvements: reduce heavy JS, avoid layout thrash
 
 ### F-02 Assets + caching
@@ -165,7 +165,7 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 # H) PUBLISHING PLATFORM
 
 ### H-01 Library UX
-- [IN PROGRESS] H-01.1 No-placeholder empty state: premium, clear next actions
+- [IN PROGRESS] H-01.1 No-placeholder empty state: premium, clear next actions (Wave H stabilized default empty-state rendering)
 - [IN PROGRESS] H-01.2 Remove ARIA list misuse; ensure filters are proper buttons/controls
 - [NOT STARTED] H-01.3 Add category/series/era chips matching real data (no fake books)
 
@@ -247,3 +247,4 @@ Local QA results pasted:
 - [IN PROGRESS] G-01.5 Head performance: preconnect/dns-prefetch sweep APPLIED via MEGA WAVE C; pending local Lighthouse verification
 
 - [IN PROGRESS] L-01.3 Runtime dev-check blocked in sandbox (Playwright browser binary unavailable); pending local runtime execution pack
+- **2026-02-24 (AEST)** — MEGA WAVE H (Publishing CLS + empty-state stabilization): removed malformed Publishing skeleton scaffold, switched to truthful empty-state-first rendering, and added deterministic runtime empty/results state handling. (Ledger: ID-012, Checklist: H-01.1, F-01.2)
