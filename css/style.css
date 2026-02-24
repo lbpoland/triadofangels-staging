@@ -897,15 +897,17 @@ html[data-theme="light"] .hero-banner {
     z-index: 2;
     text-align: center;
     color: var(--text);
-    padding: 0 18px;
-    max-width: min(920px, 92vw);
+    padding: clamp(0.75rem, 1.5vw, 1.2rem) 18px;
+    max-width: min(920px, 94vw);
     background: none;
     box-shadow: none;
 }
 
 .hero-content h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 3rem;
+    font-size: clamp(2rem, 5.4vw, 3.6rem);
+    line-height: 1.08;
+    letter-spacing: 0.02em;
     color: #f1c40f;
     text-shadow:
         0 0 5px rgba(241, 196, 15, 0.4),
@@ -913,6 +915,14 @@ html[data-theme="light"] .hero-banner {
         0 0 30px rgba(255, 255, 255, 0.2),
         0 0 60px rgba(14, 176, 255, 0.1); /* soft cosmic aura */
     margin: 0;
+}
+
+.hero-content__subtitle {
+    margin: clamp(0.3rem, 1vw, 0.55rem) 0 0;
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    line-height: 1.2;
+    color: var(--text);
 }
 
 h1, h2, h3 {
@@ -925,9 +935,11 @@ h1, h2, h3 {
 
 
 .hero-content p {
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 2.2vw, 1.45rem);
+    line-height: 1.45;
+    max-width: 42ch;
+    margin: clamp(0.8rem, 1.7vw, 1.25rem) auto 0;
     color: var(--text);
-    margin: 10px 0;
     text-shadow:
         0 0 5px rgba(241, 196, 15, 0.4),
         0 0 15px rgba(241, 196, 15, 0.6),
@@ -953,6 +965,7 @@ h1, h2, h3 {
 
 .cta-button {
     display: inline-block;
+    min-height: 44px;
     padding: 15px 30px;
     font-size: 1rem;
     color: #000;
@@ -972,6 +985,11 @@ h1, h2, h3 {
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
     text-decoration: none;
     outline: none;
+}
+
+.cta-button:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
 }
 
 /* Featured Section - Optimized for Performance */
@@ -1341,11 +1359,15 @@ video {
 /* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
     .hero-content h1 {
-        font-size: 2rem;
+        font-size: clamp(1.7rem, 8vw, 2.35rem);
+    }
+
+    .hero-content__subtitle {
+        font-size: clamp(1.05rem, 4.3vw, 1.4rem);
     }
 
     .hero-content p {
-        font-size: 1rem;
+        font-size: clamp(0.96rem, 3.5vw, 1.1rem);
     }
 
     .cta-button {
@@ -1455,11 +1477,15 @@ video {
     }
 
     .hero-content h1 {
-        font-size: 1.5rem;
+        font-size: clamp(1.5rem, 9vw, 1.9rem);
+    }
+
+    .hero-content__subtitle {
+        font-size: clamp(1rem, 5vw, 1.15rem);
     }
 
     .hero-content p {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 
     .cta-button {

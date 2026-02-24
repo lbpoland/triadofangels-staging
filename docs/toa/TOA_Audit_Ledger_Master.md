@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE N update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE O update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -175,6 +175,18 @@
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+
+## Patch Wave 11 — Mega Wave O (Homepage Hero Polish)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Homepage hero typography/focus/perf hint hardening within the carousel/home layer (ID-006 / ID-014 / C-02.1 / C-02.2 / C-02.3).
+- **Files changed:** `index.html`, `css/style.css` + governance tracker updates.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -183,7 +195,7 @@
 | ID-003 | P0 | OPEN (process control) | Workflow | Atomic delivery enforcement | delivery contract + process |
 | ID-004 | P1 | BLOCKED | Audit | Deep-report reconciliation pending upload | deep-research-report(3).md |
 | ID-005 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Navigation / Mobile | Mobile/desktop header dropdown alignment + submenu stability hardening applied (Wave 01 + Wave M) | `css/style.css`, `js/global.js`, header HTML generation |
-| ID-006 | P0 | IMPLEMENTED (PENDING LOCAL QA) | Home / UX | Home Featured Albums rail hardened with single keyboard handler path, SR instructions, and mobile snap-width stability improvements | `index.html`, `css/style.css`, `js/global.js` |
+| ID-006 | P0 | IMPLEMENTED (PENDING LOCAL QA) | Home / UX | Home layer hardening across Featured Albums rail + hero polish (fluid typography/subtitle spacing + CTA focus guidance) applied; pending local runtime/LHCI/manual verification | `index.html`, `css/style.css`, `js/global.js` |
 | ID-007 | P0 | IMPLEMENTED (PENDING QA) | Responsive | Content “box” frames overflow viewport on S24 (horizontal clipping/edge bleed) | `css/style.css` (+ page CSS where needed) |
 | ID-008 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `label-content-name-mismatch` across pages (visible text vs aria-label mismatch) | global HTML, footer/header, `css/style.css`, `js/album.js`, `js/track.js`, `js/book.js` |
 | ID-009 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | `color-contrast` failures (light/dark parity) | `css/style.css` (+ page CSS) |
@@ -191,7 +203,7 @@
 | ID-011 | P0 | IMPLEMENTED (PENDING QA) | Accessibility | Publishing page `aria-required-children` | `publishing.html`, `js/publishing.js`, `css/publishing.css` |
 | ID-012 | P0 | HARDENED (PENDING QA) | Performance / UX | Publishing CLS mitigation strengthened (empty-state-first structure + deterministic UI state handling) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
 | ID-013 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Stability | Lighthouse reports console errors on core pages; Wave L added stricter no-inline handler/style gate enforcement in dev-check/CI but browser runtime proof still pending locally | `js/global.js`, page modules, `tools/dev-check.mjs`, `package.json` |
-| ID-014 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance | LCP containment patch applied (Home-only heavy cinematic background + Home hero preload); awaiting local LHCI confirmation | images + CSS + critical path |
+| ID-014 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance | LCP containment expanded with responsive hero image candidate hinting (`srcset`/`sizes`) on Home; awaiting local LHCI confirmation | images + CSS + critical path |
 | ID-015 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO | Duplicate/alias track static routes pruned to canonical-only corpus (10 alias routes removed) | `music/tracks/**/index.html` |
 | ID-016 | P1 | IN PROGRESS | Performance / UX | Search perf baseline remains open; non-home heavy-background containment applied to reduce first-view cost pending local LHCI verification | `search/search.js`, `search/search.css`, `css/style.css` |
 | ID-017 | P2 | OPEN | Build / Perf | Lighthouse flags minification + cache + compression strategy | tooling + build pipeline |
@@ -304,6 +316,7 @@
 - **Root cause (likely):** Markup/class mismatch with existing carousel CSS, or missing JS initialization for the home rail.
 - **Wave 01 implementation:** Home Featured Albums now uses a real **horizontal rail** on mobile via global CSS. Added keyboard scrolling + tabindex enhancement (ArrowLeft/ArrowRight/Home/End) for accessibility.
 - **Mega Wave N implementation (2026-02-24):** Removed duplicate keyboard listeners so Arrow/Home/End does not double-scroll, added explicit screen-reader rail instructions (`aria-describedby`), and tightened mobile card width/snap padding to preserve horizontal behavior and prevent edge bleed.
+- **Mega Wave O follow-up (2026-02-24):** Added Home hero fluid typography/subtitle spacing and CTA focus/target-size hardening to complete the next homepage layer slice adjacent to the rail fixes.
 - **Why it matters:** Breaks premium discovery feel and massively increases scroll friction on mobile.
 - **Required fix:** Ensure Featured Albums uses the established carousel/rail pattern (scroll-snap + buttons + touch drag).
 - **Acceptance criteria:**

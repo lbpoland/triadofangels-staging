@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE N  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE O  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -19,6 +19,7 @@
 **MEGA WAVE L applied:** yes (Console/CSP guardrail hardening: no-inline-handler gate + CI wiring).
 **MEGA WAVE M applied:** yes (Navigation desktop dropdown stability: edge-aware submenu alignment + resize repositioning).
 **MEGA WAVE N applied:** yes (Home Featured Albums rail stabilization: single keyboard handler path + SR rail instructions + mobile snap-width hardening).
+**MEGA WAVE O applied:** yes (Homepage hero polish: fluid typography/subtitle spacing + CTA focus-visible/touch target hardening + responsive hero `img srcset/sizes`).
 
 | Field | Value |
 |---|---|
@@ -212,3 +213,11 @@
   - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
   - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
 - Local execution is required before marking Wave N as VERIFIED for C-01.1/C-01.2/C-01.3 and ID-006.
+
+## 15) 2026-02-24 — MEGA WAVE O execution notes
+- Applied homepage hero-layer polish on `index.html` + `css/style.css`: fluid breakpoint-safe typography (`clamp`), dedicated subtitle styling, CTA `:focus-visible` ring and 44px minimum tap target, and responsive hero image candidate hinting (`srcset` + `sizes`) for LCP support.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates attempted once and BLOCKED in sandbox:
+  - Runtime dev-check failed due missing Playwright executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop failed due no Chrome/Edge/Chromium executable.
+- Local execution is required before marking Wave O as VERIFIED for C-02.1/C-02.2/C-02.3 and ID-014 closure evidence.
