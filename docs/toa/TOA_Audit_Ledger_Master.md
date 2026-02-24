@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE I update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE J update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -118,6 +118,17 @@
   - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
 
+
+## Patch Wave 06 — Mega Wave J (SEO Indexing Hygiene)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** SEO indexing hygiene for canonical crawl corpus and robots/sitemap alignment (ID-033 / G-04.1 / G-04.2).
+- **Files changed:** `tools/generate-static.mjs`, `sitemap.xml`, `robots.txt` + governance tracker updates.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `node tools/dev-check.mjs --runtime --ci` FAIL in sandbox due missing Playwright browser executable
+  - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
 ## Issue Index (quick navigation)
 | ID | Severity | Status | Category | Summary | Primary files |
 |---|---|---|---|---|---|
@@ -143,6 +154,7 @@
 | ID-020 | P2 | OPEN | Platform | Publishing data + content roadmap (truthful, no placeholders) | `js/publishing-data.js`, `publishing.html` |
 | ID-021 | P2 | OPEN | Platform / Trust | Store/Merch/Digital Store truth + consistency pass | `merch.html`, `digital-store.html`, `streaming.html` |
 | ID-032 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance + Accessibility | ToA global background rendering hardening (mobile variant, reduced-motion, forced-colors, no fixed attachment) | `css/style.css` |
+| ID-033 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO / Indexing | Sitemap now indexes canonical HTML pages only and robots disallows legacy templates + 404 path | `tools/generate-static.mjs`, `sitemap.xml`, `robots.txt` |
 
 ---
 
@@ -655,3 +667,15 @@ When an issue is fixed, update:
 - **Symptoms:** Playwright cannot launch (`Executable doesn't exist ... chrome-headless-shell`); Lighthouse wrapper reports no Chrome/Edge/Chromium executable detected.
 - **Required action:** Execute LOCAL QA PACK commands on a machine with Playwright Chromium + Chrome/Chromium installed and attach outputs.
 - **Entry:** 2026-02-23T23:09:00Z
+
+
+### ID-033 — Sitemap/Robots indexing hygiene for canonical HTML corpus
+- **Severity:** P1
+- **Category:** SEO / Indexing
+- **Status:** FIX IMPLEMENTED (PENDING QA)
+- **Detected by:** Governance checklist gap (`G-04.1`, `G-04.2`) and sitemap inclusion of non-HTML lyrics text endpoints.
+- **Symptoms:** `sitemap.xml` previously included `lyrics/**/*.txt` URLs, and robots directives did not explicitly keep legacy query templates out of crawl/index scope.
+- **Fix:** Updated `tools/generate-static.mjs` sitemap builder to include canonical HTML URLs only; regenerated `sitemap.xml`; updated `robots.txt` to disallow `/404.html`, `/album.html`, `/track.html`, and `/book.html` while preserving global allow + sitemap declaration.
+- **Files touched:** `tools/generate-static.mjs`, `sitemap.xml`, `robots.txt`
+- **QA verification:** `node tools/dev-check.mjs --ci` and `node tools/link-scan.mjs --ci` pass in sandbox; runtime/LHCI SEO confirmation pending local browser-enabled execution.
+- **Entry:** 2026-02-24T10:45:00Z

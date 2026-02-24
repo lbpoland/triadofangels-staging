@@ -1,6 +1,6 @@
 # TOA Website — Decisions Log (Anti-Drift)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE H  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE J  
 **Purpose:** Record decisions, constraints, and standards so work never re-litigates the same topics.
 
 ---
@@ -205,3 +205,10 @@
 - Non-home ToA pages use lightweight gradient fallbacks to preserve brand mood without forcing a global high-byte LCP candidate.
 - Home keeps a dedicated responsive hero image preload (`imagesrcset` + `imagesizes`) to improve critical image discovery.
 - Rationale: directly targets ID-014/ID-016 mobile LCP pressure while preserving cinematic intent where it matters most.
+
+
+## 2026-02-24 — DEC-025: Sitemap indexes canonical HTML routes only
+- `sitemap.xml` must include only canonical HTML document URLs intended for indexing.
+- Exclude non-HTML assets/content endpoints (for example `lyrics/**/*.txt`) and exclude legacy query templates (`/album.html`, `/track.html`, `/book.html`) from indexed sitemap entries.
+- `robots.txt` must remain aligned with this policy and keep `/404.html` and legacy templates out of crawl/index scope.
+- Enforcement: `tools/generate-static.mjs` sitemap generation and repository `robots.txt`.
