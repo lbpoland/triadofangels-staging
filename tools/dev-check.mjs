@@ -184,6 +184,98 @@ const pushIssue = (arr, strict, issue) => {
   return strict;
 };
 
+const validateDuplicateIds = (html) => {
+  const seen = new Map();
+  const duplicates = [];
+  const re = /\bid\s*=\s*(["'])([^"']+)\1/gi;
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    const id = (m[2] || '').trim();
+    if (!id) continue;
+    const count = (seen.get(id) || 0) + 1;
+    seen.set(id, count);
+    if (count === 2) duplicates.push(id);
+  }
+  return duplicates;
+};
+
+const resolveSitePathFromUrl = (urlPath) => {
+  let clean = (urlPath || '').trim();
+  if (!clean || clean.startsWith('#')) return '';
+  if (clean.startsWith('mailto:') || clean.startsWith('tel:') || clean.startsWith('javascript:')) return '';
+  if (/^https?:\/\//i.test(clean)) {
+    if (!clean.startsWith(SITE_ORIGIN)) return '';
+    clean = clean.slice(SITE_ORIGIN.length);
+  }
+  const withoutHash = clean.split('#')[0] || '';
+  const withoutQuery = withoutHash.split('?')[0] || '';
+  if (!withoutQuery.startsWith('/')) return '';
+  if (withoutQuery.endsWith('/')) return `${withoutQuery}index.html`;
+  return withoutQuery;
+};
+
+const validateLocalAssetAndPageRefs = (html, htmlSet) => {
+  const errors = [];
+  const attrs = ['href', 'src'];
+  for (const attr of attrs) {
+    const re = new RegExp(`\\b${attr}\\s*=\\s*(["'])([^"']+)\\1`, 'gi');
+    let m;
+    while ((m = re.exec(html)) !== null) {
+      const raw = (m[2] || '').trim();
+      const resolved = resolveSitePathFromUrl(raw);
+      if (!resolved) continue;
+      if (!htmlSet.has(resolved) && resolved.endsWith('.html')) {
+        errors.push({ kind: 'broken-link', field: attr, target: raw, resolved });
+      }
+    }
+  }
+  return errors;
+};
+
+const validateRobotsAndSitemap = async () => {
+  const errors = [];
+  const warnings = [];
+  const robotsPath = path.join(ROOT, 'robots.txt');
+  const sitemapPath = path.join(ROOT, 'sitemap.xml');
+
+  let robots = '';
+  let sitemap = '';
+  try { robots = await fs.readFile(robotsPath, 'utf8'); } catch {}
+  try { sitemap = await fs.readFile(sitemapPath, 'utf8'); } catch {}
+
+  if (!robots) {
+    errors.push({ kind: 'missing', field: 'robots.txt' });
+  } else {
+    if (!/User-agent:\s*\*/i.test(robots)) errors.push({ kind: 'missing', field: 'robots.user-agent-star' });
+    if (!new RegExp(`Sitemap:\\s*${SITE_ORIGIN.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\/sitemap\\.xml`, 'i').test(robots)) {
+      errors.push({ kind: 'missing', field: 'robots.sitemap-reference' });
+    }
+  }
+
+  if (!sitemap) {
+    errors.push({ kind: 'missing', field: 'sitemap.xml' });
+  } else {
+    if (!/<urlset\b/i.test(sitemap)) errors.push({ kind: 'invalid', field: 'sitemap.urlset' });
+    const locMatches = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gi)];
+    if (locMatches.length === 0) {
+      errors.push({ kind: 'invalid', field: 'sitemap.loc', note: 'No <loc> entries found.' });
+    } else {
+      const offOrigin = locMatches
+        .map((m) => (m[1] || '').trim())
+        .filter((loc) => loc && !loc.startsWith(SITE_ORIGIN));
+      if (offOrigin.length > 0) {
+        errors.push({ kind: 'non-site-origin', field: 'sitemap.loc', examples: offOrigin.slice(0, 5) });
+      }
+    }
+  }
+
+  if (robots && sitemap && !/Disallow:\s*\/404\.html/i.test(robots)) {
+    warnings.push({ kind: 'missing', field: 'robots.disallow-404', note: 'Expected 404 crawl disallow policy.' });
+  }
+
+  return { errors, warnings };
+};
+
 const checkHtmlMeta = (html, relPath, opts) => {
   const strict = !!opts?.strict;
   const strictA11yHead = !!opts?.strictA11yHead;
@@ -220,6 +312,16 @@ const checkHtmlMeta = (html, relPath, opts) => {
         examples,
       });
     }
+  }
+
+  const dupIds = validateDuplicateIds(html);
+  if (dupIds.length > 0) {
+    errors.push({ kind: 'duplicate', field: 'id', count: dupIds.length, examples: dupIds.slice(0, 10) });
+  }
+
+  const hasCspMeta = /<meta\b[^>]*http-equiv\s*=\s*["']Content-Security-Policy["'][^>]*>/i.test(html);
+  if (!hasCspMeta) {
+    errors.push({ kind: 'missing', field: 'csp-meta', note: 'Missing <meta http-equiv="Content-Security-Policy">' });
   }
 
   // TITLE
@@ -1097,6 +1199,7 @@ const main = async () => {
   const htmlFiles = all.filter((p) => p.toLowerCase().endsWith('.html'));
 
   const htmlMap = new Map();
+  const htmlSet = new Set(htmlFiles.map((p) => `/${path.relative(ROOT, p).replace(/\\/g, '/')}`));
   const perFile = [];
   const jsonldErrors = [];
 
@@ -1118,8 +1221,9 @@ const main = async () => {
     const cspErrors = validateCspAndJsonLdHashes(html, relPath);
     const jsonldStructureErrors = validateJsonLdStructure(html, relPath);
     const placeholderErrors = validatePlaceholders(html, relPath);
+    const localRefErrors = validateLocalAssetAndPageRefs(html, htmlSet);
 
-    errors.push(...cspErrors, ...jsonldStructureErrors, ...placeholderErrors);
+    errors.push(...cspErrors, ...jsonldStructureErrors, ...placeholderErrors, ...localRefErrors);
 
     perFile.push({
       file: relPath,
@@ -1133,6 +1237,10 @@ const main = async () => {
 
     jsonldErrors.push(...ldErrors);
   }
+
+  const crawlPolicy = await validateRobotsAndSitemap();
+  errorCount += crawlPolicy.errors.length;
+  warnCount += crawlPolicy.warnings.length;
 
   // Data integrity + runtime selection
   let dataIntegrity = { errors: [], warnings: [] };
@@ -1178,7 +1286,8 @@ const main = async () => {
     },
     perFile,
     dataIntegrity,
-    runtimeValidation
+    runtimeValidation,
+    crawlPolicy
   };
 
   await fs.writeFile(REPORT_PATH, JSON.stringify(report, null, 2), 'utf8');
