@@ -125,3 +125,15 @@ Actions completed in this global pass:
 ## 2026-02-24 Addendum — MEGA WAVE W (Governance Layer Closure)
 - Closed governance architectural layer A-01 by codifying Delivery Safety Protocol in locked instructions, adding rolling release notes log, and reconciling ledger/checklist/QA artifacts for ID-001/ID-002/ID-003.
 - Browser-gated runtime/LHCI checks remain local-only in this sandbox; non-browser gates passed in-session.
+
+
+## 2026-02-24 Addendum — MEGA WAVE X (Architecture/Tooling QA Gate Expansion)
+- Layer scope: A-02 architecture/tooling consistency hardening (dev-check coverage + console-clean runtime gating).
+- Implemented `tools/dev-check.mjs` checks for duplicate IDs, CSP meta presence, local HTML broken-link references, and robots/sitemap integrity.
+- Implemented `tools/console-clean.mjs` with npm CI/QA script wiring for console/pageerror/requestfailed enforcement over core pages.
+- Validation in sandbox:
+  - PASS — `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`
+  - PASS — `node tools/link-scan.mjs --ci`
+  - PASS — `npm run build:dist`
+  - BLOCKED — `node tools/console-clean.mjs --ci` (Playwright Chromium executable missing: `chrome-headless-shell`).
+- Governance linkage: Ledger `ID-013`, `ID-017`, `ID-033`; Checklist `A-02.2`, `A-02.3` moved to implementation-complete pending local browser QA.

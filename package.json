@@ -2,7 +2,7 @@
   "name": "triadofangels-site",
   "private": true,
   "type": "module",
-  "description": "Triad of Angels — static site (GitHub Pages). Dev-only validation scripts (dev-check + link-scan + optional Playwright runtime).",
+  "description": "Triad of Angels \u2014 static site (GitHub Pages). Dev-only validation scripts (dev-check + link-scan + optional Playwright runtime).",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -26,12 +26,14 @@
     "qa:check:ci": "node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler --runtime",
     "qa:links": "node tools/link-scan.mjs --ci",
     "qa:lighthouse": "npm run qa:lighthouse:mobile && npm run qa:lighthouse:desktop",
-    "qa:full": "npm run qa:check:ci && npm run qa:links && npm run qa:lighthouse",
+    "qa:full": "npm run qa:check:ci && npm run qa:links && npm run qa:console-clean && npm run qa:lighthouse",
     "qa:serve": "node tools/static-serve.mjs --port=4173",
     "qa:lighthouse:mobile": "node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json",
     "qa:lighthouse:desktop": "node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json",
     "build:dist": "node tools/build-static-dist.mjs --out=dist",
-    "qa:serve:dist": "node tools/static-serve.mjs --root=dist --port=4173"
+    "qa:serve:dist": "node tools/static-serve.mjs --root=dist --port=4173",
+    "ci:console-clean": "node tools/console-clean.mjs --ci",
+    "qa:console-clean": "node tools/console-clean.mjs --ci"
   },
   "devDependencies": {
     "playwright": "^1.55.0",

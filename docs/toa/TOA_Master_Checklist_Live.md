@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE W  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE X  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -31,9 +31,11 @@
 | [DONE] | Static hosting constraints enforced (no server-side secrets) | Rules v5 | — |
 | [DONE] | Core tooling exists: dev-check, link-scan, generate-static, static-serve | /tools/*.mjs | — |
 | [DONE] | Pre-rendered music track pages exist (static SEO path) | /music/tracks/**/index.html | — |
-| [IN PROGRESS] | Minification / build pipeline strategy (src→dist) | /tools + repo structure | ID-017 (Wave V added zero-dependency `build-static-dist` dist pipeline + dist-root QA server option; pending local LHCI production-origin verification) |
+| [IN PROGRESS] | Minification / build pipeline strategy (src→dist) | /tools + repo structure | ID-017 (Wave V dist pipeline remains in place; Wave X added static coverage checks + console-clean gate wiring to support production-origin QA closure, pending local browser/LHCI verification) |
 | [IN PROGRESS] | bfcache blocker identification + resolution | tools/static-serve.mjs + tools/dev-check.mjs + runtime | ID-018 (Wave U moved local QA servers from `Cache-Control: no-store` to bfcache-safe cache headers; pending local LHCI/DevTools verification) |
 | [IN PROGRESS] | Global head preconnect normalization applied + idempotent | all HTML + tools/toa-mega-wave-c__preconnect-normalize.mjs | ID-028, ID-032 (pending local LHCI) |
+| [IN PROGRESS] | Dev-check coverage includes CSP/broken links/duplicate IDs/JSON-LD/sitemap/robots | `tools/dev-check.mjs` + crawl artifacts | ID-013, ID-033 (Wave X expanded static enforcement for duplicate IDs, CSP meta, local broken HTML refs, and robots/sitemap integrity; pending local browser-gated confirmation) |
+| [IN PROGRESS] | Console-clean CI gate for core pages | `tools/console-clean.mjs` + npm scripts | ID-013 (Wave X added runtime console-clean script + CI wiring; execution blocked in sandbox by missing Playwright browser executable) |
 
 ---
 
@@ -249,3 +251,9 @@
 - **Done:** Closed Governance layer A-01 controls by adding a locked Delivery Safety Protocol section in project instructions, creating append-only release notes log, and reconciling governance trackers to VERIFIED workflow status for ID-001/ID-002/ID-003.
 - **QA:** `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `node tools/link-scan.mjs --ci` PASS, `npm run build:dist` PASS; runtime+Lighthouse blocked in sandbox due missing Playwright `chrome-headless-shell` / Chrome binary.
 - **Next:** Run LOCAL QA PACK browser gates locally and continue with the next non-governance layer wave.
+
+
+### 2026-02-24 (MEGA WAVE X)
+- **Done:** Expanded architecture/tooling QA guardrails by adding duplicate-ID/CSP-meta/local broken HTML link and robots/sitemap integrity checks in `tools/dev-check.mjs`, and introduced `tools/console-clean.mjs` with CI script wiring (`ci:console-clean`, `qa:console-clean`).
+- **QA:** `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS, `node tools/link-scan.mjs --ci` PASS, `npm run build:dist` PASS; `node tools/console-clean.mjs --ci` BLOCKED in sandbox because Playwright Chromium executable (`chrome-headless-shell`) is missing.
+- **Next:** Run LOCAL QA PACK browser/runtime gates locally (install Playwright browsers + Chrome/Chromium) and promote A-02.2/A-02.3 + linked IDs to VERIFIED when clear.

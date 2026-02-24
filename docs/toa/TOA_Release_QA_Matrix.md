@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE W  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE X  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -28,6 +28,7 @@
 **MEGA WAVE U applied:** yes (Architecture/tooling bfcache gate hardening: QA servers now use bfcache-safe cache policy instead of `no-store`).
 **MEGA WAVE V applied:** yes (Architecture/tooling dist build: added `build-static-dist` minification pipeline and dist-root QA serve path).
 **MEGA WAVE W applied:** yes (Governance layer A-01 non-drift controls: locked delivery safety protocol + rolling release notes log + tracker reconciliation).
+**MEGA WAVE X applied:** yes (Architecture/tooling QA gate expansion: dev-check now enforces duplicate IDs/CSP-meta/local broken-link + robots/sitemap integrity checks; console-clean runtime gate script added).
 
 | Field | Value |
 |---|---|
@@ -329,3 +330,12 @@
 - PASS: `npm run build:dist`
 - BLOCKED (single attempt, no retry): `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` due missing Playwright Chromium executable (`chrome-headless-shell`).
 - Local-only pending: `node tools/lhci-run.mjs --config=./.lighthouserc.mobile.json` and `node tools/lhci-run.mjs --config=./.lighthouserc.desktop.json` (Chrome/Chromium required).
+
+
+## 21) 2026-02-24 — MEGA WAVE X execution notes
+- Expanded architecture/tooling static gate coverage in `tools/dev-check.mjs` for duplicate IDs, CSP meta presence, local broken HTML references, and robots/sitemap integrity checks.
+- Added `tools/console-clean.mjs` runtime gate and wired npm scripts (`ci:console-clean`, `qa:console-clean`) for core-page console/pageerror/requestfailed enforcement.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler`, `node tools/link-scan.mjs --ci`, `npm run build:dist`).
+- Browser-dependent console gate attempted once and BLOCKED in sandbox:
+  - `node tools/console-clean.mjs --ci` failed because Playwright Chromium executable is missing (`chrome-headless-shell`).
+- Local execution is required before marking Wave X-linked architecture items as VERIFIED.

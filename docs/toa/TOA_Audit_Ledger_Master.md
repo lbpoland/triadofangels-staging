@@ -1,6 +1,6 @@
 # TOA Website — Audit Ledger (Master)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE W governance update  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE X architecture/tooling update  
 **Scope:** Baseline normalization + tracker hardening (no code changes in this session)  
 **Canonical domain:** https://www.triadofangels.com  
 **Hosting:** GitHub Pages (static hosting)
@@ -290,7 +290,7 @@
 | ID-010 | P1 | IMPLEMENTED (PENDING QA) | Accessibility | `link-in-text-block`: links rely on color only | `css/style.css` |
 | ID-011 | P0 | HARDENED (PENDING LOCAL QA) | Accessibility | Wave S migrated Publishing shelf rows from role-based list semantics to native `ul/li` structure and aligned shelf text contrast tokens | `js/publishing.js`, `css/publishing.css` |
 | ID-012 | P0 | HARDENED (PENDING QA) | Performance / UX | Publishing CLS mitigation strengthened (empty-state-first structure + deterministic UI state handling) | `publishing.html`, `css/publishing.css`, `js/publishing.js` |
-| ID-013 | P0 | FIX IMPLEMENTED (PENDING LOCAL QA) | Stability | Lighthouse reports console errors on core pages; Wave L added stricter no-inline handler/style gate enforcement in dev-check/CI but browser runtime proof still pending locally | `js/global.js`, page modules, `tools/dev-check.mjs`, `package.json` |
+| ID-013 | P0 | HARDENED (PENDING LOCAL QA) | Stability | Wave L no-inline handler/style enforcement now paired with Wave X expanded dev-check static coverage and new `console-clean` runtime gate script; browser runtime proof remains pending local Playwright browser install | `tools/dev-check.mjs`, `tools/console-clean.mjs`, `package.json`, page modules |
 | ID-014 | P1 | FIX IMPLEMENTED (PENDING QA) | Performance | LCP containment expanded with responsive hero image candidate hinting (`srcset`/`sizes`) on Home; awaiting local LHCI confirmation | images + CSS + critical path |
 | ID-015 | P1 | FIX IMPLEMENTED (PENDING QA) | SEO | Duplicate/alias track static routes pruned to canonical-only corpus (10 alias routes removed) | `music/tracks/**/index.html` |
 | ID-016 | P1 | IN PROGRESS | Performance / UX | Search perf baseline remains open; non-home heavy-background containment applied to reduce first-view cost pending local LHCI verification | `search/search.js`, `search/search.css`, `css/style.css` |
@@ -895,3 +895,15 @@ When an issue is fixed, update:
   - `npm run build:dist` PASS
   - `node tools/dev-check.mjs --runtime --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` FAIL in sandbox due missing Playwright browser executable (`chrome-headless-shell`)
   - LHCI mobile+desktop blocked in sandbox due missing Chrome/Chromium binary
+
+
+## Patch Wave 19 — Mega Wave X (Architecture/Tooling QA Gate Expansion)
+- **Date:** 2026-02-24 (Australia/Brisbane)
+- **Scope:** Expand architecture-layer QA enforcement for checklist A-02.2/A-02.3 and linked IDs (ID-013/ID-017/ID-033).
+- **Files changed:** `tools/dev-check.mjs`, `tools/console-clean.mjs`, `package.json` + governance tracker updates.
+- **Verification state:** **PARTIAL PASS / PENDING LOCAL BROWSER QA**
+  - `node tools/dev-check.mjs --ci --strict --strict-a11y-head --strict-no-inline-style --strict-no-inline-handler` PASS
+  - `node tools/link-scan.mjs --ci` PASS
+  - `npm run build:dist` PASS
+  - `node tools/console-clean.mjs --ci` BLOCKED in sandbox due missing Playwright Chromium executable (`chrome-headless-shell`)
+  - LHCI mobile+desktop remain local-only due missing Chrome/Chromium binary in sandbox
