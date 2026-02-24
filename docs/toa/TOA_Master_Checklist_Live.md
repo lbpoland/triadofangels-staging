@@ -1,6 +1,6 @@
 # TOA Website — Master Checklist (Live)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE H  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE I  
 **Purpose:** Single source of truth for “what’s done vs next” across the entire static platform.  
 **Status legend:** `[DONE]` `[IN PROGRESS]` `[NOT STARTED]` `[BLOCKED]`  
 **Issue references:** Use `TOA_Audit_Ledger_Master.md` Issue IDs (ID-###) for precision.
@@ -76,10 +76,10 @@
 | Status | Item | Primary files | Issue / Notes |
 |---|---|---|---|
 | [IN PROGRESS] | Remove console errors on core pages (console-clean gate) | js/global.js + modules | ID-013 |
-| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS + head hints | ID-014 + ID-028 (preconnect sweep applied; pending LHCI verification) |
-| [IN PROGRESS] | Search page perf uplift (≥95) | search/search.* | ID-016 |
+| [IN PROGRESS] | Reduce LCP on Music/Index/Publishing/Search | images + critical CSS/JS + head hints | ID-014 + ID-028 (Wave I applied: home-only heavy background containment + hero preload; pending LHCI verification) |
+| [IN PROGRESS] | Search page perf uplift (≥95) | search/search.* | ID-016 (Wave I reduced non-home first-view payload; further search-specific optimization still needed) |
 | [NOT STARTED] | Minify CSS/JS in production build | build pipeline | ID-017 |
-| [IN PROGRESS] | Serve responsive images / right-size first view | images + HTML | ID-014 |
+| [IN PROGRESS] | Serve responsive images / right-size first view | images + HTML | ID-014 (Home hero responsive preload now applied; variant generation still pending) |
 
 ---
 
@@ -144,3 +144,9 @@
 - **Done:** Stabilized Publishing library structure and empty-state rendering to reduce CLS risk (ID-012 / H-01.1 / F-01.2).
 - **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due to missing browser executables.
 - **Next:** Run LOCAL QA PACK for Publishing runtime + LHCI, then advance to Home/Music LCP optimization (ID-014 / F-01.1).
+
+
+### 2026-02-24 (MEGA WAVE I)
+- **Done:** Applied performance-layer critical path containment by limiting full-page ToA hero image background to Home and adding responsive Home hero image preload hint (ID-014 / ID-016 / F-01.1 / F-02.3).
+- **QA:** `dev-check --ci` PASS, `link-scan --ci` PASS; runtime+Lighthouse blocked in sandbox due to missing browser executables.
+- **Next:** Run LOCAL QA PACK for runtime + LHCI and then execute search-specific render/JS budget optimization (ID-016).

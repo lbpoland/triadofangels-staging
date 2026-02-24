@@ -199,3 +199,9 @@
 - Avoid heavy skeleton scaffolds for this page while catalog is empty; they create avoidable large layout shifts when runtime clears/replaces nodes.
 - `js/publishing.js` owns deterministic state transitions (`empty` vs `results`) and message copy for no-data vs no-filter-results conditions.
 - CSS must reserve stable library area spacing/min-height so toolbar/sections do not jump while JS initializes.
+
+## 2026-02-24 — DEC-024: Home-only cinematic background image containment
+- Keep the heavyweight full-page ToA hero background image (`hero-banner.webp`) limited to Home (`body.index-page`) so non-home routes avoid paying the same large first-view image cost.
+- Non-home ToA pages use lightweight gradient fallbacks to preserve brand mood without forcing a global high-byte LCP candidate.
+- Home keeps a dedicated responsive hero image preload (`imagesrcset` + `imagesizes`) to improve critical image discovery.
+- Rationale: directly targets ID-014/ID-016 mobile LCP pressure while preserving cinematic intent where it matters most.

@@ -1,6 +1,6 @@
 # TOA Website — Release QA Matrix (Baseline)
 
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE H  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE I  
 **Purpose:** Single checklist to validate releases across devices, themes, browsers, and systems.  
 **Allowed verdicts:** `PASS` `FAIL` `NOT RUN`  
 **Evidence rule:** Every `PASS` should have a short note (device/browser + any screenshots/Lighthouse refs).
@@ -13,6 +13,7 @@
 **MEGA WAVE C applied:** yes (head preconnect normalization across all HTML).
 **MEGA WAVE G applied:** yes (canonical track alias route pruning).
 **MEGA WAVE H applied:** yes (Publishing CLS + empty-state stabilization).
+**MEGA WAVE I applied:** yes (LCP critical-path containment: Home-only heavy background + Home hero preload).
 
 | Field | Value |
 |---|---|
@@ -150,3 +151,13 @@
   - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
   - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
 - Local execution is required before marking Wave H as VERIFIED.
+
+
+## 9) 2026-02-24 — MEGA WAVE I execution notes
+- Applied performance-layer critical path containment by limiting ToA full-page hero image background to Home (`body.index-page`) and using a lightweight gradient fallback for non-home ToA pages.
+- Added responsive hero image preload hint on Home (`imagesrcset` + `imagesizes`) for earlier LCP candidate discovery.
+- Non-browser gates in sandbox: PASS (`node tools/dev-check.mjs --ci`, `node tools/link-scan.mjs --ci`).
+- Browser-dependent gates are BLOCKED in sandbox:
+  - Runtime dev-check: missing Playwright browser executable (`chrome-headless-shell`).
+  - LHCI mobile/desktop: no Chrome/Edge/Chromium executable detected.
+- Local execution is required before marking Wave I as VERIFIED.

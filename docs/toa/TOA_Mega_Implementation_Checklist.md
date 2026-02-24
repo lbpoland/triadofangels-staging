@@ -1,7 +1,7 @@
 # TOA Mega Implementation Checklist (Living Backlog + Handoff Control)
 
 **Project:** Triad of Angels / ToA Studios Website (GitHub Pages static hosting)  
-**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE H  
+**Last updated:** 2026-02-24 (Australia/Brisbane) — MEGA WAVE I  
 **Purpose:** One always-on, always-current implementation checklist that survives session changes without drift.  
 **How to use:** This file is the master execution backlog. Every patch session must (1) reference checklist IDs, (2) tick statuses, and (3) write QA notes + evidence/commands where applicable.
 
@@ -124,14 +124,14 @@ Record outputs in: TOA_Release_QA_Matrix.md + TOA_Audit_Ledger_Master.md.
 # F) PERFORMANCE (Lighthouse + CWV)
 
 ### F-01 Core Web Vitals
-- [IN PROGRESS] F-01.1 Reduce LCP on Home and Music (hero + above-fold images)
+- [IN PROGRESS] F-01.1 Reduce LCP on Home and Music (hero + above-fold images) — Wave I home-only heavy-background containment + Home hero preload applied; pending local LHCI confirmation
 - [IN PROGRESS] F-01.2 CLS ≤ 0.10 on Publishing and any other failing page (Wave H layout/empty-state hardening applied; pending local LHCI confirmation)
 - [NOT STARTED] F-01.3 INP improvements: reduce heavy JS, avoid layout thrash
 
 ### F-02 Assets + caching
 - [NOT STARTED] F-02.1 Images: modern formats + correct dimensions
 - [IN PROGRESS] F-02.2 Responsive images srcset/sizes for above-fold assets
-- [NOT STARTED] F-02.3 Preload only true LCP; avoid over-preloading
+- [IN PROGRESS] F-02.3 Preload only true LCP; avoid over-preloading (Wave I added responsive Home hero preload hint)
 - [IN PROGRESS] F-02.4 Normalize Google Fonts preconnect/dns-prefetch on all HTML pages (tool + sweep complete; LHCI verification pending local run)
 
 ---
@@ -248,3 +248,5 @@ Local QA results pasted:
 
 - [IN PROGRESS] L-01.3 Runtime dev-check blocked in sandbox (Playwright browser binary unavailable); pending local runtime execution pack
 - **2026-02-24 (AEST)** — MEGA WAVE H (Publishing CLS + empty-state stabilization): removed malformed Publishing skeleton scaffold, switched to truthful empty-state-first rendering, and added deterministic runtime empty/results state handling. (Ledger: ID-012, Checklist: H-01.1, F-01.2)
+
+- **2026-02-24 (AEST)** — MEGA WAVE I (Critical path LCP containment): constrained heavyweight ToA full-page hero background image to Home only and added responsive Home hero image preload to reduce LCP pressure on core non-home pages. (Ledger: ID-014, ID-016; Checklist: F-01.1, F-02.3)
